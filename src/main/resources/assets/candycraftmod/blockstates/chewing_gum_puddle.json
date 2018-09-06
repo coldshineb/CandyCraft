@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "candycraftmod:chewing_gum_puddle" },
+            { "model": "candycraftmod:chewing_gum_puddle", "y": 90 },
+            { "model": "candycraftmod:chewing_gum_puddle", "y": 180 },
+            { "model": "candycraftmod:chewing_gum_puddle", "y": 270 }
+        ]
+    }
+}

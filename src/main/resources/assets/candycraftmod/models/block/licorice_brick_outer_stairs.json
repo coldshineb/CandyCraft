@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "candycraftmod:blocks/licorice_brick",
+        "top": "candycraftmod:blocks/licorice_brick",
+        "side": "candycraftmod:blocks/licorice_brick"
+    }
+}

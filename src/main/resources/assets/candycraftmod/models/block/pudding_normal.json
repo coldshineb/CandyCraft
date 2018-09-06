@@ -1,0 +1,10 @@
+{
+    "parent": "block/grass",
+    "textures": {
+        "particle": "candycraftmod:blocks/flour",
+        "bottom": "candycraftmod:blocks/flour",
+        "top": "candycraftmod:blocks/pudding_overlay_top",
+        "side": "candycraftmod:blocks/pudding_side",
+        "overlay": "candycraftmod:blocks/pudding_overlay_side"
+    }
+}

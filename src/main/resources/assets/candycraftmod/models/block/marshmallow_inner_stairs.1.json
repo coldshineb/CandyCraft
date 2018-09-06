@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "candycraftmod:blocks/marshmallow_planks.1",
+        "top": "candycraftmod:blocks/marshmallow_planks.1",
+        "side": "candycraftmod:blocks/marshmallow_planks.1"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=default": { "model": "candycraftmod:half_slab_chocolate_stone" },
+        "half=top,variant=default": { "model": "candycraftmod:upper_slab_chocolate_stone" }
+    }
+}

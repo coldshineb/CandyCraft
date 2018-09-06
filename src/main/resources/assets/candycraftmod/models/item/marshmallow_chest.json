@@ -1,0 +1,36 @@
+{
+    "textures": {
+        "0": "candycraftmod:blocks/chest_side",
+        "1": "candycraftmod:blocks/chest_top",
+        "2": "candycraftmod:blocks/lock_side",
+        "3": "candycraftmod:blocks/lock_top"
+    },
+    "elements": [
+        {
+            "name": "Body",
+            "from": [ 1.0, 0.0, 1.0 ], 
+            "to": [ 15.0, 14.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 1.0, 1.0, 15.0, 15.0 ] },
+                "east": { "texture": "#0", "uv": [ 1.0, 1.0, 15.0, 15.0 ] },
+                "south": { "texture": "#0", "uv": [ 1.0, 1.0, 15.0, 15.0 ] },
+                "west": { "texture": "#0", "uv": [ 1.0, 1.0, 15.0, 15.0 ] },
+                "up": { "texture": "#1", "uv": [ 1.0, 1.0, 15.0, 15.0 ] },
+                "down": { "texture": "#1", "uv": [ 1.0, 1.0, 15.0, 15.0 ] }
+            }
+        },
+        {
+            "name": "Lock",
+            "from": [ 7.0, 7.0, 0.0 ], 
+            "to": [ 9.0, 11.0, 1.0 ], 
+            "faces": {
+                "north": { "texture": "#2", "uv": [ 2.0, 0.0, 0.0, 4.0 ] },
+                "east": { "texture": "#2", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "south": { "texture": "#2", "uv": [ 0.0, 0.0, 2.0, 4.0 ] },
+                "west": { "texture": "#2", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+                "up": { "texture": "#3", "uv": [ 2.0, 0.0, 0.0, 1.0 ] },
+                "down": { "texture": "#3", "uv": [ 0.0, 0.0, 2.0, 1.0 ] }
+            }
+        }
+    ]
+}

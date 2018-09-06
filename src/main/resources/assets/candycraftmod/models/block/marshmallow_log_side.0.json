@@ -1,0 +1,7 @@
+{
+    "parent": "block/column_side",
+    "textures": {
+        "end": "candycraftmod:blocks/marshmallow_log_top.0",
+        "side": "candycraftmod:blocks/marshmallow_log_side.0"
+    }
+}

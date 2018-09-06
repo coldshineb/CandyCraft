@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=default": { "model": "candycraftmod:candy_cane_block" },
+		"half=top,variant=default": { "model": "candycraftmod:candy_cane_block" }
+    }
+}

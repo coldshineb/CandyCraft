@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "metadata=0": { "model": "candycraftmod:marshmallow_planks.0" },
+		"metadata=1": { "model": "candycraftmod:marshmallow_planks.1" },
+		"metadata=2": { "model": "candycraftmod:marshmallow_planks.2" }
+    }
+}
