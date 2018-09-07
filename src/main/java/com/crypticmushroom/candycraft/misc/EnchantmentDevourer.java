@@ -1,6 +1,7 @@
-package com.valentin4311.candycraftmod.misc;
+package com.valentin4311.candycraft.misc;
 
-import com.valentin4311.candycraftmod.items.CCItems;
+import com.valentin4311.candycraft.CandyCraft;
+import com.valentin4311.candycraft.items.CCItems;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -12,7 +13,8 @@ public class EnchantmentDevourer extends Enchantment
 	public EnchantmentDevourer()
 	{
 		super(Rarity.UNCOMMON, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
-		setName("devourer");
+		setRegistryName(CandyCraft.MODID, "devourer");
+        setName("devourer");
 	}
 
 	@Override

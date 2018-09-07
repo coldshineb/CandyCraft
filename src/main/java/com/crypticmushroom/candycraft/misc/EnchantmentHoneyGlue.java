@@ -1,6 +1,7 @@
-package com.valentin4311.candycraftmod.misc;
+package com.valentin4311.candycraft.misc;
 
-import com.valentin4311.candycraftmod.items.CCItems;
+import com.valentin4311.candycraft.CandyCraft;
+import com.valentin4311.candycraft.items.CCItems;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -12,7 +13,8 @@ public class EnchantmentHoneyGlue extends Enchantment
 	public EnchantmentHoneyGlue()
 	{
 		super(Rarity.UNCOMMON, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
-		setName("honey_glue");
+        setRegistryName(CandyCraft.MODID, "honey_glue");
+        setName("honey_glue");
 	}
 
 	@Override

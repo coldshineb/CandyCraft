@@ -1,9 +1,10 @@
-package com.valentin4311.candycraftmod.misc;
+package com.valentin4311.candycraft.misc;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
+import com.valentin4311.candycraft.blocks.CCBlocks;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class CCCreativeTabs extends CreativeTabs
 {
@@ -20,8 +21,8 @@ public class CCCreativeTabs extends CreativeTabs
 	}
 
 	@Override
-	public Item getTabIconItem()
+	public ItemStack getTabIconItem()
 	{
-		return Item.getItemFromBlock(CCBlocks.marshmallowWorkbench);
+		return new ItemStack(Item.getItemFromBlock(CCBlocks.marshmallowWorkbench));
 	}
 }

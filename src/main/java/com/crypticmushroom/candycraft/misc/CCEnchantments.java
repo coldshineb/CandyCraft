@@ -1,15 +1,38 @@
-package com.valentin4311.candycraftmod.misc;
+package com.valentin4311.candycraft.misc;
+
+import com.valentin4311.candycraft.CandyCraft;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@Mod(modid = CandyCraft.MODID, name = CandyCraft.NAME, version = CandyCraft.VERSION)
 public class CCEnchantments
 {
-	public static Enchantment devourer = new EnchantmentDevourer().setName("Devourer");;
-	public static Enchantment honeyGlue = new EnchantmentHoneyGlue().setName("HoneyGlue");
+	public static final Enchantment devourer = new EnchantmentDevourer();
+	public static final Enchantment honey_glue = new EnchantmentHoneyGlue();
 
-	public static void init(Configuration config)
-	{
-		//TODO check
+	@Mod.EventBusSubscriber(modid = CandyCraft.MODID)
+    public static class RegistryHandler
+    {
+        @SubscribeEvent
+        public static void onEvent(final RegistryEvent.Register<Enchantment> event)
+        {
+            // DEBUG
+            System.out.println("Registering CandyCraft enchantments");
+
+            final IForgeRegistry<Enchantment> registry = event.getRegistry();
+            
+            registerEnchantment(registry, devourer, true);
+            registerEnchantment(registry, honey_glue, true);
+        }
+    }
+	
+	public static void registerEnchantment(IForgeRegistry<Enchantment> registry, Enchantment enchantment, boolean enabledInConfig) {
+		if(enabledInConfig) {
+			registry.register(enchantment);
+		}
 	}
 }

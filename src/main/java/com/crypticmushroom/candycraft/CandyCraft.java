@@ -1,27 +1,26 @@
-package com.valentin4311.candycraftmod;
+package com.valentin4311.candycraft;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.fluid.CCFluids;
-import com.valentin4311.candycraftmod.client.gui.GuiHandlerCandyCraft;
-import com.valentin4311.candycraftmod.command.WikiCommand;
-import com.valentin4311.candycraftmod.entity.CCEntities;
-import com.valentin4311.candycraftmod.event.ClientEventCatcher;
-import com.valentin4311.candycraftmod.event.ClientTick;
-import com.valentin4311.candycraftmod.event.ServerEventCatcher;
-import com.valentin4311.candycraftmod.event.ServerTick;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-import com.valentin4311.candycraftmod.misc.CCCreativeTabs;
-import com.valentin4311.candycraftmod.misc.CCEnchantments;
-import com.valentin4311.candycraftmod.misc.CCRecipes;
-import com.valentin4311.candycraftmod.world.TerrainCatcher;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-import com.valentin4311.candycraftmod.world.WorldProviderVoid;
-import com.valentin4311.candycraftmod.world.WorldTypeCandy;
-import com.valentin4311.candycraftmod.world.biomes.CCBiomes;
+import com.valentin4311.candycraft.blocks.CCBlocks;
+import com.valentin4311.candycraft.blocks.fluid.CCFluids;
+import com.valentin4311.candycraft.client.gui.GuiHandlerCandyCraft;
+import com.valentin4311.candycraft.command.WikiCommand;
+import com.valentin4311.candycraft.entity.CCEntities;
+import com.valentin4311.candycraft.event.ClientEventCatcher;
+import com.valentin4311.candycraft.event.ClientTick;
+import com.valentin4311.candycraft.event.ServerEventCatcher;
+import com.valentin4311.candycraft.event.ServerTick;
+import com.valentin4311.candycraft.items.CCItems;
+import com.valentin4311.candycraft.misc.CCAchievements;
+import com.valentin4311.candycraft.misc.CCCreativeTabs;
+import com.valentin4311.candycraft.misc.CCRecipes;
+import com.valentin4311.candycraft.world.TerrainCatcher;
+import com.valentin4311.candycraft.world.WorldProviderCandy;
+import com.valentin4311.candycraft.world.WorldProviderVoid;
+import com.valentin4311.candycraft.world.WorldTypeCandy;
+import com.valentin4311.candycraft.world.biomes.CCBiomes;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -40,21 +39,25 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = "candycraftmod", name = "candycraftmod", version = CandyCraft.VERSION)
+@Mod(modid = CandyCraft.MODID, name = CandyCraft.NAME, version = CandyCraft.VERSION)
 public class CandyCraft
 {
-	@Instance("candycraftmod")
-	private static CandyCraft modInstance;
-	public static final String VERSION = "Beta 1.3.1";
+	
+	public static final String MODID = "candycraft";
+    public static final String NAME = "CandyCraft";
+    public static final String VERSION = "1.0";
+    
+    @Instance
+	public static CandyCraft instance;
 
-	@SidedProxy(clientSide = "com.valentin4311.candycraftmod.client.ClientProxy", serverSide = "com.valentin4311.candycraftmod.CommonProxy")
+	@SidedProxy(clientSide = "com.valentin4311.candycraft.client.ClientProxy", serverSide = "com.valentin4311.candycraft.CommonProxy")
 	private static CommonProxy proxy;
 	private static ClientTick clientTicker;
 	private static ServerTick serverTicker;
 
 	private static CreativeTabs creativeTab = new CCCreativeTabs("CandyCraft");
 	private static GuiHandlerCandyCraft guiHandler = new GuiHandlerCandyCraft();
-	private static ArrayList<Item> itemList = new ArrayList();
+	private static ArrayList<Item> itemList = new ArrayList<Item>();
 	// Dimension
 	private static WorldTypeCandy candyWorldType = new WorldTypeCandy();
 	private static int candyDimensionID;
@@ -64,7 +67,7 @@ public class CandyCraft
 	private static boolean shouldUpdate = false;
 
 	@EventHandler
-	public void preInitMod(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		boolean isClient = event.getSide() == Side.CLIENT;
 
@@ -86,20 +89,24 @@ public class CandyCraft
 		CCFluids.postInit();
 
 		addContentFromConfig(isClient, event.getModConfigurationDirectory());
+		
+		//FlashFyre
+		CCBiomes.registerBiomes();
 	}
 
 	@EventHandler
-	public void initMod(FMLInitializationEvent event)
+	public void init(FMLInitializationEvent event)
 	{
 		CCBlocks.registerBlocks(event.getSide());
 		CCBlocks.doMiningLevel();
 
 		CCItems.registerItems(event.getSide());
 
-		proxy.init();
-
 		CCRecipes.init();
 		CCAchievements.init();
+		
+		//FlashFyre
+		proxy.attachRenderLayers();
 	}
 
 	public void addContentFromConfig(boolean client, File configDirectory)
@@ -118,7 +125,7 @@ public class CandyCraft
 
 		// Entities
 		CCEntities.init();
-		CCEnchantments.init(config);
+		
 		CCBiomes.init();
 
 		config.save();
@@ -151,7 +158,7 @@ public class CandyCraft
 
 	public static CandyCraft getInstance()
 	{
-		return modInstance;
+		return instance;
 	}
 
 	public static boolean isShouldUpdate()
