@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.items;
-
-import java.util.List;
+package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemGrenadineCandy extends ItemFood
 {

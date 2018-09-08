@@ -1,10 +1,7 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -12,6 +9,8 @@ import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenChewingGumTotem extends WorldGenerator
 {
@@ -59,7 +58,7 @@ public class WorldGenChewingGumTotem extends WorldGenerator
 
 			if (tileentitymobspawner != null)
 			{
-				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraft.EntityBeetle");
+                tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraftmod.EntityBeetle");
 			}
 
 		}

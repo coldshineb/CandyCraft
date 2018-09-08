@@ -1,10 +1,7 @@
-package com.valentin4311.candycraftmod.misc;
+package com.crypticmushroom.candycraft.misc;
 
-import java.util.ArrayList;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
+
+import java.util.ArrayList;
 
 public class CCAchievements
 {
@@ -85,7 +84,7 @@ public class CCAchievements
 
 	private static Achievement setAchievement(String balise, int x, int y, ItemStack item, Achievement req, boolean special)
 	{
-		Achievement ach = new Achievement("candycraft:" + balise, balise, x, y, item, req);
+        Achievement ach = new Achievement("candycraftmod:" + balise, balise, x, y, item, req);
 		if (special)
 		{
 			ach.setSpecial();

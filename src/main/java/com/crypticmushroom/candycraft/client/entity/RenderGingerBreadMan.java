@@ -1,20 +1,18 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.entity.EntityGingerBreadMan;
-
+import com.crypticmushroom.candycraft.entity.EntityGingerBreadMan;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderGingerBreadMan extends RenderBiped<EntityGingerBreadMan>
 {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("candycraft:textures/entity/Gingerbread0.png"), new ResourceLocation("candycraft:textures/entity/Gingerbread1.png"), new ResourceLocation("candycraft:textures/entity/Gingerbread2.png"), new ResourceLocation("candycraft:textures/entity/Gingerbread3.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[]{new ResourceLocation("candycraftmod:textures/entity/Gingerbread0.png"), new ResourceLocation("candycraftmod:textures/entity/Gingerbread1.png"), new ResourceLocation("candycraftmod:textures/entity/Gingerbread2.png"), new ResourceLocation("candycraftmod:textures/entity/Gingerbread3.png")};
 
 	public RenderGingerBreadMan(RenderManager manager, ModelBiped par1ModelBiped, float par2)
 	{

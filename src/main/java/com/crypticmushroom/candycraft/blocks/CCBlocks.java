@@ -1,20 +1,9 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.blocks.misc.CandyStepSound;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityAlchemy;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityCandyChest;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityEgg;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFactory;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFurnace;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityTeleporter;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.items.ItemCandyBlock;
-import com.valentin4311.candycraftmod.items.ItemCandyLeaves;
-import com.valentin4311.candycraftmod.items.ItemCandySlab;
-import com.valentin4311.candycraftmod.items.ItemCandyWaterLily;
-import com.valentin4311.candycraftmod.items.ItemPudding;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.blocks.misc.CandyStepSound;
+import com.crypticmushroom.candycraft.blocks.tileentity.*;
+import com.crypticmushroom.candycraft.items.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
@@ -480,8 +469,8 @@ public class CCBlocks
 				int realMeta = 0;
 				for (int i = 0; i < metaNames.length; i++)
 				{
-					metaNames[i] = "candycraft:" + name + "." + realMeta;
-					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraft:" + name + "." + realMeta, "inventory"));
+					metaNames[i] = "candycraftmod:" + name + "." + realMeta;
+					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraftmod:" + name + "." + realMeta, "inventory"));
 					realMeta++;
 					if (realMeta > 3)
 					{
@@ -492,21 +481,21 @@ public class CCBlocks
 			}
 			else if (cl == ItemCandySlab.class)
 			{
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraft:" + name, "inventory"));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + name, "inventory"));
 			}
 			else if (metadataAmount > 0)
 			{
 				String[] metaNames = new String[metadataAmount];
 				for (int i = 0; i < metaNames.length; i++)
 				{
-					metaNames[i] = "candycraft:" + name + "." + i;
-					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraft:" + name + "." + i, "inventory"));
+					metaNames[i] = "candycraftmod:" + name + "." + i;
+					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraftmod:" + name + "." + i, "inventory"));
 				}
 				ModelBakery.addVariantName(Item.getItemFromBlock(block), metaNames);
 			}
 			else
 			{
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraft:" + name, "inventory"));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + name, "inventory"));
 			}
 		}
 	}
@@ -518,7 +507,7 @@ public class CCBlocks
 
 		if (currentSide == Side.CLIENT)
 		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraft:" + Item.getItemFromBlock(block).getUnlocalizedName().substring(5), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + Item.getItemFromBlock(block).getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
 

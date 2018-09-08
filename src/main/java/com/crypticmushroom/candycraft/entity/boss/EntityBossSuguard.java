@@ -1,23 +1,18 @@
-package com.valentin4311.candycraftmod.entity.boss;
+package com.crypticmushroom.candycraft.entity.boss;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.client.gui.GuiBoss;
-import com.valentin4311.candycraftmod.entity.EntityCandyArrow;
-import com.valentin4311.candycraftmod.entity.EntityUtil;
-import com.valentin4311.candycraftmod.entity.ICandyBoss;
-import com.valentin4311.candycraftmod.entity.ai.EntityAICandyArrow;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.client.gui.GuiBoss;
+import com.crypticmushroom.candycraft.entity.EntityCandyArrow;
+import com.crypticmushroom.candycraft.entity.EntityUtil;
+import com.crypticmushroom.candycraft.entity.ICandyBoss;
+import com.crypticmushroom.candycraft.entity.ai.EntityAICandyArrow;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;

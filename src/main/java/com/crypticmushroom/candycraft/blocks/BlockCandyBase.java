@@ -1,7 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.List;
-import java.util.Random;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,6 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockCandyBase extends Block
 {

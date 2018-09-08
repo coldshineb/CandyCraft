@@ -1,8 +1,6 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import com.valentin4311.candycraftmod.event.ServerTick;
-
-import net.minecraft.block.state.IBlockState;
+import com.crypticmushroom.candycraft.event.ServerTick;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;

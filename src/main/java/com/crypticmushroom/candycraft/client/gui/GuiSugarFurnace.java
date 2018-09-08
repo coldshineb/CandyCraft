@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.client.gui;
+package com.crypticmushroom.candycraft.client.gui;
 
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFurnace;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -13,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSugarFurnace extends GuiContainer
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/gui/Gui_SugarFurnace.png");
+    private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/gui/Gui_SugarFurnace.png");
 	private TileEntitySugarFurnace furnaceInventory;
 
 	public GuiSugarFurnace(InventoryPlayer par1InventoryPlayer, TileEntitySugarFurnace par2TileEntityFurnace)

@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.items;
-
-import java.util.List;
+package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemRecord;
@@ -9,6 +7,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemCandyRecord extends ItemRecord
 {
@@ -31,7 +31,7 @@ public class ItemCandyRecord extends ItemRecord
 	@Override
 	public ResourceLocation getRecordResource(String name)
 	{
-		return new ResourceLocation("candycraft:" + name);
+        return new ResourceLocation("candycraftmod:" + name);
 	}
 
 	@Override

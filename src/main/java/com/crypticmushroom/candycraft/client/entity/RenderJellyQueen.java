@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import com.valentin4311.candycraftmod.entity.boss.EntityJellyQueen;
-
+import com.crypticmushroom.candycraft.entity.boss.EntityJellyQueen;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
@@ -12,10 +11,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderJellyQueen extends RenderJelly
 {
-	private static final ResourceLocation baseTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss.png");
-	private static final ResourceLocation fastTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss2.png");
-	private static final ResourceLocation explosionTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss3.png");
-	private static final ResourceLocation sleepTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss4.png");
+    private static final ResourceLocation baseTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss.png");
+    private static final ResourceLocation fastTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss2.png");
+    private static final ResourceLocation explosionTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss3.png");
+    private static final ResourceLocation sleepTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss4.png");
 
 	public RenderJellyQueen(RenderManager rm, ModelBase par1ModelBase)
 	{

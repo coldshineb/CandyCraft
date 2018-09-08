@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import com.valentin4311.candycraftmod.entity.EntityJelly;
-
+import com.crypticmushroom.candycraft.entity.EntityJelly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

@@ -1,8 +1,4 @@
-package com.valentin4311.candycraftmod.client;
-
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
+package com.crypticmushroom.candycraft.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -16,10 +12,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Random;
 
 public class RenderWeather extends IRenderHandler
 {
-	private static final ResourceLocation locationRainPng = new ResourceLocation("candycraft:textures/environment/rain.png");
+    private static final ResourceLocation locationRainPng = new ResourceLocation("candycraftmod:textures/environment/rain.png");
 
 	private float[] rainX = new float[1024];
 	private float[] rainY = new float[1024];

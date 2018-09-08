@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderMageSuguard extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/SuguardeMage.png");
+    private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/SuguardeMage.png");
 
 	public RenderMageSuguard(RenderManager rm)
 	{

@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import com.valentin4311.candycraftmod.entity.EntityGummyBall;
-
+import com.crypticmushroom.candycraft.entity.EntityGummyBall;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;

@@ -1,16 +1,15 @@
-package com.valentin4311.candycraftmod.blocks.fluid;
+package com.crypticmushroom.candycraft.blocks.fluid;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class CCFluids
 {
-	public static FluidGrenadine grenadineFluid = new FluidGrenadine("candycraft:grenadine");
-	public static FluidCaramel caramelFluid = new FluidCaramel("candycraft:caramel");
+	public static FluidGrenadine grenadineFluid = new FluidGrenadine("candycraftmod:grenadine");
+	public static FluidCaramel caramelFluid = new FluidCaramel("candycraftmod:caramel");
 
 	public static void init()
 	{

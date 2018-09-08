@@ -1,11 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityEgg;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDragonEgg;
 import net.minecraft.block.ITileEntityProvider;
@@ -21,6 +16,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockEgg extends BlockDragonEgg implements ITileEntityProvider
 {

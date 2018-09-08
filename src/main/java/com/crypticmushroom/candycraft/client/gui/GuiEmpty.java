@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.client.gui;
+package com.crypticmushroom.candycraft.client.gui;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.relauncher.Side;

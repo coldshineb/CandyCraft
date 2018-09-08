@@ -1,10 +1,9 @@
-package com.valentin4311.candycraftmod.event;
+package com.crypticmushroom.candycraft.event;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.CandyCraftPreferences;
-import com.valentin4311.candycraftmod.client.gui.GuiBoss;
-import com.valentin4311.candycraftmod.misc.ThreadCheckUpdate;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.CandyCraftPreferences;
+import com.crypticmushroom.candycraft.client.gui.GuiBoss;
+import com.crypticmushroom.candycraft.misc.ThreadCheckUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

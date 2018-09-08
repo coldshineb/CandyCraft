@@ -1,22 +1,10 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.entity.ai.EntityAIAvoidPlayerGinger;
-import com.valentin4311.candycraftmod.items.CCItems;
-
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IMerchant;
-import net.minecraft.entity.INpc;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookAtTradePlayer;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPlay;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITradePlayer;
-import net.minecraft.entity.ai.EntityAIVillagerMate;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.entity.ai.EntityAIAvoidPlayerGinger;
+import com.crypticmushroom.candycraft.items.CCItems;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;

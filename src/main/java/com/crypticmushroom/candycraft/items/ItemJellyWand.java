@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import com.valentin4311.candycraftmod.entity.EntityGummyBall;
-
+import com.crypticmushroom.candycraft.entity.EntityGummyBall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -1,13 +1,9 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.List;
-import java.util.Random;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityCandyChest;
+import com.crypticmushroom.candycraft.items.CCItems;
 import com.google.common.collect.Lists;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityCandyChest;
-import com.valentin4311.candycraftmod.items.CCItems;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -16,6 +12,9 @@ import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.List;
+import java.util.Random;
 
 public class WorldGenHoneyDungeons extends WorldGenerator
 {
@@ -151,7 +150,7 @@ public class WorldGenHoneyDungeons extends WorldGenerator
 
 			if (tileentitymobspawner != null)
 			{
-				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraft.CaramelBee");
+                tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraftmod.CaramelBee");
 			}
 			else
 			{

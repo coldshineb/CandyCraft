@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.entity.EntityNougatGolem;
-
+import com.crypticmushroom.candycraft.entity.EntityNougatGolem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

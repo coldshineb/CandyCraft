@@ -1,21 +1,19 @@
-package com.valentin4311.candycraftmod.client.gui;
+package com.crypticmushroom.candycraft.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFactory;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiSugarFactory extends GuiContainer
 {
-	public static final ResourceLocation texture = new ResourceLocation("candycraft:textures/gui/Gui_Sugar.png");
-	public static final ResourceLocation texture2 = new ResourceLocation("candycraft:textures/gui/Gui_AdvancedSugar.png");
+    public static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/gui/Gui_Sugar.png");
+    public static final ResourceLocation texture2 = new ResourceLocation("candycraftmod:textures/gui/Gui_AdvancedSugar.png");
 	private TileEntitySugarFactory furnaceInventory;
 
 	public GuiSugarFactory(InventoryPlayer par1, TileEntitySugarFactory par2)

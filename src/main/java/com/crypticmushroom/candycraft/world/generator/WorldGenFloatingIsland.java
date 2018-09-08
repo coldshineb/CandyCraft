@@ -1,15 +1,10 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.entity.EntityGingerBreadMan;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossBeetle;
-import com.valentin4311.candycraftmod.event.ServerTick;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.entity.EntityGingerBreadMan;
+import com.crypticmushroom.candycraft.entity.boss.EntityBossBeetle;
+import com.crypticmushroom.candycraft.event.ServerTick;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
@@ -17,6 +12,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class WorldGenFloatingIsland extends WorldGenerator
 {

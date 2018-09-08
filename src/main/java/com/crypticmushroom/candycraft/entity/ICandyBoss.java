@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
 public interface ICandyBoss
 {

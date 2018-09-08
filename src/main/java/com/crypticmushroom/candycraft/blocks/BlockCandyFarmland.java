@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.Random;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFarmland;
@@ -17,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockCandyFarmland extends BlockFarmland
 {

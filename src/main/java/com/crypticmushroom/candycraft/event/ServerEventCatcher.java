@@ -1,18 +1,17 @@
-package com.valentin4311.candycraftmod.event;
+package com.crypticmushroom.candycraft.event;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityTeleporter;
-import com.valentin4311.candycraftmod.entity.EntityCandyCreeper;
-import com.valentin4311.candycraftmod.entity.EntitySuguard;
-import com.valentin4311.candycraftmod.entity.IEntityLockable;
-import com.valentin4311.candycraftmod.entity.IEntityPowerMount;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossSuguard;
-import com.valentin4311.candycraftmod.entity.boss.EntityJellyQueen;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.items.ItemBossKey;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
+import com.crypticmushroom.candycraft.entity.EntityCandyCreeper;
+import com.crypticmushroom.candycraft.entity.EntitySuguard;
+import com.crypticmushroom.candycraft.entity.IEntityLockable;
+import com.crypticmushroom.candycraft.entity.IEntityPowerMount;
+import com.crypticmushroom.candycraft.entity.boss.EntityBossSuguard;
+import com.crypticmushroom.candycraft.entity.boss.EntityJellyQueen;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.items.ItemBossKey;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockJukebox;
 import net.minecraft.block.state.IBlockState;

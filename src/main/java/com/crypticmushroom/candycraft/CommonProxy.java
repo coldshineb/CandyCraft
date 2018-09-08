@@ -1,4 +1,4 @@
-package com.valentin4311.candycraft;
+package com.crypticmushroom.candycraft;
 
 import net.minecraft.item.Item;
 

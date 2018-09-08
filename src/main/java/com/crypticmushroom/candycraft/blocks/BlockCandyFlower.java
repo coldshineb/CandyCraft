@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.Random;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -14,6 +12,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockCandyFlower extends BlockCandyBush
 {

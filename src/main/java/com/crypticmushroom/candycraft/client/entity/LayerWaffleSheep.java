@@ -1,14 +1,13 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import com.valentin4311.candycraftmod.entity.EntityWaffleSheep;
-
+import com.crypticmushroom.candycraft.entity.EntityWaffleSheep;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 public class LayerWaffleSheep implements LayerRenderer
 {
-	private static final ResourceLocation sheepTextures = new ResourceLocation("candycraft:textures/entity/sheepCandy.png");
+	private static final ResourceLocation sheepTextures = new ResourceLocation("candycraftmod:textures/entity/sheepCandy.png");
 	private static final ModelWaffleSheep furModel = new ModelWaffleSheep();
 
 	private RenderWaffleSheep sheepRenderer;

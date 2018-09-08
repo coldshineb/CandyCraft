@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemDoor;

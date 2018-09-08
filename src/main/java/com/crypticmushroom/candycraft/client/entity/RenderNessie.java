@@ -1,10 +1,7 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.client.gui.GuiBoss;
-import com.valentin4311.candycraftmod.entity.EntityNessie;
-
+import com.crypticmushroom.candycraft.client.gui.GuiBoss;
+import com.crypticmushroom.candycraft.entity.EntityNessie;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -14,13 +11,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderNessie extends RenderLiving
 {
 	private static ModelNessie modelOne = (new ModelNessie(0.0F));
 	private static ModelNessie2 modelTwo = (new ModelNessie2(0.0F));
-	private static final ResourceLocation[] img = { new ResourceLocation("candycraft:textures/entity/Nessie0.png"), new ResourceLocation("candycraft:textures/entity/Nessie1.png"), new ResourceLocation("candycraft:textures/entity/Nessie2.png"), new ResourceLocation("candycraft:textures/entity/Nessie3.png"), new ResourceLocation("candycraft:textures/entity/Nessie4.png"), new ResourceLocation("candycraft:textures/entity/Nessie5.png"), new ResourceLocation("candycraft:textures/entity/Nessie6.png") };
+    private static final ResourceLocation[] img = {new ResourceLocation("candycraftmod:textures/entity/Nessie0.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie1.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie2.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie3.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie4.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie5.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie6.png")};
 
 	public RenderNessie(RenderManager rm)
 	{

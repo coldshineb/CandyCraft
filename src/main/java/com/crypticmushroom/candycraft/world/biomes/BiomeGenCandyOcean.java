@@ -1,14 +1,13 @@
-package com.valentin4311.candycraftmod.world.biomes;
+package com.crypticmushroom.candycraft.world.biomes;
 
-import java.awt.Color;
-
-import com.valentin4311.candycraftmod.entity.EntityFish;
-import com.valentin4311.candycraftmod.entity.EntityNessie;
-
+import com.crypticmushroom.candycraft.entity.EntityFish;
+import com.crypticmushroom.candycraft.entity.EntityNessie;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.awt.*;
 
 public class BiomeGenCandyOcean extends BiomeGenCandy
 {

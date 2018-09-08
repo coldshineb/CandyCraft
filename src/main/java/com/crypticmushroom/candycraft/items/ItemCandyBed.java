@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockDirectional;

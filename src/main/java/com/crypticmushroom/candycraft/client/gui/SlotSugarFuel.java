@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.client.gui;
+package com.crypticmushroom.candycraft.client.gui;
 
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFurnace;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFurnace;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

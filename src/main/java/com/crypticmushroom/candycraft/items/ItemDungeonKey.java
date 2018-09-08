@@ -1,12 +1,9 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import java.util.List;
-
-import com.valentin4311.candycraftmod.CandyCraftPreferences;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityTeleporter;
-import com.valentin4311.candycraftmod.world.generator.ThreadCheckDungeon;
-
+import com.crypticmushroom.candycraft.CandyCraftPreferences;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
+import com.crypticmushroom.candycraft.world.generator.ThreadCheckDungeon;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +18,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemDungeonKey extends Item
 {

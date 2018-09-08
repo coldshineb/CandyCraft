@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.client.tileentity;
+package com.crypticmushroom.candycraft.client.tileentity;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityEgg;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityEgg;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -11,6 +8,8 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.Random;
 
 public class RenderEgg extends TileEntitySpecialRenderer
 {

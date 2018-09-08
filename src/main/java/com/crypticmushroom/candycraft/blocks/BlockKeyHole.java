@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.items.ItemBossKey;
-
+import com.crypticmushroom.candycraft.items.ItemBossKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

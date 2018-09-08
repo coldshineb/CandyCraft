@@ -1,8 +1,8 @@
-package com.valentin4311.candycraftmod.world.generator;
-
-import java.util.Random;
+package com.crypticmushroom.candycraft.world.generator;
 
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class ThreadFloatingIsland extends Thread
 {

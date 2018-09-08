@@ -1,13 +1,9 @@
-package com.valentin4311.candycraftmod.blocks.tileentity;
+package com.crypticmushroom.candycraft.blocks.tileentity;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
@@ -22,6 +18,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TileEntitySugarFactory extends TileEntity implements ISidedInventory, ITickable
 {

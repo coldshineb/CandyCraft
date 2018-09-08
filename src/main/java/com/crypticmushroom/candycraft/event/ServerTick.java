@@ -1,14 +1,10 @@
-package com.valentin4311.candycraftmod.event;
+package com.crypticmushroom.candycraft.event;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.entity.DynamiteCallBack;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-import com.valentin4311.candycraftmod.world.generator.WorldGenFloatingIsland;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.entity.DynamiteCallBack;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
+import com.crypticmushroom.candycraft.world.generator.WorldGenFloatingIsland;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -16,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ServerTick
 {

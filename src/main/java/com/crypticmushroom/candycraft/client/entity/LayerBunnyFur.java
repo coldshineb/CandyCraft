@@ -1,17 +1,15 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.entity.EntityBunny;
-
+import com.crypticmushroom.candycraft.entity.EntityBunny;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class LayerBunnyFur implements LayerRenderer
 {
-	private static final ResourceLocation skinTexture = new ResourceLocation("candycraft:textures/entity/whiteBunny.png");
+	private static final ResourceLocation skinTexture = new ResourceLocation("candycraftmod:textures/entity/whiteBunny.png");
 	private RenderBunny bunnyRenderer;
 
 	public LayerBunnyFur(RenderBunny bunnyRenderer)

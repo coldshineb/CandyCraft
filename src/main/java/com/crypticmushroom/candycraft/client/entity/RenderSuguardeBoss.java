@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.entity.boss.EntityBossSuguard;
-
+import com.crypticmushroom.candycraft.entity.boss.EntityBossSuguard;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -11,15 +8,16 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderSuguardeBoss extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/SuGardeBoss.png");
-	private static final ResourceLocation texture2 = new ResourceLocation("candycraft:textures/entity/SuGardeBoss1.png");
-	private static final ResourceLocation texture3 = new ResourceLocation("candycraft:textures/entity/SuGardeBoss2.png");
-	private static final ResourceLocation texture4 = new ResourceLocation("candycraft:textures/entity/SuGardeBoss3.png");
-	private static final ResourceLocation texture5 = new ResourceLocation("candycraft:textures/entity/SuGardeBoss4.png");
+    private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/SuGardeBoss.png");
+    private static final ResourceLocation texture2 = new ResourceLocation("candycraftmod:textures/entity/SuGardeBoss1.png");
+    private static final ResourceLocation texture3 = new ResourceLocation("candycraftmod:textures/entity/SuGardeBoss2.png");
+    private static final ResourceLocation texture4 = new ResourceLocation("candycraftmod:textures/entity/SuGardeBoss3.png");
+    private static final ResourceLocation texture5 = new ResourceLocation("candycraftmod:textures/entity/SuGardeBoss4.png");
 
 	public RenderSuguardeBoss(RenderManager rm)
 	{

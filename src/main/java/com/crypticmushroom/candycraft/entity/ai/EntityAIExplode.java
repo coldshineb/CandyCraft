@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.entity.ai;
+package com.crypticmushroom.candycraft.entity.ai;
 
-import com.valentin4311.candycraftmod.entity.EntityNougatGolem;
-
+import com.crypticmushroom.candycraft.entity.EntityNougatGolem;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;

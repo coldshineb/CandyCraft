@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.entity.ai;
+package com.crypticmushroom.candycraft.entity.ai;
 
-import java.util.List;
-
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -14,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.List;
 
 public class EntityAIAvoidPlayerGinger extends EntityAIBase
 {

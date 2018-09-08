@@ -1,13 +1,8 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
+import com.crypticmushroom.candycraft.blocks.BlockCandyLog;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.google.common.collect.Lists;
-import com.valentin4311.candycraftmod.blocks.BlockCandyLog;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -15,6 +10,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class WorldGenBigCandyTree extends WorldGenAbstractTree
 {

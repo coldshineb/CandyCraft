@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.client.gui;
-
-import org.lwjgl.opengl.GL11;
+package com.crypticmushroom.candycraft.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -10,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiCandyWorkbench extends GuiContainer

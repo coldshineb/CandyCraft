@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.blocks.fluid.CCFluids;
-
+import com.crypticmushroom.candycraft.blocks.fluid.CCFluids;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

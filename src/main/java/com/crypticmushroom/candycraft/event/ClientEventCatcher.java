@@ -1,14 +1,13 @@
-package com.valentin4311.candycraftmod.event;
+package com.crypticmushroom.candycraft.event;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.client.ClientProxy;
-import com.valentin4311.candycraftmod.client.gui.GuiBoss;
-import com.valentin4311.candycraftmod.entity.EntityGummyBall;
-import com.valentin4311.candycraftmod.entity.ICandyBoss;
-import com.valentin4311.candycraftmod.entity.IEntityLockable;
-import com.valentin4311.candycraftmod.entity.IEntityPowerMount;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.client.ClientProxy;
+import com.crypticmushroom.candycraft.client.gui.GuiBoss;
+import com.crypticmushroom.candycraft.entity.EntityGummyBall;
+import com.crypticmushroom.candycraft.entity.ICandyBoss;
+import com.crypticmushroom.candycraft.entity.IEntityLockable;
+import com.crypticmushroom.candycraft.entity.IEntityPowerMount;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;

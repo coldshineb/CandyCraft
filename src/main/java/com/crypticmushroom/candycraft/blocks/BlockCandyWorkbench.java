@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.client.gui.ContainerCandyWorkbench;
-
+import com.crypticmushroom.candycraft.client.gui.ContainerCandyWorkbench;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.world;
+package com.crypticmushroom.candycraft.world;
 
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityTeleporter;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketSetExperience;

@@ -1,18 +1,10 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.valentin4311.candycraftmod.entity.ai.EntityAIWaterMate;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.entity.ai.EntityAIWaterMate;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +21,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLockable, IEntityPowerMount
 {
@@ -397,19 +392,19 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return "candycraft:mob.nessie";
+        return "candycraftmod:mob.nessie";
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return "candycraft:mob.nessiehurt";
+        return "candycraftmod:mob.nessiehurt";
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return "candycraft:mob.nessiehurt";
+        return "candycraftmod:mob.nessiehurt";
 	}
 
 	@Override

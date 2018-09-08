@@ -1,15 +1,12 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityTeleporter;
-import com.valentin4311.candycraftmod.entity.EntityTornadoJelly;
-import com.valentin4311.candycraftmod.entity.boss.EntityKingSlime;
-import com.valentin4311.candycraftmod.entity.boss.EntityPEZJelly;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCEnchantments;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
+import com.crypticmushroom.candycraft.entity.EntityTornadoJelly;
+import com.crypticmushroom.candycraft.entity.boss.EntityKingSlime;
+import com.crypticmushroom.candycraft.entity.boss.EntityPEZJelly;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.CCEnchantments;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -21,6 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenSlimeDungeon extends WorldGenerator
 {
@@ -628,7 +627,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator
 		int mob = random.nextInt(3);
 		if (spawner != null)
 		{
-			spawner.getSpawnerBaseLogic().setEntityName(mob == 0 ? "candycraft.SprinterSlime" : mob == 1 ? "candycraft.KamikazeSlime" : "candycraft.TornadoSlime");
+            spawner.getSpawnerBaseLogic().setEntityName(mob == 0 ? "candycraftmod.SprinterSlime" : mob == 1 ? "candycraftmod.KamikazeSlime" : "candycraftmod.TornadoSlime");
 		}
 		this.setBlock(x, y + 1, z, CCBlocks.licoriceBlock);
 		this.setBlock(x, y + 5, z, CCBlocks.licoriceBlock);

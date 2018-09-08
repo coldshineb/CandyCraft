@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

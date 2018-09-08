@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
 import net.minecraft.block.Block;
 

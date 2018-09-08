@@ -1,10 +1,7 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.BlockCandySapling;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-
+import com.crypticmushroom.candycraft.blocks.BlockCandySapling;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,6 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
+import java.util.Random;
 
 public class WorldGenCaramelTree extends WorldGenAbstractTree
 {

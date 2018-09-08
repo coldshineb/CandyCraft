@@ -1,11 +1,11 @@
-package com.valentin4311.candycraftmod.items;
-
-import java.util.List;
+package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class ItemEmblem extends Item
 {

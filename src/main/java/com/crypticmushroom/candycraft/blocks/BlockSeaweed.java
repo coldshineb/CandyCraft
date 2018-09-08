@@ -1,8 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -20,6 +16,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockSeaweed extends Block implements IShearable
 {

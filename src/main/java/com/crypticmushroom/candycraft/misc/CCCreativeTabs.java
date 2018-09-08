@@ -1,7 +1,6 @@
-package com.valentin4311.candycraft.misc;
+package com.crypticmushroom.candycraft.misc;
 
-import com.valentin4311.candycraft.blocks.CCBlocks;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

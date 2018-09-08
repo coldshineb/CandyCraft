@@ -1,9 +1,8 @@
-package com.valentin4311.candycraftmod.blocks.tileentity;
+package com.crypticmushroom.candycraft.blocks.tileentity;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.world.generator.WorldGenSlimeDungeon;
-import com.valentin4311.candycraftmod.world.generator.WorldGenSuguardDungeon;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.world.generator.WorldGenSlimeDungeon;
+import com.crypticmushroom.candycraft.world.generator.WorldGenSuguardDungeon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

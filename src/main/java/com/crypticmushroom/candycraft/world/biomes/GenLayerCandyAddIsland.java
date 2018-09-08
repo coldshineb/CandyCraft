@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.world.biomes;
+package com.crypticmushroom.candycraft.world.biomes;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;

@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityCandyChest;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityCandyChest;
 import net.minecraft.block.BlockChest;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
