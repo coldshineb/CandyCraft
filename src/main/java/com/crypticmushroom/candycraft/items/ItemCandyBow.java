@@ -34,20 +34,19 @@ public class ItemCandyBow extends Item
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityLivingBase entity, int par4)
-	{
-		if (!(entity instanceof EntityPlayer))
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+		if (!(entityLiving instanceof EntityPlayer))
 		{
 			return;
 		}
 
-		EntityPlayer par3EntityPlayer = (EntityPlayer) entity;
+		EntityPlayer player = (EntityPlayer) entityLiving;
 
-		int j = getMaxItemUseDuration(par1ItemStack) - par4;
+		int j = getMaxItemUseDuration(stack) - timeLeft;
 
-		boolean flag = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, par1ItemStack) > 0;
+		boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 
-		if (flag || par3EntityPlayer.inventory.hasItemStack(new ItemStack(CCItems.honeyArrow)))
+		if (flag || player.inventory.hasItemStack(new ItemStack(CCItems.honeyArrow)))
 		{
 			float f = j / 20.0F;
 			f = (f * f + f * 4.0F) / 3.0F;
@@ -62,39 +61,39 @@ public class ItemCandyBow extends Item
 				f = 1.0F;
 			}
 
-			EntityCandyArrow entityarrow = new EntityCandyArrow(par2World, par3EntityPlayer, f * 2.0F);
+			EntityCandyArrow entityarrow = new EntityCandyArrow(worldIn, player);
 
 			if (f == 1.0F)
 			{
 				entityarrow.setIsCritical(true);
 			}
 
-			int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, par1ItemStack);
+			int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 
 			if (k > 0)
 			{
 				entityarrow.setDamage(entityarrow.getDamage() + k * 0.5D + 0.5D);
 			}
 
-			int l = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, par1ItemStack);
+			int l = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
 
 			if (l > 0)
 			{
 				entityarrow.setKnockbackStrength(l);
 			}
-			int l2 = EnchantmentHelper.getEnchantmentLevel(CCEnchantments.honeyGlue, par1ItemStack);
+			int l2 = EnchantmentHelper.getEnchantmentLevel(CCEnchantments.honey_glue, stack);
 
 			if (l2 > 0)
 			{
 				entityarrow.slow = l2;
 			}
-			if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, par1ItemStack) > 0)
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
 			{
 				entityarrow.setFire(100);
 			}
 
-			par1ItemStack.damageItem(1, par3EntityPlayer);
-			par2World.playSound((EntityPlayer) null, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+			stack.damageItem(1, player);
+			worldIn.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
 			if (flag)
 			{
@@ -102,20 +101,20 @@ public class ItemCandyBow extends Item
 			}
 			else
 			{
-				par3EntityPlayer.inventory.consumeInventoryItem(CCItems.honeyArrow);
+				player.inventory.deleteStack(CCItems.honeyArrow);
 			}
 
 			entityarrow.pickupStatus = PickupStatus.ALLOWED;
 
-			if (!par2World.isRemote)
+			if (!worldIn.isRemote)
 			{
-				par2World.spawnEntityInWorld(entityarrow);
+				worldIn.spawnEntity(entityarrow);
 			}
 		}
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityLivingBase par3EntityPlayer)
+	public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityLivingBase player)
 	{
 		return par1ItemStack;
 	}
@@ -133,14 +132,12 @@ public class ItemCandyBow extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
-	{
-		if (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItemStack(new ItemStack(CCItems.honeyArrow)))
-		{
-			par3EntityPlayer.setActiveHand(hand);
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItemStack(new ItemStack(CCItems.honeyArrow))) {
+			playerIn.setActiveHand(handIn);
 		}
 
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 
 	@Override

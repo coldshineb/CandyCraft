@@ -22,29 +22,29 @@ public class ItemDragibusStick extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
-	{
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
 		if (playerIn.isRiding() && playerIn.getRidingEntity() instanceof EntityCandyPig)
 		{
 			EntityCandyPig entitypig = (EntityCandyPig) playerIn.getRidingEntity();
 
-			if (itemStackIn.getMaxDamage() - itemStackIn.getMetadata() >= 7 && entitypig.boost())
+            if (stack.getMaxDamage() - stack.getMetadata() >= 7 && entitypig.boost())
 			{
-				itemStackIn.damageItem(7, playerIn);
+                stack.damageItem(7, playerIn);
 
-				if (itemStackIn.stackSize == 0)
+                if (stack.getCount() == 0)
 				{
 					ItemStack itemstack = new ItemStack(CCItems.dragibusStick);
-					itemstack.setTagCompound(itemStackIn.getTagCompound());
+                    itemstack.setTagCompound(stack.getTagCompound());
 					return new ActionResult(EnumActionResult.SUCCESS, itemstack);
 				}
 
-				return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+                return new ActionResult(EnumActionResult.SUCCESS, stack);
 			}
 		}
 
 		playerIn.addStat(StatList.getObjectUseStats(this));
-		return new ActionResult(EnumActionResult.PASS, itemStackIn);
+        return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override

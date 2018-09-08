@@ -22,7 +22,7 @@ public class ItemJumpWand extends ItemWand
 			par6 = 0.1;
 		}
 		par1Entity.isAirBorne = true;
-		float f1 = MathHelper.sqrt_double(par3 * par3 + par5 * par5);
+        float f1 = MathHelper.sqrt(par3 * par3 + par5 * par5);
 		float f2 = par2;
 		par1Entity.motionX /= 2.0D;
 		par1Entity.motionY /= 2.0D;

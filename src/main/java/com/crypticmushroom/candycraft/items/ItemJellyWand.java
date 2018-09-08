@@ -26,7 +26,7 @@ public class ItemJellyWand extends ItemWand
 			{
 				world.playSound((EntityPlayer) null, entity.posX, entity.posY, entity.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 				EntityGummyBall ball = new EntityGummyBall(world, entity, 1);
-				world.spawnEntityInWorld(ball);
+                world.spawnEntity(ball);
 				item.setItemDamage(0);
 			}
 			item.setItemDamage(0);

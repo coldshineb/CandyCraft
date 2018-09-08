@@ -29,7 +29,7 @@ public class ItemCaramelBucket extends Item
 			EntityPlayer player = (EntityPlayer) entity;
 			if (!player.capabilities.isCreativeMode)
 			{
-				--itemstack.stackSize;
+                itemstack.shrink(1);
 			}
 
 			if (!world.isRemote)
@@ -38,7 +38,7 @@ public class ItemCaramelBucket extends Item
 			}
 		}
 
-		return itemstack.stackSize <= 0 ? new ItemStack(Items.BUCKET) : itemstack;
+        return itemstack.getCount() <= 0 ? new ItemStack(Items.BUCKET) : itemstack;
 	}
 
 	@Override
@@ -54,9 +54,8 @@ public class ItemCaramelBucket extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack item, World world, EntityPlayer player, EnumHand hand)
-	{
-		player.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 }

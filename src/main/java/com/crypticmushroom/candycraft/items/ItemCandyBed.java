@@ -23,13 +23,12 @@ public class ItemCandyBed extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
 		if (worldIn.isRemote)
 		{
 			return EnumActionResult.SUCCESS;
-		}
-		else if (side != EnumFacing.UP)
+		} else if (facing != EnumFacing.UP)
 		{
 			return EnumActionResult.FAIL;
 		}
@@ -44,19 +43,19 @@ public class ItemCandyBed extends Item
 				pos = pos.up();
 			}
 
-			int i = MathHelper.floor_double(playerIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+			int i = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			EnumFacing enumfacing1 = EnumFacing.getHorizontal(i);
 			BlockPos blockpos1 = pos.offset(enumfacing1);
 			boolean flag1 = block.isReplaceable(worldIn, blockpos1);
 			boolean flag2 = worldIn.isAirBlock(pos) || flag;
 			boolean flag3 = worldIn.isAirBlock(blockpos1) || flag1;
 
-			if (playerIn.canPlayerEdit(pos, side, stack) && playerIn.canPlayerEdit(blockpos1, side, stack))
+			if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(blockpos1, facing, stack))
 			{
 				if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos, EnumFacing.UP) && worldIn.getBlockState(blockpos1.down()).isSideSolid(worldIn, blockpos1, EnumFacing.UP))
 				{
 					int j = enumfacing1.getHorizontalIndex();
-					IBlockState iblockstate1 = CCBlocks.cottonCandyBedBlock.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockDirectional.FACING, enumfacing1).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+					IBlockState iblockstate1 = CCBlocks.cottonCandyBedBlock.getDefaultState().withProperty(BlockBed.OCCUPIED, false).withProperty(BlockDirectional.FACING, enumfacing1).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
 					if (worldIn.setBlockState(pos, iblockstate1, 3))
 					{
@@ -64,7 +63,7 @@ public class ItemCandyBed extends Item
 						worldIn.setBlockState(blockpos1, iblockstate2, 3);
 					}
 
-					--stack.stackSize;
+					stack.shrink(1);
 					return EnumActionResult.SUCCESS;
 				}
 				else

@@ -1,7 +1,6 @@
 package com.crypticmushroom.candycraft.items;
 
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSeedFood;
@@ -23,21 +22,19 @@ public class ItemCandySeedFood extends ItemSeedFood
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if (side != EnumFacing.UP)
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack itemstack = player.getHeldItem(hand);
+		if (facing != EnumFacing.UP)
 		{
 			return EnumActionResult.FAIL;
-		}
-		else if (player.canPlayerEdit(pos.offset(side), side, stack))
-		{
-			Block soil = world.getBlockState(pos).getBlock();
+		} else if (player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
+			Block soil = worldIn.getBlockState(pos).getBlock();
 
-			if (soil == CCBlocks.candySoil && world.isAirBlock(pos.up()))
+			if (soil == CCBlocks.candySoil && worldIn.isAirBlock(pos.up()))
 			{
-				player.addStat(CCAchievements.dragibusFarm);
-				world.setBlockState(pos.up(), cropId.getDefaultState());
-				--stack.stackSize;
+				//TODO player.addStat(CCAchievements.dragibusFarm);
+				worldIn.setBlockState(pos.up(), cropId.getDefaultState());
+				itemstack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
 			else
@@ -50,5 +47,4 @@ public class ItemCandySeedFood extends ItemSeedFood
 			return EnumActionResult.FAIL;
 		}
 	}
-
 }

@@ -2,7 +2,6 @@ package com.crypticmushroom.candycraft.items;
 
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
 import com.crypticmushroom.candycraft.misc.CCEnchantments;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -37,17 +36,17 @@ public class ItemFork extends Item
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player)
 	{
-		Block i = player.worldObj.getBlockState(pos).getBlock();
+        Block i = player.world.getBlockState(pos).getBlock();
 		if (i != null)
 		{
 			ItemStack block = new ItemStack(i);
 			if (EnchantmentHelper.getEnchantmentLevel(CCEnchantments.devourer, itemstack) > 0 && TileEntitySugarFactory.isItemValid(block))
 			{
-				player.worldObj.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, player.worldObj.rand.nextFloat() * 0.1F + 0.9F);
-				player.worldObj.setBlockToAir(pos);
+                player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, player.world.rand.nextFloat() * 0.1F + 0.9F);
+                player.world.setBlockToAir(pos);
 				itemstack.setItemDamage(itemstack.getItemDamage() - 1);
 				player.getFoodStats().addStats(1, 0.0F);
-				player.addStat(CCAchievements.eatBlock);
+                //TODO player.addStat(CCAchievements.eatBlock);
 			}
 			return false;
 		}
@@ -55,15 +54,14 @@ public class ItemFork extends Item
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (!player.canPlayerEdit(pos, facing, stack))
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!player.canPlayerEdit(pos, facing, player.getHeldItem(hand)))
 		{
 			return EnumActionResult.FAIL;
 		}
 		else
 		{
-			Block i1 = world.getBlockState(pos).getBlock();
+            Block i1 = worldIn.getBlockState(pos).getBlock();
 
 			if (i1 != CCBlocks.pudding && i1 != CCBlocks.flour)
 			{
@@ -72,16 +70,16 @@ public class ItemFork extends Item
 			else
 			{
 				Block block = CCBlocks.candySoil;
-				world.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                worldIn.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-				if (world.isRemote)
+                if (worldIn.isRemote)
 				{
 					return EnumActionResult.SUCCESS;
 				}
 				else
 				{
-					world.setBlockState(pos, block.getDefaultState());
-					stack.damageItem(1, player);
+                    worldIn.setBlockState(pos, block.getDefaultState());
+                    player.getHeldItem(hand).damageItem(1, player);
 					return EnumActionResult.SUCCESS;
 				}
 			}

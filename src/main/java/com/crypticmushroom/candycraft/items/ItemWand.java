@@ -21,7 +21,7 @@ public class ItemWand extends Item
 			Vec3d vec31 = new Vec3d((Item.itemRand.nextFloat() - 0.5D) * 0.3D, (-Item.itemRand.nextFloat()) * 0.6D - 0.3D, 0.6D);
 			vec31 = vec31.rotateYaw(-(player.rotationYaw + 25) * (float) Math.PI / 180.0F);
 			vec31 = vec31.addVector(player.posX, player.posY + player.getEyeHeight() + 0.5, player.posZ);
-			player.worldObj.spawnParticle(EnumParticleTypes.REDSTONE, vec31.xCoord, vec31.yCoord, vec31.zCoord, 0.3F, 0.3F, 1.0F);
+            player.world.spawnParticle(EnumParticleTypes.REDSTONE, vec31.x, vec31.y, vec31.z, 0.3F, 0.3F, 1.0F);
 		}
 	}
 
@@ -38,28 +38,25 @@ public class ItemWand extends Item
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
-	{
-		if (!par3EntityPlayer.capabilities.isCreativeMode)
-		{
-			if (par1ItemStack.getItemDamage() == 0)
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if (!playerIn.capabilities.isCreativeMode) {
+            if (stack.getItemDamage() == 0) {
+                stack.setItemDamage(stack.getMaxDamage() - 1);
+			} else if (stack.getItemDamage() != 1)
 			{
-				par1ItemStack.setItemDamage(par1ItemStack.getMaxDamage() - 1);
-			}
-			else if (par1ItemStack.getItemDamage() != 1)
-			{
-				par1ItemStack.setItemDamage(par1ItemStack.getItemDamage() - 1);
+                stack.setItemDamage(stack.getItemDamage() - 1);
 			}
 
-			par3EntityPlayer.setActiveHand(hand);
-			renderItemUse(par1ItemStack, par3EntityPlayer);
+            playerIn.setActiveHand(handIn);
+            renderItemUse(stack, playerIn);
 
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, par1ItemStack);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 		}
 		else
 		{
-			par3EntityPlayer.addChatMessage(new TextComponentString("\2476" + new TextComponentTranslation("chat.NoCreative").getUnformattedText()));
-			return new ActionResult<ItemStack>(EnumActionResult.FAIL, par1ItemStack);
+            playerIn.sendStatusMessage(new TextComponentString("\2476" + new TextComponentTranslation("chat.NoCreative").getUnformattedText()), true);
+            return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);
 		}
 	}
 }

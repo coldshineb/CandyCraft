@@ -27,8 +27,8 @@ public class ItemCandyWaterLily extends ItemBlock
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
-	{
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        ItemStack itemStackIn = playerIn.getHeldItem(handIn);
 		RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, true);
 
 		if (raytraceresult == null)
@@ -60,7 +60,7 @@ public class ItemCandyWaterLily extends ItemBlock
 					// lilies
 					BlockSnapshot blocksnapshot = BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
 					worldIn.setBlockState(blockpos1, Blocks.WATERLILY.getDefaultState());
-					if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP).isCanceled())
+                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(playerIn, blocksnapshot, net.minecraft.util.EnumFacing.UP, handIn).isCanceled())
 					{
 						blocksnapshot.restore(true, false);
 						return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
@@ -70,7 +70,7 @@ public class ItemCandyWaterLily extends ItemBlock
 
 					if (!playerIn.capabilities.isCreativeMode)
 					{
-						--itemStackIn.stackSize;
+                        itemStackIn.shrink(1);
 					}
 
 					playerIn.addStat(StatList.getObjectUseStats(this));

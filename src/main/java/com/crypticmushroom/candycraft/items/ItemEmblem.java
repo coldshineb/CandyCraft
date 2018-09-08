@@ -1,10 +1,12 @@
 package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemEmblem extends Item
@@ -19,10 +21,9 @@ public class ItemEmblem extends Item
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
-	{
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		String str = "\2472" + I18n.format("Desc." + attr);
-		par3List.add(str.replaceAll("Format error: ", ""));
-		par3List.add("\247a" + I18n.format("Desc.Emblem"));
+        tooltip.add(str.replaceAll("Format error: ", ""));
+        tooltip.add("\247a" + I18n.format("Desc.Emblem"));
 	}
 }

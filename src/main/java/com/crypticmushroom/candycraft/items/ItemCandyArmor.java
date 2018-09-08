@@ -12,9 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCandyArmor extends ItemArmor
 {
-	public ItemCandyArmor(ArmorMaterial par2EnumArmorMaterial, EntityEquipmentSlot par3)
-	{
-		super(par2EnumArmorMaterial, 0, par3);
+    public ItemCandyArmor(ArmorMaterial material, EntityEquipmentSlot slot) {
+        super(material, 0, slot);
 	}
 
 	@Override

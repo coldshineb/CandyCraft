@@ -50,7 +50,7 @@ public class CandyCraft
 	public static CandyCraft instance;
 
 	@SidedProxy(clientSide = "com.crypticmushroom.candycraft.client.ClientProxy", serverSide = "com.crypticmushroom.candycraft.CommonProxy")
-	private static CommonProxy proxy;
+    public static CommonProxy proxy;
 	private static ClientTick clientTicker;
 	private static ServerTick serverTicker;
 

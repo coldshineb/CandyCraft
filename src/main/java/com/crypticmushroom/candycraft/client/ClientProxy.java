@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.client;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.CommonProxy;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityAlchemy;
@@ -62,7 +63,8 @@ public class ClientProxy extends CommonProxy
     public static ModelResourceLocation crossAn2 = new ModelResourceLocation("candycraftmod:caramel_crossbow_2", "inventory");
     public static ModelResourceLocation crossAn3 = new ModelResourceLocation("candycraftmod:caramel_crossbow_3", "inventory");
 
-	@Override
+
+    @Override
 	public void init()
 	{
 		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
@@ -100,7 +102,7 @@ public class ClientProxy extends CommonProxy
 		rm.entityRenderMap.put(EntityMermaid.class, new RenderMermaid(rm));
 
 		TileEntityCandyChestRenderer render = new TileEntityCandyChestRenderer();
-		TileEntityRendererDispatcher.instance.mapSpecialRenderers.put(TileEntityCandyChest.class, render);
+        TileEntityRendererDispatcher.instance.renderers.put(TileEntityCandyChest.class, render);
 		render.setRendererDispatcher(TileEntityRendererDispatcher.instance);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemy.class, new TileEntityAlchemyRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTeleporter.class, new TileEntityRendererTeleporter());
@@ -184,4 +186,9 @@ public class ClientProxy extends CommonProxy
 			}
 		});
 	}
+
+    @Override
+    public void registerItemRenderer(Item item, int meta, String id) {
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(CandyCraft.MODID + ":" + id, "inventory"));
+    }
 }
