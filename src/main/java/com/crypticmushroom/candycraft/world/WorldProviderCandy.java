@@ -1,8 +1,7 @@
-package com.valentin4311.candycraftmod.world;
+package com.crypticmushroom.candycraft.world;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.client.ClientProxy;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.client.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;

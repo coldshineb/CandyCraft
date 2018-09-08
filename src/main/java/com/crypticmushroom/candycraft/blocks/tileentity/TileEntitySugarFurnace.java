@@ -1,11 +1,10 @@
-package com.valentin4311.candycraftmod.blocks.tileentity;
+package com.crypticmushroom.candycraft.blocks.tileentity;
 
-import com.valentin4311.candycraftmod.blocks.BlockCandyFurnace;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.client.gui.ContainerSugarFurnace;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCFurnaceRecipe;
-
+import com.crypticmushroom.candycraft.blocks.BlockCandyFurnace;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.client.gui.ContainerSugarFurnace;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.CCFurnaceRecipe;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -472,7 +471,7 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
 	@Override
 	public String getGuiID()
 	{
-		return "candycraft:sugar_furnace";
+		return "candycraftmod:sugar_furnace";
 	}
 
 	@Override

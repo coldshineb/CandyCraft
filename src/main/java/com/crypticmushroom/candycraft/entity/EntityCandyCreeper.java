@@ -1,8 +1,7 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;

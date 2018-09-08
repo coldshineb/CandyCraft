@@ -1,9 +1,8 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import com.valentin4311.candycraftmod.client.entity.EntityBreakingParticleFX;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossBeetle;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.client.entity.EntityBreakingParticleFX;
+import com.crypticmushroom.candycraft.entity.boss.EntityBossBeetle;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.entity.EntityLivingBase;

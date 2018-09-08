@@ -1,11 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+package com.crypticmushroom.candycraft.blocks;
 
 import com.google.common.base.Predicate;
-
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -21,6 +16,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockCandyLeave extends BlockCandyLeaveBase implements IShearable
 {

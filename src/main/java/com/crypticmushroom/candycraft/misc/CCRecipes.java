@@ -1,9 +1,8 @@
-package com.valentin4311.candycraftmod.misc;
+package com.crypticmushroom.candycraft.misc;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.AlchemyRecipes;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.AlchemyRecipes;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;

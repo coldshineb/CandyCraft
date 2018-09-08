@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.world;
+package com.crypticmushroom.candycraft.world;
 
 import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.relauncher.Side;

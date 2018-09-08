@@ -1,10 +1,6 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import java.util.List;
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.items.ItemCandySlab;
-
+import com.crypticmushroom.candycraft.items.ItemCandySlab;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,6 +17,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockCandyStep extends BlockSlab
 {

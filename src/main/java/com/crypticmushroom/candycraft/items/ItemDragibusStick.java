@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import com.valentin4311.candycraftmod.entity.EntityCandyPig;
-
+import com.crypticmushroom.candycraft.entity.EntityCandyPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

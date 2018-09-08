@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.entity.ai;
+package com.crypticmushroom.candycraft.entity.ai;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;

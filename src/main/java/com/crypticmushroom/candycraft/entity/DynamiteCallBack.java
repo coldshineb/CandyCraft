@@ -1,10 +1,9 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
+
+import com.crypticmushroom.candycraft.event.ServerTick;
+import net.minecraft.entity.Entity;
 
 import java.util.Random;
-
-import com.valentin4311.candycraftmod.event.ServerTick;
-
-import net.minecraft.entity.Entity;
 
 public class DynamiteCallBack
 {

@@ -1,23 +1,16 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -389,7 +382,7 @@ public class CCItems
 		CandyCraft.getItemList().add(item);
 		if (currentSide == Side.CLIENT)
 		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation("candycraft:" + item.getUnlocalizedName().substring(5), "inventory"));
+            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation("candycraftmod:" + item.getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
 }

@@ -1,11 +1,11 @@
-package com.valentin4311.candycraftmod.world.generator;
-
-import java.util.Random;
+package com.crypticmushroom.candycraft.world.generator;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class GeometryGenerator extends WorldGenerator
 {

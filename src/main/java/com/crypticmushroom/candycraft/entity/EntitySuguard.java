@@ -1,20 +1,13 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.world.biomes.CCBiomes;
-
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;

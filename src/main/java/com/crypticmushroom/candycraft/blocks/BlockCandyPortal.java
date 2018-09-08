@@ -1,11 +1,8 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.client.entity.EntityCandyPortalFX;
-import com.valentin4311.candycraftmod.world.TeleporterCandy;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.client.entity.EntityCandyPortalFX;
+import com.crypticmushroom.candycraft.world.TeleporterCandy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
@@ -23,6 +20,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockCandyPortal extends BlockPortal
 {

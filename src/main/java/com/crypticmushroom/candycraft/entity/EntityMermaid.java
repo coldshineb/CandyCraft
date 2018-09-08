@@ -1,8 +1,7 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import com.valentin4311.candycraftmod.entity.ai.EntityAICandyArrow;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.entity.ai.EntityAICandyArrow;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;

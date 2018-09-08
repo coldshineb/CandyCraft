@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.Arrays;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -8,6 +6,8 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
+
+import java.util.Arrays;
 
 public class BlockCandyPlanks extends BlockCandyBase
 {

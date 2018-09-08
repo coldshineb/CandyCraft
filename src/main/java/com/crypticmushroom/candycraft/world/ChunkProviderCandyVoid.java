@@ -1,7 +1,4 @@
-package com.valentin4311.candycraftmod.world;
-
-import java.util.List;
-import java.util.Random;
+package com.crypticmushroom.candycraft.world;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.IProgressUpdate;
@@ -11,6 +8,9 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import java.util.List;
+import java.util.Random;
 
 public class ChunkProviderCandyVoid implements IChunkGenerator
 {

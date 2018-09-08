@@ -1,13 +1,12 @@
-package com.valentin4311.candycraftmod.entity.boss;
+package com.crypticmushroom.candycraft.entity.boss;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.client.gui.GuiBoss;
-import com.valentin4311.candycraftmod.entity.EntityJelly;
-import com.valentin4311.candycraftmod.entity.EntityTornadoJelly;
-import com.valentin4311.candycraftmod.entity.EntityUtil;
-import com.valentin4311.candycraftmod.entity.ICandyBoss;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.client.gui.GuiBoss;
+import com.crypticmushroom.candycraft.entity.EntityJelly;
+import com.crypticmushroom.candycraft.entity.EntityTornadoJelly;
+import com.crypticmushroom.candycraft.entity.EntityUtil;
+import com.crypticmushroom.candycraft.entity.ICandyBoss;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;

@@ -1,11 +1,8 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityCandyChest;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityCandyChest;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -13,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenIceTower extends WorldGenerator
 {

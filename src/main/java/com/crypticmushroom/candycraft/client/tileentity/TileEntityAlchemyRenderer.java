@@ -1,20 +1,18 @@
-package com.valentin4311.candycraftmod.client.tileentity;
+package com.crypticmushroom.candycraft.client.tileentity;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityAlchemy;
-
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityAlchemy;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public class TileEntityAlchemyRenderer extends TileEntitySpecialRenderer
 {
 	public static TileEntityAlchemyRenderer instance = new TileEntityAlchemyRenderer();
 	private final ModelAlchemy model = new ModelAlchemy();
-	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/AlchemyTable.png");
+    private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/AlchemyTable.png");
 
 	public TileEntityAlchemyRenderer()
 	{

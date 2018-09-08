@@ -1,20 +1,15 @@
-package com.valentin4311.candycraftmod.entity;
+package com.crypticmushroom.candycraft.entity;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossBeetle;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossSuguard;
-import com.valentin4311.candycraftmod.entity.boss.EntityJellyQueen;
-import com.valentin4311.candycraftmod.entity.boss.EntityKingSlime;
-import com.valentin4311.candycraftmod.entity.boss.EntityPEZJelly;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.entity.boss.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class CCEntities
 {
@@ -65,6 +60,6 @@ public class CCEntities
 	public static void registerEntity(Class<? extends Entity> entity, String entityName, int id, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primary, int secondary)
 	{
 		EntityRegistry.registerModEntity(entity, entityName, id, CandyCraft.getInstance(), trackingRange, updateFrequency, sendsVelocityUpdates);
-		CANDYCRAFT_EGGS.put("candycraft." + entityName, new EntityList.EntityEggInfo("candycraft." + entityName, primary, secondary));
+        CANDYCRAFT_EGGS.put("candycraftmod." + entityName, new EntityList.EntityEggInfo("candycraftmod." + entityName, primary, secondary));
 	}
 }

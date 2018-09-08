@@ -1,11 +1,8 @@
-package com.valentin4311.candycraftmod.client.gui;
+package com.crypticmushroom.candycraft.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.entity.ICandyBoss;
-import com.valentin4311.candycraftmod.entity.IEntityLockable;
-import com.valentin4311.candycraftmod.entity.IEntityPowerMount;
-
+import com.crypticmushroom.candycraft.entity.ICandyBoss;
+import com.crypticmushroom.candycraft.entity.IEntityLockable;
+import com.crypticmushroom.candycraft.entity.IEntityPowerMount;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -21,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiBoss extends Gui
@@ -29,7 +27,7 @@ public class GuiBoss extends Gui
 	public int counter = 0;
 	public float lastLife = 0;
 	private Minecraft mc = Minecraft.getMinecraft();
-	private ResourceLocation gui = new ResourceLocation("candycraft:textures/gui/Gui_Boss.png");
+    private ResourceLocation gui = new ResourceLocation("candycraftmod:textures/gui/Gui_Boss.png");
 	String[] difficulties = { I18n.format("Gui.Boss.Sentry"), I18n.format("Gui.Boss.MiniBoss"), I18n.format("Gui.Boss.Boss") };
 	double animation = 0;
 	int tick = 0;

@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.world;
+package com.crypticmushroom.candycraft.world;
 
-import com.valentin4311.candycraftmod.world.biomes.GenLayerCandyBiomes;
-
+import com.crypticmushroom.candycraft.world.biomes.GenLayerCandyBiomes;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

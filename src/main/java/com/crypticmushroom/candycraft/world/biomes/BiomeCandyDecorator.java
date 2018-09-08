@@ -1,22 +1,13 @@
-package com.valentin4311.candycraftmod.world.biomes;
+package com.crypticmushroom.candycraft.world.biomes;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.world.generator.WorldGenTallCandyGrass;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.world.generator.WorldGenTallCandyGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.gen.feature.WorldGenCactus;
-import net.minecraft.world.gen.feature.WorldGenClay;
-import net.minecraft.world.gen.feature.WorldGenLiquids;
-import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenReed;
-import net.minecraft.world.gen.feature.WorldGenSand;
-import net.minecraft.world.gen.feature.WorldGenWaterlily;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.*;
+
+import java.util.Random;
 
 public class BiomeCandyDecorator
 {
@@ -127,7 +118,7 @@ public class BiomeCandyDecorator
 			WorldGenerator worldgenerator = biome.genBigTreeChance(randomGenerator);
 			worldgenerator.setDecorationDefaults();
 			BlockPos h = currentWorld.getHeight(new BlockPos(k, 0, l));
-			if (currentWorld.getBiomeGenForCoords(h) instanceof BiomeGenSkyMountains || h.getY() < 120)
+            if (currentWorld.provider.getBiomeForCoords(h) instanceof BiomeGenSkyMountains || h.getY() < 120)
 			{
 				worldgenerator.generate(currentWorld, randomGenerator, h);
 			}

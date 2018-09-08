@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.List;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
@@ -10,6 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BlockCandyWall extends BlockWall
 {

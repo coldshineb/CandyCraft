@@ -1,10 +1,9 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntitySugarFactory;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-import com.valentin4311.candycraftmod.misc.CCEnchantments;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
+import com.crypticmushroom.candycraft.misc.CCEnchantments;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;

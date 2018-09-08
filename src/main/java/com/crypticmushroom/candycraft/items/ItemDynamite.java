@@ -1,22 +1,17 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.entity.EntityDynamite;
-import com.valentin4311.candycraftmod.entity.EntityGlueDynamite;
-
+import com.crypticmushroom.candycraft.entity.EntityDynamite;
+import com.crypticmushroom.candycraft.entity.EntityGlueDynamite;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class ItemDynamite extends Item
 {

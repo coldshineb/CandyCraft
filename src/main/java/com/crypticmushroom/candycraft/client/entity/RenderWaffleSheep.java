@@ -1,7 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import com.valentin4311.candycraftmod.entity.EntityWaffleSheep;
-
+import com.crypticmushroom.candycraft.entity.EntityWaffleSheep;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -13,8 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderWaffleSheep extends RenderLiving
 {
-	private static final ResourceLocation shearedSheepTextures = new ResourceLocation("candycraft:textures/entity/sheepCandy0.png");
-	private static final ResourceLocation shearedSheepTextures2 = new ResourceLocation("candycraft:textures/entity/sheepCandy1.png");
+    private static final ResourceLocation shearedSheepTextures = new ResourceLocation("candycraftmod:textures/entity/sheepCandy0.png");
+    private static final ResourceLocation shearedSheepTextures2 = new ResourceLocation("candycraftmod:textures/entity/sheepCandy1.png");
 
 	public RenderWaffleSheep(RenderManager rm, ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{

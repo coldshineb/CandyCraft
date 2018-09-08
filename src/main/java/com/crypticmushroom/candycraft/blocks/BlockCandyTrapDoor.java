@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.material.Material;

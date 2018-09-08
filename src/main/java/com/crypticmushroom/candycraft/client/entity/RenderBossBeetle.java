@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.entity.boss.EntityBossBeetle;
-
+import com.crypticmushroom.candycraft.entity.boss.EntityBossBeetle;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,12 +9,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderBossBeetle extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/BossBeetle.png");
-	private static final ResourceLocation sleepingTexture = new ResourceLocation("candycraft:textures/entity/BossBeetle2.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/BossBeetle.png");
+	private static final ResourceLocation sleepingTexture = new ResourceLocation("candycraftmod:textures/entity/BossBeetle2.png");
 
 	public RenderBossBeetle(RenderManager rm, ModelBase model, float size)
 	{

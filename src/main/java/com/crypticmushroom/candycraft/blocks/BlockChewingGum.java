@@ -1,10 +1,9 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
-import com.valentin4311.candycraftmod.entity.EntityBeetle;
-import com.valentin4311.candycraftmod.entity.EntityKingBeetle;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossBeetle;
-import com.valentin4311.candycraftmod.items.CCItems;
-
+import com.crypticmushroom.candycraft.entity.EntityBeetle;
+import com.crypticmushroom.candycraft.entity.EntityKingBeetle;
+import com.crypticmushroom.candycraft.entity.boss.EntityBossBeetle;
+import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

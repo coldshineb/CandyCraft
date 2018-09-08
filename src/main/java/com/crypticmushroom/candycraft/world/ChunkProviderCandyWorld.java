@@ -1,24 +1,9 @@
-package com.valentin4311.candycraftmod.world;
+package com.crypticmushroom.candycraft.world;
 
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
-
-import java.util.List;
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.CandyCraftPreferences;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.world.biomes.CCBiomes;
-import com.valentin4311.candycraftmod.world.generator.MapGenCandyRavine;
-import com.valentin4311.candycraftmod.world.generator.WorldGenCandyHouse;
-import com.valentin4311.candycraftmod.world.generator.WorldGenChewingGumTotem;
-import com.valentin4311.candycraftmod.world.generator.WorldGenFloatingIsland;
-import com.valentin4311.candycraftmod.world.generator.WorldGenGeyser;
-import com.valentin4311.candycraftmod.world.generator.WorldGenHoneyDungeons;
-import com.valentin4311.candycraftmod.world.generator.WorldGenIceTower;
-import com.valentin4311.candycraftmod.world.generator.WorldGenUnderGroundVillage;
-import com.valentin4311.candycraftmod.world.generator.WorldGenWaterTemple;
-import com.valentin4311.candycraftmod.world.generator.WorldGenWebLakes;
-
+import com.crypticmushroom.candycraft.CandyCraftPreferences;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
+import com.crypticmushroom.candycraft.world.generator.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -34,14 +19,14 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderSettings;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.NoiseGenerator;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraftforge.event.terraingen.TerrainGen;
+
+import java.util.List;
+import java.util.Random;
+
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
 
 public class ChunkProviderCandyWorld implements IChunkGenerator
 {

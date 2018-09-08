@@ -1,8 +1,4 @@
-package com.valentin4311.candycraftmod.entity.ai;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+package com.crypticmushroom.candycraft.entity.ai;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -14,6 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class EntityAIWaterMate extends EntityAIBase
 {

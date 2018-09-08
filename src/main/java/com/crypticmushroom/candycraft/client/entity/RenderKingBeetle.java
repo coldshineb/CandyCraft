@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.client.entity;
-
-import org.lwjgl.opengl.GL11;
+package com.crypticmushroom.candycraft.client.entity;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -10,11 +8,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderKingBeetle extends RenderLiving
 {
-	private static final ResourceLocation field_110833_b = new ResourceLocation("candycraft:textures/entity/tamedBeetle.png");
+    private static final ResourceLocation field_110833_b = new ResourceLocation("candycraftmod:textures/entity/tamedBeetle.png");
 
 	public RenderKingBeetle(RenderManager rm, ModelBase p_i1262_1_, float p_i1262_2_)
 	{

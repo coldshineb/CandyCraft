@@ -1,20 +1,14 @@
-package com.valentin4311.candycraftmod.misc;
+package com.crypticmushroom.candycraft.misc;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.CandyCraftPreferences;
+import com.crypticmushroom.candycraft.event.ClientTick;
+import net.minecraft.client.Minecraft;
+
+import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.CandyCraftPreferences;
-import com.valentin4311.candycraftmod.event.ClientTick;
-
-import net.minecraft.client.Minecraft;
 
 public class ThreadCheckUpdate extends Thread
 {

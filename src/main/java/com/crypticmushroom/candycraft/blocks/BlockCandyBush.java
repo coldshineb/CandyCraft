@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.state.IBlockState;

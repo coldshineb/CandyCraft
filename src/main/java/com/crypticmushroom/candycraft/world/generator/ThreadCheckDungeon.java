@@ -1,8 +1,7 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.blocks.tileentity.TileEntityTeleporter;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

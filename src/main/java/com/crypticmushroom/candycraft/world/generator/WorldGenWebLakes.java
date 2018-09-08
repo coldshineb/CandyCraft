@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,6 +9,8 @@ import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenWebLakes extends WorldGenerator
 {
@@ -124,7 +123,7 @@ public class WorldGenWebLakes extends WorldGenerator
 			{
 				world.setBlockState(new BlockPos(pX + 8, pY + 2, pZ + 8), Blocks.MOB_SPAWNER.getDefaultState(), 2);
 				TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner) world.getTileEntity(new BlockPos(pX + 8, pY + 2, pZ + 8));
-				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraft.CottonCandySpider");
+                tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraftmod.CottonCandySpider");
 			}
 
 			return true;

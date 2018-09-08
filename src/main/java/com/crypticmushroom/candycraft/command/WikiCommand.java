@@ -1,11 +1,7 @@
-package com.valentin4311.candycraftmod.command;
+package com.crypticmushroom.candycraft.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +10,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WikiCommand implements ICommand
 {

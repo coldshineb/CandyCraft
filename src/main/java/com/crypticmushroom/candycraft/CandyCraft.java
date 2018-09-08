@@ -1,27 +1,23 @@
-package com.valentin4311.candycraft;
+package com.crypticmushroom.candycraft;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import com.valentin4311.candycraft.blocks.CCBlocks;
-import com.valentin4311.candycraft.blocks.fluid.CCFluids;
-import com.valentin4311.candycraft.client.gui.GuiHandlerCandyCraft;
-import com.valentin4311.candycraft.command.WikiCommand;
-import com.valentin4311.candycraft.entity.CCEntities;
-import com.valentin4311.candycraft.event.ClientEventCatcher;
-import com.valentin4311.candycraft.event.ClientTick;
-import com.valentin4311.candycraft.event.ServerEventCatcher;
-import com.valentin4311.candycraft.event.ServerTick;
-import com.valentin4311.candycraft.items.CCItems;
-import com.valentin4311.candycraft.misc.CCAchievements;
-import com.valentin4311.candycraft.misc.CCCreativeTabs;
-import com.valentin4311.candycraft.misc.CCRecipes;
-import com.valentin4311.candycraft.world.TerrainCatcher;
-import com.valentin4311.candycraft.world.WorldProviderCandy;
-import com.valentin4311.candycraft.world.WorldProviderVoid;
-import com.valentin4311.candycraft.world.WorldTypeCandy;
-import com.valentin4311.candycraft.world.biomes.CCBiomes;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.blocks.fluid.CCFluids;
+import com.crypticmushroom.candycraft.client.gui.GuiHandlerCandyCraft;
+import com.crypticmushroom.candycraft.command.WikiCommand;
+import com.crypticmushroom.candycraft.entity.CCEntities;
+import com.crypticmushroom.candycraft.event.ClientEventCatcher;
+import com.crypticmushroom.candycraft.event.ClientTick;
+import com.crypticmushroom.candycraft.event.ServerEventCatcher;
+import com.crypticmushroom.candycraft.event.ServerTick;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
+import com.crypticmushroom.candycraft.misc.CCCreativeTabs;
+import com.crypticmushroom.candycraft.misc.CCRecipes;
+import com.crypticmushroom.candycraft.world.TerrainCatcher;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
+import com.crypticmushroom.candycraft.world.WorldProviderVoid;
+import com.crypticmushroom.candycraft.world.WorldTypeCandy;
+import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.DimensionManager;
@@ -39,6 +35,9 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.io.File;
+import java.util.ArrayList;
+
 @Mod(modid = CandyCraft.MODID, name = CandyCraft.NAME, version = CandyCraft.VERSION)
 public class CandyCraft
 {
@@ -50,7 +49,7 @@ public class CandyCraft
     @Instance
 	public static CandyCraft instance;
 
-	@SidedProxy(clientSide = "com.valentin4311.candycraft.client.ClientProxy", serverSide = "com.valentin4311.candycraft.CommonProxy")
+	@SidedProxy(clientSide = "com.crypticmushroom.candycraft.client.ClientProxy", serverSide = "com.crypticmushroom.candycraft.CommonProxy")
 	private static CommonProxy proxy;
 	private static ClientTick clientTicker;
 	private static ServerTick serverTicker;

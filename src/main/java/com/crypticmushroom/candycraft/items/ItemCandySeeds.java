@@ -1,8 +1,7 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.misc.CCAchievements;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

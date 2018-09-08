@@ -1,14 +1,10 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.entity.EntityGingerBreadMan;
-import com.valentin4311.candycraftmod.entity.boss.EntityBossSuguard;
-import com.valentin4311.candycraftmod.items.CCItems;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.entity.EntityGingerBreadMan;
+import com.crypticmushroom.candycraft.entity.boss.EntityBossSuguard;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
@@ -20,6 +16,9 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class WorldGenUnderGroundVillage extends WorldGenerator
 {

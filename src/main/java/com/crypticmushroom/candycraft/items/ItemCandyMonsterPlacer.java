@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.items;
+package com.crypticmushroom.candycraft.items;
 
-import java.util.List;
-
-import com.valentin4311.candycraftmod.entity.CCEntities;
-
+import com.crypticmushroom.candycraft.entity.CCEntities;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
@@ -12,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemCandyMonsterPlacer extends ItemMonsterPlacer
 {

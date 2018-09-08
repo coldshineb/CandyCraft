@@ -1,10 +1,7 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.world.WorldProviderCandy;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -13,6 +10,8 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenWaterTemple extends WorldGenerator
 {

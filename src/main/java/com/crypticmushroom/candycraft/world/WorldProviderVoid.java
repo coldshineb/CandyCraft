@@ -1,8 +1,7 @@
-package com.valentin4311.candycraftmod.world;
+package com.crypticmushroom.candycraft.world;
 
-import com.valentin4311.candycraftmod.CandyCraft;
-import com.valentin4311.candycraftmod.world.biomes.CCBiomes;
-
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;

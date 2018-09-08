@@ -1,11 +1,11 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.Random;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.BlockWeb;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+
+import java.util.Random;
 
 public class BlockCandyWeb extends BlockWeb
 {

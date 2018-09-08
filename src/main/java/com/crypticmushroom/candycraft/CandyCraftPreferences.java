@@ -1,8 +1,8 @@
-package com.valentin4311.candycraft;
-
-import java.io.File;
+package com.crypticmushroom.candycraft;
 
 import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
 
 public class CandyCraftPreferences
 {

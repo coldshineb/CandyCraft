@@ -1,4 +1,4 @@
-package com.valentin4311.candycraftmod.client.gui;
+package com.crypticmushroom.candycraft.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

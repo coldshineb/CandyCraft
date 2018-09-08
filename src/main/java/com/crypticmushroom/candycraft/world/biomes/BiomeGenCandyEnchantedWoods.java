@@ -1,21 +1,20 @@
-package com.valentin4311.candycraftmod.world.biomes;
+package com.crypticmushroom.candycraft.world.biomes;
 
-import java.awt.Color;
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.BlockCandyLog;
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-import com.valentin4311.candycraftmod.entity.EntityBee;
-import com.valentin4311.candycraftmod.entity.EntityBunny;
-import com.valentin4311.candycraftmod.entity.EntityCandyPig;
-import com.valentin4311.candycraftmod.entity.EntityMageSuguard;
-import com.valentin4311.candycraftmod.world.generator.WorldGenEnchantedTree;
-
+import com.crypticmushroom.candycraft.blocks.BlockCandyLog;
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
+import com.crypticmushroom.candycraft.entity.EntityBee;
+import com.crypticmushroom.candycraft.entity.EntityBunny;
+import com.crypticmushroom.candycraft.entity.EntityCandyPig;
+import com.crypticmushroom.candycraft.entity.EntityMageSuguard;
+import com.crypticmushroom.candycraft.world.generator.WorldGenEnchantedTree;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.awt.*;
+import java.util.Random;
 
 public class BiomeGenCandyEnchantedWoods extends BiomeGenCandy
 {

@@ -1,14 +1,13 @@
-package com.valentin4311.candycraftmod.world.generator;
+package com.crypticmushroom.candycraft.world.generator;
 
-import java.util.Random;
-
-import com.valentin4311.candycraftmod.blocks.CCBlocks;
-
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenSeaweeds extends WorldGenerator
 {

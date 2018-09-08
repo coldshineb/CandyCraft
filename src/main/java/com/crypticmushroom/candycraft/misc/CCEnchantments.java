@@ -1,7 +1,6 @@
-package com.valentin4311.candycraft.misc;
+package com.crypticmushroom.candycraft.misc;
 
-import com.valentin4311.candycraft.CandyCraft;
-
+import com.crypticmushroom.candycraft.CandyCraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;

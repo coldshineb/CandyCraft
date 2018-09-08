@@ -1,10 +1,4 @@
-package com.valentin4311.candycraftmod.items;
-
-import java.awt.Desktop;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,6 +9,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class ItemWiki extends Item
 {

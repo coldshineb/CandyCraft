@@ -1,6 +1,4 @@
-package com.valentin4311.candycraftmod.blocks;
-
-import java.util.List;
+package com.crypticmushroom.candycraft.blocks;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BlockCandyLog extends BlockLog
 {

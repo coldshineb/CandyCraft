@@ -1,9 +1,6 @@
-package com.valentin4311.candycraftmod.client.entity;
+package com.crypticmushroom.candycraft.client.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import com.valentin4311.candycraftmod.entity.EntityNougatGolem;
-
+import com.crypticmushroom.candycraft.entity.EntityNougatGolem;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -11,12 +8,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderNougatGolem extends RenderLiving
 {
-	private static final ResourceLocation body = new ResourceLocation("candycraft:textures/entity/nougatGolem2.png");
-	private static final ResourceLocation head = new ResourceLocation("candycraft:textures/entity/nougatGolem.png");
+    private static final ResourceLocation body = new ResourceLocation("candycraftmod:textures/entity/nougatGolem2.png");
+    private static final ResourceLocation head = new ResourceLocation("candycraftmod:textures/entity/nougatGolem.png");
 
 	public RenderNougatGolem(RenderManager rm)
 	{
