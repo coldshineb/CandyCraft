@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderKingBeetle extends RenderLiving
 {
-	private static final ResourceLocation field_110833_b = new ResourceLocation("candycraftmod:textures/entity/tamedBeetle.png");
+	private static final ResourceLocation field_110833_b = new ResourceLocation("candycraft:textures/entity/tamedBeetle.png");
 
 	public RenderKingBeetle(RenderManager rm, ModelBase p_i1262_1_, float p_i1262_2_)
 	{

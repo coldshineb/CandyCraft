@@ -19,7 +19,7 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class RenderWeather extends IRenderHandler
 {
-	private static final ResourceLocation locationRainPng = new ResourceLocation("candycraftmod:textures/environment/rain.png");
+	private static final ResourceLocation locationRainPng = new ResourceLocation("candycraft:textures/environment/rain.png");
 
 	private float[] rainX = new float[1024];
 	private float[] rainY = new float[1024];

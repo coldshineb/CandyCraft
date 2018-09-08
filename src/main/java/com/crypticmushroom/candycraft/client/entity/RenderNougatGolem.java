@@ -15,8 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderNougatGolem extends RenderLiving
 {
-	private static final ResourceLocation body = new ResourceLocation("candycraftmod:textures/entity/nougatGolem2.png");
-	private static final ResourceLocation head = new ResourceLocation("candycraftmod:textures/entity/nougatGolem.png");
+	private static final ResourceLocation body = new ResourceLocation("candycraft:textures/entity/nougatGolem2.png");
+	private static final ResourceLocation head = new ResourceLocation("candycraft:textures/entity/nougatGolem.png");
 
 	public RenderNougatGolem(RenderManager rm)
 	{

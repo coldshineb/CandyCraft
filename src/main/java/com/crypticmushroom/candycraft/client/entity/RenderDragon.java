@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDragon extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/Dragons.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/Dragons.png");
 
 	public RenderDragon(RenderManager rm, ModelBase par1ModelBase, float par2)
 	{

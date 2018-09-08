@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerNessieSaddle implements LayerRenderer
 {
-	private static final ResourceLocation TEXTURE = new ResourceLocation("candycraftmod:textures/entity/NessieSaddle.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("candycraft:textures/entity/NessieSaddle.png");
 	private final RenderNessie nessieRenderer;
 	private final ModelNessie nessieModel = new ModelNessie(0.5F);
 

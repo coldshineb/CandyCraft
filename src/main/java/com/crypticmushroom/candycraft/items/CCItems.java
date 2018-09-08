@@ -389,7 +389,7 @@ public class CCItems
 		CandyCraft.getItemList().add(item);
 		if (currentSide == Side.CLIENT)
 		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation("candycraftmod:" + item.getUnlocalizedName().substring(5), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation("candycraft:" + item.getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
 }

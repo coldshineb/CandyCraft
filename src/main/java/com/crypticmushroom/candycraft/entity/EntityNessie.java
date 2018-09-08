@@ -397,19 +397,19 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-		return "candycraftmod:mob.nessie";
+		return "candycraft:mob.nessie";
 	}
 
 	@Override
 	protected SoundEvent getHurtSound()
 	{
-		return "candycraftmod:mob.nessiehurt";
+		return "candycraft:mob.nessiehurt";
 	}
 
 	@Override
 	protected SoundEvent getDeathSound()
 	{
-		return "candycraftmod:mob.nessiehurt";
+		return "candycraft:mob.nessiehurt";
 	}
 
 	@Override

@@ -65,6 +65,6 @@ public class CCEntities
 	public static void registerEntity(Class<? extends Entity> entity, String entityName, int id, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primary, int secondary)
 	{
 		EntityRegistry.registerModEntity(entity, entityName, id, CandyCraft.getInstance(), trackingRange, updateFrequency, sendsVelocityUpdates);
-		CANDYCRAFT_EGGS.put("candycraftmod." + entityName, new EntityList.EntityEggInfo("candycraftmod." + entityName, primary, secondary));
+		CANDYCRAFT_EGGS.put("candycraft." + entityName, new EntityList.EntityEggInfo("candycraft." + entityName, primary, secondary));
 	}
 }

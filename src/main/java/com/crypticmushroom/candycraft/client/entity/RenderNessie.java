@@ -20,7 +20,7 @@ public class RenderNessie extends RenderLiving
 {
 	private static ModelNessie modelOne = (new ModelNessie(0.0F));
 	private static ModelNessie2 modelTwo = (new ModelNessie2(0.0F));
-	private static final ResourceLocation[] img = { new ResourceLocation("candycraftmod:textures/entity/Nessie0.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie1.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie2.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie3.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie4.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie5.png"), new ResourceLocation("candycraftmod:textures/entity/Nessie6.png") };
+	private static final ResourceLocation[] img = { new ResourceLocation("candycraft:textures/entity/Nessie0.png"), new ResourceLocation("candycraft:textures/entity/Nessie1.png"), new ResourceLocation("candycraft:textures/entity/Nessie2.png"), new ResourceLocation("candycraft:textures/entity/Nessie3.png"), new ResourceLocation("candycraft:textures/entity/Nessie4.png"), new ResourceLocation("candycraft:textures/entity/Nessie5.png"), new ResourceLocation("candycraft:textures/entity/Nessie6.png") };
 
 	public RenderNessie(RenderManager rm)
 	{

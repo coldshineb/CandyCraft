@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderGingerBreadMan extends RenderBiped<EntityGingerBreadMan>
 {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("candycraftmod:textures/entity/Gingerbread0.png"), new ResourceLocation("candycraftmod:textures/entity/Gingerbread1.png"), new ResourceLocation("candycraftmod:textures/entity/Gingerbread2.png"), new ResourceLocation("candycraftmod:textures/entity/Gingerbread3.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("candycraft:textures/entity/Gingerbread0.png"), new ResourceLocation("candycraft:textures/entity/Gingerbread1.png"), new ResourceLocation("candycraft:textures/entity/Gingerbread2.png"), new ResourceLocation("candycraft:textures/entity/Gingerbread3.png") };
 
 	public RenderGingerBreadMan(RenderManager manager, ModelBiped par1ModelBiped, float par2)
 	{

@@ -9,8 +9,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class CCFluids
 {
-	public static FluidGrenadine grenadineFluid = new FluidGrenadine("candycraftmod:grenadine");
-	public static FluidCaramel caramelFluid = new FluidCaramel("candycraftmod:caramel");
+	public static FluidGrenadine grenadineFluid = new FluidGrenadine("candycraft:grenadine");
+	public static FluidCaramel caramelFluid = new FluidCaramel("candycraft:caramel");
 
 	public static void init()
 	{

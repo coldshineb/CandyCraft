@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerBunnyFur implements LayerRenderer
 {
-	private static final ResourceLocation skinTexture = new ResourceLocation("candycraftmod:textures/entity/whiteBunny.png");
+	private static final ResourceLocation skinTexture = new ResourceLocation("candycraft:textures/entity/whiteBunny.png");
 	private RenderBunny bunnyRenderer;
 
 	public LayerBunnyFur(RenderBunny bunnyRenderer)

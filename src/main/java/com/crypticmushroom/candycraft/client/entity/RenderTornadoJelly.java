@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderTornadoJelly extends RenderJelly
 {
-	private static final ResourceLocation slimeTextures = new ResourceLocation("candycraftmod:textures/entity/TornadoJelly.png");
+	private static final ResourceLocation slimeTextures = new ResourceLocation("candycraft:textures/entity/TornadoJelly.png");
 
 	public RenderTornadoJelly(RenderManager rm, ModelBase par1ModelBase)
 	{

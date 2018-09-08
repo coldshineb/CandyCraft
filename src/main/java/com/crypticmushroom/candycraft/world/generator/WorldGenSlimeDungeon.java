@@ -628,7 +628,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator
 		int mob = random.nextInt(3);
 		if (spawner != null)
 		{
-			spawner.getSpawnerBaseLogic().setEntityName(mob == 0 ? "candycraftmod.SprinterSlime" : mob == 1 ? "candycraftmod.KamikazeSlime" : "candycraftmod.TornadoSlime");
+			spawner.getSpawnerBaseLogic().setEntityName(mob == 0 ? "candycraft.SprinterSlime" : mob == 1 ? "candycraft.KamikazeSlime" : "candycraft.TornadoSlime");
 		}
 		this.setBlock(x, y + 1, z, CCBlocks.licoriceBlock);
 		this.setBlock(x, y + 5, z, CCBlocks.licoriceBlock);

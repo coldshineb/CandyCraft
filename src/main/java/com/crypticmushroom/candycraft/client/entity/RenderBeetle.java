@@ -16,8 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBeetle extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/beetle.png");
-	private static final ResourceLocation textureAngry = new ResourceLocation("candycraftmod:textures/entity/AngryBeetle.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/beetle.png");
+	private static final ResourceLocation textureAngry = new ResourceLocation("candycraft:textures/entity/AngryBeetle.png");
 
 	public RenderBeetle(RenderManager rm, ModelBase par1ModelBase, float par2)
 	{

@@ -12,8 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderCandyArrow extends RenderArrow
 {
-	private static final ResourceLocation arrowTextures = new ResourceLocation("candycraftmod:textures/entity/candyArrow.png");
-	private static final ResourceLocation boltTextures = new ResourceLocation("candycraftmod:textures/entity/candyBolt.png");
+	private static final ResourceLocation arrowTextures = new ResourceLocation("candycraft:textures/entity/candyArrow.png");
+	private static final ResourceLocation boltTextures = new ResourceLocation("candycraft:textures/entity/candyBolt.png");
 
 	public RenderCandyArrow(RenderManager renderManager)
 	{

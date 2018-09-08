@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBunny extends RenderLiving
 {
-	private static final ResourceLocation faceTexture = new ResourceLocation("candycraftmod:textures/entity/bunny.png");
+	private static final ResourceLocation faceTexture = new ResourceLocation("candycraft:textures/entity/bunny.png");
 
 	public RenderBunny(RenderManager rm, ModelBase par1ModelBase, float par2)
 	{

@@ -472,7 +472,7 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
 	@Override
 	public String getGuiID()
 	{
-		return "candycraftmod:sugar_furnace";
+		return "candycraft:sugar_furnace";
 	}
 
 	@Override

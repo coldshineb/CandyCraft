@@ -480,8 +480,8 @@ public class CCBlocks
 				int realMeta = 0;
 				for (int i = 0; i < metaNames.length; i++)
 				{
-					metaNames[i] = "candycraftmod:" + name + "." + realMeta;
-					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraftmod:" + name + "." + realMeta, "inventory"));
+					metaNames[i] = "candycraft:" + name + "." + realMeta;
+					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraft:" + name + "." + realMeta, "inventory"));
 					realMeta++;
 					if (realMeta > 3)
 					{
@@ -492,21 +492,21 @@ public class CCBlocks
 			}
 			else if (cl == ItemCandySlab.class)
 			{
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + name, "inventory"));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraft:" + name, "inventory"));
 			}
 			else if (metadataAmount > 0)
 			{
 				String[] metaNames = new String[metadataAmount];
 				for (int i = 0; i < metaNames.length; i++)
 				{
-					metaNames[i] = "candycraftmod:" + name + "." + i;
-					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraftmod:" + name + "." + i, "inventory"));
+					metaNames[i] = "candycraft:" + name + "." + i;
+					Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), i, new ModelResourceLocation("candycraft:" + name + "." + i, "inventory"));
 				}
 				ModelBakery.addVariantName(Item.getItemFromBlock(block), metaNames);
 			}
 			else
 			{
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + name, "inventory"));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraft:" + name, "inventory"));
 			}
 		}
 	}
@@ -518,7 +518,7 @@ public class CCBlocks
 
 		if (currentSide == Side.CLIENT)
 		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + Item.getItemFromBlock(block).getUnlocalizedName().substring(5), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraft:" + Item.getItemFromBlock(block).getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
 

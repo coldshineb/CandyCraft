@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSugarFurnace extends GuiContainer
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/gui/Gui_SugarFurnace.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/gui/Gui_SugarFurnace.png");
 	private TileEntitySugarFurnace furnaceInventory;
 
 	public GuiSugarFurnace(InventoryPlayer par1InventoryPlayer, TileEntitySugarFurnace par2TileEntityFurnace)

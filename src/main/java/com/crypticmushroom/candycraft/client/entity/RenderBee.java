@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBee extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/bee.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/bee.png");
 
 	public RenderBee(RenderManager rm, ModelBase par1ModelBase, float par2)
 	{

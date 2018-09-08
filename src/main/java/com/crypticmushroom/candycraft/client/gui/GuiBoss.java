@@ -29,7 +29,7 @@ public class GuiBoss extends Gui
 	public int counter = 0;
 	public float lastLife = 0;
 	private Minecraft mc = Minecraft.getMinecraft();
-	private ResourceLocation gui = new ResourceLocation("candycraftmod:textures/gui/Gui_Boss.png");
+	private ResourceLocation gui = new ResourceLocation("candycraft:textures/gui/Gui_Boss.png");
 	String[] difficulties = { I18n.format("Gui.Boss.Sentry"), I18n.format("Gui.Boss.MiniBoss"), I18n.format("Gui.Boss.Boss") };
 	double animation = 0;
 	int tick = 0;

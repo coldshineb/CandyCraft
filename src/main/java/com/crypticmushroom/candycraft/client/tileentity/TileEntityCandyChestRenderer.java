@@ -19,12 +19,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityCandyChestRenderer extends TileEntityChestRenderer
 {
-	private static final ResourceLocation RES_TRAPPED_DOUBLE = new ResourceLocation("candycraftmod:textures/entity/chest2.png");
-	private static final ResourceLocation RES_CHRISTMAS_DOUBLE = new ResourceLocation("candycraftmod:textures/entity/chest2.png");
-	private static final ResourceLocation RES_NORMAL_DOUBLE = new ResourceLocation("candycraftmod:textures/entity/chest2.png");
-	private static final ResourceLocation RES_TRAPPED_SINGLE = new ResourceLocation("candycraftmod:textures/entity/chest.png");
-	private static final ResourceLocation RES_CHRISTMAS_SINGLE = new ResourceLocation("candycraftmod:textures/entity/chest.png");
-	private static final ResourceLocation RES_NORMAL_SINGLE = new ResourceLocation("candycraftmod:textures/entity/chest.png");
+	private static final ResourceLocation RES_TRAPPED_DOUBLE = new ResourceLocation("candycraft:textures/entity/chest2.png");
+	private static final ResourceLocation RES_CHRISTMAS_DOUBLE = new ResourceLocation("candycraft:textures/entity/chest2.png");
+	private static final ResourceLocation RES_NORMAL_DOUBLE = new ResourceLocation("candycraft:textures/entity/chest2.png");
+	private static final ResourceLocation RES_TRAPPED_SINGLE = new ResourceLocation("candycraft:textures/entity/chest.png");
+	private static final ResourceLocation RES_CHRISTMAS_SINGLE = new ResourceLocation("candycraft:textures/entity/chest.png");
+	private static final ResourceLocation RES_NORMAL_SINGLE = new ResourceLocation("candycraft:textures/entity/chest.png");
 
 	/** The normal small chest model. */
 	private ModelChest simpleChest = new ModelChest();

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderCandyCreeper extends RenderCreeper
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/Candycreeper.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/Candycreeper.png");
 
 	public RenderCandyCreeper(RenderManager renderManager)
 	{

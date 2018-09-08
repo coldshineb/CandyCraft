@@ -151,7 +151,7 @@ public class WorldGenHoneyDungeons extends WorldGenerator
 
 			if (tileentitymobspawner != null)
 			{
-				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraftmod.CaramelBee");
+				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraft.CaramelBee");
 			}
 			else
 			{

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderEntityFish extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/Fish.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/Fish.png");
 
 	public RenderEntityFish(RenderManager rm, ModelBase par1ModelBase, float par2)
 	{

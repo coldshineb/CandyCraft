@@ -16,8 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBossBeetle extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/BossBeetle.png");
-	private static final ResourceLocation sleepingTexture = new ResourceLocation("candycraftmod:textures/entity/BossBeetle2.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/BossBeetle.png");
+	private static final ResourceLocation sleepingTexture = new ResourceLocation("candycraft:textures/entity/BossBeetle2.png");
 
 	public RenderBossBeetle(RenderManager rm, ModelBase model, float size)
 	{

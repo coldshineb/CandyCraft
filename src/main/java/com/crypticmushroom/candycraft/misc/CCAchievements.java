@@ -85,7 +85,7 @@ public class CCAchievements
 
 	private static Achievement setAchievement(String balise, int x, int y, ItemStack item, Achievement req, boolean special)
 	{
-		Achievement ach = new Achievement("candycraftmod:" + balise, balise, x, y, item, req);
+		Achievement ach = new Achievement("candycraft:" + balise, balise, x, y, item, req);
 		if (special)
 		{
 			ach.setSpecial();

@@ -31,7 +31,7 @@ public class ItemCandyRecord extends ItemRecord
 	@Override
 	public ResourceLocation getRecordResource(String name)
 	{
-		return new ResourceLocation("candycraftmod:" + name);
+		return new ResourceLocation("candycraft:" + name);
 	}
 
 	@Override

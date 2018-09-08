@@ -7,7 +7,7 @@ public class FluidGrenadine extends Fluid
 {
 	public FluidGrenadine(String fluidName)
 	{
-		super(fluidName, new ResourceLocation("candycraftmod:blocks/grenadine_static"), new ResourceLocation("candycraftmod:blocks/grenadine_flow"));
+		super(fluidName, new ResourceLocation("candycraft:blocks/grenadine_static"), new ResourceLocation("candycraft:blocks/grenadine_flow"));
 		setViscosity(2000);
 		setDensity(1500);
 	}

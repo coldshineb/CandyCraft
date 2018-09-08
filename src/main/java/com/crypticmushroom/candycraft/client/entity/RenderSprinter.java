@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderSprinter extends RenderJelly
 {
-	private static final ResourceLocation slimeTextures = new ResourceLocation("candycraftmod:textures/entity/SprinterJelly.png");
+	private static final ResourceLocation slimeTextures = new ResourceLocation("candycraft:textures/entity/SprinterJelly.png");
 
 	public RenderSprinter(RenderManager rm, ModelBase par1ModelBase)
 	{

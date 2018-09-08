@@ -59,7 +59,7 @@ public class WorldGenChewingGumTotem extends WorldGenerator
 
 			if (tileentitymobspawner != null)
 			{
-				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraftmod.EntityBeetle");
+				tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraft.EntityBeetle");
 			}
 
 		}

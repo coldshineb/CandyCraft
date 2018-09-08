@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderMermaid extends RenderLiving
 {
-	private static final ResourceLocation suguard = new ResourceLocation("candycraftmod:textures/entity/mermaid.png");
+	private static final ResourceLocation suguard = new ResourceLocation("candycraft:textures/entity/mermaid.png");
 
 	public RenderMermaid(RenderManager rm)
 	{

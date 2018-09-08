@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderKamikazeJelly extends RenderJelly
 {
-	private static final ResourceLocation slimeTextures = new ResourceLocation("candycraftmod:textures/entity/KamikazeJelly.png");
+	private static final ResourceLocation slimeTextures = new ResourceLocation("candycraft:textures/entity/KamikazeJelly.png");
 
 	public RenderKamikazeJelly(RenderManager rm, ModelBase par1ModelBase)
 	{

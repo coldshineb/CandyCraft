@@ -14,7 +14,7 @@ public class TileEntityAlchemyRenderer extends TileEntitySpecialRenderer
 {
 	public static TileEntityAlchemyRenderer instance = new TileEntityAlchemyRenderer();
 	private final ModelAlchemy model = new ModelAlchemy();
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/AlchemyTable.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/AlchemyTable.png");
 
 	public TileEntityAlchemyRenderer()
 	{

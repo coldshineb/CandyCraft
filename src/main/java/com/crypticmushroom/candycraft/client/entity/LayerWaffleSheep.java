@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LayerWaffleSheep implements LayerRenderer
 {
-	private static final ResourceLocation sheepTextures = new ResourceLocation("candycraftmod:textures/entity/sheepCandy.png");
+	private static final ResourceLocation sheepTextures = new ResourceLocation("candycraft:textures/entity/sheepCandy.png");
 	private static final ModelWaffleSheep furModel = new ModelWaffleSheep();
 
 	private RenderWaffleSheep sheepRenderer;

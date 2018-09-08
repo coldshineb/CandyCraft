@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderPingouin extends RenderLiving
 {
-	private static final ResourceLocation[] texture = { new ResourceLocation("candycraftmod:textures/entity/pingouin0.png"), new ResourceLocation("candycraftmod:textures/entity/pingouin1.png"), new ResourceLocation("candycraftmod:textures/entity/pingouin2.png") };
+	private static final ResourceLocation[] texture = { new ResourceLocation("candycraft:textures/entity/pingouin0.png"), new ResourceLocation("candycraft:textures/entity/pingouin1.png"), new ResourceLocation("candycraft:textures/entity/pingouin2.png") };
 
 	public RenderPingouin(RenderManager rm, ModelBase par1ModelBase, float par2)
 	{

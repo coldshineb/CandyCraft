@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderMageSuguard extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("candycraftmod:textures/entity/SuguardeMage.png");
+	private static final ResourceLocation texture = new ResourceLocation("candycraft:textures/entity/SuguardeMage.png");
 
 	public RenderMageSuguard(RenderManager rm)
 	{

@@ -12,10 +12,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderJellyQueen extends RenderJelly
 {
-	private static final ResourceLocation baseTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss.png");
-	private static final ResourceLocation fastTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss2.png");
-	private static final ResourceLocation explosionTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss3.png");
-	private static final ResourceLocation sleepTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss4.png");
+	private static final ResourceLocation baseTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss.png");
+	private static final ResourceLocation fastTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss2.png");
+	private static final ResourceLocation explosionTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss3.png");
+	private static final ResourceLocation sleepTexture = new ResourceLocation("candycraft:textures/entity/CandyBoss4.png");
 
 	public RenderJellyQueen(RenderManager rm, ModelBase par1ModelBase)
 	{
