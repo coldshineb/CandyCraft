@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:grenadine_block" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:grenadine_block"
     }
+  }
 }

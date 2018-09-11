@@ -1,6 +1,6 @@
 {
-    "parent": "block/leaves",
-    "textures": {
-        "all": "candycraftmod:blocks/candy_leaves.4"
-    }
+  "parent": "block/leaves",
+  "textures": {
+    "all": "candycraftmod:blocks/candy_leaves.4"
+  }
 }

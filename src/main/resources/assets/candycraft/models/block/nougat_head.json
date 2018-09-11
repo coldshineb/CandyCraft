@@ -1,8 +1,8 @@
 {
-    "parent": "block/orientable",
-    "textures": {
-        "top": "candycraftmod:blocks/nougat_block",
-        "front": "candycraftmod:blocks/nougat_head",
-        "side": "candycraftmod:blocks/nougat_block"
-    }
+  "parent": "block/orientable",
+  "textures": {
+    "top": "candycraftmod:blocks/nougat_block",
+    "front": "candycraftmod:blocks/nougat_head",
+    "side": "candycraftmod:blocks/nougat_block"
+  }
 }

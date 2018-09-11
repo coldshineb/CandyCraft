@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:chocolate_cobblestone" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:chocolate_cobblestone"
     }
+  }
 }

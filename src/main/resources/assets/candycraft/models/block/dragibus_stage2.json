@@ -1,6 +1,6 @@
 {
-    "parent": "block/crop",
-    "textures": {
-        "crop": "candycraftmod:blocks/dragibus_crops.2"
-    }
+  "parent": "block/crop",
+  "textures": {
+    "crop": "candycraftmod:blocks/dragibus_crops.2"
+  }
 }

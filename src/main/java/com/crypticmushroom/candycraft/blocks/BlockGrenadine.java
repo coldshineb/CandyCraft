@@ -12,38 +12,32 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockGrenadine extends BlockCandyBase
-{
-	public BlockGrenadine(Material material)
-	{
-		super(material);
-		slipperiness = 1.1F;
-	}
+public class BlockGrenadine extends BlockCandyBase {
+    public BlockGrenadine(Material material) {
+        super(material);
+        slipperiness = 1.1F;
+    }
 
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 0;
-	}
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-	{
-		Block block = blockAccess.getBlockState(pos).getBlock();
-		return block == this ? false : super.shouldSideBeRendered(state, blockAccess, pos, side);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        Block block = blockAccess.getBlockState(pos).getBlock();
+        return block == this ? false : super.shouldSideBeRendered(state, blockAccess, pos, side);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.TRANSLUCENT;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
 }

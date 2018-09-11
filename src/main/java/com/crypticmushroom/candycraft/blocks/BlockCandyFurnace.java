@@ -18,92 +18,74 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockCandyFurnace extends BlockFurnace
-{
-	private static boolean keepInventory;
+public class BlockCandyFurnace extends BlockFurnace {
+    private static boolean keepInventory;
 
-	public BlockCandyFurnace(boolean isBurning)
-	{
-		super(isBurning);
-	}
+    public BlockCandyFurnace(boolean isBurning) {
+        super(isBurning);
+    }
 
-	public static void setState(boolean isOn, World worldIn, BlockPos pos)
-	{
-		IBlockState iblockstate = worldIn.getBlockState(pos);
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		keepInventory = true;
+    public static void setState(boolean isOn, World worldIn, BlockPos pos) {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        keepInventory = true;
 
-		if (isOn)
-		{
-			worldIn.setBlockState(pos, CCBlocks.sugarFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-			worldIn.setBlockState(pos, CCBlocks.sugarFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-		}
-		else
-		{
-			worldIn.setBlockState(pos, CCBlocks.sugarFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-			worldIn.setBlockState(pos, CCBlocks.sugarFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-		}
+        if (isOn) {
+            worldIn.setBlockState(pos, CCBlocks.sugarFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, CCBlocks.sugarFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+        } else {
+            worldIn.setBlockState(pos, CCBlocks.sugarFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, CCBlocks.sugarFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+        }
 
-		keepInventory = false;
+        keepInventory = false;
 
-		if (tileentity != null)
-		{
-			tileentity.validate();
-			worldIn.setTileEntity(pos, tileentity);
-		}
-	}
+        if (tileentity != null) {
+            tileentity.validate();
+            worldIn.setTileEntity(pos, tileentity);
+        }
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return Item.getItemFromBlock(CCBlocks.sugarFurnace);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return Item.getItemFromBlock(CCBlocks.sugarFurnace);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if (world.isRemote)
-		{
-			return true;
-		}
-		else
-		{
-			TileEntitySugarFurnace tileentityfurnace = (TileEntitySugarFurnace) world.getTileEntity(pos);
-			if (tileentityfurnace != null)
-			{
-				player.openGui(CandyCraft.getInstance(), 1, world, pos.getX(), pos.getY(), pos.getZ());
-			}
-			return true;
-		}
-	}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (world.isRemote) {
+            return true;
+        } else {
+            TileEntitySugarFurnace tileentityfurnace = (TileEntitySugarFurnace) world.getTileEntity(pos);
+            if (tileentityfurnace != null) {
+                player.openGui(CandyCraft.getInstance(), 1, world, pos.getX(), pos.getY(), pos.getZ());
+            }
+            return true;
+        }
+    }
 
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-	{
-		if (!keepInventory && !worldIn.isRemote)
-		{
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        if (!keepInventory && !worldIn.isRemote) {
+            TileEntity tileentity = worldIn.getTileEntity(pos);
 
-			if (tileentity instanceof TileEntitySugarFurnace)
-			{
-				InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntitySugarFurnace) tileentity);
-				worldIn.updateComparatorOutputLevel(pos, this);
-			}
-		}
+            if (tileentity instanceof TileEntitySugarFurnace) {
+                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntitySugarFurnace) tileentity);
+                worldIn.updateComparatorOutputLevel(pos, this);
+            }
+        }
 
-		super.breakBlock(worldIn, pos, state);
-	}
+        super.breakBlock(worldIn, pos, state);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
-		return new TileEntitySugarFurnace();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileEntitySugarFurnace();
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-	{
-		return new ItemStack(CCBlocks.sugarFurnace);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+        return new ItemStack(CCBlocks.sugarFurnace);
+    }
 }

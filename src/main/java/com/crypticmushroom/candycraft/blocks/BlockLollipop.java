@@ -13,59 +13,49 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockLollipop extends BlockCandyBush
-{
-	public BlockLollipop()
-	{
-		super();
-	}
+public class BlockLollipop extends BlockCandyBush {
+    public BlockLollipop() {
+        super();
+    }
 
-	@Override
-	protected boolean canSustainBush(IBlockState par1)
-	{
-		return par1.getBlock() != Blocks.AIR;
-	}
+    @Override
+    protected boolean canSustainBush(IBlockState par1) {
+        return par1.getBlock() != Blocks.AIR;
+    }
 
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos, world.getBlockState(pos));
-	}
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos, world.getBlockState(pos));
+    }
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
-	{
-		return null;
-	}
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+        return null;
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return CCItems.lollipop;
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return CCItems.lollipop;
+    }
 
-	@Override
-	public int quantityDropped(Random par1Random)
-	{
-		return 2 + par1Random.nextInt(2);
-	}
+    @Override
+    public int quantityDropped(Random par1Random) {
+        return 2 + par1Random.nextInt(2);
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
-	{
-		return BlockRenderLayer.CUTOUT;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 }

@@ -14,30 +14,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockCandyBed extends BlockBed
-{
-	public BlockCandyBed()
-	{
-		super();
-		disableStats();
-	}
+public class BlockCandyBed extends BlockBed {
+    public BlockCandyBed() {
+        super();
+        disableStats();
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return state.getValue(PART) == BlockBed.EnumPartType.HEAD ? null : CCItems.cottonCandyBed;
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return state.getValue(PART) == BlockBed.EnumPartType.HEAD ? null : CCItems.cottonCandyBed;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-	{
-		return new ItemStack(CCItems.cottonCandyBed);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+        return new ItemStack(CCItems.cottonCandyBed);
+    }
 
-	@Override
-	public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, Entity player)
-	{
-		return true;
-	}
+    @Override
+    public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, Entity player) {
+        return true;
+    }
 }

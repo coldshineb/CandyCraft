@@ -8,14 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 
-public class ItemLollipop extends ItemFood
-{
-	public ItemLollipop()
-	{
-		super(1, false);
-	}
+public class ItemLollipop extends ItemFood {
+    public ItemLollipop() {
+        super(1, false);
+    }
 
-	@Override
+    @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
         double d0 = playerIn.world.rand.nextGaussian() * 0.02D;
         double d1 = playerIn.world.rand.nextGaussian() * 0.02D;
@@ -35,11 +33,10 @@ public class ItemLollipop extends ItemFood
         }
         stack.shrink(1);
         return true;
-	}
+    }
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
-	{
-		return 32;
-	}
+    @Override
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+        return 32;
+    }
 }

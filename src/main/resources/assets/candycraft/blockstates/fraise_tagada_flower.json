@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:fraise_tagada_flower" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:fraise_tagada_flower"
     }
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:licorice_brick" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:licorice_brick"
     }
+  }
 }

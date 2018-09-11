@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:beetle_egg_block" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:beetle_egg_block"
     }
+  }
 }

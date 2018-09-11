@@ -8,19 +8,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderCottonSpider extends RenderSpider
-{
+public class RenderCottonSpider extends RenderSpider {
     private static final ResourceLocation spiderTextures = new ResourceLocation("candycraftmod:textures/entity/cottonSpider.png");
 
-	public RenderCottonSpider(RenderManager renderManager)
-	{
-		super(renderManager);
-		mainModel = (new ModelCottonSpider());
-	}
+    public RenderCottonSpider(RenderManager renderManager) {
+        super(renderManager);
+        mainModel = (new ModelCottonSpider());
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(EntitySpider par1EntitySpider)
-	{
-		return spiderTextures;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(EntitySpider par1EntitySpider) {
+        return spiderTextures;
+    }
 }

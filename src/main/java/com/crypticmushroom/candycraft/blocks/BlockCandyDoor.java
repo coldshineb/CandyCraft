@@ -13,23 +13,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockCandyDoor extends BlockDoor
-{
-	public BlockCandyDoor(Material par2Material)
-	{
-		super(par2Material);
-	}
+public class BlockCandyDoor extends BlockDoor {
+    public BlockCandyDoor(Material par2Material) {
+        super(par2Material);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return CCItems.marshmallowDoor;
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return CCItems.marshmallowDoor;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
-	{
-		return new ItemStack(CCItems.marshmallowDoor);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+        return new ItemStack(CCItems.marshmallowDoor);
+    }
 }

@@ -15,34 +15,28 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockChewingGum extends Block
-{
-	protected static final AxisAlignedBB GUM_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
+public class BlockChewingGum extends Block {
+    protected static final AxisAlignedBB GUM_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
 
-	public BlockChewingGum(Material material)
-	{
-		super(material);
-	}
+    public BlockChewingGum(Material material) {
+        super(material);
+    }
 
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
-		return GUM_AABB;
-	}
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return GUM_AABB;
+    }
 
-	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity)
-	{
-		if (!(entity instanceof EntityBeetle) && !(entity instanceof EntityBossBeetle) && !(entity instanceof EntityKingBeetle))
-		{
-			if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItemStack(new ItemStack(CCItems.chewingGumEmblem)))
-			{
-				return;
-			}
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+        if (!(entity instanceof EntityBeetle) && !(entity instanceof EntityBossBeetle) && !(entity instanceof EntityKingBeetle)) {
+            if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItemStack(new ItemStack(CCItems.chewingGumEmblem))) {
+                return;
+            }
 
-			entity.motionX *= 0.2D;
-			entity.motionZ *= 0.2D;
-			entity.motionY = 0;
-		}
-	}
+            entity.motionX *= 0.2D;
+            entity.motionZ *= 0.2D;
+            entity.motionY = 0;
+        }
+    }
 }

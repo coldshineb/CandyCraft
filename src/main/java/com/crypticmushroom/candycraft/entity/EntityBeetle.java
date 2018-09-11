@@ -22,212 +22,177 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityBeetle extends EntityMob
-{
-	private static final DataParameter<Boolean> IS_ANGRY = EntityDataManager.<Boolean> createKey(EntityBeetle.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.<Boolean> createKey(EntityBeetle.class, DataSerializers.BOOLEAN);
+public class EntityBeetle extends EntityMob {
+    private static final DataParameter<Boolean> IS_ANGRY = EntityDataManager.<Boolean>createKey(EntityBeetle.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.<Boolean>createKey(EntityBeetle.class, DataSerializers.BOOLEAN);
 
-	public EntityBeetle(World par1World)
-	{
-		super(par1World);
-		setSize(1.0F, 0.8F);
-		tasks.addTask(1, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackMelee(this, 0.3F, false));
-		tasks.addTask(3, new EntityAIWander(this, 0.3F));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		tasks.addTask(4, new EntityAILookIdle(this));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-	}
+    public EntityBeetle(World par1World) {
+        super(par1World);
+        setSize(1.0F, 0.8F);
+        tasks.addTask(1, new EntityAISwimming(this));
+        tasks.addTask(2, new EntityAIAttackMelee(this, 0.3F, false));
+        tasks.addTask(3, new EntityAIWander(this, 0.3F));
+        tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        tasks.addTask(4, new EntityAILookIdle(this));
+        targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
+    }
 
-	public void setAngry(boolean par1)
-	{
-		if (par1)
-		{
-			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.5D);
-			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
-			if (isChild())
-			{
-				getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
-			}
-		}
-		dataManager.set(IS_ANGRY, par1);
-	}
+    public boolean isAngry() {
+        return dataManager.get(IS_ANGRY).booleanValue();
+    }
 
-	public boolean isAngry()
-	{
-		return dataManager.get(IS_ANGRY).booleanValue();
-	}
+    public void setAngry(boolean par1) {
+        if (par1) {
+            getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.5D);
+            getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(15.0D);
+            if (isChild()) {
+                getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
+            }
+        }
+        dataManager.set(IS_ANGRY, par1);
+    }
 
-	public void setChild(boolean par1)
-	{
-		dataManager.set(IS_CHILD, par1);
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.2D);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.2D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
-	}
+    @Override
+    protected Item getDropItem() {
+        return CCItems.chewingGum;
+    }
 
-	@Override
-	protected Item getDropItem()
-	{
-		return CCItems.chewingGum;
-	}
+    @Override
+    public boolean shouldDismountInWater(Entity rider) {
+        return false;
+    }
 
-	@Override
-	public boolean shouldDismountInWater(Entity rider)
-	{
-		return false;
-	}
+    @Override
+    public void onDeath(DamageSource par1DamageSource) {
+        if (isChild() && par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
+            List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(32.0D, 32.0D, 32.0D));
 
-	@Override
-	public void onDeath(DamageSource par1DamageSource)
-	{
-		if (isChild() && par1DamageSource.getSourceOfDamage() != null && par1DamageSource.getSourceOfDamage() instanceof EntityPlayer)
-		{
-			List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(32.0D, 32.0D, 32.0D));
+            for (int i = 0; i < list.size(); ++i) {
+                Entity entity1 = (Entity) list.get(i);
 
-			for (int i = 0; i < list.size(); ++i)
-			{
-				Entity entity1 = (Entity) list.get(i);
+                if (entity1 instanceof EntityBeetle) {
+                    EntityBeetle entitybeetle = (EntityBeetle) entity1;
+                    entitybeetle.setAngry(true);
+                }
+            }
+        }
+        super.onDeath(par1DamageSource);
+    }
 
-				if (entity1 instanceof EntityBeetle)
-				{
-					EntityBeetle entitybeetle = (EntityBeetle) entity1;
-					entitybeetle.setAngry(true);
-				}
-			}
-		}
-		super.onDeath(par1DamageSource);
-	}
+    @Override
+    protected boolean isValidLightLevel() {
+        return true;
+    }
 
-	@Override
-	protected boolean isValidLightLevel()
-	{
-		return true;
-	}
+    @Override
+    public void onLivingUpdate() {
+        if (worldObj.isRemote && isAngry() && rand.nextInt(20) == 0) {
+            for (int i = 0; i < 2; ++i) {
+                double d0 = rand.nextGaussian() * 0.02D;
+                double d1 = rand.nextGaussian() * 0.02D;
+                double d2 = rand.nextGaussian() * 0.02D;
+                worldObj.spawnParticle(EnumParticleTypes.VILLAGER_ANGRY, posX + rand.nextFloat() * width * 2.0F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, d0, d1, d2);
+            }
+        }
+        if (getRidingEntity() != null) {
+            rotationYaw = getRidingEntity().rotationYaw;
+            prevRotationYaw = getRidingEntity().prevRotationYaw;
+            rotationYawHead = getRidingEntity().getRotationYawHead();
+            rotationPitch = getRidingEntity().rotationPitch;
+            prevRotationPitch = getRidingEntity().prevRotationPitch;
+            setSize(0.5F, 0.4F);
+        }
+        if (!isChild() && !worldObj.isRemote && getAttackTarget() != null && rand.nextInt(500) == 0) {
+            for (int x = -1; x < 2; x++) {
+                for (int z = -1; z < 2; z++) {
+                    BlockPos pos = new BlockPos((int) posX + x, (int) posY, (int) posZ + z);
+                    if (rand.nextBoolean() && (worldObj.getBlockState(pos)).getBlock() == CCBlocks.tallCandyGrass || worldObj.isAirBlock(pos) && CCBlocks.chewingGumPuddle.canPlaceBlockAt(worldObj, pos)) {
+                        worldObj.setBlockState(new BlockPos((int) posX + x, (int) posY, (int) posZ + z), CCBlocks.chewingGumPuddle.getDefaultState());
+                    }
+                }
+            }
+        }
+        super.onLivingUpdate();
+    }
 
-	@Override
-	public void onLivingUpdate()
-	{
-		if (worldObj.isRemote && isAngry() && rand.nextInt(20) == 0)
-		{
-			for (int i = 0; i < 2; ++i)
-			{
-				double d0 = rand.nextGaussian() * 0.02D;
-				double d1 = rand.nextGaussian() * 0.02D;
-				double d2 = rand.nextGaussian() * 0.02D;
-				worldObj.spawnParticle(EnumParticleTypes.VILLAGER_ANGRY, posX + rand.nextFloat() * width * 2.0F - width, posY + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, d0, d1, d2);
-			}
-		}
-		if (getRidingEntity() != null)
-		{
-			rotationYaw = getRidingEntity().rotationYaw;
-			prevRotationYaw = getRidingEntity().prevRotationYaw;
-			rotationYawHead = getRidingEntity().getRotationYawHead();
-			rotationPitch = getRidingEntity().rotationPitch;
-			prevRotationPitch = getRidingEntity().prevRotationPitch;
-			setSize(0.5F, 0.4F);
-		}
-		if (!isChild() && !worldObj.isRemote && getAttackTarget() != null && rand.nextInt(500) == 0)
-		{
-			for (int x = -1; x < 2; x++)
-			{
-				for (int z = -1; z < 2; z++)
-				{
-					BlockPos pos = new BlockPos((int) posX + x, (int) posY, (int) posZ + z);
-					if (rand.nextBoolean() && (worldObj.getBlockState(pos)).getBlock() == CCBlocks.tallCandyGrass || worldObj.isAirBlock(pos) && CCBlocks.chewingGumPuddle.canPlaceBlockAt(worldObj, pos))
-					{
-						worldObj.setBlockState(new BlockPos((int) posX + x, (int) posY, (int) posZ + z), CCBlocks.chewingGumPuddle.getDefaultState());
-					}
-				}
-			}
-		}
-		super.onLivingUpdate();
-	}
+    @Override
+    protected void dropFewItems(boolean par1, int par2) {
+        super.dropFewItems(par1, par2);
 
-	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		super.dropFewItems(par1, par2);
+        if (rand.nextInt(80) == 0 && !isChild()) {
+            dropItem(Item.getItemFromBlock(CCBlocks.beetleEggBlock), 1);
+        }
+    }
 
-		if (rand.nextInt(80) == 0 && !isChild())
-		{
-			dropItem(Item.getItemFromBlock(CCBlocks.beetleEggBlock), 1);
-		}
-	}
+    @Override
+    public double getMountedYOffset() {
+        return 0.62F;
+    }
 
-	@Override
-	public double getMountedYOffset()
-	{
-		return 0.62F;
-	}
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance instance, IEntityLivingData par1EntityLivingData) {
+        if (rand.nextInt(10) == 0) {
+            EntityBeetle child = new EntityBeetle(worldObj);
+            child.setPosition(posX, posY, posZ);
+            child.setChild(true);
+            worldObj.spawnEntityInWorld(child);
+            child.startRiding(this);
+            child.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5D);
+        }
+        return super.onInitialSpawn(instance, par1EntityLivingData);
+    }
 
-	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance instance, IEntityLivingData par1EntityLivingData)
-	{
-		if (rand.nextInt(10) == 0)
-		{
-			EntityBeetle child = new EntityBeetle(worldObj);
-			child.setPosition(posX, posY, posZ);
-			child.setChild(true);
-			worldObj.spawnEntityInWorld(child);
-			child.startRiding(this);
-			child.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5D);
-		}
-		return super.onInitialSpawn(instance, par1EntityLivingData);
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        dataManager.register(IS_ANGRY, false);
+        dataManager.register(IS_CHILD, false);
+    }
 
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		dataManager.register(IS_ANGRY, false);
-		dataManager.register(IS_CHILD, false);
-	}
+    @Override
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setBoolean("Child", isChild());
+        par1NBTTagCompound.setBoolean("Angry", isAngry());
+    }
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setBoolean("Child", isChild());
-		par1NBTTagCompound.setBoolean("Angry", isAngry());
-	}
+    @Override
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        setChild(par1NBTTagCompound.getBoolean("Child"));
+        setAngry(par1NBTTagCompound.getBoolean("Angry"));
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		setChild(par1NBTTagCompound.getBoolean("Child"));
-		setAngry(par1NBTTagCompound.getBoolean("Angry"));
-	}
+    @Override
+    public boolean isChild() {
+        return dataManager.get(IS_CHILD).booleanValue();
+    }
 
-	@Override
-	public boolean isChild()
-	{
-		return dataManager.get(IS_CHILD).booleanValue();
-	}
+    public void setChild(boolean par1) {
+        dataManager.set(IS_CHILD, par1);
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound()
-	{
-		return null;
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return null;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound()
-	{
-		return null;
-	}
+    @Override
+    protected SoundEvent getHurtSound() {
+        return null;
+    }
 
-	@Override
-	protected SoundEvent getDeathSound()
-	{
-		return null;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
+    }
 }

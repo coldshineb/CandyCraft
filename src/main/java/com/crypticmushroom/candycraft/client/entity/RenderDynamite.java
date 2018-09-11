@@ -14,43 +14,38 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDynamite extends Render
-{
-	public boolean glue;
-	private final RenderItem itemRenderer;
+public class RenderDynamite extends Render {
+    private final RenderItem itemRenderer;
+    public boolean glue;
 
-	public RenderDynamite(RenderManager rm, boolean g, RenderItem ri)
-	{
-		super(rm);
-		glue = g;
-		itemRenderer = ri;
-	}
+    public RenderDynamite(RenderManager rm, boolean g, RenderItem ri) {
+        super(rm);
+        glue = g;
+        itemRenderer = ri;
+    }
 
-	// TODO DYNAMITE TEXTURE
-	public ItemStack getItemStackToRender(Entity entity)
-	{
-		return new ItemStack(glue ? CCItems.glueDynamite : CCItems.dynamite, 1, 0);
-	}
+    // TODO DYNAMITE TEXTURE
+    public ItemStack getItemStackToRender(Entity entity) {
+        return new ItemStack(glue ? CCItems.glueDynamite : CCItems.dynamite, 1, 0);
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return TextureMap.LOCATION_BLOCKS_TEXTURE;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
+        return TextureMap.LOCATION_BLOCKS_TEXTURE;
+    }
 
-	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float par5, float par6)
-	{
-		GlStateManager.pushMatrix();
-		GlStateManager.translate((float) posX, (float) posY, (float) posZ);
-		GlStateManager.enableRescaleNormal();
-		GlStateManager.scale(0.5F, 0.5F, 0.5F);
-		GlStateManager.rotate(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-		GlStateManager.rotate(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		itemRenderer.renderItem(getItemStackToRender(entity), TransformType.GROUND);
-		GlStateManager.disableRescaleNormal();
-		GlStateManager.popMatrix();
-		super.doRender(entity, posX, posY, posZ, par5, par6);
-	}
+    @Override
+    public void doRender(Entity entity, double posX, double posY, double posZ, float par5, float par6) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float) posX, (float) posY, (float) posZ);
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.scale(0.5F, 0.5F, 0.5F);
+        GlStateManager.rotate(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+        bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        itemRenderer.renderItem(getItemStackToRender(entity), TransformType.GROUND);
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.popMatrix();
+        super.doRender(entity, posX, posY, posZ, par5, par6);
+    }
 }

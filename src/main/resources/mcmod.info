@@ -1,19 +1,19 @@
 [
-{
-  "modid": "candycraft",
-  "name": "CandyCraft",
-  "description": "CandyCraft 1.12.2.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": [
-    "Valentin4311",
-    "Cryptic Mushroom"
-  ],
-  "credits": "Valentin4311 for making the original mod, Cryptic Mushroom for reviving it ;)",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "candycraft",
+    "name": "CandyCraft",
+    "description": "CandyCraft 1.12.2.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Valentin4311",
+      "Cryptic Mushroom"
+    ],
+    "credits": "Valentin4311 for making the original mod, Cryptic Mushroom for reviving it ;)",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
 ]

@@ -7,22 +7,18 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BlockHoneyOre extends BlockCandyBase
-{
-	public BlockHoneyOre(Material material)
-	{
-		super(material);
-	}
+public class BlockHoneyOre extends BlockCandyBase {
+    public BlockHoneyOre(Material material) {
+        super(material);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return CCItems.honeyShard;
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return CCItems.honeyShard;
+    }
 
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 2 + (random.nextInt(2));
-	}
+    @Override
+    public int quantityDropped(Random random) {
+        return 2 + (random.nextInt(2));
+    }
 }

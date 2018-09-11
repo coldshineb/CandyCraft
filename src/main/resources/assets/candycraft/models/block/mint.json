@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
-    "textures": {
-        "cross": "candycraftmod:blocks/mint"
-    }
+  "parent": "block/cross",
+  "textures": {
+    "cross": "candycraftmod:blocks/mint"
+  }
 }

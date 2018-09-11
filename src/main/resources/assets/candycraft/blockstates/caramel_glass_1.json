@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:caramel_glass_1" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:caramel_glass_1"
     }
+  }
 }

@@ -39,164 +39,145 @@ import java.io.File;
 import java.util.ArrayList;
 
 @Mod(modid = CandyCraft.MODID, name = CandyCraft.NAME, version = CandyCraft.VERSION)
-public class CandyCraft
-{
-	
-	public static final String MODID = "candycraft";
+public class CandyCraft {
+
+    public static final String MODID = "candycraft";
     public static final String NAME = "CandyCraft";
     public static final String VERSION = "1.0";
-    
+
     @Instance
-	public static CandyCraft instance;
+    public static CandyCraft instance;
 
-	@SidedProxy(clientSide = "com.crypticmushroom.candycraft.client.ClientProxy", serverSide = "com.crypticmushroom.candycraft.CommonProxy")
+    @SidedProxy(clientSide = "com.crypticmushroom.candycraft.client.ClientProxy", serverSide = "com.crypticmushroom.candycraft.CommonProxy")
     public static CommonProxy proxy;
-	private static ClientTick clientTicker;
-	private static ServerTick serverTicker;
+    private static ClientTick clientTicker;
+    private static ServerTick serverTicker;
 
-	private static CreativeTabs creativeTab = new CCCreativeTabs("CandyCraft");
-	private static GuiHandlerCandyCraft guiHandler = new GuiHandlerCandyCraft();
-	private static ArrayList<Item> itemList = new ArrayList<Item>();
-	// Dimension
-	private static WorldTypeCandy candyWorldType = new WorldTypeCandy();
-	private static int candyDimensionID;
-	private static int dungeonDimensionID;
+    private static CreativeTabs creativeTab = new CCCreativeTabs("CandyCraft");
+    private static GuiHandlerCandyCraft guiHandler = new GuiHandlerCandyCraft();
+    private static ArrayList<Item> itemList = new ArrayList<Item>();
+    // Dimension
+    private static WorldTypeCandy candyWorldType = new WorldTypeCandy();
+    private static int candyDimensionID;
+    private static int dungeonDimensionID;
 
-	// Misc
-	private static boolean shouldUpdate = false;
+    // Misc
+    private static boolean shouldUpdate = false;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
-		boolean isClient = event.getSide() == Side.CLIENT;
+    public static int getCandyDimensionID() {
+        return candyDimensionID;
+    }
 
-		if (isClient)
-		{
-			clientTicker = new ClientTick();
-			MinecraftForge.EVENT_BUS.register(new ClientEventCatcher());
-		}
-		serverTicker = new ServerTick();
+    public static CreativeTabs getCandyTab() {
+        return creativeTab;
+    }
 
-		MinecraftForge.EVENT_BUS.register(new ServerEventCatcher());
-		MinecraftForge.TERRAIN_GEN_BUS.register(new TerrainCatcher());
+    public static CandyCraft getInstance() {
+        return instance;
+    }
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
+    public static boolean isShouldUpdate() {
+        return shouldUpdate;
+    }
 
-		CCFluids.init();
-		CCBlocks.loadBlocks();
-		CCItems.loadItems();
-		CCFluids.postInit();
+    public static void setShouldUpdate(boolean shouldUpdate) {
+        CandyCraft.shouldUpdate = shouldUpdate;
+    }
 
-		addContentFromConfig(isClient, event.getModConfigurationDirectory());
-		
-		//FlashFyre
-		CCBiomes.registerBiomes();
-	}
+    public static int getDungeonDimensionID() {
+        return dungeonDimensionID;
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
-		CCBlocks.registerBlocks(event.getSide());
-		CCBlocks.doMiningLevel();
+    public static ServerTick getServerTicker() {
+        return serverTicker;
+    }
 
-		CCItems.registerItems(event.getSide());
+    public static ClientTick getClientTicker() {
+        return clientTicker;
+    }
 
-		CCRecipes.init();
-		CCAchievements.init();
-		
-		//FlashFyre
-		proxy.attachRenderLayers();
-	}
+    public static ArrayList<Item> getItemList() {
+        return itemList;
+    }
 
-	public void addContentFromConfig(boolean client, File configDirectory)
-	{
-		CandyCraftPreferences.init(configDirectory);
+    public static WorldTypeCandy getCandyWorldType() {
+        return candyWorldType;
+    }
 
-		Configuration config = new Configuration(new File(configDirectory, "/CandyCraft/CandyCraft-CFG.cfg"));
-		config.load();
+    public static void setCandyWorldType(WorldTypeCandy candyWorldType) {
+        CandyCraft.candyWorldType = candyWorldType;
+    }
 
-		// Dimension
-		candyDimensionID = config.get("Dimension", "Id", 23).getInt();
-		dungeonDimensionID = config.get("Dimension", "Dungeon", 24).getInt();
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        boolean isClient = event.getSide() == Side.CLIENT;
 
-		DimensionManager.registerDimension(getCandyDimensionID(), WorldProviderCandy.CANDY_WORLD);
-		DimensionManager.registerDimension(getDungeonDimensionID(), WorldProviderVoid.DUNGEON_WORLD);
+        if (isClient) {
+            clientTicker = new ClientTick();
+            MinecraftForge.EVENT_BUS.register(new ClientEventCatcher());
+        }
+        serverTicker = new ServerTick();
 
-		// Entities
-		CCEntities.init();
-		
-		CCBiomes.init();
+        MinecraftForge.EVENT_BUS.register(new ServerEventCatcher());
+        MinecraftForge.TERRAIN_GEN_BUS.register(new TerrainCatcher());
 
-		config.save();
-	}
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 
-	@EventHandler
-	public void serverLoad(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(new WikiCommand());
-	}
+        CCFluids.init();
+        CCBlocks.loadBlocks();
+        CCItems.loadItems();
+        CCFluids.postInit();
 
-	@EventHandler
-	public void modsLoaded(FMLPostInitializationEvent event)
-	{
-		if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT)
-		{
-			// NEIModule.loadNEI();
-		}
-	}
+        addContentFromConfig(isClient, event.getModConfigurationDirectory());
 
-	public static int getCandyDimensionID()
-	{
-		return candyDimensionID;
-	}
+        //FlashFyre
+        CCBiomes.registerBiomes();
+    }
 
-	public static CreativeTabs getCandyTab()
-	{
-		return creativeTab;
-	}
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        CCBlocks.registerBlocks(event.getSide());
+        CCBlocks.doMiningLevel();
 
-	public static CandyCraft getInstance()
-	{
-		return instance;
-	}
+        CCItems.registerItems(event.getSide());
 
-	public static boolean isShouldUpdate()
-	{
-		return shouldUpdate;
-	}
+        CCRecipes.init();
+        CCAchievements.init();
 
-	public static void setShouldUpdate(boolean shouldUpdate)
-	{
-		CandyCraft.shouldUpdate = shouldUpdate;
-	}
+        //FlashFyre
+        proxy.attachRenderLayers();
+    }
 
-	public static int getDungeonDimensionID()
-	{
-		return dungeonDimensionID;
-	}
+    public void addContentFromConfig(boolean client, File configDirectory) {
+        CandyCraftPreferences.init(configDirectory);
 
-	public static ServerTick getServerTicker()
-	{
-		return serverTicker;
-	}
+        Configuration config = new Configuration(new File(configDirectory, "/CandyCraft/CandyCraft-CFG.cfg"));
+        config.load();
 
-	public static ClientTick getClientTicker()
-	{
-		return clientTicker;
-	}
+        // Dimension
+        candyDimensionID = config.get("Dimension", "Id", 23).getInt();
+        dungeonDimensionID = config.get("Dimension", "Dungeon", 24).getInt();
 
-	public static ArrayList<Item> getItemList()
-	{
-		return itemList;
-	}
+        DimensionManager.registerDimension(getCandyDimensionID(), WorldProviderCandy.CANDY_WORLD);
+        DimensionManager.registerDimension(getDungeonDimensionID(), WorldProviderVoid.DUNGEON_WORLD);
 
-	public static WorldTypeCandy getCandyWorldType()
-	{
-		return candyWorldType;
-	}
+        // Entities
+        CCEntities.init();
 
-	public static void setCandyWorldType(WorldTypeCandy candyWorldType)
-	{
-		CandyCraft.candyWorldType = candyWorldType;
-	}
+        CCBiomes.init();
+
+        config.save();
+    }
+
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        event.registerServerCommand(new WikiCommand());
+    }
+
+    @EventHandler
+    public void modsLoaded(FMLPostInitializationEvent event) {
+        if (Loader.isModLoaded("NotEnoughItems") && event.getSide() == Side.CLIENT) {
+            // NEIModule.loadNEI();
+        }
+    }
 }

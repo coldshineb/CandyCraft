@@ -13,43 +13,34 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockCandyWaterLily extends BlockLilyPad
-{
-	public BlockCandyWaterLily()
-	{
-		super();
-		setTickRandomly(this != CCBlocks.marshmallowFlowerBlock);
-	}
+public class BlockCandyWaterLily extends BlockLilyPad {
+    public BlockCandyWaterLily() {
+        super();
+        setTickRandomly(this != CCBlocks.marshmallowFlowerBlock);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return Item.getItemFromBlock(CCBlocks.marshmallowSlice);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return Item.getItemFromBlock(CCBlocks.marshmallowSlice);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if (this == CCBlocks.marshmallowFlowerBlock && !world.isRemote)
-		{
-			world.setBlockState(pos, CCBlocks.marshmallowSlice.getDefaultState());
-			spawnAsEntity(world, pos, new ItemStack(CCItems.marshmallowFlower, 1, 0));
-		}
-		return this != CCBlocks.marshmallowSlice;
-	}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (this == CCBlocks.marshmallowFlowerBlock && !world.isRemote) {
+            world.setBlockState(pos, CCBlocks.marshmallowSlice.getDefaultState());
+            spawnAsEntity(world, pos, new ItemStack(CCItems.marshmallowFlower, 1, 0));
+        }
+        return this != CCBlocks.marshmallowSlice;
+    }
 
-	@Override
-	public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random)
-	{
-		if (!par1World.isRemote && this != CCBlocks.marshmallowFlowerBlock)
-		{
-			if (par1World.getLight(pos.up()) >= 9)
-			{
-				if (par5Random.nextInt(80) == 0)
-				{
-					par1World.setBlockState(pos, CCBlocks.marshmallowFlowerBlock.getDefaultState());
-				}
-			}
-		}
-	}
+    @Override
+    public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
+        if (!par1World.isRemote && this != CCBlocks.marshmallowFlowerBlock) {
+            if (par1World.getLight(pos.up()) >= 9) {
+                if (par5Random.nextInt(80) == 0) {
+                    par1World.setBlockState(pos, CCBlocks.marshmallowFlowerBlock.getDefaultState());
+                }
+            }
+        }
+    }
 }

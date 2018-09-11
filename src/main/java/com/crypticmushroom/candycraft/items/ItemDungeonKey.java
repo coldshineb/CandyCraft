@@ -23,62 +23,53 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemDungeonKey extends Item
-{
-	public final int keyId;
+public class ItemDungeonKey extends Item {
+    public final int keyId;
 
-	public ItemDungeonKey(int key)
-	{
-		super();
-		keyId = key;
-		setMaxStackSize(1);
-	}
+    public ItemDungeonKey(int key) {
+        super();
+        keyId = key;
+        setMaxStackSize(1);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldRotateAroundWhenRendering()
-	{
-		return true;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldRotateAroundWhenRendering() {
+        return true;
+    }
 
-	@Override
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if (keyId <= 1)
-		{
-            if (!player.canPlayerEdit(pos.offset(facing), facing, player.getHeldItem(hand)) || !CandyCraftPreferences.canGenerateDungeon)
-			{
-				return EnumActionResult.FAIL;
-			}
-			else
-			{
+        if (keyId <= 1) {
+            if (!player.canPlayerEdit(pos.offset(facing), facing, player.getHeldItem(hand)) || !CandyCraftPreferences.canGenerateDungeon) {
+                return EnumActionResult.FAIL;
+            } else {
                 IBlockState bl = worldIn.getBlockState(pos);
-                if (bl.isOpaqueCube() && worldIn.isAirBlock(pos.up()) && !worldIn.isRemote)
-				{
+                if (bl.isOpaqueCube() && worldIn.isAirBlock(pos.up()) && !worldIn.isRemote) {
                     worldIn.setBlockState(pos.up(), CCBlocks.blockTeleporter.getStateFromMeta(keyId));
                     player.setHeldItem(hand, null);
                     player.sendStatusMessage(new TextComponentString("\247e" + new TextComponentTranslation("chat.generating").getUnformattedText()), true);
-					ThreadCheckDungeon d = new ThreadCheckDungeon(keyId);
+                    ThreadCheckDungeon d = new ThreadCheckDungeon(keyId);
                     d.teleport = (TileEntityTeleporter) worldIn.getTileEntity(pos.up());
                     d.player = player;
-					d.px = pos.getX();
-					d.py = pos.getY() + 1;
-					d.pz = pos.getZ();
+                    d.px = pos.getX();
+                    d.py = pos.getY() + 1;
+                    d.pz = pos.getZ();
                     d.dim = worldIn.provider.getDimension();
-					d.start();
-					return EnumActionResult.SUCCESS;
-				}
-				return EnumActionResult.FAIL;
-			}
-		}
-		return EnumActionResult.FAIL;
-	}
+                    d.start();
+                    return EnumActionResult.SUCCESS;
+                }
+                return EnumActionResult.FAIL;
+            }
+        }
+        return EnumActionResult.FAIL;
+    }
 
-	@Override
+    @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		if (this == CCItems.orangeKey || this == CCItems.blueKey)
-		{
+        if (this == CCItems.orangeKey || this == CCItems.blueKey) {
             tooltip.add("\247a" + I18n.format("Desc.key"));
-		}
-	}
+        }
+    }
 }

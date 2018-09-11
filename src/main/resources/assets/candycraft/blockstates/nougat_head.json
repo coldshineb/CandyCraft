@@ -1,8 +1,19 @@
 {
-    "variants": {
-        "facing=north": { "model": "candycraftmod:nougat_head" },
-        "facing=south": { "model": "candycraftmod:nougat_head", "y": 180 },
-        "facing=west":  { "model": "candycraftmod:nougat_head", "y": 270 },
-        "facing=east":  { "model": "candycraftmod:nougat_head", "y": 90 }
+  "variants": {
+    "facing=north": {
+      "model": "candycraftmod:nougat_head"
+    },
+    "facing=south": {
+      "model": "candycraftmod:nougat_head",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "candycraftmod:nougat_head",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "candycraftmod:nougat_head",
+      "y": 90
     }
+  }
 }

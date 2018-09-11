@@ -9,21 +9,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderMermaid extends RenderLiving
-{
+public class RenderMermaid extends RenderLiving {
     private static final ResourceLocation suguard = new ResourceLocation("candycraftmod:textures/entity/mermaid.png");
 
-	public RenderMermaid(RenderManager rm)
-	{
-		super(rm, new ModelMermaid(), 0.5F);
-		shadowSize = 0.5f;
-		addLayer(new LayerMermaidHeldItem(this));
-	}
+    public RenderMermaid(RenderManager rm) {
+        super(rm, new ModelMermaid(), 0.5F);
+        shadowSize = 0.5f;
+        addLayer(new LayerMermaidHeldItem(this));
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
-		EntityLivingBase b = (EntityLivingBase) entity;
-		return RenderMermaid.suguard;
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        EntityLivingBase b = (EntityLivingBase) entity;
+        return RenderMermaid.suguard;
+    }
 }

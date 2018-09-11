@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:acid_mint_flower" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:acid_mint_flower"
     }
+  }
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "block/tallgrass",
-    "textures": {
-        "cross": "candycraftmod:blocks/sweet_grass.3"
-    }
+  "parent": "block/tallgrass",
+  "textures": {
+    "cross": "candycraftmod:blocks/sweet_grass.3"
+  }
 }

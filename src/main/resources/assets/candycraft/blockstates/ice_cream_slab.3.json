@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "half=bottom,variant=default": { "model": "candycraftmod:half_slab_ice_cream.3" },
-        "half=top,variant=default": { "model": "candycraftmod:upper_slab_ice_cream.3" }
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "candycraftmod:half_slab_ice_cream.3"
+    },
+    "half=top,variant=default": {
+      "model": "candycraftmod:upper_slab_ice_cream.3"
     }
+  }
 }

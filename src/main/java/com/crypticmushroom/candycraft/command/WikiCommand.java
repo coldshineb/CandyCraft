@@ -1,7 +1,6 @@
 package com.crypticmushroom.candycraft.command;
 
 import com.crypticmushroom.candycraft.items.CCItems;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,83 +10,66 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WikiCommand implements ICommand
-{
-	private List aliases = new ArrayList();
+public class WikiCommand implements ICommand {
+    private List aliases = new ArrayList();
 
-	public WikiCommand()
-	{
-		aliases.add("candywiki");
-	}
+    public WikiCommand() {
+        aliases.add("candywiki");
+    }
 
-	@Override
-	public int compareTo(ICommand arg0)
-	{
-		return 0;
-	}
+    @Override
+    public int compareTo(ICommand arg0) {
+        return 0;
+    }
 
-	@Override
-	public String getCommandName()
-	{
-		return "candywiki";
-	}
+    @Override
+    public String getName() {
+        return "candywiki";
+    }
 
-	@Override
-	public String getCommandUsage(ICommandSender p_71518_1_)
-	{
-		return "/candywiki";
-	}
+    @Override
+    public String getUsage(ICommandSender sender) {
+        return "/candywiki";
+    }
 
-	@Override
-	public List getCommandAliases()
-	{
-		return aliases;
-	}
+    public List getAliases() {
+        return aliases;
+    }
 
-	@Override
-	public void execute(MinecraftServer server, ICommandSender sender, String[] args)
-	{
-		if (sender instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer) sender;
+    @Override
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+        if (sender instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) sender;
 
-			if (!player.inventory.hasItemStack(new ItemStack(CCItems.wiki)))
-			{
-				if (player.inventory.addItemStackToInventory(new ItemStack(CCItems.wiki)))
-				{
-					player.addChatMessage(new TextComponentString("\247a" + new TextComponentTranslation("chat.wikiOk").getUnformattedText()));
-					player.addStat(CCAchievements.openWiki);
-				}
-				else
-				{
-					player.addChatMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiRoom").getUnformattedText()));
-				}
-			}
-			else
-			{
-				player.addChatMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiFail").getUnformattedText()));
-			}
-		}
-	}
+            if (!player.inventory.hasItemStack(new ItemStack(CCItems.wiki))) {
+                if (player.inventory.addItemStackToInventory(new ItemStack(CCItems.wiki))) {
+                    player.sendStatusMessage(new TextComponentString("\247a" + new TextComponentTranslation("chat.wikiOk").getUnformattedText()), true);
+                    //TODO player.addStat(CCAchievements.openWiki);
+                } else {
+                    player.sendStatusMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiRoom").getUnformattedText()), true);
+                }
+            } else {
+                player.sendStatusMessage(new TextComponentString("\247c" + new TextComponentTranslation("chat.wikiFail").getUnformattedText()), true);
+            }
+        }
+    }
 
-	@Override
-	public boolean checkPermission(MinecraftServer server, ICommandSender sender)
-	{
-		return sender instanceof EntityPlayer;
-	}
+    @Override
+    public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
+        return sender instanceof EntityPlayer;
+    }
 
-	@Override
-	public List getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos)
-	{
-		return null;
-	}
+    @Override
+    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+        return null;
+    }
 
-	@Override
-	public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_)
-	{
-		return false;
-	}
+    @Override
+    public boolean isUsernameIndex(String[] p_82358_1_, int p_82358_2_) {
+        return false;
+    }
 }

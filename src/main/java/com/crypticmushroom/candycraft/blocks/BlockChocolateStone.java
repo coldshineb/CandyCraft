@@ -10,23 +10,19 @@ import net.minecraft.world.IBlockAccess;
 
 import java.util.Random;
 
-public class BlockChocolateStone extends Block
-{
+public class BlockChocolateStone extends Block {
 
-	public BlockChocolateStone()
-	{
-		super(Material.ROCK);
-	}
+    public BlockChocolateStone() {
+        super(Material.ROCK);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return Item.getItemFromBlock(CCBlocks.chocolateCobbleStone);
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return Item.getItemFromBlock(CCBlocks.chocolateCobbleStone);
+    }
 
-	@Override
-	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target)
-	{
-		return true;
-	}
+    @Override
+    public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target) {
+        return true;
+    }
 }

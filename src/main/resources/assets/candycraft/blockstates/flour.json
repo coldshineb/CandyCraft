@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:flour" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:flour"
     }
+  }
 }

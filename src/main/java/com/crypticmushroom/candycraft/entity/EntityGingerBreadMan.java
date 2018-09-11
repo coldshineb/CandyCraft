@@ -22,316 +22,248 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityGingerBreadMan extends EntityVillager implements IMerchant, INpc
-{
-	public final String[] jobs = { "Blacksmith", "Farmer", "Citizen", "Elder" };
+public class EntityGingerBreadMan extends EntityVillager implements IMerchant, INpc {
+    public final String[] jobs = {"Blacksmith", "Farmer", "Citizen", "Elder"};
+    EntityAIAvoidPlayerGinger ai = new EntityAIAvoidPlayerGinger(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D);
+    private MerchantRecipeList buyingList = new MerchantRecipeList();
 
-	private MerchantRecipeList buyingList = new MerchantRecipeList();
+    public EntityGingerBreadMan(World par1World) {
+        super(par1World);
+        ((PathNavigateGround) getNavigator()).setEnterDoors(true);
+        tasks.taskEntries.clear();
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAITradePlayer(this));
+        tasks.addTask(1, new EntityAILookAtTradePlayer(this));
+        tasks.addTask(6, new EntityAIVillagerMate(this));
+        tasks.addTask(8, new EntityAIPlay(this, 0.32D));
+        tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
+        tasks.addTask(9, new EntityAIWatchClosest2(this, EntityGingerBreadMan.class, 5.0F, 0.02F));
+        tasks.addTask(2, new EntityAIWander(this, 0.25F));
+        tasks.addTask(3, new EntityAILookIdle(this));
+        tasks.addTask(4, ai);
+        setSize(0.3F, 0.9F);
+        setPathPriority(PathNodeType.WATER, -1.0F);
+    }
 
-	EntityAIAvoidPlayerGinger ai = new EntityAIAvoidPlayerGinger(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D);
+    @Override
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
 
-	public EntityGingerBreadMan(World par1World)
-	{
-		super(par1World);
-		((PathNavigateGround) getNavigator()).setEnterDoors(true);
-		tasks.taskEntries.clear();
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAITradePlayer(this));
-		tasks.addTask(1, new EntityAILookAtTradePlayer(this));
-		tasks.addTask(6, new EntityAIVillagerMate(this));
-		tasks.addTask(8, new EntityAIPlay(this, 0.32D));
-		tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
-		tasks.addTask(9, new EntityAIWatchClosest2(this, EntityGingerBreadMan.class, 5.0F, 0.02F));
-		tasks.addTask(2, new EntityAIWander(this, 0.25F));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, ai);
-		setSize(0.3F, 0.9F);
-		setPathPriority(PathNodeType.WATER, -1.0F);
-	}
+        if (buyingList != null) {
+            par1NBTTagCompound.setTag("Offers", buyingList.getRecipiesAsTags());
+        }
+    }
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.writeEntityToNBT(par1NBTTagCompound);
+    @Override
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
 
-		if (buyingList != null)
-		{
-			par1NBTTagCompound.setTag("Offers", buyingList.getRecipiesAsTags());
-		}
-	}
+        if (par1NBTTagCompound.hasKey("Offers", 10)) {
+            NBTTagCompound nbttagcompound1 = par1NBTTagCompound.getCompoundTag("Offers");
+            buyingList = new MerchantRecipeList(nbttagcompound1);
+        }
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.readEntityFromNBT(par1NBTTagCompound);
+    @Override
+    public void updateAITick() {
+        super.updateAITick();
+        if (getProfession() != 3) {
+            if (getMoveHelper().isUpdating()) {
+                double d0 = getMoveHelper().getSpeed();
 
-		if (par1NBTTagCompound.hasKey("Offers", 10))
-		{
-			NBTTagCompound nbttagcompound1 = par1NBTTagCompound.getCompoundTag("Offers");
-			buyingList = new MerchantRecipeList(nbttagcompound1);
-		}
-	}
+                if (d0 == 0.6D) {
+                    setSneaking(true);
+                    setFlag(3, false);
+                } else if (d0 == 1.33D) {
+                    setSneaking(false);
+                    setFlag(3, true);
+                } else {
+                    setSneaking(false);
+                    setFlag(3, false);
+                }
+            } else {
+                setSneaking(false);
+                setFlag(3, false);
+            }
+        }
+    }
 
-	@Override
-	public void updateAITick()
-	{
-		super.updateAITick();
-		if (getProfession() != 3)
-		{
-			if (getMoveHelper().isUpdating())
-			{
-				double d0 = getMoveHelper().getSpeed();
+    @Override
+    public void setProfession(int p_70938_1_) {
+        if (p_70938_1_ == 3) {
+            tasks.removeTask(ai);
+            getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.83000000298023224D);
+            buyingList.clear();
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 5), new ItemStack(CCItems.whiteKey)));
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 10), new ItemStack(CCItems.skyEmblem)));
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 20), new ItemStack(CCItems.CD3)));
+        }
+        dataWatcher.updateObject(16, Integer.valueOf(p_70938_1_));
+    }
 
-				if (d0 == 0.6D)
-				{
-					setSneaking(true);
-					setFlag(3, false);
-				}
-				else if (d0 == 1.33D)
-				{
-					setSneaking(false);
-					setFlag(3, true);
-				}
-				else
-				{
-					setSneaking(false);
-					setFlag(3, false);
-				}
-			}
-			else
-			{
-				setSneaking(false);
-				setFlag(3, false);
-			}
-		}
-	}
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance instance, IEntityLivingData par1EntityLivingData) {
+        getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random spawn bonus", rand.nextGaussian() * 0.05D, 1));
+        int i = rand.nextInt(jobs.length - 1);
+        this.setProfession(i);
 
-	@Override
-	public void setProfession(int p_70938_1_)
-	{
-		if (p_70938_1_ == 3)
-		{
-			tasks.removeTask(ai);
-			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.83000000298023224D);
-			buyingList.clear();
-			buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 5), new ItemStack(CCItems.whiteKey)));
-			buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 10), new ItemStack(CCItems.skyEmblem)));
-			buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 20), new ItemStack(CCItems.CD3)));
-		}
-		dataWatcher.updateObject(16, Integer.valueOf(p_70938_1_));
-	}
+        if (getProfession() == 0) {
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCItems.honeyArrow, rand.nextInt(4) + 1)));
+            }
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(40) + 4), new ItemStack(CCItems.honeyBolt, rand.nextInt(4) + 1)));
+            }
+            if (rand.nextInt(5) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, 64), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 32), new ItemStack(CCItems.caramelBow, 1)));
+            }
+            if (rand.nextInt(4) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 50), new ItemStack(CCItems.honeySword, 1)));
+            }
+            if (rand.nextInt(3) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 40), new ItemStack(CCItems.honeyHelmet, 1)));
+            }
+            if (rand.nextInt(6) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(8) + 55), new ItemStack(CCItems.honeyPlate, 1)));
+            }
+            if (rand.nextInt(4) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(8) + 50), new ItemStack(CCItems.honeyLeggings, 1)));
+            }
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 35), new ItemStack(CCItems.honeyBoots, 1)));
+            }
+            if (rand.nextInt(3) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 15), new ItemStack(CCItems.honeycomb, 1)));
+            }
+            if (rand.nextInt(3) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 35), new ItemStack(CCItems.PEZ, 1)));
+            }
+            if (buyingList.size() == 0) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCItems.honeyArrow, rand.nextInt(4) + 1)));
+            }
+        } else if (getProfession() == 1) {
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 40), new ItemStack(CCItems.fork, rand.nextInt(2) + 1)));
+            }
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 24), new ItemStack(CCItems.lollipopSeeds, rand.nextInt(2) + 1)));
+            }
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 2), new ItemStack(CCItems.dragibus, rand.nextInt(2) + 1)));
+            if (rand.nextInt(3) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCBlocks.pinkSeeweed, rand.nextInt(4) + 1)));
+            }
+            if (rand.nextInt(5) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.greenSeeweed, rand.nextInt(6) + 1)));
+            }
+            if (rand.nextInt(5) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.bananaSeaweed, rand.nextInt(6) + 1)));
+            }
+            if (rand.nextInt(8) == 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 15), new ItemStack(CCBlocks.lollipopBlock, rand.nextInt(1) + 1)));
+            }
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 8), new ItemStack(CCItems.lollipop, rand.nextInt(8) + 3)));
+            }
+            if (buyingList.size() == 0) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 24), new ItemStack(CCItems.lollipopSeeds, rand.nextInt(2) + 1)));
+            }
+        } else if (getProfession() == 2) {
+            if (rand.nextInt(4) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.waffle, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 5)));
+            }
+            if (rand.nextInt(3) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.candyCane, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 5)));
+            }
+            if (rand.nextInt(3) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.licorice, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
+            }
+            if (rand.nextInt(5) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.honeyShard, rand.nextInt(15) + 30), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
+            }
+            if (rand.nextInt(5) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCBlocks.trampojelly, rand.nextInt(5) + 10), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
+            }
+            if (rand.nextInt(5) < 1) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCBlocks.caramelBlock, rand.nextInt(5) + 10), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
+            }
+            if (rand.nextInt(5) < 3) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.honeyArrow, rand.nextInt(5) + 20), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
+            }
+            if (rand.nextInt(5) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCBlocks.marshmallowLog, rand.nextInt(5) + 20), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
+            }
+            if (rand.nextInt(10) < 2) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, 64), new ItemStack(CCItems.chocolateCoin, 64), new ItemStack(CCItems.gingerbreadEmblem, 1)));
+            }
+            if (buyingList.size() == 0) {
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.candyCane, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 5)));
+            }
+        }
+        return par1EntityLivingData;
+    }
 
-	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance instance, IEntityLivingData par1EntityLivingData)
-	{
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random spawn bonus", rand.nextGaussian() * 0.05D, 1));
-		int i = rand.nextInt(jobs.length - 1);
-		this.setProfession(i);
+    @Override
+    public MerchantRecipeList getRecipes(EntityPlayer par1EntityPlayer) {
+        return buyingList;
+    }
 
-		if (getProfession() == 0)
-		{
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCItems.honeyArrow, rand.nextInt(4) + 1)));
-			}
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(40) + 4), new ItemStack(CCItems.honeyBolt, rand.nextInt(4) + 1)));
-			}
-			if (rand.nextInt(5) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, 64), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 32), new ItemStack(CCItems.caramelBow, 1)));
-			}
-			if (rand.nextInt(4) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 50), new ItemStack(CCItems.honeySword, 1)));
-			}
-			if (rand.nextInt(3) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 40), new ItemStack(CCItems.honeyHelmet, 1)));
-			}
-			if (rand.nextInt(6) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(8) + 55), new ItemStack(CCItems.honeyPlate, 1)));
-			}
-			if (rand.nextInt(4) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(8) + 50), new ItemStack(CCItems.honeyLeggings, 1)));
-			}
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 35), new ItemStack(CCItems.honeyBoots, 1)));
-			}
-			if (rand.nextInt(3) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 15), new ItemStack(CCItems.honeycomb, 1)));
-			}
-			if (rand.nextInt(3) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 35), new ItemStack(CCItems.PEZ, 1)));
-			}
-			if (buyingList.size() == 0)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCItems.honeyArrow, rand.nextInt(4) + 1)));
-			}
-		}
-		else if (getProfession() == 1)
-		{
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 40), new ItemStack(CCItems.fork, rand.nextInt(2) + 1)));
-			}
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 24), new ItemStack(CCItems.lollipopSeeds, rand.nextInt(2) + 1)));
-			}
-			buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 2), new ItemStack(CCItems.dragibus, rand.nextInt(2) + 1)));
-			if (rand.nextInt(3) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCBlocks.pinkSeeweed, rand.nextInt(4) + 1)));
-			}
-			if (rand.nextInt(5) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.greenSeeweed, rand.nextInt(6) + 1)));
-			}
-			if (rand.nextInt(5) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.bananaSeaweed, rand.nextInt(6) + 1)));
-			}
-			if (rand.nextInt(8) == 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 15), new ItemStack(CCBlocks.lollipopBlock, rand.nextInt(1) + 1)));
-			}
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 8), new ItemStack(CCItems.lollipop, rand.nextInt(8) + 3)));
-			}
-			if (buyingList.size() == 0)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 24), new ItemStack(CCItems.lollipopSeeds, rand.nextInt(2) + 1)));
-			}
-		}
-		else if (getProfession() == 2)
-		{
-			if (rand.nextInt(4) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.waffle, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 5)));
-			}
-			if (rand.nextInt(3) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.candyCane, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 5)));
-			}
-			if (rand.nextInt(3) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.licorice, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
-			}
-			if (rand.nextInt(5) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.honeyShard, rand.nextInt(15) + 30), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
-			}
-			if (rand.nextInt(5) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCBlocks.trampojelly, rand.nextInt(5) + 10), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
-			}
-			if (rand.nextInt(5) < 1)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCBlocks.caramelBlock, rand.nextInt(5) + 10), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
-			}
-			if (rand.nextInt(5) < 3)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.honeyArrow, rand.nextInt(5) + 20), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
-			}
-			if (rand.nextInt(5) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCBlocks.marshmallowLog, rand.nextInt(5) + 20), new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 5)));
-			}
-			if (rand.nextInt(10) < 2)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, 64), new ItemStack(CCItems.chocolateCoin, 64), new ItemStack(CCItems.gingerbreadEmblem, 1)));
-			}
-			if (buyingList.size() == 0)
-			{
-				buyingList.add(new MerchantRecipe(new ItemStack(CCItems.candyCane, rand.nextInt(6) + 5), new ItemStack(CCItems.chocolateCoin, rand.nextInt(15) + 5)));
-			}
-		}
-		return par1EntityLivingData;
-	}
+    @Override
+    public void setRecipes(MerchantRecipeList merchantrecipelist) {
+    }
 
-	@Override
-	public MerchantRecipeList getRecipes(EntityPlayer par1EntityPlayer)
-	{
-		return buyingList;
-	}
+    @Override
+    public void useRecipe(MerchantRecipe merchantrecipe) {
+    }
 
-	@Override
-	public void setRecipes(MerchantRecipeList merchantrecipelist)
-	{}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33000000298023224D);
+    }
 
-	@Override
-	public void useRecipe(MerchantRecipe merchantrecipe)
-	{}
+    @Override
+    public EntityVillager createChild(EntityAgeable par1EntityAgeable) {
+        EntityGingerBreadMan entityvillager = new EntityGingerBreadMan(worldObj);
+        entityvillager.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
+        return entityvillager;
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33000000298023224D);
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return isTrading() ? SoundEvents.ENTITY_VILLAGER_TRADING : SoundEvents.ENTITY_VILLAGER_AMBIENT;
+    }
 
-	@Override
-	public EntityVillager createChild(EntityAgeable par1EntityAgeable)
-	{
-		EntityGingerBreadMan entityvillager = new EntityGingerBreadMan(worldObj);
-		entityvillager.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
-		return entityvillager;
-	}
+    @Override
+    protected float getSoundPitch() {
+        return isChild() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 0.2F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 0.2F;
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound()
-	{
-		return isTrading() ? SoundEvents.ENTITY_VILLAGER_TRADING : SoundEvents.ENTITY_VILLAGER_AMBIENT;
-	}
+    @Override
+    protected SoundEvent getHurtSound() {
+        return SoundEvents.ENTITY_VILLAGER_HURT;
+    }
 
-	@Override
-	protected float getSoundPitch()
-	{
-		return isChild() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 0.2F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 0.2F;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_VILLAGER_DEATH;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound()
-	{
-		return SoundEvents.ENTITY_VILLAGER_HURT;
-	}
+    @Override
+    public ITextComponent getDisplayName() {
+        String s1 = "blacksmith";
 
-	@Override
-	protected SoundEvent getDeathSound()
-	{
-		return SoundEvents.ENTITY_VILLAGER_DEATH;
-	}
+        if (getProfession() == 1) {
+            s1 = "farmer";
+        } else if (getProfession() == 2) {
+            s1 = "citizen";
+        } else if (getProfession() == 3) {
+            s1 = "elder";
+        }
 
-	@Override
-	public ITextComponent getDisplayName()
-	{
-		String s1 = "blacksmith";
-
-		if (getProfession() == 1)
-		{
-			s1 = "farmer";
-		}
-		else if (getProfession() == 2)
-		{
-			s1 = "citizen";
-		}
-		else if (getProfession() == 3)
-		{
-			s1 = "elder";
-		}
-
-		TextComponentTranslation chatcomponenttranslation = new TextComponentTranslation("gingerbread.job." + s1, new Object[0]);
-		chatcomponenttranslation.getStyle().setHoverEvent(getHoverEvent());
-		chatcomponenttranslation.getStyle().setInsertion(getUniqueID().toString());
-		return chatcomponenttranslation;
-	}
+        TextComponentTranslation chatcomponenttranslation = new TextComponentTranslation("gingerbread.job." + s1, new Object[0]);
+        chatcomponenttranslation.getStyle().setHoverEvent(getHoverEvent());
+        chatcomponenttranslation.getStyle().setInsertion(getUniqueID().toString());
+        return chatcomponenttranslation;
+    }
 }

@@ -10,135 +10,112 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityFish extends EntityWaterMob
-{
-	public float current = 0;
-	private BlockPos currentFlightTarget;
+public class EntityFish extends EntityWaterMob {
+    public float current = 0;
+    private BlockPos currentFlightTarget;
 
-	public EntityFish(World par1World)
-	{
-		super(par1World);
-		setSize(0.95F, 0.95F);
-	}
+    public EntityFish(World par1World) {
+        super(par1World);
+        setSize(0.95F, 0.95F);
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-	}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
+    }
 
-	@Override
-	public void moveEntityWithHeading(float par1, float par2)
-	{
-		if (isInWater())
-		{
-			motionY -= 0.002D;
-		}
-		super.moveEntityWithHeading(par1, par2);
+    @Override
+    public void moveEntityWithHeading(float par1, float par2) {
+        if (isInWater()) {
+            motionY -= 0.002D;
+        }
+        super.moveEntityWithHeading(par1, par2);
 
-	}
+    }
 
-	@Override
-	public boolean getCanSpawnHere()
-	{
-		return posY > 45.0D && posY < 63.0D && super.getCanSpawnHere();
-	}
+    @Override
+    public boolean getCanSpawnHere() {
+        return posY > 45.0D && posY < 63.0D && super.getCanSpawnHere();
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound()
-	{
-		return null;
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return null;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound()
-	{
-		return null;
-	}
+    @Override
+    protected SoundEvent getHurtSound() {
+        return null;
+    }
 
-	@Override
-	protected SoundEvent getDeathSound()
-	{
-		return null;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
+    }
 
-	@Override
-	protected float getSoundVolume()
-	{
-		return 0.4F;
-	}
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F;
+    }
 
-	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		int var3 = 1;
+    @Override
+    protected void dropFewItems(boolean par1, int par2) {
+        int var3 = 1;
 
-		for (int var4 = 0; var4 < var3; ++var4)
-		{
-			entityDropItem(new ItemStack(CCItems.cranberryFish, 1, 0), 0.0F);
-		}
-		var3 = rand.nextInt(3);
+        for (int var4 = 0; var4 < var3; ++var4) {
+            entityDropItem(new ItemStack(CCItems.cranberryFish, 1, 0), 0.0F);
+        }
+        var3 = rand.nextInt(3);
 
-		for (int var4 = 0; var4 < var3; ++var4)
-		{
-			entityDropItem(new ItemStack(CCItems.cranberryScale, 1, 0), 0.0F);
-		}
-		if (rand.nextInt(50) == 0)
-		{
-			entityDropItem(new ItemStack(CCItems.cranberryEmblem, 1, 0), 0.0F);
-		}
-	}
+        for (int var4 = 0; var4 < var3; ++var4) {
+            entityDropItem(new ItemStack(CCItems.cranberryScale, 1, 0), 0.0F);
+        }
+        if (rand.nextInt(50) == 0) {
+            entityDropItem(new ItemStack(CCItems.cranberryEmblem, 1, 0), 0.0F);
+        }
+    }
 
-	@Override
-	public void onEntityUpdate()
-	{
-		super.onEntityUpdate();
+    @Override
+    public void onEntityUpdate() {
+        super.onEntityUpdate();
 
-		current += 0.2F;
-	}
+        current += 0.2F;
+    }
 
-	@Override
-	protected boolean canTriggerWalking()
-	{
-		return false;
-	}
+    @Override
+    protected boolean canTriggerWalking() {
+        return false;
+    }
 
-	@Override
-	protected void updateAITasks()
-	{
-		super.updateAITasks();
+    @Override
+    protected void updateAITasks() {
+        super.updateAITasks();
 
-		if (isInWater())
-		{
-			if (currentFlightTarget != null && (!(worldObj.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1))
-			{
-				currentFlightTarget = null;
-			}
+        if (isInWater()) {
+            if (currentFlightTarget != null && (!(worldObj.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
+                currentFlightTarget = null;
+            }
 
-			if (currentFlightTarget == null || rand.nextInt(100) == 0 || currentFlightTarget.distanceSq((int) posX, (int) posY, (int) posZ) < 4.0F)
-			{
-				currentFlightTarget = new BlockPos((int) posX + rand.nextInt(14) - rand.nextInt(14), (int) posY + rand.nextInt(3) - 1, (int) posZ + rand.nextInt(14) - rand.nextInt(14));
-			}
-			double d0 = currentFlightTarget.getX() + 0.5D - posX;
-			double d1 = currentFlightTarget.getY() + 0.1D - posY;
-			double d2 = currentFlightTarget.getZ() + 0.5D - posZ;
+            if (currentFlightTarget == null || rand.nextInt(100) == 0 || currentFlightTarget.distanceSq((int) posX, (int) posY, (int) posZ) < 4.0F) {
+                currentFlightTarget = new BlockPos((int) posX + rand.nextInt(14) - rand.nextInt(14), (int) posY + rand.nextInt(3) - 1, (int) posZ + rand.nextInt(14) - rand.nextInt(14));
+            }
+            double d0 = currentFlightTarget.getX() + 0.5D - posX;
+            double d1 = currentFlightTarget.getY() + 0.1D - posY;
+            double d2 = currentFlightTarget.getZ() + 0.5D - posZ;
 
-			motionX += (Math.signum(d0) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(d1) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(d2) * 0.5D - motionZ) * 0.10000000149011612D;
-			float f = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float f1 = MathHelper.wrapDegrees(f - rotationYaw);
-			moveForward = 0.5F;
-			rotationYaw += f1;
-		}
-		else
-		{
-			if (getAir() == -19 && onGround)
-			{
-				motionY = 0.4D;
-			}
-		}
-	}
+            motionX += (Math.signum(d0) * 0.5D - motionX) * 0.10000000149011612D;
+            motionY += (Math.signum(d1) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+            motionZ += (Math.signum(d2) * 0.5D - motionZ) * 0.10000000149011612D;
+            float f = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+            float f1 = MathHelper.wrapDegrees(f - rotationYaw);
+            moveForward = 0.5F;
+            rotationYaw += f1;
+        } else {
+            if (getAir() == -19 && onGround) {
+                motionY = 0.4D;
+            }
+        }
+    }
 }

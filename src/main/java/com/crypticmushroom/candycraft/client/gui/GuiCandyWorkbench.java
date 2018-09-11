@@ -11,29 +11,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiCandyWorkbench extends GuiContainer
-{
-	private static final ResourceLocation guiTexture = new ResourceLocation("textures/gui/container/crafting_table.png");
+public class GuiCandyWorkbench extends GuiContainer {
+    private static final ResourceLocation guiTexture = new ResourceLocation("textures/gui/container/crafting_table.png");
 
-	public GuiCandyWorkbench(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5)
-	{
-		super(new ContainerCandyWorkbench(par1InventoryPlayer, par2World, new BlockPos(par3, par4, par5)));
-	}
+    public GuiCandyWorkbench(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5) {
+        super(new ContainerCandyWorkbench(par1InventoryPlayer, par2World, new BlockPos(par3, par4, par5)));
+    }
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2)
-	{
-		fontRendererObj.drawString(I18n.format("container.crafting"), 28, 6, 4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
-	}
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        fontRendererObj.drawString(I18n.format("container.crafting"), 28, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
+    }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-	{
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.getTextureManager().bindTexture(guiTexture);
-		int k = (width - xSize) / 2;
-		int l = (height - ySize) / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-	}
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        mc.getTextureManager().bindTexture(guiTexture);
+        int k = (width - xSize) / 2;
+        int l = (height - ySize) / 2;
+        this.drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+    }
 }

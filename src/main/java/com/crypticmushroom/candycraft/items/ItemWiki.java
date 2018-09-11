@@ -16,48 +16,35 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class ItemWiki extends Item
-{
-	public ItemWiki()
-	{
-		super();
-		maxStackSize = 1;
-	}
+public class ItemWiki extends Item {
+    public ItemWiki() {
+        super();
+        maxStackSize = 1;
+    }
 
-	@Override
+    @SideOnly(Side.CLIENT)
+    public static void openWebpage(URI uri) {
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse(uri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        if (worldIn.isRemote)
-		{
-			try
-			{
-				ItemWiki.openWebpage(new URL("http://candycraft.wikia.com/wiki/CandyCraft_Wiki").toURI());
-			}
-			catch (MalformedURLException e)
-			{
-				e.printStackTrace();
-			}
-			catch (URISyntaxException e)
-			{
-				e.printStackTrace();
-			}
-		}
+        if (worldIn.isRemote) {
+            try {
+                ItemWiki.openWebpage(new URL("http://candycraft.wikia.com/wiki/CandyCraft_Wiki").toURI());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
         return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void openWebpage(URI uri)
-	{
-		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-		if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE))
-		{
-			try
-			{
-				desktop.browse(uri);
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
+    }
 }

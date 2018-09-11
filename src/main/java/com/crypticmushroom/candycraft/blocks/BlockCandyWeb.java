@@ -7,11 +7,9 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BlockCandyWeb extends BlockWeb
-{
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return Items.STRING;
-	}
+public class BlockCandyWeb extends BlockWeb {
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Items.STRING;
+    }
 }

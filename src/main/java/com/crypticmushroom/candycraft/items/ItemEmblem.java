@@ -9,21 +9,19 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemEmblem extends Item
-{
-	String attr = "";
+public class ItemEmblem extends Item {
+    String attr = "";
 
-	public ItemEmblem(String desc)
-	{
-		super();
-		setMaxStackSize(1);
-		attr = desc;
-	}
+    public ItemEmblem(String desc) {
+        super();
+        setMaxStackSize(1);
+        attr = desc;
+    }
 
-	@Override
+    @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		String str = "\2472" + I18n.format("Desc." + attr);
+        String str = "\2472" + I18n.format("Desc." + attr);
         tooltip.add(str.replaceAll("Format error: ", ""));
         tooltip.add("\247a" + I18n.format("Desc.Emblem"));
-	}
+    }
 }

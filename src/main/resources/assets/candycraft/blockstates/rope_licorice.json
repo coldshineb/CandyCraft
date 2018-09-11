@@ -1,20 +1,52 @@
 {
-    "variants": {
-        "level=0": { "model": "candycraftmod:rope_licorice" },
-        "level=1": { "model": "candycraftmod:rope_licorice" },
-        "level=2": { "model": "candycraftmod:rope_licorice" },
-        "level=3": { "model": "candycraftmod:rope_licorice" },
-        "level=4": { "model": "candycraftmod:rope_licorice" },
-        "level=5": { "model": "candycraftmod:rope_licorice" },
-        "level=6": { "model": "candycraftmod:rope_licorice" },
-        "level=7": { "model": "candycraftmod:rope_licorice" },
-        "level=8": { "model": "candycraftmod:rope_licorice" },
-        "level=9": { "model": "candycraftmod:rope_licorice" },
-        "level=10": { "model": "candycraftmod:rope_licorice" },
-        "level=11": { "model": "candycraftmod:rope_licorice" },
-        "level=12": { "model": "candycraftmod:rope_licorice" },
-        "level=13": { "model": "candycraftmod:rope_licorice" },
-        "level=14": { "model": "candycraftmod:rope_licorice" },
-        "level=15": { "model": "candycraftmod:rope_licorice" }
+  "variants": {
+    "level=0": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=1": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=2": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=3": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=4": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=5": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=6": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=7": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=8": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=9": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=10": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=11": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=12": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=13": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=14": {
+      "model": "candycraftmod:rope_licorice"
+    },
+    "level=15": {
+      "model": "candycraftmod:rope_licorice"
     }
+  }
 }

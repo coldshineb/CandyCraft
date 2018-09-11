@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:chewing_gum_block" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:chewing_gum_block"
     }
+  }
 }

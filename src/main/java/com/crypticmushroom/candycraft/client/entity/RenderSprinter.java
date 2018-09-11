@@ -8,18 +8,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderSprinter extends RenderJelly
-{
+public class RenderSprinter extends RenderJelly {
     private static final ResourceLocation slimeTextures = new ResourceLocation("candycraftmod:textures/entity/SprinterJelly.png");
 
-	public RenderSprinter(RenderManager rm, ModelBase par1ModelBase)
-	{
-		super(rm, par1ModelBase);
-	}
+    public RenderSprinter(RenderManager rm, ModelBase par1ModelBase) {
+        super(rm, par1ModelBase);
+    }
 
-	@Override
-	protected ResourceLocation getJellyTexture(EntityLiving par1EntitySprinterSlime)
-	{
-		return slimeTextures;
-	}
+    @Override
+    protected ResourceLocation getJellyTexture(EntityLiving par1EntitySprinterSlime) {
+        return slimeTextures;
+    }
 }

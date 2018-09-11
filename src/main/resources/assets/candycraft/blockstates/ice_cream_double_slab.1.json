@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "half=bottom,variant=default": { "model": "candycraftmod:ice_cream.1" },
-		"half=top,variant=default": { "model": "candycraftmod:ice_cream.1" }
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "candycraftmod:ice_cream.1"
+    },
+    "half=top,variant=default": {
+      "model": "candycraftmod:ice_cream.1"
     }
+  }
 }

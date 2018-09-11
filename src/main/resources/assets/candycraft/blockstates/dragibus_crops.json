@@ -1,12 +1,28 @@
 {
-    "variants": {
-        "age=0": { "model": "candycraftmod:dragibus_stage0" },
-        "age=1": { "model": "candycraftmod:dragibus_stage0" },
-        "age=2": { "model": "candycraftmod:dragibus_stage1" },
-        "age=3": { "model": "candycraftmod:dragibus_stage1" },
-        "age=4": { "model": "candycraftmod:dragibus_stage2" },
-        "age=5": { "model": "candycraftmod:dragibus_stage2" },
-        "age=6": { "model": "candycraftmod:dragibus_stage2" },
-        "age=7": { "model": "candycraftmod:dragibus_stage3" }
+  "variants": {
+    "age=0": {
+      "model": "candycraftmod:dragibus_stage0"
+    },
+    "age=1": {
+      "model": "candycraftmod:dragibus_stage0"
+    },
+    "age=2": {
+      "model": "candycraftmod:dragibus_stage1"
+    },
+    "age=3": {
+      "model": "candycraftmod:dragibus_stage1"
+    },
+    "age=4": {
+      "model": "candycraftmod:dragibus_stage2"
+    },
+    "age=5": {
+      "model": "candycraftmod:dragibus_stage2"
+    },
+    "age=6": {
+      "model": "candycraftmod:dragibus_stage2"
+    },
+    "age=7": {
+      "model": "candycraftmod:dragibus_stage3"
     }
+  }
 }

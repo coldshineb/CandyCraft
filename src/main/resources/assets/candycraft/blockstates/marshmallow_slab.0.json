@@ -1,6 +1,10 @@
 {
-    "variants": {
-        "half=bottom,variant=default": { "model": "candycraftmod:half_slab_marshmallow.0" },
-        "half=top,variant=default": { "model": "candycraftmod:upper_slab_marshmallow.0" }
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "candycraftmod:half_slab_marshmallow.0"
+    },
+    "half=top,variant=default": {
+      "model": "candycraftmod:upper_slab_marshmallow.0"
     }
+  }
 }

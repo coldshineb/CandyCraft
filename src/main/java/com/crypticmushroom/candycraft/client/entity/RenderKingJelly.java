@@ -9,19 +9,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderKingJelly extends RenderJelly
-{
+public class RenderKingJelly extends RenderJelly {
     private static final ResourceLocation slimeTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss6.png");
     private static final ResourceLocation sleepTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss4.png");
 
-	public RenderKingJelly(RenderManager rm, ModelBase par1ModelBase)
-	{
-		super(rm, par1ModelBase);
-	}
+    public RenderKingJelly(RenderManager rm, ModelBase par1ModelBase) {
+        super(rm, par1ModelBase);
+    }
 
-	@Override
-	protected ResourceLocation getJellyTexture(EntityLiving par1EntityKingSlime)
-	{
-		return ((EntityKingSlime) par1EntityKingSlime).getAwake() == 0 ? sleepTexture : slimeTexture;
-	}
+    @Override
+    protected ResourceLocation getJellyTexture(EntityLiving par1EntityKingSlime) {
+        return ((EntityKingSlime) par1EntityKingSlime).getAwake() == 0 ? sleepTexture : slimeTexture;
+    }
 }

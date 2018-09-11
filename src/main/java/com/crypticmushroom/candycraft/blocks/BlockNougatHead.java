@@ -12,110 +12,89 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockNougatHead extends Block
-{
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+public class BlockNougatHead extends Block {
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-	public BlockNougatHead()
-	{
-		super(Material.IRON);
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-	}
+    public BlockNougatHead() {
+        super(Material.IRON);
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    }
 
-	@Override
-	public IBlockState onBlockPlaced(World par1, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-	{
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-	}
+    @Override
+    public IBlockState onBlockPlaced(World par1, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    }
 
-	@Override
-	public void onBlockAdded(World par1, BlockPos pos, IBlockState state)
-	{
-		if (!par1.isRemote)
-		{
-			IBlockState block = par1.getBlockState(pos.north());
-			IBlockState block1 = par1.getBlockState(pos.south());
-			IBlockState block2 = par1.getBlockState(pos.west());
-			IBlockState block3 = par1.getBlockState(pos.east());
-			EnumFacing enumfacing = state.getValue(FACING);
+    @Override
+    public void onBlockAdded(World par1, BlockPos pos, IBlockState state) {
+        if (!par1.isRemote) {
+            IBlockState block = par1.getBlockState(pos.north());
+            IBlockState block1 = par1.getBlockState(pos.south());
+            IBlockState block2 = par1.getBlockState(pos.west());
+            IBlockState block3 = par1.getBlockState(pos.east());
+            EnumFacing enumfacing = state.getValue(FACING);
 
-			if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock())
-			{
-				enumfacing = EnumFacing.SOUTH;
-			}
-			else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
-			{
-				enumfacing = EnumFacing.NORTH;
-			}
-			else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
-			{
-				enumfacing = EnumFacing.EAST;
-			}
-			else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
-			{
-				enumfacing = EnumFacing.WEST;
-			}
+            if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock()) {
+                enumfacing = EnumFacing.SOUTH;
+            } else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock()) {
+                enumfacing = EnumFacing.NORTH;
+            } else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock()) {
+                enumfacing = EnumFacing.EAST;
+            } else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock()) {
+                enumfacing = EnumFacing.WEST;
+            }
 
-			par1.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-		}
+            par1.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
+        }
 
-		if (par1.getBlockState(pos.down()).getBlock() != CCBlocks.nougatBlock || par1.getBlockState(pos.down(2)).getBlock() != CCBlocks.nougatBlock)
-		{
-			return;
-		}
-		int lenght = 0;
-		BlockPos pos2 = pos.down(1);
-		while (par1.getBlockState(pos2) == CCBlocks.nougatBlock.getDefaultState() && pos2.getY() > 0)
-		{
-			par1.setBlockToAir(pos2);
-			lenght++;
-			pos2 = pos2.down(1);
-		}
-		par1.setBlockToAir(pos);
+        if (par1.getBlockState(pos.down()).getBlock() != CCBlocks.nougatBlock || par1.getBlockState(pos.down(2)).getBlock() != CCBlocks.nougatBlock) {
+            return;
+        }
+        int lenght = 0;
+        BlockPos pos2 = pos.down(1);
+        while (par1.getBlockState(pos2) == CCBlocks.nougatBlock.getDefaultState() && pos2.getY() > 0) {
+            par1.setBlockToAir(pos2);
+            lenght++;
+            pos2 = pos2.down(1);
+        }
+        par1.setBlockToAir(pos);
 
-		EntityNougatGolem[] golemList = new EntityNougatGolem[lenght + 1];
+        EntityNougatGolem[] golemList = new EntityNougatGolem[lenght + 1];
 
-		for (int j = 0; j < lenght + 1; j++)
-		{
-			EntityNougatGolem golem = new EntityNougatGolem(par1);
-			golem.setPosition(pos.getX() + 0.5D, pos.getY() - lenght, pos.getZ() + 0.5D);
+        for (int j = 0; j < lenght + 1; j++) {
+            EntityNougatGolem golem = new EntityNougatGolem(par1);
+            golem.setPosition(pos.getX() + 0.5D, pos.getY() - lenght, pos.getZ() + 0.5D);
 
-			if (j == 0)
-			{
-				golem.setLenght(0.8F);
-			}
-			golemList[j] = golem;
+            if (j == 0) {
+                golem.setLenght(0.8F);
+            }
+            golemList[j] = golem;
 
-			if (j != 0)
-			{
-				golem.startRiding(golemList[j - 1]);
-			}
-			par1.spawnEntityInWorld(golem);
-		}
-	}
+            if (j != 0) {
+                golem.startRiding(golemList[j - 1]);
+            }
+            par1.spawnEntityInWorld(golem);
+        }
+    }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing enumfacing = EnumFacing.getFront(meta);
 
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-		{
-			enumfacing = EnumFacing.NORTH;
-		}
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+            enumfacing = EnumFacing.NORTH;
+        }
 
-		return getDefaultState().withProperty(FACING, enumfacing);
-	}
+        return getDefaultState().withProperty(FACING, enumfacing);
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		return state.getValue(FACING).getIndex();
-	}
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer(this, new IProperty[] { FACING });
-	}
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[]{FACING});
+    }
 }

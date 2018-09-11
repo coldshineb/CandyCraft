@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:jelly_boss_key_hole" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:jelly_boss_key_hole"
     }
+  }
 }

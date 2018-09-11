@@ -11,33 +11,26 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemCandySeeds extends Item
-{
-	@Override
+public class ItemCandySeeds extends Item {
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
-        if (facing != EnumFacing.UP)
-		{
-			return EnumActionResult.FAIL;
-		} else if (player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
+        if (facing != EnumFacing.UP) {
+            return EnumActionResult.FAIL;
+        } else if (player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
             Block i1 = worldIn.getBlockState(pos).getBlock();
-			Block soil = CCBlocks.candySoil;
+            Block soil = CCBlocks.candySoil;
 
-            if (soil == i1 && worldIn.isAirBlock(pos.up()))
-			{
+            if (soil == i1 && worldIn.isAirBlock(pos.up())) {
                 //TODO player.addStat(CCAchievements.lollipopFarm);
                 worldIn.setBlockState(pos.up(), CCBlocks.lollipopPlant.getDefaultState(), 3);
                 itemstack.shrink(1);
-				return EnumActionResult.SUCCESS;
-			}
-			else
-			{
-				return EnumActionResult.FAIL;
-			}
-		}
-		else
-		{
-			return EnumActionResult.FAIL;
-		}
-	}
+                return EnumActionResult.SUCCESS;
+            } else {
+                return EnumActionResult.FAIL;
+            }
+        } else {
+            return EnumActionResult.FAIL;
+        }
+    }
 }

@@ -10,35 +10,30 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
 import java.util.Random;
 
-public class BiomeGenSkyMountains extends BiomeGenCandy
-{
-	public BiomeGenSkyMountains(Biome.BiomeProperties properties)
-	{
-		super(properties);
-		theBiomeDecorator2.treesPerChunk = 1;
-		theBiomeDecorator2.reedsPerChunk = 1;
-		theBiomeDecorator2.grassPerChunk = 1;
-		theBiomeDecorator2.allowIceCream = true;
-		theBiomeDecorator2.allowIceCream = true;
-	}
+public class BiomeGenSkyMountains extends BiomeGenCandy {
+    public BiomeGenSkyMountains(Biome.BiomeProperties properties) {
+        super(properties);
+        theBiomeDecorator2.treesPerChunk = 1;
+        theBiomeDecorator2.reedsPerChunk = 1;
+        theBiomeDecorator2.grassPerChunk = 1;
+        theBiomeDecorator2.allowIceCream = true;
+        theBiomeDecorator2.allowIceCream = true;
+    }
 
-	@Override
-	public WorldGenAbstractTree genBigTreeChance(Random par1Random)
-	{
-		return new WorldGenCandyTrees(false, 4, 2, 2, false);
-	}
+    @Override
+    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+        return new WorldGenCandyTrees(false, 4, 2, 2, false);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getSkyColorByTemp(float par1)
-	{
-		return Color.WHITE.getRGB();
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getSkyColorByTemp(float par1) {
+        return Color.WHITE.getRGB();
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getGrassColorAtPos(BlockPos pos)
-	{
-		return 0xffffff;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getGrassColorAtPos(BlockPos pos) {
+        return 0xffffff;
+    }
 }

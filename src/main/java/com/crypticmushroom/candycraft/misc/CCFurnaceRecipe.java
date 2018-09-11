@@ -11,20 +11,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class CCFurnaceRecipe
-{
-	private static final CCFurnaceRecipe smeltingBase = new CCFurnaceRecipe();
+public class CCFurnaceRecipe {
+    private static final CCFurnaceRecipe smeltingBase = new CCFurnaceRecipe();
 
-	private Map smeltingList = new HashMap();
-	private Map experienceList = new HashMap();
+    private Map smeltingList = new HashMap();
+    private Map experienceList = new HashMap();
 
-	public static final CCFurnaceRecipe smelting()
-	{
-		return smeltingBase;
-	}
-
-	private CCFurnaceRecipe()
-	{
+    private CCFurnaceRecipe() {
         GameRegistry.addSmelting(CCBlocks.flour, new ItemStack(CCBlocks.pudding), 0.7F);
         GameRegistry.addSmelting(CCBlocks.licoriceOre, new ItemStack(CCItems.licorice), 1.0F);
         GameRegistry.addSmelting(CCBlocks.jellyOre, new ItemStack(CCBlocks.trampojelly), 1.0F);
@@ -38,46 +31,43 @@ public class CCFurnaceRecipe
         GameRegistry.addSmelting(CCBlocks.PEZOre, new ItemStack(CCItems.PEZ), 1.0F);
         GameRegistry.addSmelting(CCItems.cranberryFish, new ItemStack(CCItems.cranberryFishCooked), 0.7F);
         GameRegistry.addSmelting(CCBlocks.caramelBlock, new ItemStack(CCBlocks.caramelGlass0), 0.7F);
-	}
+    }
 
-	public ItemStack getSmeltingResult(ItemStack stack)
-	{
+    public static final CCFurnaceRecipe smelting() {
+        return smeltingBase;
+    }
+
+    public ItemStack getSmeltingResult(ItemStack stack) {
 
         return FurnaceRecipes.instance().getSmeltingResult(stack);
-	}
+    }
 
-	private boolean isSameItem(ItemStack s1, ItemStack s2)
-	{
-		return s2.getItem() == s1.getItem() && (s2.getItemDamage() == 32767 || s2.getItemDamage() == s1.getItemDamage());
-	}
+    private boolean isSameItem(ItemStack s1, ItemStack s2) {
+        return s2.getItem() == s1.getItem() && (s2.getItemDamage() == 32767 || s2.getItemDamage() == s1.getItemDamage());
+    }
 
-	public Map getSmeltingList()
-	{
-		return smeltingList;
-	}
+    public Map getSmeltingList() {
+        return smeltingList;
+    }
 
-	public float getExperienceAmount(ItemStack stack)
-	{
-		float ret = stack.getItem().getSmeltingExperience(stack);
-		if (ret != -1)
-		{
-			return ret;
-		}
+    public float getExperienceAmount(ItemStack stack) {
+        float ret = stack.getItem().getSmeltingExperience(stack);
+        if (ret != -1) {
+            return ret;
+        }
 
-		Iterator iterator = experienceList.entrySet().iterator();
-		Entry entry;
+        Iterator iterator = experienceList.entrySet().iterator();
+        Entry entry;
 
-		do
-		{
-			if (!iterator.hasNext())
-			{
-				return 0.0F;
-			}
+        do {
+            if (!iterator.hasNext()) {
+                return 0.0F;
+            }
 
-			entry = (Entry) iterator.next();
-		}
-		while (!isSameItem(stack, (ItemStack) entry.getKey()));
+            entry = (Entry) iterator.next();
+        }
+        while (!isSameItem(stack, (ItemStack) entry.getKey()));
 
-		return ((Float) entry.getValue()).floatValue();
-	}
+        return ((Float) entry.getValue()).floatValue();
+    }
 }

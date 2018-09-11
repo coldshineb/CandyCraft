@@ -18,23 +18,23 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
 import static com.crypticmushroom.candycraft.CandyCraft.proxy;
+import static com.crypticmushroom.candycraft.client.CCSoundEvents.*;
 
 @Mod.EventBusSubscriber
-public class CCItems
-{
+public class CCItems {
     /**
      * Materials
      **/
     private static ToolMaterial licoriceMaterial = EnumHelper.addToolMaterial("Licorice", 1, 175, 4.0F, 1, 8);
-    private static ArmorMaterial licoriceArmorMaterial = EnumHelper.addArmorMaterial("Licorice", "licorice", 18, new int[] { 1, 5, 4, 1 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    private static ArmorMaterial licoriceArmorMaterial = EnumHelper.addArmorMaterial("Licorice", "licorice", 18, new int[]{1, 5, 4, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
     private static ToolMaterial honeyMaterial = EnumHelper.addToolMaterial("Honey", 3, 400, 7.0F, 2.0F, 18);
-    private static ArmorMaterial honeyArmorMaterial = EnumHelper.addArmorMaterial("Honey", "honey", 22, new int[] { 2, 7, 6, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
+    private static ArmorMaterial honeyArmorMaterial = EnumHelper.addArmorMaterial("Honey", "honey", 22, new int[]{2, 7, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
     private static ToolMaterial PEZMaterial = EnumHelper.addToolMaterial("PEZ", 4, 1034, 7.6F, 3.4F, 3);
-    private static ArmorMaterial PEZArmorMaterial = EnumHelper.addArmorMaterial("PEZ", "pez", 24, new int[] { 4, 9, 7, 4 }, 6, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F);
+    private static ArmorMaterial PEZArmorMaterial = EnumHelper.addArmorMaterial("PEZ", "pez", 24, new int[]{4, 9, 7, 4}, 6, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F);
 
-    private static ArmorMaterial jellyCrownMaterial = EnumHelper.addArmorMaterial("Jelly_Crown", "Jelly_Crown", 0, new int[] { 0, 0, 0, 0 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F);
-    private static ArmorMaterial waterMaskMaterial = EnumHelper.addArmorMaterial("Water_Mask", "Armor_Mask", 0, new int[] { 0, 0, 0, 0 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
-    private static ArmorMaterial jellyBootsMaterial = EnumHelper.addArmorMaterial("Jelly_Boots", "Armor_Boots", 0, new int[] { 0, 0, 0, 0 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    private static ArmorMaterial jellyCrownMaterial = EnumHelper.addArmorMaterial("Jelly_Crown", "Jelly_Crown", 0, new int[]{0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F);
+    private static ArmorMaterial waterMaskMaterial = EnumHelper.addArmorMaterial("Water_Mask", "Armor_Mask", 0, new int[]{0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    private static ArmorMaterial jellyBootsMaterial = EnumHelper.addArmorMaterial("Jelly_Boots", "Armor_Boots", 0, new int[]{0, 0, 0, 0}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
     /**
      * Items
      **/
@@ -242,10 +242,10 @@ public class CCItems
         honeyBolt = new Item().setUnlocalizedName("honey_bolt").setCreativeTab(CandyCraft.getCandyTab());
         caramelCrossbow = new ItemCandyCrossbow().setUnlocalizedName("caramel_crossbow").setCreativeTab(CandyCraft.getCandyTab());
 
-        CD1 = new ItemCandyRecord("CD-1", "C418 - Sweden - Remix Caution & Crisis", "Sweden Remix").setUnlocalizedName("record_1").setCreativeTab(CandyCraft.getCandyTab());
-        CD2 = new ItemCandyRecord("CD-2", "Jakim - Every", "Every").setUnlocalizedName("record_2").setCreativeTab(CandyCraft.getCandyTab());
-        CD3 = new ItemCandyRecord("CD-3", "Rainbow Bunchie", "Rainbow Bunchie").setUnlocalizedName("record_3").setCreativeTab(CandyCraft.getCandyTab());
-        CD4 = new ItemCandyRecord("CD-4", "C418 - Einfallslos", "Einfallslos").setUnlocalizedName("record_4").setCreativeTab(CandyCraft.getCandyTab());
+        CD1 = new ItemCandyRecord(C1, "C418 - Sweden - Remix Caution & Crisis", "Sweden Remix").setUnlocalizedName("record_1").setCreativeTab(CandyCraft.getCandyTab());
+        CD2 = new ItemCandyRecord(C2, "Jakim - Every", "Every").setUnlocalizedName("record_2").setCreativeTab(CandyCraft.getCandyTab());
+        CD3 = new ItemCandyRecord(C3, "Rainbow Bunchie", "Rainbow Bunchie").setUnlocalizedName("record_3").setCreativeTab(CandyCraft.getCandyTab());
+        CD4 = new ItemCandyRecord(C4, "C418 - Einfallslos", "Einfallslos").setUnlocalizedName("record_4").setCreativeTab(CandyCraft.getCandyTab());
 
         candyPlacer = new ItemCandyMonsterPlacer().setUnlocalizedName("candy_spawn_egg").setCreativeTab(CandyCraft.getCandyTab());
         wiki = new ItemWiki().setUnlocalizedName("wiki").setCreativeTab(CandyCraft.getCandyTab());
@@ -269,11 +269,11 @@ public class CCItems
         suguardBossKey = new ItemBossKey(3).setUnlocalizedName("suguard_boss_key").setCreativeTab(CandyCraft.getCandyTab());
 
         licoriceMaterial.setRepairItem(new ItemStack(licorice));
-        licoriceArmorMaterial.customCraftingMaterial = licorice;
+        licoriceArmorMaterial.setRepairItem(new ItemStack(licorice));
         honeyMaterial.setRepairItem(new ItemStack(honeycomb));
-        honeyArmorMaterial.customCraftingMaterial = honeycomb;
+        honeyArmorMaterial.setRepairItem(new ItemStack(honeycomb));
         PEZMaterial.setRepairItem(new ItemStack(PEZ));
-        PEZArmorMaterial.customCraftingMaterial = PEZ;
+        PEZArmorMaterial.setRepairItem(new ItemStack(PEZ);
     }
 
     public static void registerItems(Side side) {

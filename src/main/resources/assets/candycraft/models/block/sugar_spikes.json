@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
-    "textures": {
-        "cross": "candycraftmod:blocks/sugar_spikes"
-    }
+  "parent": "block/cross",
+  "textures": {
+    "cross": "candycraftmod:blocks/sugar_spikes"
+  }
 }

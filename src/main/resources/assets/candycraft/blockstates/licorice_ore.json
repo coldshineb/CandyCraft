@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:licorice_ore" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:licorice_ore"
     }
+  }
 }

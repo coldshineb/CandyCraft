@@ -1,6 +1,6 @@
 {
-    "parent": "block/fence_ns",
-    "textures": {
-        "texture": "candycraftmod:blocks/marshmallow_planks.0"
-    }
+  "parent": "block/fence_ns",
+  "textures": {
+    "texture": "candycraftmod:blocks/marshmallow_planks.0"
+  }
 }

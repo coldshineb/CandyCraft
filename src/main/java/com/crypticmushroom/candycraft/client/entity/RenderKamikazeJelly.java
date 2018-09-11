@@ -8,18 +8,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderKamikazeJelly extends RenderJelly
-{
+public class RenderKamikazeJelly extends RenderJelly {
     private static final ResourceLocation slimeTextures = new ResourceLocation("candycraftmod:textures/entity/KamikazeJelly.png");
 
-	public RenderKamikazeJelly(RenderManager rm, ModelBase par1ModelBase)
-	{
-		super(rm, par1ModelBase);
-	}
+    public RenderKamikazeJelly(RenderManager rm, ModelBase par1ModelBase) {
+        super(rm, par1ModelBase);
+    }
 
-	@Override
-	protected ResourceLocation getJellyTexture(EntityLiving par1EntityKamikazeSlime)
-	{
-		return slimeTextures;
-	}
+    @Override
+    protected ResourceLocation getJellyTexture(EntityLiving par1EntityKamikazeSlime) {
+        return slimeTextures;
+    }
 }

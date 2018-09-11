@@ -43,13 +43,12 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import org.lwjgl.input.Keyboard;
 
-public class ClientProxy extends CommonProxy
-{
-	public static IRenderHandler weatherRenderer = new RenderWeather();
+public class ClientProxy extends CommonProxy {
+    public static IRenderHandler weatherRenderer = new RenderWeather();
 
-	public static GuiEmpty emptyGui = new GuiEmpty();
-	public static ModelBiped crown = new ModelBiped(0.1F);
-	public static KeyBinding unleashMountPower = new KeyBinding("key.mountPower", Keyboard.KEY_P, "CandyCraft");
+    public static GuiEmpty emptyGui = new GuiEmpty();
+    public static ModelBiped crown = new ModelBiped(0.1F);
+    public static KeyBinding unleashMountPower = new KeyBinding("key.mountPower", Keyboard.KEY_P, "CandyCraft");
 
     public static ModelResourceLocation bowAn1 = new ModelResourceLocation("candycraftmod:caramel_bow_1", "inventory");
     public static ModelResourceLocation bowAn2 = new ModelResourceLocation("candycraftmod:caramel_bow_2", "inventory");
@@ -65,53 +64,52 @@ public class ClientProxy extends CommonProxy
 
 
     @Override
-	public void init()
-	{
-		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
-		RenderItem ri = Minecraft.getMinecraft().getRenderItem();
+    public void init() {
+        RenderManager rm = Minecraft.getMinecraft().getRenderManager();
+        RenderItem ri = Minecraft.getMinecraft().getRenderItem();
 
-		rm.entityRenderMap.put(EntityCandyPig.class, new RenderCandyPig(rm, new ModelCandyPig(), 0.7F));
-		rm.entityRenderMap.put(EntityCandyCreeper.class, new RenderCandyCreeper(rm));
-		rm.entityRenderMap.put(EntitySuguard.class, new RenderSuguard(rm));
-		rm.entityRenderMap.put(EntityMageSuguard.class, new RenderMageSuguard(rm));
-		rm.entityRenderMap.put(EntityCandyWolf.class, new RenderCandyWolf(rm, new ModelWolf(), 0.5F));
-		rm.entityRenderMap.put(EntityJellyQueen.class, new RenderJellyQueen(rm, new ModelSlime(16)));
-		rm.entityRenderMap.put(EntityBunny.class, new RenderBunny(rm, new ModelBunny(), 0.5F));
-		rm.entityRenderMap.put(EntityBee.class, new RenderBee(rm, new ModelBee(), 0.5F));
-		rm.entityRenderMap.put(EntityGingerBreadMan.class, new RenderGingerBreadMan(rm, new ModelBiped(0.0F), 0.5F));
-		rm.entityRenderMap.put(EntityCandyArrow.class, new RenderCandyArrow(rm));
-		rm.entityRenderMap.put(EntityGummyBall.class, new RenderGummyBall(rm, CCItems.gummyBall, ri));
-		rm.entityRenderMap.put(EntityBossSuguard.class, new RenderSuguardeBoss(rm));
-		rm.entityRenderMap.put(EntityCottonCandySpider.class, new RenderCottonSpider(rm));
-		rm.entityRenderMap.put(EntityFish.class, new RenderEntityFish(rm, new ModelFish(), 0.5F));
-		rm.entityRenderMap.put(EntityNessie.class, new RenderNessie(rm));
-		rm.entityRenderMap.put(EntityWaffleSheep.class, new RenderWaffleSheep(rm, new ModelWaffleSheep2(), new ModelWaffleSheep(), 0.7F));
-		rm.entityRenderMap.put(EntityYellowJelly.class, new RenderSprinter(rm, new ModelSlime(16)));
-		rm.entityRenderMap.put(EntityRedJelly.class, new RenderKamikazeJelly(rm, new ModelSlime(16)));
-		rm.entityRenderMap.put(EntityTornadoJelly.class, new RenderTornadoJelly(rm, new ModelSlime(16)));
-		rm.entityRenderMap.put(EntityPEZJelly.class, new RenderPEZJelly(rm, new ModelSlime(16)));
-		rm.entityRenderMap.put(EntityKingSlime.class, new RenderKingJelly(rm, new ModelSlime(16)));
-		rm.entityRenderMap.put(EntityDynamite.class, new RenderDynamite(rm, false, ri));
-		rm.entityRenderMap.put(EntityGlueDynamite.class, new RenderDynamite(rm, true, ri));
-		rm.entityRenderMap.put(EntityNougatGolem.class, new RenderNougatGolem(rm));
-		rm.entityRenderMap.put(EntityBeetle.class, new RenderBeetle(rm, new ModelBeetle(), 0.5F));
-		rm.entityRenderMap.put(EntityBossBeetle.class, new RenderBossBeetle(rm, new ModelBeetle(), 0.5F));
-		rm.entityRenderMap.put(EntityPingouin.class, new RenderPingouin(rm, new ModelPingouin(), 0.5F));
-		rm.entityRenderMap.put(EntityDragon.class, new RenderDragon(rm, new ModelDragon(), 0.5F));
-		rm.entityRenderMap.put(EntityKingBeetle.class, new RenderKingBeetle(rm, new ModelBeetle(), 0.5F));
-		rm.entityRenderMap.put(EntityMermaid.class, new RenderMermaid(rm));
+        rm.entityRenderMap.put(EntityCandyPig.class, new RenderCandyPig(rm, new ModelCandyPig(), 0.7F));
+        rm.entityRenderMap.put(EntityCandyCreeper.class, new RenderCandyCreeper(rm));
+        rm.entityRenderMap.put(EntitySuguard.class, new RenderSuguard(rm));
+        rm.entityRenderMap.put(EntityMageSuguard.class, new RenderMageSuguard(rm));
+        rm.entityRenderMap.put(EntityCandyWolf.class, new RenderCandyWolf(rm, new ModelWolf(), 0.5F));
+        rm.entityRenderMap.put(EntityJellyQueen.class, new RenderJellyQueen(rm, new ModelSlime(16)));
+        rm.entityRenderMap.put(EntityBunny.class, new RenderBunny(rm, new ModelBunny(), 0.5F));
+        rm.entityRenderMap.put(EntityBee.class, new RenderBee(rm, new ModelBee(), 0.5F));
+        rm.entityRenderMap.put(EntityGingerBreadMan.class, new RenderGingerBreadMan(rm, new ModelBiped(0.0F), 0.5F));
+        rm.entityRenderMap.put(EntityCandyArrow.class, new RenderCandyArrow(rm));
+        rm.entityRenderMap.put(EntityGummyBall.class, new RenderGummyBall(rm, CCItems.gummyBall, ri));
+        rm.entityRenderMap.put(EntityBossSuguard.class, new RenderSuguardeBoss(rm));
+        rm.entityRenderMap.put(EntityCottonCandySpider.class, new RenderCottonSpider(rm));
+        rm.entityRenderMap.put(EntityFish.class, new RenderEntityFish(rm, new ModelFish(), 0.5F));
+        rm.entityRenderMap.put(EntityNessie.class, new RenderNessie(rm));
+        rm.entityRenderMap.put(EntityWaffleSheep.class, new RenderWaffleSheep(rm, new ModelWaffleSheep2(), new ModelWaffleSheep(), 0.7F));
+        rm.entityRenderMap.put(EntityYellowJelly.class, new RenderSprinter(rm, new ModelSlime(16)));
+        rm.entityRenderMap.put(EntityRedJelly.class, new RenderKamikazeJelly(rm, new ModelSlime(16)));
+        rm.entityRenderMap.put(EntityTornadoJelly.class, new RenderTornadoJelly(rm, new ModelSlime(16)));
+        rm.entityRenderMap.put(EntityPEZJelly.class, new RenderPEZJelly(rm, new ModelSlime(16)));
+        rm.entityRenderMap.put(EntityKingSlime.class, new RenderKingJelly(rm, new ModelSlime(16)));
+        rm.entityRenderMap.put(EntityDynamite.class, new RenderDynamite(rm, false, ri));
+        rm.entityRenderMap.put(EntityGlueDynamite.class, new RenderDynamite(rm, true, ri));
+        rm.entityRenderMap.put(EntityNougatGolem.class, new RenderNougatGolem(rm));
+        rm.entityRenderMap.put(EntityBeetle.class, new RenderBeetle(rm, new ModelBeetle(), 0.5F));
+        rm.entityRenderMap.put(EntityBossBeetle.class, new RenderBossBeetle(rm, new ModelBeetle(), 0.5F));
+        rm.entityRenderMap.put(EntityPingouin.class, new RenderPingouin(rm, new ModelPingouin(), 0.5F));
+        rm.entityRenderMap.put(EntityDragon.class, new RenderDragon(rm, new ModelDragon(), 0.5F));
+        rm.entityRenderMap.put(EntityKingBeetle.class, new RenderKingBeetle(rm, new ModelBeetle(), 0.5F));
+        rm.entityRenderMap.put(EntityMermaid.class, new RenderMermaid(rm));
 
-		TileEntityCandyChestRenderer render = new TileEntityCandyChestRenderer();
+        TileEntityCandyChestRenderer render = new TileEntityCandyChestRenderer();
         TileEntityRendererDispatcher.instance.renderers.put(TileEntityCandyChest.class, render);
-		render.setRendererDispatcher(TileEntityRendererDispatcher.instance);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemy.class, new TileEntityAlchemyRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTeleporter.class, new TileEntityRendererTeleporter());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEgg.class, new RenderEgg());
-		ClientRegistry.registerKeyBinding(ClientProxy.unleashMountPower);
+        render.setRendererDispatcher(TileEntityRendererDispatcher.instance);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemy.class, new TileEntityAlchemyRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTeleporter.class, new TileEntityRendererTeleporter());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEgg.class, new RenderEgg());
+        ClientRegistry.registerKeyBinding(ClientProxy.unleashMountPower);
 
-		crown.bipedHead = new ModelRenderer(crown, 0, 0);
-		crown.bipedHead.addBox(-4.0F, -9.5F, -4.0F, 8, 8, 8, 0.1F);
-		crown.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
+        crown.bipedHead = new ModelRenderer(crown, 0, 0);
+        crown.bipedHead.addBox(-4.0F, -9.5F, -4.0F, 8, 8, 8, 0.1F);
+        crown.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         ri.getItemModelMesher().register(CCItems.caramelBow, 0, new ModelResourceLocation("candycraftmod:caramel_bow", "inventory"));
         ri.getItemModelMesher().register(CCItems.caramelBow, 1, new ModelResourceLocation("candycraftmod:caramel_bow_1", "inventory"));
@@ -142,50 +140,42 @@ public class ClientProxy extends CommonProxy
 
         ri.getItemModelMesher().register(Item.getItemFromBlock(CCBlocks.marshmallowChest), 0, new ModelResourceLocation("candycraftmod:marshmallow_chest", "inventory"));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemy.class, new TileEntityAlchemyRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlchemy.class, new TileEntityAlchemyRenderer());
         ri.getItemModelMesher().register(Item.getItemFromBlock(CCBlocks.alchemyTable), 0, new ModelResourceLocation("candycraftmod:alchemy_table", "inventory"));
 
-		ri.getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(CCBlocks.cottonCandyBedBlock, (new StateMap.Builder()).ignore(new IProperty[] { BlockBed.OCCUPIED }).build());
-		ri.getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(CCBlocks.grenadine, (new StateMap.Builder()).ignore(new IProperty[] { BlockFluidBase.LEVEL }).build());
-		ri.getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(CCBlocks.marshmallowDoor, (new StateMap.Builder()).ignore(new IProperty[] { BlockDoor.POWERED }).build());
+        ri.getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(CCBlocks.cottonCandyBedBlock, (new StateMap.Builder()).ignore(new IProperty[]{BlockBed.OCCUPIED}).build());
+        ri.getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(CCBlocks.grenadine, (new StateMap.Builder()).ignore(new IProperty[]{BlockFluidBase.LEVEL}).build());
+        ri.getItemModelMesher().getModelManager().getBlockModelShapes().registerBlockWithStateMapper(CCBlocks.marshmallowDoor, (new StateMap.Builder()).ignore(new IProperty[]{BlockDoor.POWERED}).build());
 
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(CCItems.candyPlacer, new ItemMeshDefinition()
-		{
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack)
-			{
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(CCItems.candyPlacer, new ItemMeshDefinition() {
+            @Override
+            public ModelResourceLocation getModelLocation(ItemStack stack) {
                 return new ModelResourceLocation("candycraftmod:" + CCItems.candyPlacer.getUnlocalizedName().substring(5), "inventory");
-			}
-		});
+            }
+        });
 
-		ModelBakery.registerItemVariants(Item.getItemFromBlock(CCBlocks.grenadine));
-		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(CCBlocks.grenadine), new ItemMeshDefinition()
-		{
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack)
-			{
+        ModelBakery.registerItemVariants(Item.getItemFromBlock(CCBlocks.grenadine));
+        ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(CCBlocks.grenadine), new ItemMeshDefinition() {
+            @Override
+            public ModelResourceLocation getModelLocation(ItemStack stack) {
                 return new ModelResourceLocation("candycraftmod:grenadine");
-			}
-		});
+            }
+        });
 
-		ModelLoader.setCustomStateMapper(CCBlocks.grenadine, new StateMapperBase()
-		{
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
-			{
+        ModelLoader.setCustomStateMapper(CCBlocks.grenadine, new StateMapperBase() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 return new ModelResourceLocation("candycraftmod:grenadine");
-			}
-		});
+            }
+        });
 
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(CCItems.sugarPill, new ItemMeshDefinition()
-		{
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack)
-			{
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(CCItems.sugarPill, new ItemMeshDefinition() {
+            @Override
+            public ModelResourceLocation getModelLocation(ItemStack stack) {
                 return new ModelResourceLocation("candycraftmod:" + CCItems.sugarPill.getUnlocalizedName().substring(5), "inventory");
-			}
-		});
-	}
+            }
+        });
+    }
 
     @Override
     public void registerItemRenderer(Item item, int meta, String id) {

@@ -9,22 +9,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderJellyQueen extends RenderJelly
-{
+public class RenderJellyQueen extends RenderJelly {
     private static final ResourceLocation baseTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss.png");
     private static final ResourceLocation fastTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss2.png");
     private static final ResourceLocation explosionTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss3.png");
     private static final ResourceLocation sleepTexture = new ResourceLocation("candycraftmod:textures/entity/CandyBoss4.png");
 
-	public RenderJellyQueen(RenderManager rm, ModelBase par1ModelBase)
-	{
-		super(rm, par1ModelBase);
-	}
+    public RenderJellyQueen(RenderManager rm, ModelBase par1ModelBase) {
+        super(rm, par1ModelBase);
+    }
 
-	@Override
-	protected ResourceLocation getJellyTexture(EntityLiving entity)
-	{
-		EntityJellyQueen queen = (EntityJellyQueen) entity;
-		return queen.getAwake() == 0 ? sleepTexture : (queen.getStats() == 0 ? baseTexture : queen.getStats() == 1 ? explosionTexture : fastTexture);
-	}
+    @Override
+    protected ResourceLocation getJellyTexture(EntityLiving entity) {
+        EntityJellyQueen queen = (EntityJellyQueen) entity;
+        return queen.getAwake() == 0 ? sleepTexture : (queen.getStats() == 0 ? baseTexture : queen.getStats() == 1 ? explosionTexture : fastTexture);
+    }
 }

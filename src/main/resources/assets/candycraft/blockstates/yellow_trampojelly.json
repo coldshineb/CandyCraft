@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "candycraftmod:yellow_trampojelly" }
+  "variants": {
+    "normal": {
+      "model": "candycraftmod:yellow_trampojelly"
     }
+  }
 }

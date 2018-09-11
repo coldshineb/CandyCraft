@@ -12,52 +12,45 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemDragibusStick extends Item
-{
-	public ItemDragibusStick()
-	{
-		super();
-		setMaxStackSize(1);
-		setMaxDamage(25);
-	}
+public class ItemDragibusStick extends Item {
+    public ItemDragibusStick() {
+        super();
+        setMaxStackSize(1);
+        setMaxDamage(25);
+    }
 
-	@Override
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
-		if (playerIn.isRiding() && playerIn.getRidingEntity() instanceof EntityCandyPig)
-		{
-			EntityCandyPig entitypig = (EntityCandyPig) playerIn.getRidingEntity();
+        if (playerIn.isRiding() && playerIn.getRidingEntity() instanceof EntityCandyPig) {
+            EntityCandyPig entitypig = (EntityCandyPig) playerIn.getRidingEntity();
 
-            if (stack.getMaxDamage() - stack.getMetadata() >= 7 && entitypig.boost())
-			{
+            if (stack.getMaxDamage() - stack.getMetadata() >= 7 && entitypig.boost()) {
                 stack.damageItem(7, playerIn);
 
-                if (stack.getCount() == 0)
-				{
-					ItemStack itemstack = new ItemStack(CCItems.dragibusStick);
+                if (stack.getCount() == 0) {
+                    ItemStack itemstack = new ItemStack(CCItems.dragibusStick);
                     itemstack.setTagCompound(stack.getTagCompound());
-					return new ActionResult(EnumActionResult.SUCCESS, itemstack);
-				}
+                    return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+                }
 
                 return new ActionResult(EnumActionResult.SUCCESS, stack);
-			}
-		}
+            }
+        }
 
-		playerIn.addStat(StatList.getObjectUseStats(this));
+        playerIn.addStat(StatList.getObjectUseStats(this));
         return new ActionResult(EnumActionResult.PASS, stack);
-	}
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isFull3D()
-	{
-		return true;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isFull3D() {
+        return true;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldRotateAroundWhenRendering()
-	{
-		return true;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldRotateAroundWhenRendering() {
+        return true;
+    }
 }

@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "candycraftmod:blocks/jaw_breaker_block"
-    }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "candycraftmod:blocks/jaw_breaker_block"
+  }
 }

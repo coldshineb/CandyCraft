@@ -7,22 +7,18 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BlockNougatOre extends BlockCandyBase
-{
-	public BlockNougatOre(Material material)
-	{
-		super(material);
-	}
+public class BlockNougatOre extends BlockCandyBase {
+    public BlockNougatOre(Material material) {
+        super(material);
+    }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return CCItems.nougatPowder;
-	}
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return CCItems.nougatPowder;
+    }
 
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 3 + (random.nextInt(4));
-	}
+    @Override
+    public int quantityDropped(Random random) {
+        return 3 + (random.nextInt(4));
+    }
 }
