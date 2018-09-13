@@ -5,7 +5,14 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 public class CandyCraftPreferences {
-    public static boolean canGenerateDungeon = true, canOpenPortalWithLava = true, canOpenPortalWithCaramel = true, checkForUpdates = true, generateGingerbreadVillage = true, generateFloatingIsland = true, allowDragons = true, allowBeetleKings = true;
+    public static boolean canGenerateDungeon = true;
+    public static boolean canOpenPortalWithLava = true;
+    public static boolean canOpenPortalWithCaramel = true;
+    public static boolean checkForUpdates = true;
+    public static boolean generateGingerbreadVillage = true;
+    public static boolean generateFloatingIsland = true;
+    public static boolean allowDragons = true;
+    public static boolean allowBeetleKings = true;
 
     public static void init(File confDirectory) {
         Configuration config = new Configuration(new File(confDirectory, "/CandyCraft/ServerConfig.cfg"));

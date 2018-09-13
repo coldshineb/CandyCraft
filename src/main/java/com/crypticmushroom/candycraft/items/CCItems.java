@@ -15,7 +15,6 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 import static com.crypticmushroom.candycraft.CandyCraft.proxy;
 import static com.crypticmushroom.candycraft.client.CCSoundEvents.*;
@@ -161,9 +160,6 @@ public class CCItems {
     public static Item candyPlacer;
 
     // Misc End
-
-    private static Side currentSide = null;
-
     public static void loadItems() {
         licorice = new ItemFood(6, true).setUnlocalizedName("licorice").setCreativeTab(CandyCraft.getCandyTab());
         licoriceSpear = new ItemSword(licoriceMaterial).setUnlocalizedName("licorice_spear").setCreativeTab(CandyCraft.getCandyTab());
@@ -273,11 +269,10 @@ public class CCItems {
         honeyMaterial.setRepairItem(new ItemStack(honeycomb));
         honeyArmorMaterial.setRepairItem(new ItemStack(honeycomb));
         PEZMaterial.setRepairItem(new ItemStack(PEZ));
-        PEZArmorMaterial.setRepairItem(new ItemStack(PEZ);
+        PEZArmorMaterial.setRepairItem(new ItemStack(PEZ));
     }
 
-    public static void registerItems(Side side) {
-        currentSide = side;
+    public static void registerItems() {
         registerItem(marshmallowStick);
         registerItem(marshmallowDoor);
         registerItem(cottonCandyBed);

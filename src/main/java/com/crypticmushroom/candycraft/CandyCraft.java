@@ -139,7 +139,7 @@ public class CandyCraft {
         CCBlocks.registerBlocks(event.getSide());
         CCBlocks.doMiningLevel();
 
-        CCItems.registerItems(event.getSide());
+        CCItems.registerItems();
 
         CCRecipes.init();
         CCAchievements.init();

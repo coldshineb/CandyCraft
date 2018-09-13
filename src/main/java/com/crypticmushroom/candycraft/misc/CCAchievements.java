@@ -45,7 +45,7 @@ public class CCAchievements {
     private static ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
 
     public static void init() {
-        craftSugarBlock = setAchievement("craftSugarBlock", 0, 0, new ItemStack(CCBlocks.sugarBlock), null, false);
+        craftSugarBlock = setAchievement("craftSugarBlock", 0, 0, new ItemStack(CCBlocks.sugarBlock), null, false);\
         enterCandyWorld = setAchievement("enterCandyWorld", 2, 0, new ItemStack(CCBlocks.candyPortal), craftSugarBlock, true);
         gettingCandyCaneSugar = setAchievement("gettingCandyCane", 2, -2, new ItemStack(CCItems.candyCane), enterCandyWorld, false);
         gettingLicorice = setAchievement("gettingLicorice", 2, 2, new ItemStack(CCBlocks.licoriceOre), enterCandyWorld, false);
@@ -104,7 +104,7 @@ public class CCAchievements {
             player.addStat(CCAchievements.craftLicoriceSword);
         } else if (item == CCItems.marshmallowStick) {
             player.addStat(CCAchievements.craftCandyStick);
-        } else if (item == Items.STICK && stack.stackSize == 1) {
+        } else if (item == Items.STICK && stack.getCount() == 1) {
             player.addStat(CCAchievements.craftStick);
         } else if (item == Item.getItemFromBlock(CCBlocks.sugarFactory)) {
             player.addStat(CCAchievements.craftSugarFactory);

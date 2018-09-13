@@ -7,9 +7,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class CCFurnaceRecipe {
     private static final CCFurnaceRecipe smeltingBase = new CCFurnaceRecipe();
@@ -38,36 +36,6 @@ public class CCFurnaceRecipe {
     }
 
     public ItemStack getSmeltingResult(ItemStack stack) {
-
         return FurnaceRecipes.instance().getSmeltingResult(stack);
-    }
-
-    private boolean isSameItem(ItemStack s1, ItemStack s2) {
-        return s2.getItem() == s1.getItem() && (s2.getItemDamage() == 32767 || s2.getItemDamage() == s1.getItemDamage());
-    }
-
-    public Map getSmeltingList() {
-        return smeltingList;
-    }
-
-    public float getExperienceAmount(ItemStack stack) {
-        float ret = stack.getItem().getSmeltingExperience(stack);
-        if (ret != -1) {
-            return ret;
-        }
-
-        Iterator iterator = experienceList.entrySet().iterator();
-        Entry entry;
-
-        do {
-            if (!iterator.hasNext()) {
-                return 0.0F;
-            }
-
-            entry = (Entry) iterator.next();
-        }
-        while (!isSameItem(stack, (ItemStack) entry.getKey()));
-
-        return ((Float) entry.getValue()).floatValue();
     }
 }

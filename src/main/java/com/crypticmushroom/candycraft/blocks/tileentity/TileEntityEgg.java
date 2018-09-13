@@ -30,7 +30,7 @@ public class TileEntityEgg extends TileEntity implements ITickable {
         for (int x = 0; x < 5; x++) {
             for (int z = 0; z < 5; z++) {
                 if (x == 0 || x == 4 || z == 0 || z == 4) {
-                    if (worldObj.getBlockState(new BlockPos(pos.getX() - 2 + x, pos.getY(), pos.getZ() - 2 + z)).getBlock() != CCBlocks.sugarEssenceFlower) {
+                    if (world.getBlockState(new BlockPos(pos.getX() - 2 + x, pos.getY(), pos.getZ() - 2 + z)).getBlock() != CCBlocks.sugarEssenceFlower) {
                         readyToHatch = false;
                     }
                 }
@@ -39,27 +39,27 @@ public class TileEntityEgg extends TileEntity implements ITickable {
         if (readyToHatch || timeLeft <= hatchDelay) {
             timeLeft--;
 
-            if (!worldObj.isRemote) {
+            if (!world.isRemote) {
                 if (timeLeft == hatchDelay) {
-                    if (worldObj.getBlockState(pos).getBlock() == CCBlocks.dragonEggBlock && CandyCraftPreferences.allowDragons) {
-                        EntityDragon dragon = new EntityDragon(worldObj);
+                    if (world.getBlockState(pos).getBlock() == CCBlocks.dragonEggBlock && CandyCraftPreferences.allowDragons) {
+                        EntityDragon dragon = new EntityDragon(world);
                         dragon.setPosition(pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ());
-                        worldObj.spawnEntityInWorld(dragon);
+                        world.spawnEntity(dragon);
                     } else if (CandyCraftPreferences.allowBeetleKings) {
-                        EntityKingBeetle beetle = new EntityKingBeetle(worldObj);
+                        EntityKingBeetle beetle = new EntityKingBeetle(world);
                         beetle.setPosition(pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ());
-                        worldObj.spawnEntityInWorld(beetle);
+                        world.spawnEntity(beetle);
                         beetle.entityDropItem(new ItemStack(CCItems.chewingGumEmblem), 0.5F);
                     }
                 }
                 if (timeLeft <= 0) {
-                    worldObj.setBlockToAir(pos);
+                    world.setBlockToAir(pos);
 
                     for (int x = 0; x < 5; x++) {
                         for (int z = 0; z < 5; z++) {
                             if (x == 0 || x == 4 || z == 0 || z == 4) {
-                                if (worldObj.getBlockState(new BlockPos(pos.getX() - 2 + x, pos.getY(), pos.getZ() - 2 + z)).getBlock() == CCBlocks.sugarEssenceFlower) {
-                                    worldObj.setBlockState(new BlockPos(pos.getX() - 2 + x, pos.getY(), pos.getZ() - 2 + z), CCBlocks.fraiseTagadaFlower.getDefaultState());
+                                if (world.getBlockState(new BlockPos(pos.getX() - 2 + x, pos.getY(), pos.getZ() - 2 + z)).getBlock() == CCBlocks.sugarEssenceFlower) {
+                                    world.setBlockState(new BlockPos(pos.getX() - 2 + x, pos.getY(), pos.getZ() - 2 + z), CCBlocks.fraiseTagadaFlower.getDefaultState());
                                 }
                             }
                         }

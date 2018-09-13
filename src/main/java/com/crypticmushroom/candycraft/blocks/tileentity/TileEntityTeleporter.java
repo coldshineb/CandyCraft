@@ -36,7 +36,7 @@ public class TileEntityTeleporter extends TileEntity implements ITickable {
         }
 
         if (player != null) {
-            player.addChatComponentMessage(new TextComponentString("\247e" + new TextComponentTranslation("chat.generated").getUnformattedText()));
+            player.sendStatusMessage(new TextComponentString("\247e" + new TextComponentTranslation("chat.generated").getUnformattedText()), true);
         }
     }
 
@@ -68,7 +68,7 @@ public class TileEntityTeleporter extends TileEntity implements ITickable {
     public void update() {
         if (dungeonID != -1 && !generated) {
             generated = true;
-            genDungeon(worldObj);
+            genDungeon(world);
         }
         tickExisted++;
     }

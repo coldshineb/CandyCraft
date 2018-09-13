@@ -86,7 +86,7 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
             if (!furnaceItemStacks[2].isItemEqual(itemstack)) {
                 return false;
             }
-            int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
+            int result = furnaceItemStacks[2].getCount() + itemstack.getCount();
             return result <= getInventoryStackLimit() && result <= furnaceItemStacks[2].getMaxStackSize();
         }
     }
@@ -98,16 +98,16 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
             if (furnaceItemStacks[2] == null) {
                 furnaceItemStacks[2] = itemstack.copy();
             } else if (furnaceItemStacks[2].getItem() == itemstack.getItem()) {
-                furnaceItemStacks[2].stackSize += itemstack.stackSize;
+                furnaceItemStacks[2].setCount(furnaceItemStacks[2].getCount() + itemstack.getCount());
             }
 
             if (furnaceItemStacks[0].getItem() == CCItems.caramelBucket) {
                 furnaceItemStacks[0] = new ItemStack(Items.BUCKET);
             } else {
-                --furnaceItemStacks[0].stackSize;
+                furnaceItemStacks[0].shrink(1);
             }
 
-            if (furnaceItemStacks[0].stackSize <= 0) {
+            if (furnaceItemStacks[0].getCount() <= 0) {
                 furnaceItemStacks[0] = null;
             }
         }
@@ -116,6 +116,11 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
     @Override
     public int getSizeInventory() {
         return furnaceItemStacks.length;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
     }
 
     @Override
@@ -128,14 +133,14 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
         if (furnaceItemStacks[index] != null) {
             ItemStack itemstack;
 
-            if (furnaceItemStacks[index].stackSize <= count) {
+            if (furnaceItemStacks[index].getCount() <= count) {
                 itemstack = furnaceItemStacks[index];
                 furnaceItemStacks[index] = null;
                 return itemstack;
             } else {
                 itemstack = furnaceItemStacks[index].splitStack(count);
 
-                if (furnaceItemStacks[index].stackSize == 0) {
+                if (furnaceItemStacks[index].getCount() == 0) {
                     furnaceItemStacks[index] = null;
                 }
 
@@ -162,8 +167,8 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
         boolean flag = stack != null && stack.isItemEqual(furnaceItemStacks[index]) && ItemStack.areItemStackTagsEqual(stack, furnaceItemStacks[index]);
         furnaceItemStacks[index] = stack;
 
-        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-            stack.stackSize = getInventoryStackLimit();
+        if (stack != null && stack.getCount() > getInventoryStackLimit()) {
+            stack.setCount(getInventoryStackLimit());
         }
 
         if (index == 0 && !flag) {
@@ -189,7 +194,7 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
             byte b0 = nbttagcompound1.getByte("Slot");
 
             if (b0 >= 0 && b0 < furnaceItemStacks.length) {
-                furnaceItemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+                furnaceItemStacks[b0] = new ItemStack(nbttagcompound1);
             }
         }
 
@@ -242,10 +247,10 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
             --furnaceBurnTime;
         }
 
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (!isBurning() && (furnaceItemStacks[1] == null || furnaceItemStacks[0] == null)) {
                 if (!isBurning() && field_174906_k > 0) {
-                    field_174906_k = MathHelper.clamp_int(field_174906_k - 2, 0, field_174905_l);
+                    field_174906_k = MathHelper.clamp(field_174906_k - 2, 0, field_174905_l);
                 }
             } else {
                 if (!isBurning() && canSmelt()) {
@@ -255,9 +260,9 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
                         flag1 = true;
 
                         if (furnaceItemStacks[1] != null) {
-                            --furnaceItemStacks[1].stackSize;
+                            furnaceItemStacks[1].shrink(1);
 
-                            if (furnaceItemStacks[1].stackSize == 0) {
+                            if (furnaceItemStacks[1].getCount() == 0) {
                                 furnaceItemStacks[1] = furnaceItemStacks[1].getItem().getContainerItem(furnaceItemStacks[1]);
                             }
                         }
@@ -280,7 +285,7 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
 
             if (flag != isBurning()) {
                 flag1 = true;
-                BlockCandyFurnace.setState(isBurning(), worldObj, pos);
+                BlockCandyFurnace.setState(isBurning(), world, pos);
             }
         }
 
@@ -290,8 +295,8 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer playerIn) {
-        return worldObj.getTileEntity(pos) != this ? false : playerIn.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return world.getTileEntity(pos) == this && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -304,7 +309,7 @@ public class TileEntitySugarFurnace extends TileEntityLockable implements ITicka
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return index == 2 ? false : (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
+        return index != 2 && (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
     }
 
     @Override
