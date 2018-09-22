@@ -30,7 +30,7 @@ public class BlockCandyGlass extends BlockCandyBase {
     public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-        return block instanceof BlockCandyGlass ? false : super.shouldSideBeRendered(state, worldIn, pos, side);
+        return !(block instanceof BlockCandyGlass) && super.shouldSideBeRendered(state, worldIn, pos, side);
     }
 
     @Override

@@ -25,20 +25,20 @@ public class BlockCandyWaterLily extends BlockLilyPad {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (this == CCBlocks.marshmallowFlowerBlock && !world.isRemote) {
-            world.setBlockState(pos, CCBlocks.marshmallowSlice.getDefaultState());
-            spawnAsEntity(world, pos, new ItemStack(CCItems.marshmallowFlower, 1, 0));
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (this == CCBlocks.marshmallowFlowerBlock && !worldIn.isRemote) {
+            worldIn.setBlockState(pos, CCBlocks.marshmallowSlice.getDefaultState());
+            spawnAsEntity(worldIn, pos, new ItemStack(CCItems.marshmallowFlower, 1, 0));
         }
         return this != CCBlocks.marshmallowSlice;
     }
 
     @Override
-    public void updateTick(World par1World, BlockPos pos, IBlockState state, Random par5Random) {
-        if (!par1World.isRemote && this != CCBlocks.marshmallowFlowerBlock) {
-            if (par1World.getLight(pos.up()) >= 9) {
-                if (par5Random.nextInt(80) == 0) {
-                    par1World.setBlockState(pos, CCBlocks.marshmallowFlowerBlock.getDefaultState());
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        if (!world.isRemote && this != CCBlocks.marshmallowFlowerBlock) {
+            if (world.getLight(pos.up()) >= 9) {
+                if (rand.nextInt(80) == 0) {
+                    world.setBlockState(pos, CCBlocks.marshmallowFlowerBlock.getDefaultState());
                 }
             }
         }

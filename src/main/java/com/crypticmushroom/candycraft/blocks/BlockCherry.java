@@ -41,10 +41,10 @@ public class BlockCherry extends Block {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5) {
-        if (!canPlaceBlockAt(par1World, pos)) {
-            par1World.setBlockToAir(pos);
-            dropBlockAsItem(par1World, pos, state, 0);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canPlaceBlockAt(worldIn, pos)) {
+            worldIn.setBlockToAir(pos);
+            dropBlockAsItem(worldIn, pos, state, 0);
         }
     }
 

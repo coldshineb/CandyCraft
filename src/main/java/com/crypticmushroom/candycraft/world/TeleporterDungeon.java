@@ -10,25 +10,25 @@ import net.minecraft.world.WorldServer;
 public class TeleporterDungeon extends Teleporter {
     TileEntityTeleporter teleporter = null;
 
-    public TeleporterDungeon(WorldServer par1WorldServer, TileEntityTeleporter tileentityportal) {
-        super(par1WorldServer);
-        teleporter = tileentityportal;
+    public TeleporterDungeon(WorldServer worldServer, TileEntityTeleporter tileEntityTeleporter) {
+        super(worldServer);
+        teleporter = tileEntityTeleporter;
     }
 
     @Override
-    public void placeInPortal(Entity par1Entity, float par2) {
+    public void placeInPortal(Entity entityIn, float rotationYaw) {
         if (teleporter != null) {
-            par1Entity.setPosition(teleporter.x + 0.5D, teleporter.y + 0.50D, teleporter.z + 0.5D);
+            entityIn.setPosition(teleporter.x + 0.5D, teleporter.y + 0.50D, teleporter.z + 0.5D);
         }
 
-        if (par1Entity instanceof EntityPlayerMP) {
-            EntityPlayerMP player = (EntityPlayerMP) par1Entity;
+        if (entityIn instanceof EntityPlayerMP) {
+            EntityPlayerMP player = (EntityPlayerMP) entityIn;
             player.connection.sendPacket(new SPacketSetExperience(player.experience, player.experienceTotal, player.experienceLevel));
         }
     }
 
     @Override
-    public boolean makePortal(Entity par1Entity) {
+    public boolean makePortal(Entity entityIn) {
         return false;
     }
 

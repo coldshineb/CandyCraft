@@ -1,7 +1,6 @@
 package com.crypticmushroom.candycraft.world;
 
 import com.crypticmushroom.candycraft.CandyCraft;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.entity.Entity;
@@ -35,21 +34,21 @@ public class TeleporterCandy extends Teleporter {
     }
 
     @Override
-    public void placeInPortal(Entity par1Entity, float par2) {
+    public void placeInPortal(Entity entityIn, float rotationYaw) {
         if (worldServerInstance.provider.getDimension() == CandyCraft.getCandyDimensionID() || worldServerInstance.provider.getDimension() == 0) {
-            if (worldServerInstance.provider.getDimension() == CandyCraft.getCandyDimensionID() && par1Entity != null && par1Entity instanceof EntityPlayer) {
-                ((EntityPlayer) par1Entity).addStat(CCAchievements.enterCandyWorld);
+            if (worldServerInstance.provider.getDimension() == CandyCraft.getCandyDimensionID() && entityIn != null && entityIn instanceof EntityPlayer) {
+                //((EntityPlayer) par1Entity).addStat(CCAchievements.enterCandyWorld);
             }
         }
-        int i = MathHelper.floor_double(par1Entity.posX);
-        int k = MathHelper.floor_double(par1Entity.posZ);
+        int i = MathHelper.floor(entityIn.posX);
+        int k = MathHelper.floor(entityIn.posZ);
 
-        ((EntityLivingBase) par1Entity).addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 30));
-        par1Entity.setLocationAndAngles(i, 300, k, par1Entity.rotationYaw, par1Entity.rotationPitch);
-        par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
+        ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 30));
+        entityIn.setLocationAndAngles(i, 300, k, entityIn.rotationYaw, entityIn.rotationPitch);
+        entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0D;
 
-        if (par1Entity instanceof EntityPlayerMP) {
-            EntityPlayerMP player = (EntityPlayerMP) par1Entity;
+        if (entityIn instanceof EntityPlayerMP) {
+            EntityPlayerMP player = (EntityPlayerMP) entityIn;
             player.connection.sendPacket(new SPacketSetExperience(player.experience, player.experienceTotal, player.experienceLevel));
         }
     }
@@ -57,11 +56,11 @@ public class TeleporterCandy extends Teleporter {
     public boolean func_180620_b(Entity p_180620_1_, float p_180620_2_) {
         boolean flag = true;
         double d0 = -1.0D;
-        int i = MathHelper.floor_double(p_180620_1_.posX);
-        int j = MathHelper.floor_double(p_180620_1_.posZ);
+        int i = MathHelper.floor(p_180620_1_.posX);
+        int j = MathHelper.floor(p_180620_1_.posZ);
         boolean flag1 = true;
         Object object = BlockPos.ORIGIN;
-        long k = ChunkPos.chunkXZ2Int(i, j);
+        long k = ChunkPos.asLong(i, j);
 
         if (destinationCoordinateCache.containsKey(k)) {
             Teleporter.PortalPosition portalposition = destinationCoordinateCache.get(k);

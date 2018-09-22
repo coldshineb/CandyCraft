@@ -18,6 +18,7 @@ import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import com.crypticmushroom.candycraft.world.WorldProviderVoid;
 import com.crypticmushroom.candycraft.world.WorldTypeCandy;
 import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.DimensionManager;
@@ -55,7 +56,8 @@ public class CandyCraft {
 
     private static CreativeTabs creativeTab = new CCCreativeTabs("CandyCraft");
     private static GuiHandlerCandyCraft guiHandler = new GuiHandlerCandyCraft();
-    private static ArrayList<Item> itemList = new ArrayList<Item>();
+    private static ArrayList<Item> itemList = new ArrayList<>();
+    private static ArrayList<Block> blockList = new ArrayList<>();
     // Dimension
     private static WorldTypeCandy candyWorldType = new WorldTypeCandy();
     private static int candyDimensionID;
@@ -98,6 +100,10 @@ public class CandyCraft {
 
     public static ArrayList<Item> getItemList() {
         return itemList;
+    }
+
+    public static ArrayList<Block> getBlockList() {
+        return blockList;
     }
 
     public static WorldTypeCandy getCandyWorldType() {

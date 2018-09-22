@@ -26,8 +26,9 @@ public class BlockAlchemyTable extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (heldItem != null && heldItem.getItem() == CCItems.grenadineBucket) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack heldItem = player.getHeldItem(hand);
+        if (heldItem != ItemStack.EMPTY && heldItem.getItem() == CCItems.grenadineBucket) {
             TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
 
             if (!table.isTopFilled()) {
@@ -46,12 +47,12 @@ public class BlockAlchemyTable extends BlockContainer {
                 return true;
             }
             return false;
-        } else if (heldItem != null && heldItem.getItem() == Items.BUCKET) {
+        } else if (heldItem != ItemStack.EMPTY && heldItem.getItem() == Items.BUCKET) {
             TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
 
             if (table.isTopFilled()) {
                 table.setTopFilled(false);
-                heldItem.stackSize--;
+                heldItem.shrink(1);
                 if (!player.inventory.addItemStackToInventory(new ItemStack(CCItems.grenadineBucket))) {
                     player.dropItem(CCItems.grenadineBucket, 1);
                 }
@@ -61,7 +62,7 @@ public class BlockAlchemyTable extends BlockContainer {
                 return true;
             } else if (table.getLiquid() > 0) {
                 table.setLiquid(table.getLiquid() - 1);
-                heldItem.stackSize--;
+                heldItem.shrink(1);
                 if (!player.inventory.addItemStackToInventory(new ItemStack(CCItems.grenadineBucket))) {
                     player.dropItem(CCItems.grenadineBucket, 1);
                 }
@@ -72,12 +73,12 @@ public class BlockAlchemyTable extends BlockContainer {
                 return true;
             }
             return false;
-        } else if (heldItem != null) {
+        } else if (heldItem != ItemStack.EMPTY) {
             TileEntityAlchemy table = (TileEntityAlchemy) worldIn.getTileEntity(pos);
 
             if (table.isTopFilled() && table.addPotionToRecipes(heldItem)) {
                 if (heldItem.getItem() != CCItems.caramelBucket) {
-                    heldItem.stackSize--;
+                    heldItem.shrink(1);
                 } else {
                     player.setHeldItem(hand, new ItemStack(Items.BUCKET));
                 }

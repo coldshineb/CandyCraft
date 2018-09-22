@@ -73,7 +73,7 @@ public class ChunkProviderCandyWorld implements IChunkGenerator {
 
         for (int j = -2; j <= 2; ++j) {
             for (int k = -2; k <= 2; ++k) {
-                float f = 10.0F / MathHelper.sqrt_float(j * j + k * k + 0.2F);
+                float f = 10.0F / MathHelper.sqrt(j * j + k * k + 0.2F);
                 parabolicField[j + 2 + (k + 2) * 5] = f;
             }
         }

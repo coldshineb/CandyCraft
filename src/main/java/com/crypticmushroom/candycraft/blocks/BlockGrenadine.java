@@ -32,7 +32,7 @@ public class BlockGrenadine extends BlockCandyBase {
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         Block block = blockAccess.getBlockState(pos).getBlock();
-        return block == this ? false : super.shouldSideBeRendered(state, blockAccess, pos, side);
+        return block != this && super.shouldSideBeRendered(state, blockAccess, pos, side);
     }
 
     @Override

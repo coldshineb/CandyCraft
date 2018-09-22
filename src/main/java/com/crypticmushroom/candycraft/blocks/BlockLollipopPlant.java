@@ -165,8 +165,8 @@ public class BlockLollipopPlant extends BlockCandyBush implements IGrowable {
 
     @Override
     public void grow(World worldIn, Random random, BlockPos pos, IBlockState state) {
-        int i = state.getValue(AGE_PROP).intValue() + MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
-        worldIn.setBlockState(pos, state.withProperty(AGE_PROP, Integer.valueOf(Math.min(7, i))), 2);
+        int i = state.getValue(AGE_PROP) + MathHelper.getInt(worldIn.rand, 2, 5);
+        worldIn.setBlockState(pos, state.withProperty(AGE_PROP, Math.min(7, i)), 2);
     }
 
     @Override

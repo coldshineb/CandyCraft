@@ -2,23 +2,23 @@ package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class BlockTallCandyGrass extends BlockCandyBush implements IShearable {
@@ -83,16 +83,20 @@ public class BlockTallCandyGrass extends BlockCandyBush implements IShearable {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{PROPERTIES});
+        return new BlockStateContainer(this, PROPERTIES);
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item par1, CreativeTabs tab, List par3List) {
-        par3List.add(new ItemStack(par1, 1, 0));
-        par3List.add(new ItemStack(par1, 1, 1));
-        par3List.add(new ItemStack(par1, 1, 2));
-        par3List.add(new ItemStack(par1, 1, 3));
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this, 1, 1));
+        items.add(new ItemStack(this, 1, 2));
+        items.add(new ItemStack(this, 1, 3));
+        items.add(new ItemStack(this, 1, 4));
+    }
+
+    @Override
+    public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
+        return SoundType.PLANT;
     }
 
     public static enum EnumType implements IStringSerializable {

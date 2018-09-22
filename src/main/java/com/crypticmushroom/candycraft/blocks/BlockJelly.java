@@ -9,10 +9,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockJelly extends BlockBreakable {
@@ -20,15 +22,15 @@ public class BlockJelly extends BlockBreakable {
     private final double jump;
     public float fallDistance;
 
-    public BlockJelly(double par3) {
+    public BlockJelly(double jump) {
         super(Material.SAND, false);
         setTickRandomly(true);
-        jump = par3;
+        this.jump = jump;
     }
 
+    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
-        float var5 = jump == -1.0D ? 0 : 0.005F;
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return jump == -1.0D ? super.getCollisionBoundingBox(blockState, worldIn, pos) : JELLY_AABB;
     }
 
@@ -38,16 +40,16 @@ public class BlockJelly extends BlockBreakable {
     }
 
     @Override
-    public void onFallenUpon(World par1World, BlockPos pos, Entity par5Entity, float par6) {
+    public void onFallenUpon(World par1World, BlockPos pos, Entity entityIn, float par6) {
         if (jump == -1.0D || jump == 2.1D) {
-            if ((par5Entity instanceof EntityLivingBase || par5Entity instanceof EntityPlayer)) {
-                par5Entity.fallDistance = 0;
-                par5Entity.setInWeb();
+            if ((entityIn instanceof EntityLivingBase || entityIn instanceof EntityPlayer)) {
+                entityIn.fallDistance = 0;
+                entityIn.setInWeb();
             } else {
-                super.onFallenUpon(par1World, pos, par5Entity, par6);
+                super.onFallenUpon(par1World, pos, entityIn, par6);
             }
         } else {
-            super.onFallenUpon(par1World, pos, par5Entity, par6);
+            super.onFallenUpon(par1World, pos, entityIn, par6);
         }
     }
 

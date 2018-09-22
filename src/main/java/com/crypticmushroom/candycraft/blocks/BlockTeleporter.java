@@ -26,11 +26,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class BlockTeleporter extends BlockContainer {
-    public static final PropertyEnum PROPERTIES = PropertyEnum.create("metadata", BlockTeleporter.EnumType.class, Arrays.asList(Arrays.copyOf(BlockTeleporter.EnumType.values(), 2)));
-    protected static final AxisAlignedBB TELEPORTER_AABB = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.06F, 0.8F);
+    private static final PropertyEnum PROPERTIES = PropertyEnum.create("metadata", BlockTeleporter.EnumType.class, Arrays.asList(Arrays.copyOf(BlockTeleporter.EnumType.values(), 2)));
+    private static final AxisAlignedBB TELEPORTER_AABB = new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.06F, 0.8F);
 
-    public BlockTeleporter(Material par2Material) {
-        super(par2Material);
+    BlockTeleporter(Material material) {
+        super(material);
     }
 
     @Override
@@ -59,24 +59,24 @@ public class BlockTeleporter extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        TileEntityTeleporter tileentityportal = (TileEntityTeleporter) world.getTileEntity(pos);
-        if (!world.isRemote && player.getRidingEntity() == null && player.getControllingPassenger() == null && player instanceof EntityPlayerMP && tileentityportal.generated) {
-            EntityPlayerMP mp_player = (EntityPlayerMP) player;
-            player.setPositionAndUpdate(tileentityportal.x, tileentityportal.y, tileentityportal.z);
-            if (world.provider.getDimension() != CandyCraft.getDungeonDimensionID()) {
-                mp_player.mcServer.getPlayerList().transferPlayerToDimension(mp_player, CandyCraft.getDungeonDimensionID(), new TeleporterDungeon(mp_player.mcServer.worldServerForDimension(CandyCraft.getDungeonDimensionID()), tileentityportal));
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        TileEntityTeleporter tileentityportal = (TileEntityTeleporter) worldIn.getTileEntity(pos);
+        if (!worldIn.isRemote && playerIn.getRidingEntity() == null && playerIn.getControllingPassenger() == null && playerIn instanceof EntityPlayerMP && tileentityportal.generated) {
+            EntityPlayerMP mp_player = (EntityPlayerMP) playerIn;
+            playerIn.setPositionAndUpdate(tileentityportal.x, tileentityportal.y, tileentityportal.z);
+            if (worldIn.provider.getDimension() != CandyCraft.getDungeonDimensionID()) {
+                mp_player.mcServer.getPlayerList().transferPlayerToDimension(mp_player, CandyCraft.getDungeonDimensionID(), new TeleporterDungeon(mp_player.mcServer.getWorld(CandyCraft.getDungeonDimensionID()), tileentityportal));
             } else {
-                mp_player.mcServer.getPlayerList().transferPlayerToDimension(mp_player, tileentityportal.dim, new TeleporterDungeon(mp_player.mcServer.worldServerForDimension(tileentityportal.dim), tileentityportal));
+                mp_player.mcServer.getPlayerList().transferPlayerToDimension(mp_player, tileentityportal.dim, new TeleporterDungeon(mp_player.mcServer.getWorld(tileentityportal.dim), tileentityportal));
             }
         }
         return true;
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5) {
-        if (!canPlaceBlockAt(par1World, pos)) {
-            par1World.setBlockToAir(pos);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canPlaceBlockAt(worldIn, pos)) {
+            worldIn.setBlockToAir(pos);
         }
     }
 
@@ -123,7 +123,7 @@ public class BlockTeleporter extends BlockContainer {
         return BlockRenderLayer.CUTOUT;
     }
 
-    public static enum EnumType implements IStringSerializable {
+    public enum EnumType implements IStringSerializable {
         TYPE0(0, "0"), TYPE1(1, "1");
 
         private static final BlockTeleporter.EnumType[] enumList = new BlockTeleporter.EnumType[values().length];
@@ -141,7 +141,7 @@ public class BlockTeleporter extends BlockContainer {
         private final int meta;
         private final String name;
 
-        private EnumType(int m, String n) {
+        EnumType(int m, String n) {
             meta = m;
             name = n;
         }

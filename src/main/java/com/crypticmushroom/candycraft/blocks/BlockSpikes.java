@@ -14,13 +14,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public class BlockSpikes extends Block {
     protected static final AxisAlignedBB SPIKES_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.6F, 1.0F);
     private int damage = 0;
 
-    public BlockSpikes(int par2) {
+    public BlockSpikes(int damage) {
         super(Material.CIRCUITS);
-        damage = par2;
+        damage = damage;
     }
 
     public boolean canBlockStay(World par1World, BlockPos pos) {
@@ -32,8 +34,9 @@ public class BlockSpikes extends Block {
         return SPIKES_AABB;
     }
 
+    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World par1World, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return null;
     }
 
@@ -53,17 +56,15 @@ public class BlockSpikes extends Block {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World par1World, BlockPos pos, IBlockState state, Entity par5Entity) {
-        if (par5Entity instanceof EntityLivingBase) {
-            par5Entity.attackEntityFrom(DamageSource.generic, damage / 2);
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        if (entityIn instanceof EntityLivingBase) {
+            entityIn.attackEntityFrom(DamageSource.GENERIC, damage / 2);
         }
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block bl) {
-        if (!canBlockStay(par1World, pos)) {
-            par1World.setBlockToAir(pos);
-        }
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canBlockStay(worldIn, pos)) worldIn.setBlockToAir(pos);
     }
 
     @Override

@@ -3,22 +3,26 @@ package com.crypticmushroom.candycraft.blocks;
 import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.blocks.misc.CandyStepSound;
 import com.crypticmushroom.candycraft.blocks.tileentity.*;
+import com.crypticmushroom.candycraft.client.CCSoundEvents;
 import com.crypticmushroom.candycraft.items.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+@Mod.EventBusSubscriber
 public class CCBlocks {
     // StepSound
-    public static final CandyStepSound SOUND_JELLY_FOOTSTEP = new CandyStepSound("jelly", 0.7F, 0.6F);
+    public static final CandyStepSound SOUND_JELLY_FOOTSTEP = new CandyStepSound(CCSoundEvents.SOUND_JELLY, 0.7F, 0.6F);
 
     /**
      * Blocks
@@ -191,9 +195,9 @@ public class CCBlocks {
         candyLeave2 = new BlockCandyLeave2().setCreativeTab(CandyCraft.getCandyTab()).setUnlocalizedName("candy_leave2").setHardness(0.2F).setLightOpacity(1);
         candySapling = new BlockCandySapling().setCreativeTab(CandyCraft.getCandyTab()).setUnlocalizedName("candy_sapling").setHardness(0.0F);
         candySoil = new BlockCandyFarmland().setUnlocalizedName("candy_farmland").setHardness(0.6F);
-        tallCandyGrass = (BlockTallCandyGrass) new BlockTallCandyGrass().setUnlocalizedName("sweet_grass").setCreativeTab(CandyCraft.getCandyTab()).setHardness(0.0F).setStepSound(SoundType.PLANT);
+        tallCandyGrass = (BlockTallCandyGrass) new BlockTallCandyGrass().setUnlocalizedName("sweet_grass").setCreativeTab(CandyCraft.getCandyTab()).setHardness(0.0F);
         licoriceOre = new BlockCandyBase(Material.ROCK).setCreativeTab(CandyCraft.getCandyTab()).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.STONE).setUnlocalizedName("licorice_ore");
-        marshmallowFence = new BlockCandyFence(Material.WOOD, MapColor.PINK).setUnlocalizedName("marshmallow_fence").setCreativeTab(CandyCraft.getCandyTab()).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.WOOD);
+        marshmallowFence = new BlockFence(Material.WOOD, MapColor.PINK).setUnlocalizedName("marshmallow_fence").setCreativeTab(CandyCraft.getCandyTab()).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.WOOD);
         marshmallowStairs = new BlockCandyStairs(marshmallowPlanks.getStateFromMeta(0)).setUnlocalizedName("marshmallow_stairs.0").setCreativeTab(CandyCraft.getCandyTab()).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.WOOD);
         marshmallowStairs2 = new BlockCandyStairs(marshmallowPlanks.getStateFromMeta(1)).setUnlocalizedName("marshmallow_stairs.1").setCreativeTab(CandyCraft.getCandyTab()).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.WOOD);
         marshmallowStairs3 = new BlockCandyStairs(marshmallowPlanks.getStateFromMeta(2)).setUnlocalizedName("marshmallow_stairs.2").setCreativeTab(CandyCraft.getCandyTab()).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.WOOD);
@@ -209,7 +213,7 @@ public class CCBlocks {
         licoriceStep = (BlockSlab) new BlockCandyStep(Material.ROCK, true, 1).setUnlocalizedName("licorice_brick_double_slab").setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.STONE);
         licoriceBlock = new BlockCandyBase(Material.IRON).setHardness(5.0F).setResistance(10.0F).setStepSound(SoundType.METAL).setUnlocalizedName("licorice_block").setCreativeTab(CandyCraft.getCandyTab());
         candyCaneBlock = new BlockCandyCane(Material.WOOD).setHardness(1.0F).setResistance(2.0F).setStepSound(SoundType.WOOD).setUnlocalizedName("candy_cane_block").setCreativeTab(CandyCraft.getCandyTab());
-        candyCaneFence = new BlockCandyFence(Material.WOOD, MapColor.RED).setHardness(1.0F).setResistance(2.0F).setStepSound(SoundType.WOOD).setUnlocalizedName("candy_cane_fence").setCreativeTab(CandyCraft.getCandyTab());
+        candyCaneFence = new BlockFence(Material.WOOD, MapColor.RED).setHardness(1.0F).setResistance(2.0F).setStepSound(SoundType.WOOD).setUnlocalizedName("candy_cane_fence").setCreativeTab(CandyCraft.getCandyTab());
         candyCaneWall = new BlockCandyWall(candyCaneFence).setHardness(1.0F).setResistance(2.0F).setStepSound(SoundType.WOOD).setUnlocalizedName("candy_cane_wall").setCreativeTab(CandyCraft.getCandyTab());
         candyCaneStairs = new BlockCandyStairs(candyCaneBlock.getDefaultState()).setHardness(1.0F).setResistance(2.0F).setStepSound(SoundType.WOOD).setUnlocalizedName("candy_cane_stairs").setCreativeTab(CandyCraft.getCandyTab());
         candyCaneHalfStep = (BlockSlab) new BlockCandyStep(Material.WOOD, false, 2).setUnlocalizedName("candy_cane_half_step").setCreativeTab(CandyCraft.getCandyTab()).setHardness(1.0F).setResistance(2.0F).setStepSound(SoundType.STONE);
@@ -266,7 +270,7 @@ public class CCBlocks {
         caramelPane0 = new BlockCandyGlassPane(Material.GLASS, false).setHardness(0.3F).setStepSound(SoundType.GLASS).setUnlocalizedName("caramel_pane_0").setCreativeTab(CandyCraft.getCandyTab());
         caramelPane1 = new BlockCandyGlassPane(Material.GLASS, false).setHardness(0.5F).setStepSound(SoundType.GLASS).setUnlocalizedName("caramel_pane_1").setCreativeTab(CandyCraft.getCandyTab());
         caramelPane2 = new BlockCandyGlassPane(Material.GLASS, false).setHardness(0.7F).setStepSound(SoundType.GLASS).setUnlocalizedName("caramel_pane_2").setCreativeTab(CandyCraft.getCandyTab());
-        cottonCandyWeb = new BlockCandyWeb().setLightOpacity(1).setHardness(4.0F).setUnlocalizedName("cotton_candy_web").setCreativeTab(CandyCraft.getCandyTab());
+        cottonCandyWeb = new BlockWeb().setLightOpacity(1).setHardness(4.0F).setUnlocalizedName("cotton_candy_web").setCreativeTab(CandyCraft.getCandyTab());
         cherryBlock = new BlockCherry(Material.WOOD).setLightOpacity(1).setHardness(0.2F).setUnlocalizedName("cherry_block");
         bananaSeaweed = (new BlockSeaweed(false)).setUnlocalizedName("banana_seaweed").setStepSound(SoundType.PLANT).setCreativeTab(CandyCraft.getCandyTab());
         nougatOre = new BlockNougatOre(Material.ROCK).setHardness(3.0F).setResistance(5.0F).setStepSound(SoundType.STONE).setUnlocalizedName("nougat_ore").setCreativeTab(CandyCraft.getCandyTab());
@@ -445,12 +449,12 @@ public class CCBlocks {
         registerBlock(jawBreakerBlock);
         registerBlock(jawBreakerLight);
 
-        GameRegistry.registerTileEntity(TileEntityCandyChest.class, "CandyChest");
-        GameRegistry.registerTileEntity(TileEntityTeleporter.class, "TeleporterBlock");
-        GameRegistry.registerTileEntity(TileEntitySugarFactory.class, "SugarFactory");
-        GameRegistry.registerTileEntity(TileEntitySugarFurnace.class, "SugarFurnace");
-        GameRegistry.registerTileEntity(TileEntityAlchemy.class, "AlchemyTable");
-        GameRegistry.registerTileEntity(TileEntityEgg.class, "HatchingEgg");
+        GameRegistry.registerTileEntity(TileEntityCandyChest.class, new ResourceLocation(CandyCraft.MODID, "candychest"));
+        GameRegistry.registerTileEntity(TileEntityTeleporter.class, new ResourceLocation(CandyCraft.MODID, "teleporterblock"));
+        GameRegistry.registerTileEntity(TileEntitySugarFactory.class, new ResourceLocation(CandyCraft.MODID, "sugarfactory"));
+        GameRegistry.registerTileEntity(TileEntitySugarFurnace.class, new ResourceLocation(CandyCraft.MODID, "sugarfurnace"));
+        GameRegistry.registerTileEntity(TileEntityAlchemy.class, new ResourceLocation(CandyCraft.MODID, "alchemytable"));
+        GameRegistry.registerTileEntity(TileEntityEgg.class, new ResourceLocation(CandyCraft.MODID, "hatchingegg"));
 
         doMiningLevel();
     }
@@ -487,13 +491,10 @@ public class CCBlocks {
     }
 
     public static void registerBlock(final Block block) {
-        GameRegistry.registerBlock(block, block.getUnlocalizedName());
+        CandyCraft.getBlockList().add(block);
         CandyCraft.getItemList().add(Item.getItemFromBlock(block));
-
-        if (currentSide == Side.CLIENT) {
-            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("candycraftmod:" + Item.getItemFromBlock(block).getUnlocalizedName(), "inventory"));
-        }
     }
+
 
     public static void doMiningLevel() {
         licoriceOre.setHarvestLevel("pickaxe", 1);
@@ -506,5 +507,12 @@ public class CCBlocks {
         nougatOre.setHarvestLevel("pickaxe", 2);
         pudding.setHarvestLevel("shovel", 0);
         flour.setHarvestLevel("shovel", 0);
+    }
+
+    @SubscribeEvent
+    public static void onRegister(RegistryEvent.Register<Block> registry) {
+        for (Block block : CandyCraft.getBlockList()) {
+            registry.getRegistry().register(block);
+        }
     }
 }

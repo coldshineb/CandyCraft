@@ -5,11 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDragonEgg;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -17,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockEgg extends BlockDragonEgg implements ITileEntityProvider {
@@ -42,34 +38,21 @@ public class BlockEgg extends BlockDragonEgg implements ITileEntityProvider {
         return 10;
     }
 
-    @Override
-    public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
-    }
-
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        return false;
-    }
-
-    @Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-    }
 
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
     }
-
     @Override
-    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block bl) {
-        super.neighborChanged(state, world, pos, bl);
-        checkAndDropBlock(world, pos, state);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        checkAndDropBlock(worldIn, pos, state);
     }
 
     @Override
     public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param) {
         super.eventReceived(state, worldIn, pos, id, param);
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        return tileentity != null ? tileentity.receiveClientEvent(id, param) : false;
+        return tileentity != null && tileentity.receiveClientEvent(id, param);
     }
 
     @Override

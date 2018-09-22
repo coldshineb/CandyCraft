@@ -14,22 +14,23 @@ import net.minecraft.world.World;
 public class BlockKeyHole extends Block {
     private int keyId;
 
-    public BlockKeyHole(Material par2Material, int id) {
-        super(par2Material);
+    public BlockKeyHole(Material material, int id) {
+        super(material);
         keyId = id;
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && heldItem != null && heldItem.getItem() instanceof ItemBossKey && ((ItemBossKey) heldItem.getItem()).keyId == keyId) {
-            world.setBlockToAir(pos);
-            if (world.getBlockState(pos.up()).getBlock() == this) {
-                world.setBlockToAir(pos.up());
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        if (!worldIn.isRemote && heldItem != null && heldItem.getItem() instanceof ItemBossKey && ((ItemBossKey) heldItem.getItem()).keyId == keyId) {
+            worldIn.setBlockToAir(pos);
+            if (worldIn.getBlockState(pos.up()).getBlock() == this) {
+                worldIn.setBlockToAir(pos.up());
             }
-            if (world.getBlockState(pos.down()).getBlock() == this) {
-                world.setBlockToAir(pos.down());
+            if (worldIn.getBlockState(pos.down()).getBlock() == this) {
+                worldIn.setBlockToAir(pos.down());
             }
-            heldItem.stackSize--;
+            heldItem.shrink(1);
 
             return true;
         } else {

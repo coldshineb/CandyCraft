@@ -3,7 +3,6 @@ package com.crypticmushroom.candycraft.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -17,6 +16,7 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,7 +26,7 @@ public class BlockSeaweed extends Block implements IShearable {
 
     public BlockSeaweed(boolean canStack) {
         super(Material.WATER);
-        setDefaultState(blockState.getBaseState().withProperty(BlockLiquid.LEVEL, Integer.valueOf(0)));
+        setDefaultState(blockState.getBaseState().withProperty(BlockLiquid.LEVEL, 0));
         canSeeweedsStack = canStack;
     }
 
@@ -57,11 +57,12 @@ public class BlockSeaweed extends Block implements IShearable {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{BlockLiquid.LEVEL});
+        return new BlockStateContainer(this, BlockLiquid.LEVEL);
     }
 
+    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World par1World, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return null;
     }
 
@@ -86,18 +87,18 @@ public class BlockSeaweed extends Block implements IShearable {
     }
 
     @Override
-    public void breakBlock(World par1World, BlockPos pos, IBlockState state) {
-        IBlockState bl = par1World.getBlockState(pos.up());
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        IBlockState bl = worldIn.getBlockState(pos.up());
         if (bl.getMaterial() == Material.WATER || bl.getBlock() instanceof BlockSeaweed) {
-            par1World.setBlockState(pos, Blocks.WATER.getDefaultState());
+            worldIn.setBlockState(pos, Blocks.WATER.getDefaultState());
         }
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5) {
-        if (!canBlockStay(par1World, pos.getX(), pos.getY(), pos.getZ())) {
-            dropBlockAsItem(par1World, pos, par1World.getBlockState(pos), 0);
-            par1World.setBlockToAir(pos);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canBlockStay(worldIn, pos.getX(), pos.getY(), pos.getZ())) {
+            dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
+            worldIn.setBlockToAir(pos);
         }
     }
 

@@ -92,7 +92,7 @@ public class WorldGenFloatingIsland extends WorldGenerator {
             world.setBlockState(new BlockPos(bl.x, bl.y, bl.z), bl.block.getStateFromMeta(bl.metadata), 3);
         }
         for (int i = 0; i < entities.size(); i++) {
-            world.spawnEntityInWorld(entities.get(i));
+            world.spawnEntity(entities.get(i));
         }
 
     }

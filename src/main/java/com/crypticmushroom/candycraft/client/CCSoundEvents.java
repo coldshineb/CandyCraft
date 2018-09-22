@@ -13,6 +13,7 @@ public class CCSoundEvents {
     public static final SoundEvent C2 = new SoundEvent(new ResourceLocation(CandyCraft.MODID, "CD-2"));
     public static final SoundEvent C3 = new SoundEvent(new ResourceLocation(CandyCraft.MODID, "CD-3"));
     public static final SoundEvent C4 = new SoundEvent(new ResourceLocation(CandyCraft.MODID, "CD-4"));
+    public static final SoundEvent SOUND_JELLY = new SoundEvent(new ResourceLocation(CandyCraft.MODID, "jelly"));
 
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<net.minecraft.util.SoundEvent> eventRegister) {

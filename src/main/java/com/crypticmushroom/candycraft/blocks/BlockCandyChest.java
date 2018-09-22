@@ -12,7 +12,6 @@ public class BlockCandyChest extends BlockChest {
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        TileEntityCandyChest tileentitychest = new TileEntityCandyChest();
-        return tileentitychest;
+        return new TileEntityCandyChest();
     }
 }

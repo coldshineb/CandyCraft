@@ -8,24 +8,24 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderVoid extends WorldProvider {
-    public static final DimensionType DUNGEON_WORLD = EnumHelper.addEnum(DimensionType.class, "CANDY_DUNGEON_WORLD_MOD", new Class[]{Integer.class, String.class, String.class, Class.class}, CandyCraft.getCandyDimensionID(), "Candy Dungeon", "_candydungeons", WorldProviderVoid.class);
+    public static final DimensionType DUNGEON_WORLD = EnumHelper.addEnum(DimensionType.class, "CANDY_DUNGEON_WORLD_MOD", new Class[]{Integer.class, String.class, String.class, Class.class}, CandyCraft.getCandyDimensionID(), "Candy Dungeon", "candydungeons", WorldProviderVoid.class);
 
     @Override
-    public void createBiomeProvider() {
+    protected void init() {
         biomeProvider = new BiomeProviderSingle(CCBiomes.candyVoid);
-        isHellWorld = true;
-        hasNoSky = true;
+        nether = true;
+        hasSkyLight = false;
     }
 
     @Override
     public IChunkGenerator createChunkGenerator() {
-        return new ChunkProviderCandyVoid(worldObj, worldObj.getSeed());
+        return new ChunkProviderCandyVoid(world, world.getSeed());
     }
 
     @Override
@@ -55,15 +55,14 @@ public class WorldProviderVoid extends WorldProvider {
         return true;
     }
 
-    @Override
-    public String getWelcomeMessage() {
-        return "Entering the Dungeon";
-    }
-
-    @Override
-    public String getDepartMessage() {
-        return "Leaving the Dungeon";
-    }
+    /**
+     * @Override public String getWelcomeMessage() {
+     * return "Entering the Dungeon";
+     * }
+     * @Override public String getDepartMessage() {
+     * return "Leaving the Dungeon";
+     * }
+     */
 
     @Override
     public boolean isSurfaceWorld() {

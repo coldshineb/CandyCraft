@@ -26,23 +26,23 @@ import java.util.Random;
 public class BlockCandyPortal extends BlockPortal {
     public void travelToDimension(int par1, Entity ent, World world) {
         if (!world.isRemote && !ent.isDead) {
-            world.theProfiler.startSection("changeDimension");
+            world.profiler.startSection("changeDimension");
             MinecraftServer minecraftserver = world.getMinecraftServer();
             int j = ent.dimension;
-            WorldServer worldserver = minecraftserver.worldServerForDimension(j);
-            WorldServer worldserver1 = minecraftserver.worldServerForDimension(par1);
+            WorldServer worldserver = minecraftserver.getWorld(j);
+            WorldServer worldserver1 = minecraftserver.getWorld(par1);
             ent.dimension = par1;
 
             if (j == CandyCraft.getCandyDimensionID() && par1 == CandyCraft.getCandyDimensionID()) {
-                worldserver1 = minecraftserver.worldServerForDimension(0);
+                worldserver1 = minecraftserver.getWorld(0);
                 ent.dimension = 0;
             }
 
             world.removeEntity(ent);
             ent.isDead = false;
-            world.theProfiler.startSection("reposition");
-            minecraftserver.getPlayerList().transferEntityToWorld(ent, j, worldserver, worldserver1, new TeleporterCandy(minecraftserver.worldServerForDimension(CandyCraft.getCandyDimensionID())));
-            world.theProfiler.endStartSection("reloading");
+            world.profiler.startSection("reposition");
+            minecraftserver.getPlayerList().transferEntityToWorld(ent, j, worldserver, worldserver1, new TeleporterCandy(minecraftserver.getWorld(CandyCraft.getCandyDimensionID())));
+            world.profiler.endStartSection("reloading");
             Entity entity = EntityList.createEntityByName(EntityList.getEntityString(ent), worldserver1);
 
             if (entity != null) {
@@ -52,14 +52,14 @@ public class BlockCandyPortal extends BlockPortal {
                     entity.setLocationAndAngles(chunkcoordinates.getX(), chunkcoordinates.getY(), chunkcoordinates.getZ(), entity.rotationYaw, entity.rotationPitch);
                 }
 
-                worldserver1.spawnEntityInWorld(entity);
+                worldserver1.spawnEntity(entity);
             }
 
             ent.isDead = true;
-            world.theProfiler.endSection();
+            world.profiler.endSection();
             worldserver.resetUpdateEntityTick();
             worldserver1.resetUpdateEntityTick();
-            world.theProfiler.endSection();
+            world.profiler.endSection();
         }
     }
 
@@ -93,7 +93,7 @@ public class BlockCandyPortal extends BlockPortal {
             if (par1World.provider.getDimension() != CandyCraft.getCandyDimensionID()) {
                 player.mcServer.getPlayerList().transferPlayerToDimension(player, CandyCraft.getCandyDimensionID(), new TeleporterCandy(player.mcServer.worldServerForDimension(CandyCraft.getCandyDimensionID())));
             } else {
-                player.mcServer.getPlayerList().transferPlayerToDimension(player, 0, new TeleporterCandy(player.mcServer.worldServerForDimension(0)));
+                player.mcServer.getPlayerList().transferPlayerToDimension(player, 0, new TeleporterCandy(player.mcServer.getWorld(0)));
             }
             return;
         } else if (par5Entity.getRidingEntity() == null && !par5Entity.isBeingRidden() && par5Entity instanceof EntityLivingBase) {

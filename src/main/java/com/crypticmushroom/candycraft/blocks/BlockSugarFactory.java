@@ -27,12 +27,12 @@ public class BlockSugarFactory extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity == null || player.isSneaking()) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity == null || playerIn.isSneaking()) {
             return false;
         }
-        player.openGui(CandyCraft.getInstance(), 1, world, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(CandyCraft.getInstance(), 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
@@ -50,25 +50,25 @@ public class BlockSugarFactory extends BlockContainer {
                     float f1 = random.nextFloat() * 0.8F + 0.1F;
                     float f2 = random.nextFloat() * 0.8F + 0.1F;
 
-                    while (itemstack.stackSize > 0) {
+                    while (itemstack.getCount() > 0) {
                         int k1 = random.nextInt(21) + 10;
 
-                        if (k1 > itemstack.stackSize) {
-                            k1 = itemstack.stackSize;
+                        if (k1 > itemstack.getCount()) {
+                            k1 = itemstack.getCount();
                         }
 
-                        itemstack.stackSize -= k1;
+                        itemstack.shrink(k1);
                         EntityItem entityitem = new EntityItem(par1World, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), k1, itemstack.getItemDamage()));
 
                         if (itemstack.hasTagCompound()) {
-                            entityitem.getEntityItem().setTagCompound(itemstack.getTagCompound().copy());
+                            entityitem.getItem().setTagCompound(itemstack.getTagCompound().copy());
                         }
 
                         float f3 = 0.05F;
                         entityitem.motionX = (float) random.nextGaussian() * f3;
                         entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
                         entityitem.motionZ = (float) random.nextGaussian() * f3;
-                        par1World.spawnEntityInWorld(entityitem);
+                        par1World.spawnEntity(entityitem);
                     }
                 }
             }
@@ -83,8 +83,8 @@ public class BlockSugarFactory extends BlockContainer {
     }
 
     @Override
-    public int getComparatorInputOverride(IBlockState state, World par1World, BlockPos pos) {
-        return Container.calcRedstoneFromInventory((IInventory) par1World.getTileEntity(pos));
+    public int getComparatorInputOverride(IBlockState state, World worldIn, BlockPos pos) {
+        return Container.calcRedstoneFromInventory((IInventory) worldIn.getTileEntity(pos));
     }
 
     @Override
