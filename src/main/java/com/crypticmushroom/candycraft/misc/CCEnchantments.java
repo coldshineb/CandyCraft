@@ -1,13 +1,12 @@
 package com.crypticmushroom.candycraft.misc;
 
-import com.crypticmushroom.candycraft.CandyCraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod(modid = CandyCraft.MODID, name = CandyCraft.NAME, version = CandyCraft.VERSION)
+@Mod.EventBusSubscriber
 public class CCEnchantments {
     public static final Enchantment devourer = new EnchantmentDevourer();
     public static final Enchantment honey_glue = new EnchantmentHoneyGlue();
@@ -18,17 +17,12 @@ public class CCEnchantments {
         }
     }
 
-    @Mod.EventBusSubscriber(modid = CandyCraft.MODID)
-    public static class RegistryHandler {
-        @SubscribeEvent
-        public static void onEvent(final RegistryEvent.Register<Enchantment> event) {
-            // DEBUG
-            System.out.println("Registering CandyCraft enchantments");
+    @SubscribeEvent
+    public static void onRegsiter(RegistryEvent.Register<Enchantment> registryEvent) {
 
-            final IForgeRegistry<Enchantment> registry = event.getRegistry();
+        final IForgeRegistry<Enchantment> registry = registryEvent.getRegistry();
 
-            registerEnchantment(registry, devourer, true);
-            registerEnchantment(registry, honey_glue, true);
-        }
+        registerEnchantment(registry, devourer, true);
+        registerEnchantment(registry, honey_glue, true);
     }
 }

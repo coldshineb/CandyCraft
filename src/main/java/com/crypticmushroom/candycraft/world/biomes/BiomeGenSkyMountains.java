@@ -17,7 +17,6 @@ public class BiomeGenSkyMountains extends BiomeGenCandy {
         theBiomeDecorator2.reedsPerChunk = 1;
         theBiomeDecorator2.grassPerChunk = 1;
         theBiomeDecorator2.allowIceCream = true;
-        theBiomeDecorator2.allowIceCream = true;
     }
 
     @Override

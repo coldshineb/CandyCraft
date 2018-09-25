@@ -8,8 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
 
 public class BiomeGenMountains extends BiomeGenCandy {
-    public BiomeGenMountains() {
-        super(new BiomeProperties("Sugar Mountains").setBaseHeight(0.5F).setHeightVariation(0.8F));
+    public BiomeGenMountains(BiomeProperties properties) {
+        super(properties);
         spawnableCreatureList.add(new SpawnListEntry(EntityCandyWolf.class, 12, 4, 4));
         spawnableMonsterList.add(new SpawnListEntry(EntitySuguard.class, 4, 4, 4));
         spawnableCreatureList.add(new SpawnListEntry(EntityCandyPig.class, 8, 4, 6));

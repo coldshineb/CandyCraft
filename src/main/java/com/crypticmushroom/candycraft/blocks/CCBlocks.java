@@ -311,8 +311,7 @@ public class CCBlocks {
         chocolateCobbleStairs = new BlockCandyStairs(chocolateCobbleStone.getDefaultState()).setHardness(2.0F).setResistance(10.0F).setStepSound(SoundType.STONE).setUnlocalizedName("chocolate_cobblestone_stairs").setCreativeTab(CandyCraft.getCandyTab());
         chocolateCobbleHalfStep = (BlockSlab) new BlockCandyStep(Material.ROCK, false, 12).setHardness(2.0F).setResistance(10.0F).setStepSound(SoundType.STONE).setUnlocalizedName("chocolate_cobblestone_slab").setCreativeTab(CandyCraft.getCandyTab());
         chocolateCobbleStep = (BlockSlab) new BlockCandyStep(Material.ROCK, true, 12).setHardness(2.0F).setResistance(10.0F).setStepSound(SoundType.STONE).setUnlocalizedName("chocolate_cobblestone_double_slab").setCreativeTab(CandyCraft.getCandyTab());
-        chocolateCobbleWall = new BlockCandyWall(chocolateCobbleStone).setHardness(2.0F).setResistance(10.0F).
-        (SoundType.STONE).setUnlocalizedName("chocolate_cobblestone_wall").setCreativeTab(CandyCraft.getCandyTab());
+        chocolateCobbleWall = new BlockCandyWall(chocolateCobbleStone).setHardness(2.0F).setResistance(10.0F).setStepSound(SoundType.STONE).setUnlocalizedName("chocolate_cobblestone_wall").setCreativeTab(CandyCraft.getCandyTab());
         suguardSentryKeyHole = new BlockKeyHole(Material.ROCK, 2).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(SoundType.STONE).setUnlocalizedName("suguard_sentry_key_hole").setCreativeTab(CandyCraft.getCandyTab());
         suguardBossKeyHole = new BlockKeyHole(Material.ROCK, 3).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(SoundType.STONE).setUnlocalizedName("suguard_boss_key_hole").setCreativeTab(CandyCraft.getCandyTab());
         marshmallowTrapdoor = new BlockCandyTrapDoor(Material.WOOD).setUnlocalizedName("marshmallow_trapdoor").setHardness(2.5F).setCreativeTab(CandyCraft.getCandyTab());

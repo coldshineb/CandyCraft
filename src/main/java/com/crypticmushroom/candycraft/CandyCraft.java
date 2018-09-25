@@ -169,9 +169,6 @@ public class CandyCraft {
 
         // Entities
         CCEntities.init();
-
-        CCBiomes.init();
-
         config.save();
     }
 

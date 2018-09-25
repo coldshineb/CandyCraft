@@ -15,18 +15,18 @@ public class GenLayerCandyIsland extends GenLayer {
      * based on the particular GenLayer subclass.
      */
     @Override
-    public int[] getInts(int par1, int par2, int par3, int par4) {
-        int[] aint = IntCache.getIntCache(par3 * par4);
+    public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight) {
+        int[] aint = IntCache.getIntCache(areaWidth * areaHeight);
 
-        for (int i1 = 0; i1 < par4; ++i1) {
-            for (int j1 = 0; j1 < par3; ++j1) {
-                initChunkSeed(par1 + j1, par2 + i1);
-                aint[j1 + i1 * par3] = nextInt(10) == 0 ? Biome.getIdForBiome(CCBiomes.candyPlains) : Biome.getIdForBiome(CCBiomes.candyOcean);
+        for (int i1 = 0; i1 < areaHeight; ++i1) {
+            for (int j1 = 0; j1 < areaWidth; ++j1) {
+                initChunkSeed(areaX + j1, areaY + i1);
+                aint[j1 + i1 * areaWidth] = nextInt(10) == 0 ? Biome.getIdForBiome(CCBiomes.candyPlains) : Biome.getIdForBiome(CCBiomes.candyOcean);
             }
         }
 
-        if (par1 > -par3 && par1 <= 0 && par2 > -par4 && par2 <= 0) {
-            aint[-par1 + -par2 * par3] = Biome.getIdForBiome(CCBiomes.candyPlains);
+        if (areaX > -areaWidth && areaX <= 0 && areaY > -areaHeight && areaY <= 0) {
+            aint[-areaX + -areaY * areaWidth] = Biome.getIdForBiome(CCBiomes.candyPlains);
         }
 
         return aint;
