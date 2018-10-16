@@ -102,9 +102,9 @@ public class WorldGenIceTower extends WorldGenerator {
             Item it = WorldGenCandyHouse.itemToStock[par2.nextInt(WorldGenCandyHouse.itemToStock.length)];
             int stack = par2.nextInt(7) + 4;
             ItemStack st = new ItemStack(it);
-            st.stackSize = stack > st.getMaxStackSize() ? st.getMaxStackSize() : stack;
+            st.setCount(stack > st.getMaxStackSize() ? st.getMaxStackSize() : stack);
 
-            chest.setInventorySlotContents(par2.nextInt(27), new ItemStack(st.getItem(), st.stackSize));
+            chest.setInventorySlotContents(par2.nextInt(27), new ItemStack(st.getItem(), st.getCount()));
         }
 
         chest.setInventorySlotContents(0, new ItemStack(Items.LAVA_BUCKET));

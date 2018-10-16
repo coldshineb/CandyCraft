@@ -5,17 +5,18 @@ import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 
-public class LayerMermaidHeldItem<RendererLivingEntity> implements LayerRenderer {
-    private final RendererLivingEntity entityRenderer;
+public class LayerMermaidHeldItem implements LayerRenderer {
+    private final RenderLiving entityRenderer;
     float rX, rY, rZ, tX, tY, tZ;
 
-    public LayerMermaidHeldItem(RendererLivingEntity renderer) {
+    public LayerMermaidHeldItem(RenderLiving renderer) {
         entityRenderer = renderer;
     }
 

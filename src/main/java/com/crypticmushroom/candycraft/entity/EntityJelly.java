@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
@@ -80,7 +81,7 @@ public class EntityJelly extends EntityLiving {
                 float f1 = rand.nextFloat() * 0.5F + 0.5F;
                 float f2 = MathHelper.sin(f) * i * 0.5F * f1;
                 float f3 = MathHelper.cos(f) * i * 0.5F * f1;
-                World world = worldObj;
+
                 EnumParticleTypes enumparticletypes = EnumParticleTypes.CRIT_MAGIC;
                 double d0 = posX + f2;
                 double d1 = posZ + f3;
@@ -152,7 +153,7 @@ public class EntityJelly extends EntityLiving {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource dmgSrc) {
         return "mob.slime." + (getJellySize() > 1 ? "big" : "small");
     }
 

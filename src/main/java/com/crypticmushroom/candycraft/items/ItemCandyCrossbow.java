@@ -6,6 +6,7 @@ import com.crypticmushroom.candycraft.misc.CCEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
@@ -13,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+// TODO COMPLETLY OUTDATED
 public class ItemCandyCrossbow extends Item {
     public ItemCandyCrossbow() {
         super();
@@ -27,7 +29,7 @@ public class ItemCandyCrossbow extends Item {
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        EntityPlayer player = (EntityPlayer) entityLiving;
+       /* EntityPlayer player = (EntityPlayer) entityLiving;
         int j = getMaxItemUseDuration(stack) - timeLeft;
 
         boolean flag = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
@@ -82,12 +84,13 @@ public class ItemCandyCrossbow extends Item {
                 par3EntityPlayer.inventory.consumeInventoryItem(CCItems.honeyBolt);
             }
 
-            entityarrow.canBePickedUp = 1;
+            entityarrow.pickupStatus = PickupStatus.ALLOWED;
 
-            if (!par2World.isRemote) {
-                par2World.spawnEntityInWorld(entityarrow);
+            if (!worldIn.isRemote) {
+            	worldIn.spawnEntity(entityarrow);
             }
-        }
+        }*/
+    
     }
 
     @Override
@@ -95,16 +98,17 @@ public class ItemCandyCrossbow extends Item {
         return EnumAction.BOW;
     }
 
-    @Override
+  /*  @Override
     public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         return par1ItemStack;
     }
-
+*/
     @Override
     public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 72000;
     }
 
+    /*
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         if (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItemStack(CCItems.honeyBolt)) {
@@ -112,7 +116,7 @@ public class ItemCandyCrossbow extends Item {
         }
 
         return par1ItemStack;
-    }
+    }*/
 
     @Override
     public int getItemEnchantability() {

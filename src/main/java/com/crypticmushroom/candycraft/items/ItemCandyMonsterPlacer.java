@@ -12,11 +12,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+// TODO COMPLETLY OUTDATED
 public class ItemCandyMonsterPlacer extends ItemMonsterPlacer {
     public ItemCandyMonsterPlacer() {
         super();
     }
-
+/*
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
         String s1 = getEntityIdFromItem(stack);
@@ -36,7 +37,7 @@ public class ItemCandyMonsterPlacer extends ItemMonsterPlacer {
             stack.setTagCompound(nbt);
             subItems.add(stack);
         }
-    }
+    }*/
     /*
      * TODO check private static EntityList.EntityEggInfo getEggInfo(ItemStack
      * stack) { if (stack.hasTagCompound() &&

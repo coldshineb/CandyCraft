@@ -11,7 +11,9 @@ import com.crypticmushroom.candycraft.entity.boss.EntityBossSuguard;
 import com.crypticmushroom.candycraft.entity.boss.EntityJellyQueen;
 import com.crypticmushroom.candycraft.items.CCItems;
 import com.crypticmushroom.candycraft.items.ItemBossKey;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
+import com.crypticmushroom.candycraft.misc.CCAdvancements;
+import com.crypticmushroom.candycraft.misc.CCAdvancements;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockJukebox;
 import net.minecraft.block.state.IBlockState;
@@ -43,6 +45,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+// TODO REIMPLEMENTS ADVANCEMENTS
 public class ServerEventCatcher {
     @SubscribeEvent
     public void onChatReceive(ServerChatEvent event) {
@@ -85,12 +88,12 @@ public class ServerEventCatcher {
 
     @SubscribeEvent
     public void onCraft(ItemCraftedEvent event) {
-        CCAchievements.onCraft(event.crafting, event.player);
+        //CCAdvancements.onCraft(event.crafting, event.player);
     }
 
     @SubscribeEvent
     public void onSmelt(ItemSmeltedEvent event) {
-        CCAchievements.onSmelt(event.smelting, event.player);
+       // CCAdvancements.onSmelt(event.smelting, event.player);
     }
 
     @SubscribeEvent
@@ -124,7 +127,7 @@ public class ServerEventCatcher {
     @SubscribeEvent
     public void onPlayerInteract(RightClickBlock event) {
         // Dungeon TODO reverse
-        if (event.getEntity() != null && event.getEntity().world.provider.getDimension() == CandyCraft.getDungeonDimensionID() && event.getEntity().worldObj.getBlockState(event.getPos()).getBlock() != Blocks.LEVER && event.getEntity().worldObj.getBlockState(event.getPos()).getBlock() != CCBlocks.jellySentryKeyHole && event.getEntity().worldObj.getBlockState(event.getPos()).getBlock() != CCBlocks.jellyBossKeyHole && event.getEntity().worldObj.getBlockState(event.getPos()).getBlock() != CCBlocks.blockTeleporter && event.getEntity().worldObj.getBlockState(event.getPos()).getBlock() != CCBlocks.marshmallowChest) {
+        if (event.getEntity() != null && event.getEntity().world.provider.getDimension() == CandyCraft.getDungeonDimensionID() && event.getEntity().world.getBlockState(event.getPos()).getBlock() != Blocks.LEVER && event.getEntity().world.getBlockState(event.getPos()).getBlock() != CCBlocks.jellySentryKeyHole && event.getEntity().world.getBlockState(event.getPos()).getBlock() != CCBlocks.jellyBossKeyHole && event.getEntity().world.getBlockState(event.getPos()).getBlock() != CCBlocks.blockTeleporter && event.getEntity().world.getBlockState(event.getPos()).getBlock() != CCBlocks.marshmallowChest) {
             // event.setCanceled(true);
             return;
         }
@@ -160,7 +163,7 @@ public class ServerEventCatcher {
     @SubscribeEvent
     public void onPlayerInteract(LeftClickBlock event) {
         EntityPlayer p = event.getEntityPlayer();
-        if (event.getEntity() != null && event.getEntity().world.provider.getDimension() == CandyCraft.getDungeonDimensionID() && (event.getEntity().worldObj.getTileEntity(event.getPos()) == null || event.getEntity().worldObj.getTileEntity(event.getPos()) instanceof TileEntityTeleporter)) {
+        if (event.getEntity() != null && event.getEntity().world.provider.getDimension() == CandyCraft.getDungeonDimensionID() && (event.getEntity().world.getTileEntity(event.getPos()) == null || event.getEntity().world.getTileEntity(event.getPos()) instanceof TileEntityTeleporter)) {
             // TODO reverse
             // event.setCanceled(true);
             return;
@@ -169,50 +172,50 @@ public class ServerEventCatcher {
 
     @SubscribeEvent
     public void onDeath(LivingDeathEvent event) {
-        if (event.getSource().getTrueSource() instanceof EntityPlayer) {
+        /*if (event.getSource().getTrueSource() instanceof EntityPlayer) {
             if (event.getEntity() instanceof EntityCandyCreeper) {
-                //TODO ((EntityPlayer) event.getSource().getTrueSource()).addStat(CCAchievements.killCookieCreeper);
+                //TODO ((EntityPlayer) event.getSource().getTrueSource()).addStat(CCAdvancements.killCookieCreeper);
                 if (event.getSource().getImmediateSource() instanceof EntityArrow) {
-                    ((EntityPlayer) event.getSource().getTrueSource().addStat(CCAchievements.killCookieCreeper));
+                    ((EntityPlayer) event.getSource().getTrueSource().addStat(CCAdvancements.killCookieCreeper));
                 }
 
             }
             if (event.getEntity() instanceof EntitySuguard && event.getSource().getEntity() != null) {
                 if (event.getSource().getSourceOfDamage() instanceof EntityPlayer) {
-                    ((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAchievements.killSuguard);
+                    ((EntityPlayer) event.getSource().getSourceOfDamage()).addStat(CCAdvancements.killSuguard);
                 }
                 if (event.getSource().getImmediateSource() instanceof EntityArrow) {
                     if (((EntityArrow) event.getSource().getSourceOfDamage()).shootingEntity != null && ((EntityArrow) event.getSource().getImmediateSource()).shootingEntity instanceof EntityPlayer) {
-                        ((EntityPlayer) ((EntityArrow) event.getSource().getImmediateSource()).shootingEntity).addStat(CCAchievements.killSuguard);
+                        ((EntityPlayer) ((EntityArrow) event.getSource().getImmediateSource()).shootingEntity).addStat(CCAdvancements.killSuguard);
                     }
                 }
             }
             if (event.getEntity() instanceof EntityJellyQueen && event.getSource().getTrueSource() != null) {
                 if (event.getSource().getTrueSource() instanceof EntityPlayer) {
-                    //TODO((EntityPlayer) event.getSource().getTrueSource()).addStat(CCAchievements.killQueenSlime);
+                    //TODO((EntityPlayer) event.getSource().getTrueSource()).addStat(CCAdvancements.killQueenSlime);
                 }
                 if (event.getSource().getImmediateSource() instanceof EntityArrow) {
                     if (((EntityArrow) event.getSource().getImmediateSource()).shootingEntity != null && ((EntityArrow) event.getSource().getImmediateSource()).shootingEntity instanceof EntityPlayer) {
-                        (EntityPlayer) event.getSource().getTrueSource().addStat(CCAchievements.killQueenSlime);
+                        (EntityPlayer) event.getSource().getTrueSource().addStat(CCAdvancements.killQueenSlime);
                     }
                 }
             }
             if (event.getEntity() instanceof EntityBossSuguard && event.getSource().getEntity() != null) {
                 //TODO if (event.getSource().getSourceOfDamage() instanceof EntityPlayer) {
-                ((EntityPlayer) event.getSource().getTrueSource()).addStat(CCAchievements.killSuguardBoss);
+                ((EntityPlayer) event.getSource().getTrueSource()).addStat(CCAdvancements.killSuguardBoss);
             }
             if (event.getSource().getImmediateSource() instanceof EntityArrow) {
                 if (((EntityArrow) event.getSource().getImmediateSource()).shootingEntity != null && ((EntityArrow) event.getSource().getTrueSource()).shootingEntity instanceof EntityPlayer) {
-                    ((EntityPlayer) ((EntityArrow) event.getSource().getTrueSource()).shootingEntity).addStat(CCAchievements.killSuguardBoss);
+                    ((EntityPlayer) ((EntityArrow) event.getSource().getTrueSource()).shootingEntity).addStat(CCAdvancements.killSuguardBoss);
                 }
             }
         }
-
+		*/
     }
 
     @SubscribeEvent
     public void onPickup(EntityItemPickupEvent event) {
-        CCAchievements.onPickup(event.getItem(), event.getEntityPlayer());
+        //CCAdvancements.onPickup(event.getItem(), event.getEntityPlayer());
     }
 
     @SubscribeEvent

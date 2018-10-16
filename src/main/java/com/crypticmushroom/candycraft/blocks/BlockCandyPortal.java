@@ -4,6 +4,7 @@ import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.client.entity.EntityCandyPortalFX;
 import com.crypticmushroom.candycraft.world.TeleporterCandy;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockEndPortal;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -91,7 +92,7 @@ public class BlockCandyPortal extends BlockPortal {
         if (par5Entity.getRidingEntity() == null && !par5Entity.isBeingRidden() && par5Entity instanceof EntityPlayerMP) {
             EntityPlayerMP player = (EntityPlayerMP) par5Entity;
             if (par1World.provider.getDimension() != CandyCraft.getCandyDimensionID()) {
-                player.mcServer.getPlayerList().transferPlayerToDimension(player, CandyCraft.getCandyDimensionID(), new TeleporterCandy(player.mcServer.worldServerForDimension(CandyCraft.getCandyDimensionID())));
+                player.mcServer.getPlayerList().transferPlayerToDimension(player, CandyCraft.getCandyDimensionID(), new TeleporterCandy(player.mcServer.getWorld(CandyCraft.getCandyDimensionID())));
             } else {
                 player.mcServer.getPlayerList().transferPlayerToDimension(player, 0, new TeleporterCandy(player.mcServer.getWorld(0)));
             }
@@ -103,7 +104,7 @@ public class BlockCandyPortal extends BlockPortal {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock) {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         EnumFacing.Axis axis = state.getValue(AXIS);
         BlockCandyPortal.Size size;
 

@@ -78,7 +78,7 @@ public class EntityAICandyArrow extends EntityAIBase {
      * Returns whether an in-progress EntityAIBase should continue executing
      */
     @Override
-    public boolean continueExecuting() {
+    public boolean shouldContinueExecuting() {
         return shouldExecute() || !entityHost.getNavigator().noPath();
     }
 

@@ -36,23 +36,23 @@ public class GuiBoss extends Gui {
     public void drawScreen(float par1) {
         mc.renderEngine.bindTexture(gui);
         ScaledResolution scaledresolution = new ScaledResolution(mc);
-        if (Minecraft.getMinecraft().thePlayer != null && Minecraft.getMinecraft().thePlayer.getRidingEntity() != null && Minecraft.getMinecraft().thePlayer.getRidingEntity() instanceof IEntityPowerMount) {
+        if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getRidingEntity() != null && Minecraft.getMinecraft().player.getRidingEntity() instanceof IEntityPowerMount) {
             renderInGUI = true;
-            IEntityPowerMount mount = (IEntityPowerMount) Minecraft.getMinecraft().thePlayer.getRidingEntity();
+            IEntityPowerMount mount = (IEntityPowerMount) Minecraft.getMinecraft().player.getRidingEntity();
             double d = (mount.getPower());
-            int percent = MathHelper.floor_double((d / mount.maxPower()) * 42);
+            int percent = MathHelper.floor((d / mount.maxPower()) * 42);
             this.drawTexturedModalRect(scaledresolution.getScaledWidth() - 50, 0, 0, 84, 50, 50);
             this.drawTexturedModalRect(scaledresolution.getScaledWidth() - 46, 44, 0, 134, percent, 2);
-            drawCenteredString(mc.fontRendererObj, I18n.format("Gui.Energy"), scaledresolution.getScaledWidth() - 25, 35, 0xffffff);
+            drawCenteredString(mc.fontRenderer, I18n.format("Gui.Energy"), scaledresolution.getScaledWidth() - 25, 35, 0xffffff);
             if (mount instanceof IEntityLockable) {
-                IEntityLockable mount2 = (IEntityLockable) Minecraft.getMinecraft().thePlayer.getRidingEntity();
+                IEntityLockable mount2 = (IEntityLockable) Minecraft.getMinecraft().player.getRidingEntity();
                 String display = I18n.format(mount2.isLocked() ? "Gui.UnlockHeight" : "Gui.LockHeight").replaceAll("-key-", GameSettings.getKeyDisplayString(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode()));
-                drawString(mc.fontRendererObj, display, scaledresolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(display) - 2, 52, 0xffffff);
+                drawString(mc.fontRenderer, display, scaledresolution.getScaledWidth() - mc.fontRenderer.getStringWidth(display) - 2, 52, 0xffffff);
             }
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            renderMount(scaledresolution.getScaledWidth() - 25, 30, 10, 45, -45, (EntityLivingBase) Minecraft.getMinecraft().thePlayer.getRidingEntity());
-            float mountOffset = (float) (30 - (Minecraft.getMinecraft().thePlayer.getRidingEntity().getMountedYOffset() - 0.3) * 10);
-            renderMount(scaledresolution.getScaledWidth() - 25, mountOffset, 10, 45, -45, Minecraft.getMinecraft().thePlayer);
+            renderMount(scaledresolution.getScaledWidth() - 25, 30, 10, 45, -45, (EntityLivingBase) Minecraft.getMinecraft().player.getRidingEntity());
+            float mountOffset = (float) (30 - (Minecraft.getMinecraft().player.getRidingEntity().getMountedYOffset() - 0.3) * 10);
+            renderMount(scaledresolution.getScaledWidth() - 25, mountOffset, 10, 45, -45, Minecraft.getMinecraft().player);
         }
         mc.renderEngine.bindTexture(gui);
         if (counter > 0) {
@@ -96,8 +96,8 @@ public class GuiBoss extends Gui {
             this.drawTexturedModalRect(j - 128, 27, 0, 70, (int) percent, 14);
             GL11.glColor3d(1.0F, 1.0F, 1.0F);
             this.drawTexturedModalRect(j - 32, 6, (int) animation * 64, 200, 64, 56);
-            drawCenteredString(mc.fontRendererObj, lastHitted.getName(), j, 7, 0xffffff);
-            drawCenteredString(mc.fontRendererObj, stats == 0 ? difficulties[1] : stats == 1 ? difficulties[0] : difficulties[2], j, 53, 0xffffff);
+            drawCenteredString(mc.fontRenderer, lastHitted.getName(), j, 7, 0xffffff);
+            drawCenteredString(mc.fontRenderer, stats == 0 ? difficulties[1] : stats == 1 ? difficulties[0] : difficulties[2], j, 53, 0xffffff);
             if (lastLife > 0) {
                 lastLife -= 0.7F;
             }
@@ -114,11 +114,6 @@ public class GuiBoss extends Gui {
         GlStateManager.translate(x, y, 50.0F);
         GlStateManager.scale((-scale), scale, scale);
         GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-        float f2 = entity.renderYawOffset;
-        float f3 = entity.rotationYaw;
-        float f4 = entity.rotationPitch;
-        float f5 = entity.prevRotationYawHead;
-        float f6 = entity.rotationYawHead;
         GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
         RenderHelper.enableStandardItemLighting();
         GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
@@ -126,7 +121,7 @@ public class GuiBoss extends Gui {
         RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
         rendermanager.setPlayerViewY(180.0F);
         rendermanager.setRenderShadow(false);
-        mc.getRenderManager().doRenderEntity(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, true);// TODO
+        mc.getRenderManager().renderEntity(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, true);// TODO
         // CHECK
         // true
         // parameter

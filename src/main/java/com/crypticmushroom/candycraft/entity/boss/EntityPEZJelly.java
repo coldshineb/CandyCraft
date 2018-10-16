@@ -63,7 +63,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
     }
 
     protected EntityPEZJelly createInstance() {
-        return new EntityPEZJelly(worldObj);
+        return new EntityPEZJelly(world);
     }
 
     @Override
@@ -100,15 +100,15 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
     public void setDead() {
         int i = getJellySize();
 
-        if (!worldObj.isRemote && i > 1 && getHealth() <= 0.0F) {
-            worldObj.createExplosion(this, posX, posY, posZ, 3, false);
+        if (!world.isRemote && i > 1 && getHealth() <= 0.0F) {
+            world.createExplosion(this, posX, posY, posZ, 3, false);
 
             EntityPEZJelly slime = createInstance();
             slime.setJellySize(i - 1);
             slime.isAwake = false;
             slime.setAwake();
             slime.setLocationAndAngles(posX, posY + 0.5D, posZ, rand.nextFloat() * 360.0F, 0.0F);
-            worldObj.spawnEntityInWorld(slime);
+            world.spawnEntity(slime);
         }
 
         super.setDead();
@@ -126,7 +126,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
         int i = getJellySize();
 
-        if (canEntityBeSeen(par1EntityPlayer) && getDistanceSqToEntity(par1EntityPlayer) < 0.6D * i * 0.6D * i && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), getJellySize())) {
+        if (canEntityBeSeen(par1EntityPlayer) && getDistanceSq(par1EntityPlayer) < 0.6D * i * 0.6D * i && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), getJellySize())) {
             playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
         }
     }
@@ -143,7 +143,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
                 motionY = 3;
             }
         }
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (getHealth() <= getMaxHealth() / 2.0F && getHealth() > getMaxHealth() / 4.0F) {
                 setStats(1);
             } else if (getHealth() <= getMaxHealth() / 4.0F) {
@@ -157,7 +157,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
 
     @Override
     public void onUpdate() {
-        if (!isAwake && !worldObj.isRemote) {
+        if (!isAwake && !world.isRemote) {
             heal(5.0f);
         }
         super.onUpdate();
@@ -168,7 +168,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
         if (par1DamageSource.isProjectile()) {
             return false;
         }
-        if (!isAwake && !worldObj.isRemote && par1DamageSource.getEntity() != null) {
+        if (!isAwake && !world.isRemote && par1DamageSource.getEntity() != null) {
             motionY = 2;
             isAwake = true;
             setAwake();
@@ -192,7 +192,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
             motionX = 0;
             motionZ = 0;
         }
-        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 48.0D);
+        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 48.0D);
 
         if (entityplayer != null && isAwake) {
             faceEntity(entityplayer, 10.0F, 20.0F);
@@ -206,9 +206,9 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
 
                 isJumping = true;
                 if (rand.nextInt(5) == 0) {
-                    EntityTornadoJelly slime = new EntityTornadoJelly(worldObj);
+                    EntityTornadoJelly slime = new EntityTornadoJelly(world);
                     slime.setPosition(posX, posY, posZ);
-                    worldObj.spawnEntityInWorld(slime);
+                    world.spawnEntityInWorld(slime);
                 }
 
                 if (makesSoundOnJump()) {
@@ -224,7 +224,7 @@ public class EntityPEZJelly extends EntityJelly implements IBossDisplayData, IMo
                     moveStrafing = moveForward = 0.0F;
                 }
             }
-        } else if (!worldObj.isRemote && entityplayer == null && (worldObj.getClosestPlayerToEntity(this, 48.0D) == null || (worldObj.getClosestPlayerToEntity(this, 48.0D) != null && worldObj.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
+        } else if (!world.isRemote && entityplayer == null && (world.getClosestPlayerToEntity(this, 48.0D) == null || (world.getClosestPlayerToEntity(this, 48.0D) != null && world.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
             motionX = 0;
             motionZ = 0;
             isAwake = false;

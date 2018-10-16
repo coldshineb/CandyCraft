@@ -71,12 +71,12 @@ public class MapGenCandyRavine extends MapGenBase {
                 }
 
                 if (p_180707_6_ >= d4 - 16.0D - d13 * 2.0D && p_180707_10_ >= d5 - 16.0D - d13 * 2.0D && p_180707_6_ <= d4 + 16.0D + d13 * 2.0D && p_180707_10_ <= d5 + 16.0D + d13 * 2.0D) {
-                    int k3 = MathHelper.floor_double(p_180707_6_ - d13) - p_180707_3_ * 16 - 1;
-                    int l1 = MathHelper.floor_double(p_180707_6_ + d13) - p_180707_3_ * 16 + 1;
-                    int l3 = MathHelper.floor_double(p_180707_8_ - d6) - 1;
-                    int i2 = MathHelper.floor_double(p_180707_8_ + d6) + 1;
-                    int i4 = MathHelper.floor_double(p_180707_10_ - d13) - p_180707_4_ * 16 - 1;
-                    int j2 = MathHelper.floor_double(p_180707_10_ + d13) - p_180707_4_ * 16 + 1;
+                    int k3 = MathHelper.floor(p_180707_6_ - d13) - p_180707_3_ * 16 - 1;
+                    int l1 = MathHelper.floor(p_180707_6_ + d13) - p_180707_3_ * 16 + 1;
+                    int l3 = MathHelper.floor(p_180707_8_ - d6) - 1;
+                    int i2 = MathHelper.floor(p_180707_8_ + d6) + 1;
+                    int i4 = MathHelper.floor(p_180707_10_ - d13) - p_180707_4_ * 16 - 1;
+                    int j2 = MathHelper.floor(p_180707_10_ + d13) - p_180707_4_ * 16 + 1;
 
                     if (k3 < 0) {
                         k3 = 0;
@@ -190,7 +190,7 @@ public class MapGenCandyRavine extends MapGenBase {
     // Vanilla bugs to make sure that we generate the map the same way vanilla
     // does.
     private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
-        net.minecraft.world.biome.Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+        net.minecraft.world.biome.Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
         IBlockState state = data.getBlockState(x, y, z);
         return (isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock);
     }
@@ -212,7 +212,7 @@ public class MapGenCandyRavine extends MapGenBase {
      *                 we've broken the surface.
      */
     protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
-        net.minecraft.world.biome.Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+        net.minecraft.world.biome.Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
         IBlockState state = data.getBlockState(x, y, z);
         IBlockState top = isExceptionBiome(biome) ? Blocks.GRASS.getDefaultState() : biome.topBlock;
         IBlockState filler = isExceptionBiome(biome) ? Blocks.DIRT.getDefaultState() : biome.fillerBlock;

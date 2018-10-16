@@ -28,7 +28,7 @@ public class BiomeGenCandyEnchantedWoods extends BiomeGenCandy {
     }
 
     @Override
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+    public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
         return new WorldGenEnchantedTree(false, 10, 0, CCBlocks.marshmallowLog.getDefaultState().withProperty(BlockCandyLog.properties, BlockCandyLog.EnumType.TYPE2), CCBlocks.candyLeave2.getDefaultState());
     }
 

@@ -3,7 +3,6 @@ package com.crypticmushroom.candycraft.blocks.fluid;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class CCFluids {
@@ -18,7 +17,8 @@ public class CCFluids {
     public static void postInit() {
         grenadineFluid.setBlock(CCBlocks.grenadine);
 
-        FluidContainerRegistry.registerFluidContainer(CCFluids.grenadineFluid, new ItemStack(CCItems.grenadineBucket), FluidContainerRegistry.EMPTY_BUCKET);
-        FluidContainerRegistry.registerFluidContainer(CCFluids.caramelFluid, new ItemStack(CCItems.caramelBucket), FluidContainerRegistry.EMPTY_BUCKET);
+        // TODO
+       // FluidContainerRegistry.registerFluidContainer(CCFluids.grenadineFluid, new ItemStack(CCItems.grenadineBucket), FluidContainerRegistry.EMPTY_BUCKET);
+       // FluidContainerRegistry.registerFluidContainer(CCFluids.caramelFluid, new ItemStack(CCItems.caramelBucket), FluidContainerRegistry.EMPTY_BUCKET);
     }
 }

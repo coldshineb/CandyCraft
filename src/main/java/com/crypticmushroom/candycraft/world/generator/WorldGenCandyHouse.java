@@ -169,10 +169,10 @@ public class WorldGenCandyHouse extends WorldGenerator {
                     Item it = WorldGenCandyHouse.itemToStock[par2Random.nextInt(itemToStock.length)];
                     int stack = par2Random.nextInt(7) + 4;
                     ItemStack st = new ItemStack(it);
-                    st.stackSize = stack > st.getMaxStackSize() ? st.getMaxStackSize() : stack;
+                    st.setCount(stack > st.getMaxStackSize() ? st.getMaxStackSize() : stack);
 
                     if (par2Random.nextInt(15) != 12) {
-                        chest.setInventorySlotContents(par2Random.nextInt(27), new ItemStack(st.getItem(), st.stackSize));
+                        chest.setInventorySlotContents(par2Random.nextInt(27), new ItemStack(st.getItem(), st.getCount()));
                     } else {
                         int arm = par2Random.nextInt(4);
                         ItemStack helmet = new ItemStack(CCItems.licoriceHelmet);

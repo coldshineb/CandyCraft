@@ -39,13 +39,13 @@ public class WorldGenTallCandyGrass extends WorldGenerator {
                     par1World.setBlockState(bPos, CCBlocks.tallCandyGrass.getStateFromMeta(par2Random.nextInt(4)), 2);
                 } else {
                     if (par2Random.nextBoolean()) {
-                        par1World.setBlockState(bPos, par1World.getBiomeGenForCoords(new BlockPos(pos.getX(), 0, pos.getZ())) == CCBiomes.candyHellForest ? CCBlocks.poisonousFlower.getDefaultState() : CCBlocks.fraiseTagadaFlower.getDefaultState(), 2);
+                        par1World.setBlockState(bPos, par1World.getBiome(new BlockPos(pos.getX(), 0, pos.getZ())) == CCBiomes.candyHellForest ? CCBlocks.poisonousFlower.getDefaultState() : CCBlocks.fraiseTagadaFlower.getDefaultState(), 2);
                     }
                 }
 
-                if (par1World.getBiomeGenForCoords(new BlockPos(pos.getX(), 0, pos.getZ())) == CCBiomes.candyEnchantedForest && par2Random.nextInt(600) == 4) {
+                if (par1World.getBiome(new BlockPos(pos.getX(), 0, pos.getZ())) == CCBiomes.candyEnchantedForest && par2Random.nextInt(600) == 4) {
                     par1World.setBlockState(bPos, CCBlocks.sugarEssenceFlower.getDefaultState(), 2);
-                } else if (par1World.getBiomeGenForCoords(new BlockPos(pos.getX(), 0, pos.getZ())) == CCBiomes.candyFrostPlains && par2Random.nextInt(600) == 4) {
+                } else if (par1World.getBiome(new BlockPos(pos.getX(), 0, pos.getZ())) == CCBiomes.candyFrostPlains && par2Random.nextInt(600) == 4) {
                     par1World.setBlockState(bPos, CCBlocks.sugarEssenceFlower.getDefaultState(), 2);
                 }
             }

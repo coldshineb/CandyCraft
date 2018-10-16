@@ -84,7 +84,7 @@ public class EntityDragon extends EntityGolem implements IEntityLockable, IEntit
     public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
         if (super.processInteract(player, hand, stack)) {
             return true;
-        } else if (!worldObj.isRemote && (getControllingPassenger() == null)) {
+        } else if (!world.isRemote && (getControllingPassenger() == null)) {
             player.startRiding(this);
             setShoot(0);
             return true;
@@ -128,14 +128,14 @@ public class EntityDragon extends EntityGolem implements IEntityLockable, IEntit
                 float f2 = 0.91F;
 
                 if (onGround) {
-                    f2 = worldObj.getBlockState(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(getEntityBoundingBox().minY) - 1, MathHelper.floor_double(posZ))).getBlock().slipperiness * 0.91F;
+                    f2 = world.getBlockState(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(getEntityBoundingBox().minY) - 1, MathHelper.floor_double(posZ))).getBlock().slipperiness * 0.91F;
                 }
                 float f3 = 0.16277136F / (f2 * f2 * f2);
                 this.moveFlying(p_70612_1_, p_70612_2_, onGround ? 0.1F * f3 : 0.02F);
                 f2 = 0.91F;
 
                 if (onGround) {
-                    f2 = worldObj.getBlockState(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(getEntityBoundingBox().minY) - 1, MathHelper.floor_double(posZ))).getBlock().slipperiness * 0.91F;
+                    f2 = world.getBlockState(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(getEntityBoundingBox().minY) - 1, MathHelper.floor_double(posZ))).getBlock().slipperiness * 0.91F;
                 }
 
                 moveEntity(motionX, motionY, motionZ);
@@ -178,18 +178,18 @@ public class EntityDragon extends EntityGolem implements IEntityLockable, IEntit
 
         Entity controller = getControllingPassenger();
 
-        if (!worldObj.isRemote && getPower() < maxPower() && !isFalling()) {
+        if (!world.isRemote && getPower() < maxPower() && !isFalling()) {
             setPower(getPower() + 1);
         }
-        if (!onGround && worldObj != null) {
+        if (!onGround && world != null) {
             motionX /= 1.25;
             motionZ /= 1.25;
-            IBlockState st = worldObj.getBlockState(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.1D), MathHelper.floor_double(posZ)));
-            if (!worldObj.isAirBlock(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.1D), MathHelper.floor_double(posZ))) && st.getCollisionBoundingBox(worldObj, new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.1D), MathHelper.floor_double(posZ))) != null) {
+            IBlockState st = world.getBlockState(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.1D), MathHelper.floor_double(posZ)));
+            if (!world.isAirBlock(new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.1D), MathHelper.floor_double(posZ))) && st.getCollisionBoundingBox(world, new BlockPos(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.1D), MathHelper.floor_double(posZ))) != null) {
                 onGround = true;
             }
         }
-        if (!worldObj.isRemote && controller != null && controller instanceof EntityLivingBase) {
+        if (!world.isRemote && controller != null && controller instanceof EntityLivingBase) {
             rotationYaw = ((EntityLivingBase) controller).rotationYawHead;
             prevRotationYaw = ((EntityLivingBase) controller).rotationYawHead;
             EntityLivingBase entitylivingbase = (EntityLivingBase) controller;
@@ -217,22 +217,22 @@ public class EntityDragon extends EntityGolem implements IEntityLockable, IEntit
                 motionY += nextMotionY;
             }
 
-            if (!worldObj.isRemote && controller != null && !onGround) {
+            if (!world.isRemote && controller != null && !onGround) {
                 setPower(getPower() - 2);
                 if (getPower() < 0) {
                     setPower(0);
                     setFalling(true);
                 }
             }
-            if (!worldObj.isRemote && isFalling() && onGround) {
+            if (!world.isRemote && isFalling() && onGround) {
                 setFalling(false);
             }
         }
         if (getShoot() > 0 && ticksExisted % 2 == 0 && controller != null) {
             setPositionAndRotation(posX, posY, posZ, controller.rotationYaw, controller.rotationPitch);
             setPositionAndRotationDirect(posX, posY, posZ, controller.rotationYaw, controller.rotationPitch, 0, false);
-            if (!worldObj.isRemote) {
-                EntityGummyBall ball = new EntityGummyBall(worldObj, (EntityLivingBase) controller, 2);
+            if (!world.isRemote) {
+                EntityGummyBall ball = new EntityGummyBall(world, (EntityLivingBase) controller, 2);
                 double d1 = MathHelper.sin(controller.rotationYaw / 180.0F * (float) Math.PI) * 3.5d;
                 double d2 = -MathHelper.cos(controller.rotationYaw / 180.0F * (float) Math.PI) * 3.5d;
                 ball.posX -= d1;
@@ -240,8 +240,8 @@ public class EntityDragon extends EntityGolem implements IEntityLockable, IEntit
                 motionX = d1 / 3.4;
                 motionZ = d2 / 3.4;
                 ball.setPosition(ball.posX, ball.posY, ball.posZ);
-                worldObj.playSoundAtEntity(controller, "random.bow", 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));
-                worldObj.spawnEntityInWorld(ball);
+                world.playSoundAtEntity(controller, "random.bow", 0.5F, 0.4F / (rand.nextFloat() * 0.4F + 0.8F));
+                world.spawnEntity(ball);
                 setShoot(getShoot() - 1);
             }
         }
@@ -281,7 +281,7 @@ public class EntityDragon extends EntityGolem implements IEntityLockable, IEntit
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        Entity entity = par1DamageSource.getEntity();
+        Entity entity = par1DamageSource.getTrueSource();
         return getControllingPassenger() != null && getControllingPassenger().equals(entity) ? false : super.attackEntityFrom(par1DamageSource, par2);
     }
 

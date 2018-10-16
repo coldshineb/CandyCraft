@@ -139,7 +139,7 @@ public class EntityJellyQueen extends EntityJelly implements IBossDisplayData, I
                 motionY = 4F;
             }
         }
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (getHealth() <= getMaxHealth() / 2.0F && getHealth() > getMaxHealth() / 4.0F) {
                 setStats(1);
             } else if (getHealth() <= getMaxHealth() / 4.0F) {
@@ -154,7 +154,7 @@ public class EntityJellyQueen extends EntityJelly implements IBossDisplayData, I
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (!isAwake && !worldObj.isRemote) {
+        if (!isAwake && !world.isRemote) {
             heal(5.0f);
         }
     }
@@ -164,7 +164,7 @@ public class EntityJellyQueen extends EntityJelly implements IBossDisplayData, I
         if (par1DamageSource.isProjectile()) {
             return false;
         }
-        if (!isAwake && !worldObj.isRemote && par1DamageSource.getEntity() != null) {
+        if (!isAwake && !world.isRemote && par1DamageSource.getEntity() != null) {
             motionY = 2;
             isAwake = true;
             setAwake();
@@ -188,7 +188,7 @@ public class EntityJellyQueen extends EntityJelly implements IBossDisplayData, I
             motionX = 0;
             motionZ = 0;
         }
-        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 48.0D);
+        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 48.0D);
 
         if (entityplayer != null && isAwake) {
             faceEntity(entityplayer, 10.0F, 20.0F);
@@ -201,10 +201,10 @@ public class EntityJellyQueen extends EntityJelly implements IBossDisplayData, I
                 }
 
                 isJumping = true;
-                boolean var2 = worldObj.getGameRules().getBoolean("mobGriefing");
+                boolean var2 = world.getGameRules().getBoolean("mobGriefing");
                 if (getStats() == 2) {
-                    worldObj.createExplosion(this, posX, posY, posZ, (3), var2);
-                    worldObj.createExplosion(this, posX, posY + 2, posZ, (3), var2);
+                    world.createExplosion(this, posX, posY, posZ, (3), var2);
+                    world.createExplosion(this, posX, posY + 2, posZ, (3), var2);
                 }
 
                 if (makesSoundOnJump()) {
@@ -220,7 +220,7 @@ public class EntityJellyQueen extends EntityJelly implements IBossDisplayData, I
                     moveStrafing = moveForward = 0.0F;
                 }
             }
-        } else if (!worldObj.isRemote && entityplayer == null && (worldObj.getClosestPlayerToEntity(this, 48.0D) == null || (worldObj.getClosestPlayerToEntity(this, 48.0D) != null && worldObj.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
+        } else if (!world.isRemote && entityplayer == null && (world.getClosestPlayerToEntity(this, 48.0D) == null || (world.getClosestPlayerToEntity(this, 48.0D) != null && world.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
             motionX = 0;
             motionZ = 0;
             isAwake = false;

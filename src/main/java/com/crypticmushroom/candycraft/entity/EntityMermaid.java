@@ -43,7 +43,7 @@ public class EntityMermaid extends EntityGolem implements IMob, IRangedAttackMob
 
     @Override
     public boolean isNotColliding() {
-        return worldObj.checkNoEntityCollision(getEntityBoundingBox(), this);
+        return world.checkNoEntityCollision(getEntityBoundingBox(), this);
     }
 
     @Override
@@ -92,14 +92,14 @@ public class EntityMermaid extends EntityGolem implements IMob, IRangedAttackMob
         super.onLivingUpdate();
 
         if (!isInWater() && onGround && ticksExisted % 10 == 0) {
-            worldObj.playSound(posX, posY, posZ, "mob.guardian.flop", 1.0F, 1.0F, false);
+            world.playSound(posX, posY, posZ, "mob.guardian.flop", 1.0F, 1.0F, false);
             motionX = rand.nextFloat() - 0.5F;
             motionY += 0.34F;
             motionZ = rand.nextFloat() - 0.5F;
             rotationYaw = rand.nextFloat() * 360;
             prevRotationYaw = rotationYaw;
             for (int i = 0; i < 10; i++) {
-                worldObj.spawnParticle(EnumParticleTypes.WATER_DROP, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+                world.spawnParticle(EnumParticleTypes.WATER_DROP, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -115,7 +115,7 @@ public class EntityMermaid extends EntityGolem implements IMob, IRangedAttackMob
     protected void updateAITasks() {
         super.updateAITasks();
         if (isInWater()) {
-            if (currentFlightTarget != null && (!(worldObj.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
+            if (currentFlightTarget != null && (!(world.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
                 currentFlightTarget = null;
             }
 
@@ -142,13 +142,13 @@ public class EntityMermaid extends EntityGolem implements IMob, IRangedAttackMob
 
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase p_82196_1_, float p_82196_2_) {
-        EntityCandyArrow entityarrow = new EntityCandyArrow(worldObj, this, p_82196_1_, 1.6F, 14 - worldObj.getDifficulty().getDifficultyId() * 4);
+        EntityCandyArrow entityarrow = new EntityCandyArrow(world, this, p_82196_1_, 1.6F, 14 - world.getDifficulty().getDifficultyId() * 4);
         entityarrow.maxTick = 80;
         int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, getHeldItem(EnumHand.MAIN_HAND));
         int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, getHeldItem(EnumHand.MAIN_HAND));
-        entityarrow.setDamage(p_82196_2_ * 3.0F + rand.nextGaussian() * 0.25D + worldObj.getDifficulty().getDifficultyId() * 0.11F);
+        entityarrow.setDamage(p_82196_2_ * 3.0F + rand.nextGaussian() * 0.25D + world.getDifficulty().getDifficultyId() * 0.11F);
 
         playSound("random.bow", 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-        worldObj.spawnEntityInWorld(entityarrow);
+        world.spawnEntityInWorld(entityarrow);
     }
 }

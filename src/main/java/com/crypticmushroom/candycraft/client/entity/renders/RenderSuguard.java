@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -25,6 +26,6 @@ public class RenderSuguard extends RenderLiving {
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         EntityLivingBase b = (EntityLivingBase) entity;
-        return b.getEquipmentInSlot(0) != null && b.getEquipmentInSlot(0).getItem() == CCItems.dynamite ? RenderSuguard.orangeSuguard : RenderSuguard.suguard;
+        return b.getHeldItem(EnumHand.MAIN_HAND) != null && b.getHeldItem(EnumHand.MAIN_HAND).getItem() == CCItems.dynamite ? RenderSuguard.orangeSuguard : RenderSuguard.suguard;
     }
 }

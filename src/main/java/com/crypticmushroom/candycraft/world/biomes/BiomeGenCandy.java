@@ -69,7 +69,7 @@ public class BiomeGenCandy extends Biome {
     }
 
     @Override
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
+    public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
         return new WorldGenCandyTrees(false, true);
     }
 
@@ -101,8 +101,8 @@ public class BiomeGenCandy extends Biome {
                             iblockstate1 = fillerBlock;
                         }
 
-                        if (k1 < 63 && (iblockstate == null || iblockstate.getBlock().getMaterial(iblockstate) == Material.AIR)) {
-                            if (getFloatTemperature(new BlockPos(p_180628_4_, k1, p_180628_5_)) < 0.15F) {
+                        if (k1 < 63 && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
+                            if (getTemperature(new BlockPos(p_180628_4_, k1, p_180628_5_)) < 0.15F) {
                                 iblockstate = Blocks.ICE.getDefaultState();
                             } else {
                                 iblockstate = Blocks.WATER.getDefaultState();

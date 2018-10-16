@@ -67,7 +67,7 @@ public class EntityBossSuguard extends EntityGolem implements IMob, ICandyBoss, 
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource dmgSrc) {
         return null;
     }
 

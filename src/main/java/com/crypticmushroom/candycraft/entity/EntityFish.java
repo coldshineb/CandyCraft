@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -46,7 +47,7 @@ public class EntityFish extends EntityWaterMob {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource dmgSrc) {
         return null;
     }
 
@@ -94,7 +95,7 @@ public class EntityFish extends EntityWaterMob {
         super.updateAITasks();
 
         if (isInWater()) {
-            if (currentFlightTarget != null && (!(worldObj.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
+            if (currentFlightTarget != null && (!(world.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
                 currentFlightTarget = null;
             }
 

@@ -32,7 +32,7 @@ public class GuiSugarFurnace extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String s = I18n.format("Gui.SugarFurnace");
-        fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 0x777777);
+        fontRenderer.drawString(s, xSize / 2 - fontRenderer.getStringWidth(s) / 2, 6, 0x777777);
     }
 
     @Override

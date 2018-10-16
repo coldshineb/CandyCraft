@@ -15,7 +15,7 @@ public class ModelSuguard extends ModelBase {
     ModelRenderer Shape7;
     ModelRenderer Shape8;
     ModelRenderer leftArm;
-    ModelRenderer rightArm;
+    public ModelRenderer rightArm;
     ModelRenderer shield;
     ModelRenderer Shape12;
 

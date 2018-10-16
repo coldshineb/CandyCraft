@@ -60,7 +60,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 
     private EntityAnimal getNearbyMate() {
         float f = 8.0F;
-        List list = worldObj.getEntitiesWithinAABB(this.getClass(), getEntityBoundingBox().expand(f, f, f));
+        List list = world.getEntitiesWithinAABB(this.getClass(), getEntityBoundingBox().expand(f, f, f));
         double d0 = Double.MAX_VALUE;
         EntityAnimal entityanimal = null;
         Iterator iterator = list.iterator();
@@ -162,15 +162,15 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
     public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stackInHand) {
         if (super.processInteract(par1EntityPlayer, hand, stackInHand)) {
             return true;
-        } else if (!worldObj.isRemote && !isChild() && !getSaddled() && stackInHand != null && stackInHand.getItem() == Items.SADDLE) {
+        } else if (!world.isRemote && !isChild() && !getSaddled() && stackInHand != null && stackInHand.getItem() == Items.SADDLE) {
             stackInHand.stackSize--;
             setSaddled(true);
             return true;
-        } else if (getSaddled() && !worldObj.isRemote && par1EntityPlayer.isSneaking()) {
+        } else if (getSaddled() && !world.isRemote && par1EntityPlayer.isSneaking()) {
             setSaddled(false);
             dropItem(Items.SADDLE, 1);
             return true;
-        } else if (getSaddled() && !worldObj.isRemote && (getControllingPassenger() == null)) {
+        } else if (getSaddled() && !world.isRemote && (getControllingPassenger() == null)) {
             par1EntityPlayer.startRiding(this);
             return true;
         } else {
@@ -195,7 +195,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 
     @Override
     public void onLivingUpdate() {
-        if (!worldObj.isRemote && getControllingPassenger() != null && getControllingPassenger() instanceof EntityLivingBase && isInWater()) {
+        if (!world.isRemote && getControllingPassenger() != null && getControllingPassenger() instanceof EntityLivingBase && isInWater()) {
             moveForward = ((EntityLivingBase) getControllingPassenger()).moveForward;
             moveStrafing = ((EntityLivingBase) getControllingPassenger()).moveStrafing;
             rotationYaw = ((EntityLivingBase) getControllingPassenger()).rotationYawHead;
@@ -217,7 +217,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
             if (!isLocked()) {
                 motionY += nextMotionY;
             }
-        } else if (!worldObj.isRemote && getControllingPassenger() == null && isInWater()) {
+        } else if (!world.isRemote && getControllingPassenger() == null && isInWater()) {
             motionY += 0.099D;
         }
         isJumping = false;
@@ -230,7 +230,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
             moveForward = 0;
         }
 
-        if (!worldObj.isRemote && getPower() < maxPower()) {
+        if (!world.isRemote && getPower() < maxPower()) {
             setPower(getPower() + 1);
         }
 
@@ -238,8 +238,8 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 
         isJumping = false;
 
-        if (isInWater() && !worldObj.isRemote && getControllingPassenger() == null) {
-            if (currentFlightTarget != null && (!(worldObj.getBlockState(new BlockPos(currentFlightTarget.getX(), posY, currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
+        if (isInWater() && !world.isRemote && getControllingPassenger() == null) {
+            if (currentFlightTarget != null && (!(world.getBlockState(new BlockPos(currentFlightTarget.getX(), posY, currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
                 currentFlightTarget = null;
             }
 
@@ -273,7 +273,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 
     @Override
     public boolean isInWater() {
-        return worldObj.handleMaterialAcceleration(getEntityBoundingBox().expand(0.0D, -0.6000000238418579D, 0.0D), Material.WATER, this);
+        return world.handleMaterialAcceleration(getEntityBoundingBox().expand(0.0D, -0.6000000238418579D, 0.0D), Material.WATER, this);
     }
 
     @Override
@@ -301,7 +301,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 
     @Override
     public boolean getCanSpawnHere() {
-        List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(32.0D, 32.0D, 32.0D));
+        List list = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(32.0D, 32.0D, 32.0D));
         int n = 0;
         for (int i = 0; i < list.size(); ++i) {
             Entity entity1 = (Entity) list.get(i);
@@ -358,7 +358,7 @@ public class EntityNessie extends EntityAnimal implements IAnimals, IEntityLocka
 
     @Override
     public EntityAgeable createChild(EntityAgeable var1) {
-        EntityNessie nessie = new EntityNessie(worldObj);
+        EntityNessie nessie = new EntityNessie(world);
         nessie.setType(nessie.rand.nextInt(4));
         if (rand.nextInt(20) == 0) {
             setType(4);

@@ -37,7 +37,7 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
     public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
         if (super.processInteract(player, hand, stack)) {
             return true;
-        } else if (!worldObj.isRemote && (getControllingPassenger() == null)) {
+        } else if (!world.isRemote && (getControllingPassenger() == null)) {
             player.startRiding(this);
             explosionCount = 0;
             return true;
@@ -68,21 +68,21 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
 
         Entity controller = getControllingPassenger();
 
-        if (!worldObj.isRemote && explosionCount > 0 && ticksExisted % 5 == 0 && controller != null) {
+        if (!world.isRemote && explosionCount > 0 && ticksExisted % 5 == 0 && controller != null) {
             double d1 = posX + rand.nextInt(6) - 3;
             double d2 = posY + rand.nextInt(5) - 2;
             double d3 = posZ + rand.nextInt(6) - 3;
-            worldObj.createExplosion(controller, d1, d2, d3, 2, false);
+            world.createExplosion(controller, d1, d2, d3, 2, false);
             for (int x = -3; x < 4; x++) {
                 for (int z = -3; z < 4; z++) {
-                    if (rand.nextBoolean() && CCBlocks.chewingGumPuddle.canPlaceBlockAt(worldObj, new BlockPos((int) posX + x, (int) posY, (int) posZ + z))) {
-                        worldObj.setBlockState(new BlockPos((int) posX + x, (int) posY, (int) posZ + z), CCBlocks.chewingGumPuddle.getDefaultState());
+                    if (rand.nextBoolean() && CCBlocks.chewingGumPuddle.canPlaceBlockAt(world, new BlockPos((int) posX + x, (int) posY, (int) posZ + z))) {
+                        world.setBlockState(new BlockPos((int) posX + x, (int) posY, (int) posZ + z), CCBlocks.chewingGumPuddle.getDefaultState());
                     }
                 }
             }
             explosionCount--;
         }
-        if (!worldObj.isRemote && getPower() < maxPower()) {
+        if (!world.isRemote && getPower() < maxPower()) {
             setPower(getPower() + 1);
         }
         if (!inWater && isJumping && controller != null) {
@@ -93,7 +93,7 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
             motionX /= 1.5;
             motionZ /= 1.5;
         }
-        if (!worldObj.isRemote && controller != null && controller instanceof EntityLivingBase) {
+        if (!world.isRemote && controller != null && controller instanceof EntityLivingBase) {
             rotationYaw = ((EntityLivingBase) controller).rotationYawHead;
             prevRotationYaw = ((EntityLivingBase) controller).rotationYawHead;
             EntityLivingBase entitylivingbase = (EntityLivingBase) controller;
@@ -151,7 +151,7 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (!worldObj.isRemote && par1DamageSource.isExplosion()) {
+        if (!world.isRemote && par1DamageSource.isExplosion()) {
             return false;
         }
         Entity entity = par1DamageSource.getEntity();

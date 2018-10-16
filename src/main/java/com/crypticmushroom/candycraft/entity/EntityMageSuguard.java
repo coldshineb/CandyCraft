@@ -70,7 +70,7 @@ public class EntityMageSuguard extends EntitySuguard {
             setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CCItems.jumpWand));
         }
         if (isWaiting()) {
-            getNavigator().clearPathEntity();
+            getNavigator().clearPath();
 
             motionX = 0;
             motionZ = 0;
@@ -78,17 +78,17 @@ public class EntityMageSuguard extends EntitySuguard {
             posX = lastTickPosX;
             posZ = lastTickPosZ;
         }
-        if (!worldObj.isRemote && countDown > 0) {
+        if (!world.isRemote && countDown > 0) {
             countDown--;
             if (countDown <= 0) {
                 setSpawned(false);
             }
         }
-        if (!worldObj.isRemote && EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 8) != null) {
+        if (!world.isRemote && EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 8) != null) {
             setWaiting(false);
 
             if (rand.nextFloat() < 0.05F) {
-                worldObj.setBlockState(new BlockPos(this), Blocks.FIRE.getDefaultState());
+                world.setBlockState(new BlockPos(this), Blocks.FIRE.getDefaultState());
             }
 
             if (!isSpawned()) {
@@ -97,18 +97,18 @@ public class EntityMageSuguard extends EntitySuguard {
                     double d2 = MathHelper.cos(i / 3.75F * (float) Math.PI) * 2.5F + posZ;
                     double d3 = posY + 2;
 
-                    EntitySuguard suguard = new EntitySuguard(worldObj);
+                    EntitySuguard suguard = new EntitySuguard(world);
                     suguard.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(CCItems.dynamite));
                     suguard.isAngry = true;
                     suguard.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10);
                     suguard.setHealth(10);
 
-                    if (worldObj.isAirBlock(new BlockPos((int) d1, (int) d3, (int) d2))) {
+                    if (world.isAirBlock(new BlockPos((int) d1, (int) d3, (int) d2))) {
                         suguard.setPosition(d1, d3, d2);
                     } else {
                         suguard.setPosition(posX, posY, posZ);
                     }
-                    worldObj.spawnEntityInWorld(suguard);
+                    world.spawnEntity(suguard);
                 }
                 setSpawned(true);
                 countDown = 2400;

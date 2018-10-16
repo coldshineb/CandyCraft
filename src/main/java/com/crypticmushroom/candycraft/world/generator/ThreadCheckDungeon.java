@@ -18,7 +18,7 @@ public class ThreadCheckDungeon extends Thread {
 
     @Override
     public void run() {
-        World world = player.worldObj.getMinecraftServer().worldServerForDimension(CandyCraft.getDungeonDimensionID());
+        World world = player.world.getMinecraftServer().getWorld(CandyCraft.getDungeonDimensionID());
 
         int x = 0;
         int id = 0;

@@ -106,7 +106,7 @@ public class BiomeCandyDecorator {
         for (j = 0; j < i; ++j) {
             k = chunk_X + randomGenerator.nextInt(16) + 8;
             l = chunk_Z + randomGenerator.nextInt(16) + 8;
-            WorldGenerator worldgenerator = biome.genBigTreeChance(randomGenerator);
+            WorldGenerator worldgenerator = biome.getRandomTreeFeature(randomGenerator);
             worldgenerator.setDecorationDefaults();
             BlockPos h = currentWorld.getHeight(new BlockPos(k, 0, l));
             if (currentWorld.provider.getBiomeForCoords(h) instanceof BiomeGenSkyMountains || h.getY() < 120) {

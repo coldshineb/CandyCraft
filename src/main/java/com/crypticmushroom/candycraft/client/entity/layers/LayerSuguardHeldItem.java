@@ -2,29 +2,32 @@ package com.crypticmushroom.candycraft.client.entity.layers;
 
 import com.crypticmushroom.candycraft.client.entity.models.ModelSuguard;
 import com.crypticmushroom.candycraft.items.CCItems;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 
-public class LayerSuguardHeldItem<RendererLiving> implements LayerRenderer {
-    private final RendererLivingEntity entityRenderer;
+public class LayerSuguardHeldItem implements LayerRenderer {
+    private final RenderLiving entityRenderer;
     float rX, rY, rZ, tX, tY, tZ;
 
-    public LayerSuguardHeldItem(RendererLiving renderer) {
+    public LayerSuguardHeldItem(RenderLiving renderer) {
         entityRenderer = renderer;
     }
 
     @Override
     public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_) {
-        ItemStack itemstack = entity.getHeldItem();
+        ItemStack itemstack = entity.getHeldItem(EnumHand.MAIN_HAND);
 
         if (itemstack != null) {
             GlStateManager.pushMatrix();
-
+            
             ((ModelSuguard) entityRenderer.getMainModel()).rightArm.postRender(0.0625F);
             GlStateManager.translate(0.0275F, 0.1225F, 0.1425F);
 

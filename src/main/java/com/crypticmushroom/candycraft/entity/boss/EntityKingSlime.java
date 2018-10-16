@@ -47,24 +47,24 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
         if (isAwake) {
             super.jump();
 
-            EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 48.0D);
-            if (entityplayer != null && !worldObj.isRemote) {
+            EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 48.0D);
+            if (entityplayer != null && !world.isRemote) {
                 if (rand.nextInt(10) == 0) {
                     entityplayer.attackEntityFrom(DamageSource.causeMobDamage(this), 0);
                     entityplayer.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5 * 20, 2));
                     for (int i = 0; i < 20; i++) {
-                        if (worldObj.isRemote) {
+                        if (world.isRemote) {
                             drawParticle(entityplayer);
                         }
                     }
                 }
                 if (rand.nextInt(5) == 0) {
-                    worldObj.createExplosion(this, posX, posY, posZ, 3, false);
+                    world.createExplosion(this, posX, posY, posZ, 3, false);
                 }
                 if (rand.nextInt(3) == 0) {
-                    EntityYellowJelly slime = new EntityYellowJelly(worldObj);
+                    EntityYellowJelly slime = new EntityYellowJelly(world);
                     slime.setPosition(posX, posY, posZ);
-                    worldObj.spawnEntityInWorld(slime);
+                    world.spawnEntity(slime);
                 }
             }
         }
@@ -163,14 +163,14 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         double percent = (double) (getHealth() / getMaxHealth()) * 12;
-        if (!worldObj.isRemote && getSlimeSize() > (int) percent + 1) {
+        if (!world.isRemote && getSlimeSize() > (int) percent + 1) {
             this.setJellySize((int) percent + 1, false);
         }
 
         if (par1DamageSource.isProjectile()) {
             return false;
         }
-        if (!isAwake && !worldObj.isRemote && par1DamageSource.getEntity() != null) {
+        if (!isAwake && !world.isRemote && par1DamageSource.getEntity() != null) {
             motionY = 2;
             isAwake = true;
             setAwake();
@@ -194,7 +194,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
             motionX = 0;
             motionZ = 0;
         }
-        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 48.0D);
+        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 48.0D);
 
         if (entityplayer != null && isAwake) {
             faceEntity(entityplayer, 10.0F, 20.0F);
@@ -221,7 +221,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
                     moveStrafing = moveForward = 0.0F;
                 }
             }
-        } else if (!worldObj.isRemote && entityplayer == null && (worldObj.getClosestPlayerToEntity(this, 48.0D) == null || (worldObj.getClosestPlayerToEntity(this, 48.0D) != null && worldObj.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
+        } else if (!world.isRemote && entityplayer == null && (world.getClosestPlayerToEntity(this, 48.0D) == null || (world.getClosestPlayerToEntity(this, 48.0D) != null && world.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
             motionX = 0;
             motionZ = 0;
             isAwake = false;
@@ -231,7 +231,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
 
     @SideOnly(Side.CLIENT)
     public void drawParticle(EntityPlayer entityplayer) {
-        ParticleBreaking fx = new EntityBreakingParticleFX(worldObj, entityplayer.posX + rand.nextFloat() - 0.5F, entityplayer.posY + entityplayer.getEyeHeight(), entityplayer.posZ + rand.nextFloat() - 0.5F, CCItems.gummyBall);
+        ParticleBreaking fx = new EntityBreakingParticleFX(world, entityplayer.posX + rand.nextFloat() - 0.5F, entityplayer.posY + entityplayer.getEyeHeight(), entityplayer.posZ + rand.nextFloat() - 0.5F, CCItems.gummyBall);
         Minecraft.getMinecraft().effectRenderer.addEffect(fx);
     }
 

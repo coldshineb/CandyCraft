@@ -58,7 +58,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                     EntityJellyQueen entity = new EntityJellyQueen(worldIn);
                     entity.setPosition(pos.getX(), 300, pos.getZ());
                     entity.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData) null);
-                    worldIn.spawnEntityInWorld(entity);
+                    worldIn.spawnEntity(entity);
                 }
                 if (random.nextInt(100) == 0) {
                     return generateCherry(worldIn, pos);
@@ -70,7 +70,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                     metaLeaves = 0;
                 }
 
-                if (worldIn.getBiomeGenForCoords(pos) == CCBiomes.candyForest && random.nextInt(30) == 0) {
+                if (worldIn.getBiome(pos) == CCBiomes.candyForest && random.nextInt(30) == 0) {
                     return new WorldGenBigCandyTree(true, metaLeaves).generate(worldIn, random, pos);
                 }
 
@@ -292,7 +292,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
 
                     i4 = par2Random.nextInt(3);
 
-                    if (par1World.getBiomeGenForCoords(new BlockPos(par3, par4, par5)) == CCBiomes.candyHellMountains && par2Random.nextInt(20) == 0) {
+                    if (par1World.getBiome(new BlockPos(par3, par4, par5)) == CCBiomes.candyHellMountains && par2Random.nextInt(20) == 0) {
                         this.setBlock(par3 + 1, par4 - 1, par5, CCBlocks.pudding, 0, 2);
                         this.setBlock(par3 + 1, par4, par5, CCBlocks.sugarEssenceFlower, 0, 2);
                     }

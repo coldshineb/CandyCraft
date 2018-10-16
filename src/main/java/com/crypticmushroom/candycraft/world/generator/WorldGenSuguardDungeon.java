@@ -641,9 +641,9 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
         int y = ys = pos.getY();
         int z = zs = pos.getZ();
 
-        for (int x1 = -128; x1 < 128; x1 += 16) {
-            for (int z1 = -128; z1 < 128; z1 += 16) {
-                world.getChunkProvider().provideChunk(new BlockPos(x + x1, y, z + z1)).enqueueRelightChecks();
+        for (int x1 = -8; x1 < 8; x1 ++) {
+            for (int z1 = -8; z1 < 8; z1 ++) {
+                world.getChunkProvider().provideChunk(x1 + x / 16, z1 + z / 16).enqueueRelightChecks();
             }
         }
         // SPAWN

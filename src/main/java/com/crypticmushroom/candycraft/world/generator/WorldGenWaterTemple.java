@@ -237,9 +237,9 @@ public class WorldGenWaterTemple extends WorldGenerator {
             Item it = WorldGenCandyHouse.itemToStock[random.nextInt(WorldGenCandyHouse.itemToStock.length)];
             int stack = random.nextInt(7) + 4;
             ItemStack st = new ItemStack(it);
-            st.stackSize = stack > st.getMaxStackSize() ? st.getMaxStackSize() : stack;
+            st.setCount(stack > st.getMaxStackSize() ? st.getMaxStackSize() : stack);
 
-            chest.setInventorySlotContents(random.nextInt(27), new ItemStack(st.getItem(), st.stackSize));
+            chest.setInventorySlotContents(random.nextInt(27), new ItemStack(st.getItem(), st.getCount()));
         }
         return true;
     }

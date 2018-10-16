@@ -58,7 +58,7 @@ public class EntityPingouin extends EntityAnimal {
 
     @Override
     public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stackInHand) {
-        if (!worldObj.isRemote && stackInHand != null && stackInHand.getItem() == CCItems.marshmallowFlower) {
+        if (!world.isRemote && stackInHand != null && stackInHand.getItem() == CCItems.marshmallowFlower) {
             entityDropItem(new ItemStack(CCBlocks.iceCream, rand.nextInt(6) + 5, getColor()), 0.5F);
             stackInHand.stackSize--;
         }

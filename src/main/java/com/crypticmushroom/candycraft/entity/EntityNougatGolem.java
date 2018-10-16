@@ -1,11 +1,16 @@
 package com.crypticmushroom.candycraft.entity;
 
 import com.crypticmushroom.candycraft.entity.ai.EntityAIExplode;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,7 +61,7 @@ public class EntityNougatGolem extends EntityGolem {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource dmgSrc) {
         return null;
     }
 
@@ -124,10 +129,10 @@ public class EntityNougatGolem extends EntityGolem {
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (!worldObj.isRemote && par1DamageSource.isExplosion()) {
+        if (!world.isRemote && par1DamageSource.isExplosion()) {
             return false;
         }
-        if (!worldObj.isRemote && getHealth() - par2 <= 0) {
+        if (!world.isRemote && getHealth() - par2 <= 0) {
             if (getRidingEntity() != null && riddenByEntity != null) {
                 riddenByEntity.getRidingEntity() = null;
                 riddenByEntity.setPosition(posX, posY + 2.0D, posZ);

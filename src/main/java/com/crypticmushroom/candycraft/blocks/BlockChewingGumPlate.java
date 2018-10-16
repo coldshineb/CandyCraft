@@ -34,7 +34,7 @@ public class BlockChewingGumPlate extends BlockChewingGum {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return null;
     }
 
@@ -45,9 +45,9 @@ public class BlockChewingGumPlate extends BlockChewingGum {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5) {
-        if (!canPlaceBlockAt(par1World, pos)) {
-            par1World.setBlockToAir(pos);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canPlaceBlockAt(worldIn, pos)) {
+        	worldIn.setBlockToAir(pos);
         }
     }
 

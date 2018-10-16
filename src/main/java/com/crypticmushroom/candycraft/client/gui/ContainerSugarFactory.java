@@ -4,6 +4,7 @@ import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerBrewingStand;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,7 @@ public class ContainerSugarFactory extends Container {
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, factory.currentTime);
+        listener.sendWindowProperty(this, 0, factory.currentTime);
         listener.sendAllWindowProperties(this, factory);
     }
 
@@ -45,7 +46,7 @@ public class ContainerSugarFactory extends Container {
         for (int i = 0; i < listeners.size(); ++i) {
             IContainerListener icrafting = listeners.get(i);
             if (lastCookTime != factory.currentTime) {
-                icrafting.sendProgressBarUpdate(this, 0, factory.currentTime);
+                icrafting.sendWindowProperty(this, 0, factory.currentTime);
             }
         }
 
@@ -62,7 +63,7 @@ public class ContainerSugarFactory extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return factory.isUseableByPlayer(par1EntityPlayer);
+        return factory.isUsableByPlayer(par1EntityPlayer);
     }
 
     @Override

@@ -33,21 +33,21 @@ public class EntityDynamite extends EntityThrowable {
     public void onUpdate() {
         super.onUpdate();
         fuse--;
-        if (!worldObj.isRemote && fuse <= 0) {
-            boolean var2 = worldObj.getGameRules().getBoolean("mobGriefing");
-            worldObj.createExplosion(this, posX, posY, posZ, 3, var2);
+        if (!world.isRemote && fuse <= 0) {
+            boolean var2 = world.getGameRules().getBoolean("mobGriefing");
+            world.createExplosion(this, posX, posY, posZ, 3, var2);
             setDead();
         }
-        if (worldObj.isRemote) {
+        if (world.isRemote) {
             for (int i = 0; i < 2; ++i) {
-                worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
     @Override
     protected void onImpact(RayTraceResult par1MovingObjectPosition) {
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (par1MovingObjectPosition.entityHit != null && !chocked) {
                 par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 0);
             }
@@ -58,8 +58,8 @@ public class EntityDynamite extends EntityThrowable {
                 chocked = true;
             }
             if (par1MovingObjectPosition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                IBlockState state = worldObj.getBlockState(new BlockPos(par1MovingObjectPosition.hitVec));
-                if (state.getCollisionBoundingBox(worldObj, new BlockPos(par1MovingObjectPosition.hitVec)) != null) {
+                IBlockState state = world.getBlockState(new BlockPos(par1MovingObjectPosition.hitVec));
+                if (state.getCollisionBoundingBox(world, new BlockPos(par1MovingObjectPosition.hitVec)) != null) {
                     motionY = 0;
 
                     if (par1MovingObjectPosition.sideHit == EnumFacing.NORTH || par1MovingObjectPosition.sideHit == EnumFacing.SOUTH) {

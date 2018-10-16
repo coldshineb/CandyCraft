@@ -1,5 +1,8 @@
 package com.crypticmushroom.candycraft;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.blocks.fluid.CCFluids;
 import com.crypticmushroom.candycraft.client.gui.GuiHandlerCandyCraft;
@@ -10,7 +13,7 @@ import com.crypticmushroom.candycraft.event.ClientTick;
 import com.crypticmushroom.candycraft.event.ServerEventCatcher;
 import com.crypticmushroom.candycraft.event.ServerTick;
 import com.crypticmushroom.candycraft.items.CCItems;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
+import com.crypticmushroom.candycraft.misc.CCAdvancements;
 import com.crypticmushroom.candycraft.misc.CCCreativeTabs;
 import com.crypticmushroom.candycraft.misc.CCRecipes;
 import com.crypticmushroom.candycraft.world.TerrainCatcher;
@@ -18,6 +21,7 @@ import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import com.crypticmushroom.candycraft.world.WorldProviderVoid;
 import com.crypticmushroom.candycraft.world.WorldTypeCandy;
 import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -35,9 +39,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-
-import java.io.File;
-import java.util.ArrayList;
 
 @Mod(modid = CandyCraft.MODID, name = CandyCraft.NAME, version = CandyCraft.VERSION)
 public class CandyCraft {
@@ -148,7 +149,7 @@ public class CandyCraft {
         CCItems.registerItems();
 
         CCRecipes.init();
-        CCAchievements.init();
+        CCAdvancements.init();
 
         //FlashFyre
         proxy.attachRenderLayers();

@@ -14,7 +14,7 @@ public class ModelPingouin extends ModelBase {
     ModelRenderer Shape5;
     ModelRenderer Shape6;
     ModelRenderer Shape7;
-    ModelRenderer Shape8;
+    public ModelRenderer Shape8;
 
     public ModelPingouin() {
         textureWidth = 64;

@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
@@ -61,7 +62,7 @@ public class EntityBunny extends EntityAnimal {
     }
 
     public EntityBunny spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
-        EntityBunny bunny = new EntityBunny(worldObj);
+        EntityBunny bunny = new EntityBunny(world);
         bunny.setColor(rand.nextInt(230) + 20, rand.nextInt(230) + 20, rand.nextInt(230) + 20);
         return bunny;
     }
@@ -93,7 +94,7 @@ public class EntityBunny extends EntityAnimal {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource dmgSrc) {
         return null;
     }
 
@@ -142,7 +143,7 @@ public class EntityBunny extends EntityAnimal {
 
     @Override
     public void onLivingUpdate() {
-        if (!worldObj.isRemote && !inWater) {
+        if (!world.isRemote && !inWater) {
             if (jumpDelay > 0 && onGround) {
                 jumpDelay--;
                 getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);

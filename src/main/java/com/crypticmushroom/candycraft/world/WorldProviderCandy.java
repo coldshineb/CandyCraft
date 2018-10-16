@@ -103,7 +103,7 @@ public class WorldProviderCandy extends WorldProvider {
 
     @Override
     public IChunkGenerator createChunkGenerator() {
-        return new ChunkProviderCandyWorld(world, world.getSeed(), false, "");
+        return new ChunkGeneratorCandyWorld(world, world.getSeed(), false, "");
     }
 
     @Override

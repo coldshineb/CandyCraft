@@ -32,7 +32,7 @@ public class ItemCandyBow extends Item {
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-        if (!(entityLiving instanceof EntityPlayer)) {
+        /*if (!(entityLiving instanceof EntityPlayer)) {
             return;
         }
 
@@ -74,7 +74,7 @@ public class ItemCandyBow extends Item {
             int l2 = EnchantmentHelper.getEnchantmentLevel(CCEnchantments.honey_glue, stack);
 
             if (l2 > 0) {
-                entityarrow.slow = l2;
+               // entityarrow.slow = l2;
             }
             if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
                 entityarrow.setFire(100);
@@ -88,13 +88,14 @@ public class ItemCandyBow extends Item {
             } else {
                 player.inventory.deleteStack(CCItems.honeyArrow);
             }
-
+            
             entityarrow.pickupStatus = PickupStatus.ALLOWED;
 
             if (!worldIn.isRemote) {
                 worldIn.spawnEntity(entityarrow);
             }
-        }
+        }*/
+    	// TODO REIMPLEMENT This section
     }
 
     @Override

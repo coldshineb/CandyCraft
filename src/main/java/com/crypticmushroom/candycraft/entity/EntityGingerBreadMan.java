@@ -3,8 +3,20 @@ package com.crypticmushroom.candycraft.entity;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.entity.ai.EntityAIAvoidPlayerGinger;
 import com.crypticmushroom.candycraft.items.CCItems;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IMerchant;
+import net.minecraft.entity.INpc;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookAtTradePlayer;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPlay;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITradePlayer;
+import net.minecraft.entity.ai.EntityAIVillagerMate;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -224,8 +237,8 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
 
     @Override
     public EntityVillager createChild(EntityAgeable par1EntityAgeable) {
-        EntityGingerBreadMan entityvillager = new EntityGingerBreadMan(worldObj);
-        entityvillager.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
+        EntityGingerBreadMan entityvillager = new EntityGingerBreadMan(world);
+        entityvillager.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
         return entityvillager;
     }
 
@@ -240,7 +253,7 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource dmgSrc) {
         return SoundEvents.ENTITY_VILLAGER_HURT;
     }
 

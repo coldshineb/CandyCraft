@@ -1,7 +1,7 @@
 package com.crypticmushroom.candycraft.entity;
 
 import com.crypticmushroom.candycraft.items.CCItems;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
+import com.crypticmushroom.candycraft.misc.CCAdvancements;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,11 +71,11 @@ public class EntityCandyCreeper extends EntityCreeper {
                     playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1.0F, 0.0F + (60 - counter) / 60.0f);
                 }
                 setLocationAndAngles(posX, posY, posZ, rotationYaw + 1, rotationPitch + 1);
-                if (!worldObj.isRemote && counter <= 0) {
-                    boolean var2 = worldObj.getGameRules().getBoolean("mobGriefing");
-                    worldObj.createExplosion(this, posX, posY, posZ, explosionRadius * 6, var2);
-                    worldObj.createExplosion(this, posX, posY, posZ, explosionRadius * 6, var2);
-                    worldObj.createExplosion(this, posX, posY, posZ, explosionRadius * 6, var2);
+                if (!world.isRemote && counter <= 0) {
+                    boolean var2 = world.getGameRules().getBoolean("mobGriefing");
+                    world.createExplosion(this, posX, posY, posZ, explosionRadius * 6, var2);
+                    world.createExplosion(this, posX, posY, posZ, explosionRadius * 6, var2);
+                    world.createExplosion(this, posX, posY, posZ, explosionRadius * 6, var2);
                     setDead();
                     dropItem(Items.COOKIE, 32);
                 }
@@ -84,13 +84,13 @@ public class EntityCandyCreeper extends EntityCreeper {
             if (timeSinceIgnited >= fuseTime) {
                 timeSinceIgnited = fuseTime;
 
-                if (!worldObj.isRemote) {
-                    boolean var2 = worldObj.getGameRules().getBoolean("mobGriefing");
+                if (!world.isRemote) {
+                    boolean var2 = world.getGameRules().getBoolean("mobGriefing");
 
                     if (getPowered()) {
-                        worldObj.createExplosion(this, posX, posY, posZ, explosionRadius * 2, var2);
+                        world.createExplosion(this, posX, posY, posZ, explosionRadius * 2, var2);
                     } else {
-                        worldObj.createExplosion(this, posX, posY, posZ, explosionRadius, var2);
+                        world.createExplosion(this, posX, posY, posZ, explosionRadius, var2);
                     }
 
                     setDead();
@@ -104,8 +104,8 @@ public class EntityCandyCreeper extends EntityCreeper {
     @Override
     public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stackInHand) {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-        if (!worldObj.isRemote && var2 != null && var2.getItem() == CCItems.lollipop && !isExploding) {
-            par1EntityPlayer.addStat(CCAchievements.lollipopCreep);
+        if (!world.isRemote && var2 != null && var2.getItem() == CCItems.lollipop && !isExploding) {
+            par1EntityPlayer.addStat(CCAdvancements.lollipopCreep);
             isExploding = true;
             counter = 60;
             return true;
