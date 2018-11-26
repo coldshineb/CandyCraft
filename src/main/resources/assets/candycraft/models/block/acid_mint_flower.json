@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "candycraftmod:blocks/acid_mint_flower"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "block/torch",
-  "textures": {
-    "torch": "candycraftmod:blocks/honey_torch"
-  }
-}

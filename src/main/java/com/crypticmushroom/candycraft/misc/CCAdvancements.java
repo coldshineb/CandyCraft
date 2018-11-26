@@ -1,19 +1,11 @@
 package com.crypticmushroom.candycraft.misc;
 
-import com.crypticmushroom.candycraft.blocks.CCBlocks;
-import com.crypticmushroom.candycraft.items.CCItems;
-
 import net.minecraft.advancements.Advancement;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 
 public class CCAdvancements {
-   // public static AdvancementPage AdvancementPage;
+    // public static AdvancementPage AdvancementPage;
     public static Advancement craftSugarBlock;
     public static Advancement enterCandyWorld;
     public static Advancement gettingCandyCaneSugar;
@@ -45,7 +37,7 @@ public class CCAdvancements {
     private static ArrayList<Advancement> AdvancementList = new ArrayList<Advancement>();
 
     // TODO reimplments advancements
-    
+
     public static void init() {
         /*craftSugarBlock = setAdvancement("craftSugarBlock", 0, 0, new ItemStack(CCBlocks.sugarBlock), null, false);
         enterCandyWorld = setAdvancement("enterCandyWorld", 2, 0, new ItemStack(CCBlocks.candyPortal), craftSugarBlock, true);

@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "candycraftmod:blocks/ice_cream.2",
-    "top": "candycraftmod:blocks/ice_cream.2",
-    "side": "candycraftmod:blocks/ice_cream.2"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "candycraftmod:blocks/caramel_brick",
-    "top": "candycraftmod:blocks/caramel_brick",
-    "side": "candycraftmod:blocks/caramel_brick"
-  }
-}
