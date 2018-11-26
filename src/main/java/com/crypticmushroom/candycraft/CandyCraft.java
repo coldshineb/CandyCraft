@@ -24,7 +24,7 @@ public class CandyCraft {
     @SidedProxy(clientSide = "com.crypticmushroom.candycraft.ClientProxy", serverSide = "com.crypticmushroom.candycraft.CommonProxy")
     public static CommonProxy proxy;
 
-    private static CreativeTabs creativeTab = new CreativeTabs(NAME) {
+    public static CreativeTabs creativeTab = new CreativeTabs(NAME) {
         @Override
         public ItemStack getTabIconItem() {
             return null;//Item.getItemFromBlock(test);
