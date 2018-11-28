@@ -2,6 +2,7 @@ package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.misc.IModelProvider;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -9,10 +10,10 @@ import net.minecraft.block.state.IBlockState;
 public class BlockCandyLog extends BlockLog implements IModelProvider {
 
     public BlockCandyLog(String name) {
-        setCreativeTab(CandyCraft.creativeTab);
+        setCreativeTab(CandyCraft.ccTab);
         setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, EnumAxis.Y));
         setRegistryName(CandyCraft.MODID, name);
-        setUnlocalizedName(CandyCraft.MODID + name);
+        setUnlocalizedName(CandyCraft.MODID + "." + name);
     }
 
     @Override

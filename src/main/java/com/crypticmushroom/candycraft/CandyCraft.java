@@ -1,7 +1,10 @@
 package com.crypticmushroom.candycraft;
 
+import com.crypticmushroom.candycraft.init.CCBlocks;
 import com.crypticmushroom.candycraft.misc.CCAdvancements;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,15 +27,15 @@ public class CandyCraft {
     @SidedProxy(clientSide = "com.crypticmushroom.candycraft.ClientProxy", serverSide = "com.crypticmushroom.candycraft.CommonProxy")
     public static CommonProxy proxy;
 
-    public static CreativeTabs creativeTab = new CreativeTabs(NAME) {
+    public static CreativeTabs ccTab = new CreativeTabs(NAME) {
         @Override
         public ItemStack getTabIconItem() {
-            return null;//Item.getItemFromBlock(test);
+        	return new ItemStack(Item.getItemFromBlock(CCBlocks.PUDDING_FLOUR));
         }
 
         @Override
         public String getTranslatedTabLabel() {
-            return MODID;
+            return NAME;
         }
     };
 
