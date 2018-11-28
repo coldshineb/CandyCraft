@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_bottom_top",
+    "textures": {
+      "particle": "candycraft:blocks/pudding_side_flour",
+      "side": "candycraft:blocks/pudding_side_flour",
+      "up": "candycraft:blocks/pudding_top",
+      "down": "candycraft:blocks/pudding_bottom"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}
