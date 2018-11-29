@@ -2,8 +2,6 @@ package com.crypticmushroom.candycraft.misc;
 
 import net.minecraft.advancements.Advancement;
 
-import java.util.ArrayList;
-
 public class CCAdvancements {
     // public static AdvancementPage AdvancementPage;
     public static Advancement craftSugarBlock;
@@ -34,7 +32,7 @@ public class CCAdvancements {
     public static Advancement eatBlock;
     public static Advancement craftCoins;
     public static Advancement openWiki;
-    private static ArrayList<Advancement> AdvancementList = new ArrayList<Advancement>();
+    //private static ArrayList<Advancement> AdvancementList = new ArrayList<Advancement>();
 
     // TODO reimplments advancements
 

@@ -1,1 +1,6 @@
 candycraft.config.title=CandyCraft Config
+tab.candycraft=CandyCraft
+
+tile.candycraft.marshmallow_log.name=Marshmallow Log
+tile.candycraft.pudding_flour.name=Pudding
+tile.candycraft.pudding_sugar.name=Pudding
