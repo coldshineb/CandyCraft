@@ -1,12 +1,7 @@
 package com.crypticmushroom.candycraft.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.misc.IModelProvider;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -19,13 +14,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockPudding extends Block implements IGrowable, IModelProvider {
     public BlockPudding(String name) {
         super(Material.GROUND);
         setCreativeTab(CandyCraft.ccTab);
         setTickRandomly(true);
         setRegistryName(CandyCraft.MODID, name);
-        setUnlocalizedName(CandyCraft.MODID + "." + name);
+        setTranslationKey(CandyCraft.MODID + "." + name);
     }
 
     @Override
@@ -49,7 +47,9 @@ public class BlockPudding extends Block implements IGrowable, IModelProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
+
+
 }

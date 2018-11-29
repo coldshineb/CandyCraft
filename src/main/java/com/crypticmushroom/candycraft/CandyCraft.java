@@ -2,7 +2,6 @@ package com.crypticmushroom.candycraft;
 
 import com.crypticmushroom.candycraft.init.CCBlocks;
 import com.crypticmushroom.candycraft.misc.CCAdvancements;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,19 +28,18 @@ public class CandyCraft {
 
     public static CreativeTabs ccTab = new CreativeTabs(NAME) {
         @Override
-        public ItemStack getTabIconItem() {
-        	return new ItemStack(Item.getItemFromBlock(CCBlocks.PUDDING_FLOUR));
+        public ItemStack createIcon() {
+            return new ItemStack(Item.getItemFromBlock(CCBlocks.PUDDING_FLOUR));
         }
 
         @Override
-        public String getTranslatedTabLabel() {
+        public String getTranslationKey() {
             return NAME;
         }
     };
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
     }
 
     @EventHandler
