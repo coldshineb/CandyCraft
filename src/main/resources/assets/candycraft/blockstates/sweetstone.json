@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "candycraft:sweetstone" },
+            { "model": "candycraft:sweetstone_mirrored" },
+            { "model": "candycraft:sweetstone", "y": 180 },
+            { "model": "candycraft:sweetstone_mirrored", "y": 180 }
+        ]
+    }
+}

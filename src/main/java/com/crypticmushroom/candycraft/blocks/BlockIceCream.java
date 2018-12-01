@@ -7,6 +7,7 @@ import com.crypticmushroom.candycraft.misc.IModelProvider;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,6 +26,7 @@ public class BlockIceCream extends Block implements IModelProvider {
         setDefaultState(blockState.getBaseState().withProperty(VARIANT, EnumType.plain));
         setCreativeTab(CandyCraft.ccTab);
         setRegistryName("ice_cream_block");
+        setSoundType(SoundType.SNOW);
         setTranslationKey(MODID + ".ice_cream_block");
     }
 

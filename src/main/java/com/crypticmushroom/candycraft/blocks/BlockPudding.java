@@ -22,6 +22,7 @@ public class BlockPudding extends Block implements IGrowable, IModelProvider {
         super(Material.GROUND);
         setCreativeTab(CandyCraft.ccTab);
         setTickRandomly(true);
+        setResistance(2.5F);
         setRegistryName(CandyCraft.MODID, name);
         setTranslationKey(CandyCraft.MODID + "." + name);
     }

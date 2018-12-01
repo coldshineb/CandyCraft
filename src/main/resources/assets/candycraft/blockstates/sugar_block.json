@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "candycraft:pudding_block"
+      "model": "candycraft:sugar_block"
     }
   }
 }

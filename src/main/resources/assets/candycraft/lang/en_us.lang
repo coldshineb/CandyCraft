@@ -1,9 +1,12 @@
 candycraft.config.title=CandyCraft Config
 tab.candycraft=CandyCraft
 
-tile.candycraft.marshmallow_log.name=Marshmallow Log
+tile.candycraft.sweetstone.name=Sweetstone
 tile.candycraft.pudding_block.name=Pudding
+tile.candycraft.pudding_top.name=Pudding Top
+tile.candycraft.sugar_block.name=Sugar Block
 tile.candycraft.flour_block.name=Flour block
+tile.candycraft.marshmallow_log.name=Marshmallow Log
 tile.candycraft.marshmallow_planks.name=Marshmallow Planks
 tile.candycraft.ice_cream_block.plain.name=Ice Cream
 tile.candycraft.ice_cream_block.chocolate.name=Chocolate Ice Cream
