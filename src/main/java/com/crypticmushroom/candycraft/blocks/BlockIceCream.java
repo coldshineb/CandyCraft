@@ -1,7 +1,10 @@
 package com.crypticmushroom.candycraft.blocks;
 
+import static com.crypticmushroom.candycraft.CandyCraft.MODID;
+
 import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.misc.IModelProvider;
+
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -13,18 +16,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 
-import static com.crypticmushroom.candycraft.CandyCraft.MODID;
-
 public class BlockIceCream extends Block implements IModelProvider {
 
     private static final PropertyEnum<EnumType> VARIANT = PropertyEnum.create("variant", EnumType.class);
 
     public BlockIceCream() {
         super(Material.SAND);
-        setDefaultState(blockState.getBaseState().withProperty(VARIANT, EnumType.BLUEBERRY));
+        setDefaultState(blockState.getBaseState().withProperty(VARIANT, EnumType.plain));
         setCreativeTab(CandyCraft.ccTab);
-        setRegistryName("icecream");
-        setTranslationKey(MODID + ".icecream");
+        setRegistryName("ice_cream_block");
+        setTranslationKey(MODID + ".ice_cream_block");
     }
 
     @Override
@@ -64,12 +65,12 @@ public class BlockIceCream extends Block implements IModelProvider {
     }
 
     public enum EnumType implements IStringSerializable {
-        BLUEBERRY(0, "blueberry"),
+        plain(0, "plain"),
         CHOCOLATE(1, "chocolate"),
-        MINT(2, "mint"),
-        plain(3, "plain"),
-        STRAWBERRY(4, "strawberry"),
-        VANILLA(5, "vanilla");
+        VANILLA(2, "vanilla"),
+        STRAWBERRY(3, "strawberry"),
+        MINT(4, "mint"),
+        BLUEBERRY(5, "blueberry");
 
         private static final EnumType[] META_LOOKUP = new EnumType[values().length];
 

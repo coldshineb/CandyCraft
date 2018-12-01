@@ -21,27 +21,26 @@ import static com.crypticmushroom.candycraft.CandyCraft.MODID;
 
 @Mod.EventBusSubscriber
 public class CCBlocks {
-    public static final Block PUDDING_FLOUR = new BlockPudding("pudding_flour");
-    public static final Block PUDDING_SUGAR = new BlockPudding("pudding_sugar");
+    public static final Block PUDDING_BLOCK = new BlockPudding("pudding_block");
     public static final Block MARSHMALLOW_LOG = new BlockCandyLog("marshmallow_log");
-    public static final Block FLOUR_BLOCK = new BlockBase(Material.GROUND).setRegistryName("flour").setTranslationKey(MODID + ".flour").setHardness(0.6f).setCreativeTab(CandyCraft.ccTab);
-    public static final Block MARSHMALLOW_PLANK = new BlockBase(Material.WOOD).setRegistryName("marshmallow_plank").setTranslationKey(MODID + ".marshmallow_plank").setHardness(2.0f).setCreativeTab(CandyCraft.ccTab);
-    public static final Block ICECREAM = new BlockIceCream();
+    public static final Block FLOUR_BLOCK = new BlockBase(Material.GROUND).setRegistryName("flour_block").setTranslationKey(MODID + ".flour_block").setHardness(0.6f).setCreativeTab(CandyCraft.ccTab);
+    public static final Block MARSHMALLOW_PLANKS = new BlockBase(Material.WOOD).setRegistryName("marshmallow_planks").setTranslationKey(MODID + ".marshmallow_planks").setHardness(2.0f).setCreativeTab(CandyCraft.ccTab);
+    public static final Block ICE_CREAM_BLOCK = new BlockIceCream();
 
     public static List<Block> blocks;
     public static List<Block> blockWithSpecialItem;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> registryEvent) {
-        blocks = Lists.newArrayList(PUDDING_FLOUR, PUDDING_SUGAR, MARSHMALLOW_LOG, FLOUR_BLOCK, MARSHMALLOW_PLANK);
+        blocks = Lists.newArrayList(PUDDING_BLOCK, FLOUR_BLOCK, MARSHMALLOW_LOG, MARSHMALLOW_PLANKS);
         blocks.forEach(b -> registryEvent.getRegistry().register(b));
-        blockWithSpecialItem = Lists.newArrayList(ICECREAM);
+        blockWithSpecialItem = Lists.newArrayList(ICE_CREAM_BLOCK);
         blockWithSpecialItem.forEach(b -> registryEvent.getRegistry().register(b));
     }
 
     @SubscribeEvent
     public static void registerItemBlocks(RegistryEvent.Register<Item> registryEvent) {
         blocks.forEach(b -> registryEvent.getRegistry().register(new ItemBlock(b).setRegistryName(b.getRegistryName()).setTranslationKey(b.getTranslationKey())));
-        registryEvent.getRegistry().register(new ItemMultiTexture(ICECREAM, ICECREAM, var1 -> BlockIceCream.EnumType.byMetadata(var1.getMetadata()).getName()).setRegistryName("icecream"));
+        registryEvent.getRegistry().register(new ItemMultiTexture(ICE_CREAM_BLOCK, ICE_CREAM_BLOCK, var1 -> BlockIceCream.EnumType.byMetadata(var1.getMetadata()).getName()).setRegistryName("ice_cream_block"));
     }
 }

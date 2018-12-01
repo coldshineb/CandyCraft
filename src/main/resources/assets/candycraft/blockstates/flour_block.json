@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "candycraft:flour"
+      "model": "candycraft:flour_block"
     }
   }
 }

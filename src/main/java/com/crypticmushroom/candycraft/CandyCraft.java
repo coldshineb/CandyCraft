@@ -29,7 +29,7 @@ public class CandyCraft {
     public static CreativeTabs ccTab = new CreativeTabs(NAME) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(Item.getItemFromBlock(CCBlocks.PUDDING_FLOUR));
+            return new ItemStack(Item.getItemFromBlock(CCBlocks.PUDDING_BLOCK));
         }
 
         @Override
