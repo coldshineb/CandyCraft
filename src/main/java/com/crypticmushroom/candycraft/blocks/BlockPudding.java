@@ -50,6 +50,4 @@ public class BlockPudding extends Block implements IGrowable, IModelProvider {
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
-
-
 }

@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "item/generated"
+  },
+  "variants": {
+    "variant": {
+      "blueberry": {
+        "textures": {
+          "layer0": "candycraft:blocks/ice_cream_blueberry"
+        }
+      },
+      "chocolate": {
+        "textures": {
+          "layer0": "candycraft:blocks/ice_cream_chocolate"
+        }
+      },
+      "mint": {
+        "textures": {
+          "layer0": "candycraft:blocks/ice_cream_mint"
+        }
+      },
+      "plain": {
+        "textures": {
+          "layer0": "candycraft:blocks/ice_cream_plain"
+        }
+      },
+      "strawberry": {
+        "textures": {
+          "layer0": "candycraft:blocks/ice_cream_strawberry"
+        }
+      },
+      "vanilla": {
+        "textures": {
+          "layer0": "candycraft:blocks/ice_cream_vanilla"
+        }
+      }
+    }
+  }
+}

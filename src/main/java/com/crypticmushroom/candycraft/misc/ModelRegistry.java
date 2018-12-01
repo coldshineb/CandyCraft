@@ -19,7 +19,7 @@ public class ModelRegistry {
     @SubscribeEvent
     public static void onRegisterModels(ModelRegistryEvent event) {
         CCBlocks.blocks.stream().filter(i -> i instanceof IModelProvider).forEach(ModelRegistry::registerBlockModel);
-
+        CCBlocks.blockWithSpecialItem.stream().filter(i -> i instanceof IModelProvider).forEach(ModelRegistry::registerBlockModel);
     }
 
     @SideOnly(Side.CLIENT)
