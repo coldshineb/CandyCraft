@@ -13,6 +13,8 @@ public class BlockCandyLog extends BlockLog implements IModelProvider {
         setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, EnumAxis.Y));
         setRegistryName(CandyCraft.MODID, name);
         setTranslationKey(CandyCraft.MODID + "." + name);
+        setHardness(2.0F);
+        setResistance(10.0F);
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "candycraft:caramel_log"
+    },
+    "axis=z": {
+      "model": "candycraft:caramel_log",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "candycraft:caramel_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=none": {
+      "model": "candycraft:caramel_log"
+    }
+  }
+}
