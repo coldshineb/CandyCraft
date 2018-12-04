@@ -9,6 +9,19 @@ import net.minecraft.block.material.Material;
 import static com.crypticmushroom.candycraft.CandyCraft.MODID;
 
 public class BlockBase extends Block implements IModelProvider {
+
+    public BlockBase(Material materialIn, String name, SoundType soundType, float resistance, float hardness) {
+        this(materialIn, name, soundType);
+        setResistance(resistance);
+        setHardness(hardness);
+    }
+
+    public BlockBase(Material materialIn, String name, float resistance, float hardness) {
+        this(materialIn, name);
+        setResistance(resistance);
+        setHardness(hardness);
+    }
+
     public BlockBase(Material materialIn, String name, SoundType soundType) {
         this(materialIn, name);
         setSoundType(soundType);
@@ -18,7 +31,5 @@ public class BlockBase extends Block implements IModelProvider {
         setRegistryName(name);
         setTranslationKey(MODID + "." + name);
         setCreativeTab(CandyCraft.ccTab);
-        setResistance(2.5f);
-        setHardness(0.5f);
     }
 }
