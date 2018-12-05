@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.misc;
 
+import com.crypticmushroom.candycraft.blocks.fluids.BlockGrenadine;
 import com.crypticmushroom.candycraft.init.CCBlocks;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -14,12 +15,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static com.crypticmushroom.candycraft.init.CCBlocks.GRENADINE_FLUID;
+
 @Mod.EventBusSubscriber
 public class ModelRegistry {
     @SubscribeEvent
     public static void onRegisterModels(ModelRegistryEvent event) {
         CCBlocks.blocks.stream().filter(i -> i instanceof IModelProvider).forEach(ModelRegistry::registerBlockModel);
         CCBlocks.blockWithSpecialItem.stream().filter(i -> i instanceof IModelProvider).forEach(ModelRegistry::registerBlockModel);
+        ((BlockGrenadine) GRENADINE_FLUID).initModel();
     }
 
     @SideOnly(Side.CLIENT)

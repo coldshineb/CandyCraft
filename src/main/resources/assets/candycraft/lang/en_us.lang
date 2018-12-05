@@ -16,3 +16,8 @@ tile.candycraft.ice_cream_block.vanilla.name=Vanilla Ice Cream
 tile.candycraft.ice_cream_block.strawberry.name=Strawberry Ice Cream
 tile.candycraft.ice_cream_block.mint.name=Mint Ice Cream
 tile.candycraft.ice_cream_block.blueberry.name=Blueberry Ice Cream
+tile.candycraft.grenadine.name=Grenadine
+
+item.candycraft.grenadine_bucker.name=Bucket of Grenadine
+
+fluid.grenadine=Grenadine

@@ -4,6 +4,7 @@ import com.crypticmushroom.candycraft.blocks.BlockBase;
 import com.crypticmushroom.candycraft.blocks.BlockCandyLog;
 import com.crypticmushroom.candycraft.blocks.BlockIceCream;
 import com.crypticmushroom.candycraft.blocks.BlockPudding;
+import com.crypticmushroom.candycraft.blocks.fluids.BlockGrenadine;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -42,6 +43,7 @@ public class CCBlocks {
     public static final Block CHOCOLATE_STONE = new BlockBase(Material.ROCK, "chocolate_stone", 30.0F, 1.5F);
     public static final Block CHOCOLATE_PUDDING_BLOCK = new BlockPudding("chocolate_pudding_block");
     public static final Block CHOCOLATE_PUDDING_TOP = new BlockPudding("chocolate_pudding_top");
+    public static final Block GRENADINE_FLUID = new BlockGrenadine();
 
     public static List<Block> blocks;
     public static List<Block> blockWithSpecialItem;
@@ -50,7 +52,7 @@ public class CCBlocks {
     public static void registerBlocks(RegistryEvent.Register<Block> registryEvent) {
         blocks = Lists.newArrayList(SWEETSTONE, PUDDING_BLOCK, PUDDING_TOP, SUGAR_BLOCK, FLOUR_BLOCK, MARSHMALLOW_LOG, MARSHMALLOW_PLANKS, CARAMEL_LOG, CARAMEL_PLANKS);
         blocks.forEach(b -> registryEvent.getRegistry().register(b));
-        blockWithSpecialItem = Lists.newArrayList(ICE_CREAM_BLOCK);
+        blockWithSpecialItem = Lists.newArrayList(ICE_CREAM_BLOCK, GRENADINE_FLUID);
         blockWithSpecialItem.forEach(b -> registryEvent.getRegistry().register(b));
     }
 

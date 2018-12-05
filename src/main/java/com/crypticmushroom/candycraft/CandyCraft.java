@@ -1,10 +1,12 @@
 package com.crypticmushroom.candycraft;
 
 import com.crypticmushroom.candycraft.init.CCBlocks;
+import com.crypticmushroom.candycraft.init.CCFluids;
 import com.crypticmushroom.candycraft.misc.CCAdvancements;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -38,8 +40,13 @@ public class CandyCraft {
         }
     };
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        CCFluids.init();
     }
 
     @EventHandler
@@ -48,6 +55,6 @@ public class CandyCraft {
     }
 
     @EventHandler
-    public void modsLoaded(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event) {
     }
 }
