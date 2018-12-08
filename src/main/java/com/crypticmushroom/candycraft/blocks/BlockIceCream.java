@@ -43,7 +43,6 @@ public class BlockIceCream extends Block implements IModelProvider {
     }
 
     @Override
-    @SuppressWarnings("deprecated")
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(VARIANT, EnumType.byMetadata(meta));
     }
