@@ -1,8 +1,0 @@
-{
-  "parent": "block/upper_slab",
-  "textures": {
-    "bottom": "candycraftmod:blocks/marshmallow_planks.2",
-    "top": "candycraftmod:blocks/marshmallow_planks.2",
-    "side": "candycraftmod:blocks/marshmallow_planks.2"
-  }
-}

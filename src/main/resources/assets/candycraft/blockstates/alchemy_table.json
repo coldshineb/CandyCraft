@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "candycraftmod:alchemy_table"
+      "model": "candycraft:alchemy_table"
     }
   }
 }

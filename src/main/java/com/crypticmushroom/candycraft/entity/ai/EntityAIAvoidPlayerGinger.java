@@ -14,8 +14,7 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 
-public class EntityAIAvoidPlayerGinger extends EntityAIBase {
-    private static final String __OBFID = "CL_00001574";
+public class EntityAIAvoidPlayerGinger<T extends Entity> extends EntityAIBase {
     private EntityCreature theEntity;
     private double farSpeed;
     private double nearSpeed;
@@ -32,9 +31,9 @@ public class EntityAIAvoidPlayerGinger extends EntityAIBase {
     /**
      * The class of the entity we should avoid
      */
-    private Class targetEntityClass;
+    private final Class<T> targetEntityClass;
 
-    public EntityAIAvoidPlayerGinger(EntityCreature par1EntityCreature, Class par2Class, float par3, double par4, double par6) {
+    public EntityAIAvoidPlayerGinger(EntityCreature par1EntityCreature, Class<T> par2Class, float par3, double par4, double par6) {
         theEntity = par1EntityCreature;
         targetEntityClass = par2Class;
         distanceFromEntity = par3;
@@ -54,7 +53,7 @@ public class EntityAIAvoidPlayerGinger extends EntityAIBase {
                 return false;
             }
 
-            closestLivingEntity = theEntity.worldObj.getClosestPlayerToEntity(theEntity, distanceFromEntity);
+            closestLivingEntity = theEntity.world.getClosestPlayerToEntity(theEntity, distanceFromEntity);
 
             if (closestLivingEntity != null && ((EntityPlayer) closestLivingEntity).inventory.hasItemStack(new ItemStack(CCItems.gingerbreadEmblem))) {
                 return false;
@@ -63,7 +62,7 @@ public class EntityAIAvoidPlayerGinger extends EntityAIBase {
                 return false;
             }
         } else {
-            List list = theEntity.worldObj.getEntitiesWithinAABB(targetEntityClass, theEntity.getEntityBoundingBox().expand(distanceFromEntity, 3.0D, distanceFromEntity));
+            List list = theEntity.world.getEntitiesWithinAABB(targetEntityClass, theEntity.getEntityBoundingBox().expand(distanceFromEntity, 3.0D, distanceFromEntity));
 
             if (list.isEmpty()) {
                 return false;
@@ -76,11 +75,11 @@ public class EntityAIAvoidPlayerGinger extends EntityAIBase {
 
         if (vec3 == null) {
             return false;
-        } else if (closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < closestLivingEntity.getDistanceSqToEntity(theEntity)) {
+        } else if (closestLivingEntity.getDistanceSq(vec3.x, vec3.y, vec3.z) < closestLivingEntity.getDistanceSq(theEntity)) {
             return false;
         } else {
-            entityPathEntity = entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-            return entityPathEntity == null ? false : entityPathEntity.isDestinationSame(vec3);
+            entityPathEntity = entityPathNavigate.getPathToXYZ(vec3.x, vec3.y, vec3.z);
+            return entityPathEntity != null;
         }
     }
 
@@ -88,7 +87,7 @@ public class EntityAIAvoidPlayerGinger extends EntityAIBase {
      * Returns whether an in-progress EntityAIBase should continue executing
      */
     @Override
-    public boolean continueExecuting() {
+    public boolean shouldContinueExecuting() {
         return !entityPathNavigate.noPath();
     }
 
@@ -113,7 +112,7 @@ public class EntityAIAvoidPlayerGinger extends EntityAIBase {
      */
     @Override
     public void updateTask() {
-        if (theEntity.getDistanceSqToEntity(closestLivingEntity) < 49.0D) {
+        if (theEntity.getDistanceSq(closestLivingEntity) < 49.0D) {
             theEntity.getNavigator().setSpeed(nearSpeed);
         } else {
             theEntity.getNavigator().setSpeed(farSpeed);

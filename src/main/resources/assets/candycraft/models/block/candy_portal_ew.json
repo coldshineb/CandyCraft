@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "candycraftmod:blocks/caramel_portal",
-    "portal": "candycraftmod:blocks/caramel_portal"
+    "particle": "candycraft:blocks/caramel_portal",
+    "portal": "candycraft:blocks/caramel_portal"
   },
   "elements": [
     {

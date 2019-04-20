@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "#MARSHMALLOWPLANKS"
+    }
+  },
+  "result": {
+    "item": "candycraft:marshmallow_chest"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/pane_noside",
+  "textures": {
+    "pane": "candycraft:blocks/caramel_glass_0"
+  }
+}

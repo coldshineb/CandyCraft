@@ -1,16 +1,21 @@
 package com.crypticmushroom.candycraft.blocks;
 
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class BlockCandyWall extends BlockWall {
-    public BlockCandyWall(Block par1Block) {
+public class BlockCandyWall extends BlockWall implements ModelRegisterCallback {
+    public BlockCandyWall(Block par1Block, SoundType sound) {
         super(par1Block);
-        setDefaultState(blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(VARIANT, BlockWall.EnumType.NORMAL));
+        setDefaultState(blockState.getBaseState().withProperty(UP, Boolean.FALSE).withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE).withProperty(VARIANT, BlockWall.EnumType.NORMAL));
+        setSoundType(sound);
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override

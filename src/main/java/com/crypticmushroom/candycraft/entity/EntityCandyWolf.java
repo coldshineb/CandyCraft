@@ -1,16 +1,15 @@
 package com.crypticmushroom.candycraft.entity;
 
+import com.crypticmushroom.candycraft.blocks.BlockCandyLeave;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.items.CCItems;
-import com.crypticmushroom.candycraft.misc.CCAchievements;
+import com.crypticmushroom.candycraft.misc.CCAdvancements;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
@@ -26,14 +25,14 @@ import net.minecraft.world.World;
 import java.util.UUID;
 
 public class EntityCandyWolf extends EntityWolf {
-    private static final DataParameter<Integer> FUR_TIME = EntityDataManager.<Integer>createKey(EntityCandyWolf.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> FUR_TIME = EntityDataManager.createKey(EntityCandyWolf.class, DataSerializers.VARINT);
 
     public EntityCandyWolf(World par1World) {
         super(par1World);
     }
 
     public int getFurTime() {
-        return dataManager.get(FUR_TIME).intValue();
+        return dataManager.get(FUR_TIME);
     }
 
     public void setFurTime(int time) {
@@ -42,35 +41,35 @@ public class EntityCandyWolf extends EntityWolf {
 
     @Override
     public boolean isBreedingItem(ItemStack par1ItemStack) {
-        return par1ItemStack == null ? false : par1ItemStack.getItem() == CCItems.candyCane;
+        return par1ItemStack != null && par1ItemStack.getItem() == CCItems.candyCane;
     }
 
     @Override
     public EntityCandyWolf createChild(EntityAgeable par1EntityAgeable) {
-        EntityCandyWolf var2 = new EntityCandyWolf(worldObj);
+        EntityCandyWolf stack = new EntityCandyWolf(world);
         UUID var3 = getOwnerId();
 
         if (var3 != null) {
-            var2.setFurTime(worldObj.rand.nextInt(6000) + 5000);
-            var2.setOwnerId(var3);
-            var2.setTamed(true);
+            stack.setFurTime(world.rand.nextInt(6000) + 5000);
+            stack.setOwnerId(var3);
+            stack.setTamed(true);
         }
 
-        return var2;
+        return stack;
     }
 
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (isTamed()) {
                 if (getFurTime() > 0) {
                     boolean tree = false;
                     for (int i = 0; i < 4; i++) {
-                        IBlockState state = worldObj.getBlockState(new BlockPos((int) posX, (int) posY + i, (int) posZ));
-                        int metadata = state.getBlock().getMetaFromState(state);
-                        if (worldObj.getBlockState(new BlockPos((int) posX, (int) posY + i, (int) posZ)).getBlock() == CCBlocks.candyLeave && (metadata & 3) == 1) {
+                        IBlockState state = world.getBlockState(new BlockPos((int) posX, (int) posY + i, (int) posZ));
+                        IBlockState metadata = state.getBlock().getDefaultState();
+                        if (world.getBlockState(new BlockPos((int) posX, (int) posY + i, (int) posZ)).getBlock() instanceof BlockCandyLeave && metadata == CCBlocks.candyLeaveDark.getDefaultState()) {
                             tree = true;
                         }
                     }
@@ -82,7 +81,7 @@ public class EntityCandyWolf extends EntityWolf {
             if (isTamed() && getFurTime() <= 0) {
                 if (rand.nextInt(30) == 0) {
                     for (int var1 = 0; var1 < 2; ++var1) {
-                        worldObj.spawnParticle(EnumParticleTypes.SPELL_MOB, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.8D, 0.3D, 0.0D);
+                        world.spawnParticle(EnumParticleTypes.SPELL_MOB, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.8D, 0.3D, 0.0D);
                     }
                 }
             }
@@ -108,114 +107,84 @@ public class EntityCandyWolf extends EntityWolf {
     }
 
     @Override
-    public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stackInHand) {
-        ItemStack var2 = stackInHand;
+    public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        ItemStack stack = player.getHeldItemMainhand();
 
         if (isTamed()) {
-            if (var2 != null) {
-                if (var2.getItem() == Items.DYE) {
-                    EnumDyeColor enumdyecolor = EnumDyeColor.byDyeDamage(var2.getMetadata());
+            if (!stack.isEmpty()) {
+                if (stack.getItem() == Items.DYE) {
+                    EnumDyeColor enumdyecolor = EnumDyeColor.byDyeDamage(stack.getMetadata());
 
                     if (enumdyecolor != getCollarColor()) {
                         setCollarColor(enumdyecolor);
 
-                        if (!par1EntityPlayer.capabilities.isCreativeMode && --var2.stackSize <= 0) {
-                            par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                        if (!player.capabilities.isCreativeMode) {
+                            stack.shrink(1);
                         }
 
                         return true;
                     }
-                } else if (var2.getItem() == CCItems.lollipop) {
-                    par1EntityPlayer.addStat(CCAchievements.lollipopHeal);
+                } else if (stack.getItem() == CCItems.lollipop) {
+                    CCAdvancements.HEAL_CANDY_WOLF.trigger((EntityPlayerMP)player);
                     return false;
-                } else if (var2.getItem() == Items.BUCKET && getFurTime() < 1) {
-                    if (!worldObj.isRemote) {
-                        if (--var2.stackSize <= 0) {
-                            par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(CCItems.caramelBucket));
-                        } else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(CCItems.caramelBucket))) {
-                            par1EntityPlayer.dropItem(new ItemStack(CCItems.caramelBucket, 1, 0), false);
-                        }
-                        par1EntityPlayer.addStat(CCAchievements.caramelAch);
-                        setFurTime(worldObj.rand.nextInt(12000) + 5000);
+                } else if (stack.getItem() == Items.BUCKET && !player.capabilities.isCreativeMode && !this.isChild()) {
+                    stack.shrink(1);
+
+                    if (stack.isEmpty()) {
+                        player.setHeldItem(hand, CCItems.caramelBucket);
+                    } else if (!player.inventory.addItemStackToInventory(CCItems.caramelBucket)) {
+                        player.dropItem(CCItems.caramelBucket, false);
                     }
+
                     return true;
-                } else if (var2.getItem() == Items.SPAWN_EGG && !worldObj.isRemote) {
-                    Class var3 = EntityList.getClassFromID(var2.getItemDamage());
-
-                    if (var3 != null && var3.isAssignableFrom(this.getClass())) {
-                        EntityAgeable var4 = createChild(this);
-
-                        if (var4 != null) {
-                            var4.setGrowingAge(-24000);
-                            var4.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
-                            worldObj.spawnEntityInWorld(var4);
-
-                            if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                                --var2.stackSize;
-
-                                if (var2.stackSize <= 0) {
-                                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                } else if (var2 != null && isBreedingItem(var2) && getGrowingAge() == 0 && !isInLove()) {
-                    if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                        --var2.stackSize;
-
-                        if (var2.stackSize <= 0) {
-                            par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
-                        }
+                } else if (isBreedingItem(stack) && getGrowingAge() == 0 && !isInLove()) {
+                    if (!player.capabilities.isCreativeMode) {
+                        stack.shrink(1);
                     }
 
                     heal(4);
-                    setInLove(par1EntityPlayer);
-                    setAttackTarget((EntityLivingBase) null);
+                    setInLove(player);
+                    setAttackTarget(null);
 
                     for (int var3 = 0; var3 < 7; ++var3) {
                         double var4 = rand.nextGaussian() * 0.02D;
                         double var6 = rand.nextGaussian() * 0.02D;
                         double var8 = rand.nextGaussian() * 0.02D;
-                        worldObj.spawnParticle(EnumParticleTypes.HEART, posX + rand.nextFloat() * width * 2.0F - width, posY + 0.5D + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, var4, var6, var8);
+                        world.spawnParticle(EnumParticleTypes.HEART, posX + rand.nextFloat() * width * 2.0F - width, posY + 0.5D + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, var4, var6, var8);
                     }
 
                     return true;
                 }
 
             }
-            if ((isOwner(par1EntityPlayer)) && !worldObj.isRemote && !isBreedingItem(var2)) {
+            if ((isOwner(player)) && !world.isRemote && !isBreedingItem(stack)) {
                 aiSit.setSitting(!isSitting());
                 isJumping = false;
-                navigator.clearPathEntity();
-                setAttackTarget((EntityLivingBase) null);
+                navigator.clearPath();
+                setAttackTarget(null);
                 return true;
             }
         } else {
-            if (var2 != null && var2.getItem() == CCItems.candyCane && !isAngry()) {
-                if (!par1EntityPlayer.capabilities.isCreativeMode) {
-                    --var2.stackSize;
+            if (stack.getItem() == CCItems.candyCane && !isAngry()) {
+                if (!player.capabilities.isCreativeMode) {
+                    stack.shrink(1);
                 }
 
-                if (var2.stackSize <= 0) {
-                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
-                }
-
-                if (!worldObj.isRemote) {
+                if (!world.isRemote) {
                     if (rand.nextInt(3) == 0) {
                         setTamed(true);
-                        setFurTime(worldObj.rand.nextInt(12000) + 10000);
-                        navigator.clearPathEntity();
-                        setAttackTarget((EntityLiving) null);
+                        setFurTime(world.rand.nextInt(12000) + 10000);
+                        navigator.clearPath();
+                        setAttackTarget(null);
                         aiSit.setSitting(true);
                         setHealth(20);
-                        setOwnerId(par1EntityPlayer.getUniqueID());
-                        par1EntityPlayer.addStat(CCAchievements.dogTaming);
+                        setOwnerId(player.getUniqueID());
+                        CCAdvancements.TAME_CANDY_WOLF.trigger((EntityPlayerMP)player);
                         playTameEffect(true);
-                        worldObj.setEntityState(this, (byte) 7);
+                        world.setEntityState(this, (byte) 7);
                     } else {
                         playTameEffect(false);
-                        worldObj.setEntityState(this, (byte) 6);
+                        world.setEntityState(this, (byte) 6);
                     }
                 }
 
@@ -235,7 +204,7 @@ public class EntityCandyWolf extends EntityWolf {
             return false;
         } else {
             EntityCandyWolf entitywolf = (EntityCandyWolf) otherAnimal;
-            return !entitywolf.isTamed() ? false : (entitywolf.isSitting() ? false : isInLove() && entitywolf.isInLove());
+            return entitywolf.isTamed() && (!entitywolf.isSitting() && (isInLove() && entitywolf.isInLove()));
         }
     }
 }

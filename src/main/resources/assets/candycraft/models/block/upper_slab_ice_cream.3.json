@@ -1,8 +1,0 @@
-{
-  "parent": "block/upper_slab",
-  "textures": {
-    "bottom": "candycraftmod:blocks/ice_cream.3",
-    "top": "candycraftmod:blocks/ice_cream.3",
-    "side": "candycraftmod:blocks/ice_cream.3"
-  }
-}

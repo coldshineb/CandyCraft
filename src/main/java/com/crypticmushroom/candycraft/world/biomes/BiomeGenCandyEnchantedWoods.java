@@ -1,6 +1,5 @@
 package com.crypticmushroom.candycraft.world.biomes;
 
-import com.crypticmushroom.candycraft.blocks.BlockCandyLog;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.entity.EntityBee;
 import com.crypticmushroom.candycraft.entity.EntityBunny;
@@ -28,8 +27,8 @@ public class BiomeGenCandyEnchantedWoods extends BiomeGenCandy {
     }
 
     @Override
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
-        return new WorldGenEnchantedTree(false, 10, 0, CCBlocks.marshmallowLog.getDefaultState().withProperty(BlockCandyLog.properties, BlockCandyLog.EnumType.TYPE2), CCBlocks.candyLeave2.getDefaultState());
+    public WorldGenAbstractTree getRandomTreeFeature(Random par1Random) {
+        return new WorldGenEnchantedTree(false, 10, 0, CCBlocks.marshmallowLog.getDefaultState(), CCBlocks.candyLeaveEnchant.getDefaultState());
     }
 
     @Override

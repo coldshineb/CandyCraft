@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:lollipop"
+    },
+    "title": {
+      "translate": "advancements.candycraft.stall_candy_creeper.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.stall_candy_creeper.desc"
+    }
+  },
+  "parent": "candycraft:plant_lollipop",
+  "criteria": {
+    "stall_animal": {
+      "trigger": "candycraft:stall_candy_creeper"
+    }
+  }
+}

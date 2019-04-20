@@ -16,12 +16,10 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderCandy extends WorldProvider {
-    public static final DimensionType CANDY_WORLD = EnumHelper.addEnum(DimensionType.class, "CANDY_WORLD_MOD", new Class[]{Integer.class, String.class, String.class, Class.class}, CandyCraft.getCandyDimensionID(), "Candy Valley", "_candyworld", WorldProviderCandy.class);
     public static int canGenIsland = 0;
     public static int canGenVillage = 0;
     public static int canGenChewingGum = 0;
@@ -172,6 +170,6 @@ public class WorldProviderCandy extends WorldProvider {
 
     @Override
     public DimensionType getDimensionType() {
-        return CANDY_WORLD;
+        return CandyCraft.candyDim;
     }
 }

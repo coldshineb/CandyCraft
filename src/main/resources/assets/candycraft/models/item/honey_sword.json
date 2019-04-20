@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/honey_sword"
+    "layer0": "candycraft:items/honey_sword"
   },
   "display": {
     "thirdperson": {

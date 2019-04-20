@@ -1,13 +1,12 @@
 package com.crypticmushroom.candycraft.items;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemNougatPowder extends ItemFood {
+public class ItemNougatPowder extends ItemCandyFood {
     public ItemNougatPowder(int foodAmount, boolean dogLike) {
-        super(foodAmount, dogLike);
+        super(foodAmount, 0.6F, dogLike);
     }
 
     @Override

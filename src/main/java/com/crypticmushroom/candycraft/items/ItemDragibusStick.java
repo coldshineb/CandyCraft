@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.items;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.entity.EntityCandyPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,11 +13,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemDragibusStick extends Item {
+public class ItemDragibusStick extends ItemCandyBase {
     public ItemDragibusStick() {
         super();
         setMaxStackSize(1);
         setMaxDamage(25);
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override
@@ -31,15 +33,15 @@ public class ItemDragibusStick extends Item {
                 if (stack.getCount() == 0) {
                     ItemStack itemstack = new ItemStack(CCItems.dragibusStick);
                     itemstack.setTagCompound(stack.getTagCompound());
-                    return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+                    return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
                 }
 
-                return new ActionResult(EnumActionResult.SUCCESS, stack);
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
         }
 
         playerIn.addStat(StatList.getObjectUseStats(this));
-        return new ActionResult(EnumActionResult.PASS, stack);
+        return new ActionResult<>(EnumActionResult.PASS, stack);
     }
 
     @Override

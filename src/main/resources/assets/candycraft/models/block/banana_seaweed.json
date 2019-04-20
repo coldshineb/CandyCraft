@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "candycraftmod:blocks/banana_seaweed"
-  }
-}

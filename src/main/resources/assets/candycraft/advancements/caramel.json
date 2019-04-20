@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:caramel_bucket"
+    },
+    "title": {
+      "translate": "advancements.candycraft.caramel.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.caramel.desc"
+    }
+  },
+  "parent": "candycraft:tame_candy_wolf",
+  "criteria": {
+    "caramel": {
+      "trigger": "minecraft:inventory_changed",
+      "items": [
+        {
+          "item": "candycraft:caramel_bucket"
+        }
+      ]
+    }
+  }
+}

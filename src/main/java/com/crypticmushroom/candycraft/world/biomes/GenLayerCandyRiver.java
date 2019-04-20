@@ -27,11 +27,11 @@ public class GenLayerCandyRiver extends GenLayer {
 
         for (int i2 = 0; i2 < areaHeight; ++i2) {
             for (int j2 = 0; j2 < areaWidth; ++j2) {
-                int k2 = func_151630_c(aint[j2 + 0 + (i2 + 1) * k1]);
-                int l2 = func_151630_c(aint[j2 + 2 + (i2 + 1) * k1]);
-                int i3 = func_151630_c(aint[j2 + 1 + (i2 + 0) * k1]);
-                int j3 = func_151630_c(aint[j2 + 1 + (i2 + 2) * k1]);
-                int k3 = func_151630_c(aint[j2 + 1 + (i2 + 1) * k1]);
+                int k2 = riverFilter(aint[j2 + 0 + (i2 + 1) * k1]);
+                int l2 = riverFilter(aint[j2 + 2 + (i2 + 1) * k1]);
+                int i3 = riverFilter(aint[j2 + 1 + (i2 + 0) * k1]);
+                int j3 = riverFilter(aint[j2 + 1 + (i2 + 2) * k1]);
+                int k3 = riverFilter(aint[j2 + 1 + (i2 + 1) * k1]);
 
                 if (k3 == k2 && k3 == i3 && k3 == l2 && k3 == j3) {
                     aint1[j2 + i2 * areaWidth] = -1;
@@ -44,7 +44,7 @@ public class GenLayerCandyRiver extends GenLayer {
         return aint1;
     }
 
-    private int func_151630_c(int p_151630_1_) {
-        return p_151630_1_ >= 2 ? 2 + (p_151630_1_ & 1) : p_151630_1_;
+    private int riverFilter(int area) {
+        return area >= 2 ? 2 + (area & 1) : area;
     }
 }

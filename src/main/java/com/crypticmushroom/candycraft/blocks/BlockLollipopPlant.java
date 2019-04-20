@@ -4,11 +4,9 @@ import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -32,11 +30,10 @@ public class BlockLollipopPlant extends BlockCandyBush implements IGrowable {
     public BlockLollipopPlant() {
         super();
         setTickRandomly(true);
-        setCreativeTab((CreativeTabs) null);
         setHardness(0.0F);
         setSoundType(SoundType.PLANT);
         disableStats();
-        setDefaultState(blockState.getBaseState().withProperty(AGE_PROP, Integer.valueOf(0)));
+        setDefaultState(blockState.getBaseState().withProperty(AGE_PROP, 0));
     }
 
     protected static float getGrowthChance(Block bl, World worldIn, BlockPos pos) {
@@ -85,23 +82,25 @@ public class BlockLollipopPlant extends BlockCandyBush implements IGrowable {
     }
 
     @Override
+    @Deprecated
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return STEM_AABB[state.getValue(AGE_PROP).intValue()];
+        return STEM_AABB[state.getValue(AGE_PROP)];
     }
 
     @Override
+    @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(AGE_PROP, Integer.valueOf(meta));
+        return getDefaultState().withProperty(AGE_PROP, meta);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(AGE_PROP).intValue();
+        return state.getValue(AGE_PROP);
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{AGE_PROP});
+        return new BlockStateContainer(this, AGE_PROP);
     }
 
     @Override
@@ -121,13 +120,14 @@ public class BlockLollipopPlant extends BlockCandyBush implements IGrowable {
                         par1World.setBlockState(pos.up(), CCBlocks.lollipopBlock.getDefaultState());
                     }
                 } else if (l < 7) {
-                    par1World.setBlockState(pos, state.withProperty(AGE_PROP, Integer.valueOf(l + 1)), 2);
+                    par1World.setBlockState(pos, state.withProperty(AGE_PROP, l + 1), 2);
                 }
             }
         }
     }
 
     @Override
+    @Deprecated
     public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         List<ItemStack> ret = super.getDrops(world, pos, state, fortune);
 
@@ -146,11 +146,6 @@ public class BlockLollipopPlant extends BlockCandyBush implements IGrowable {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return CCItems.lollipopSeeds;
-    }
-
-    @Override
-    public int quantityDropped(Random par1Random) {
-        return 1;
     }
 
     @Override

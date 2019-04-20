@@ -7,19 +7,18 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class TileEntityRendererTeleporter extends TileEntitySpecialRenderer {
+public class TileEntityRendererTeleporter extends TileEntitySpecialRenderer<TileEntityTeleporter> {
     private static int[][] color = new int[][]{{255, 128, 0, 255, 0, 0}, {0, 0, 255, 0, 128, 255}};
 
     @Override
-    public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileEntityTeleporter te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GL11.glPushMatrix();
         GL11.glTranslated(x + 0.5D, y + 0.1D, z + 0.5D);
-        renderLight((TileEntityTeleporter) te, alpha);
+        renderLight(te, alpha);
         GL11.glPopMatrix();
     }
 

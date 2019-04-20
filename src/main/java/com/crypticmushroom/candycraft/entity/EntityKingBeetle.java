@@ -8,16 +8,18 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
+    private static final DataParameter<Integer> POWER = EntityDataManager.createKey(EntityKingBeetle.class, DataSerializers.VARINT);
     public int explosionCount = 0;
 
     public EntityKingBeetle(World world) {
@@ -34,10 +36,15 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
     }
 
     @Override
-    public boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
-        if (super.processInteract(player, hand, stack)) {
+    public void entityInit() {
+        dataManager.register(POWER, 0);
+    }
+
+    @Override
+    public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        if (super.processInteract(player, hand)) {
             return true;
-        } else if (!worldObj.isRemote && (getControllingPassenger() == null)) {
+        } else if (!world.isRemote && (getControllingPassenger() == null)) {
             player.startRiding(this);
             explosionCount = 0;
             return true;
@@ -68,21 +75,21 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
 
         Entity controller = getControllingPassenger();
 
-        if (!worldObj.isRemote && explosionCount > 0 && ticksExisted % 5 == 0 && controller != null) {
+        if (!world.isRemote && explosionCount > 0 && ticksExisted % 5 == 0 && controller != null) {
             double d1 = posX + rand.nextInt(6) - 3;
             double d2 = posY + rand.nextInt(5) - 2;
             double d3 = posZ + rand.nextInt(6) - 3;
-            worldObj.createExplosion(controller, d1, d2, d3, 2, false);
+            world.createExplosion(controller, d1, d2, d3, 2, false);
             for (int x = -3; x < 4; x++) {
                 for (int z = -3; z < 4; z++) {
-                    if (rand.nextBoolean() && CCBlocks.chewingGumPuddle.canPlaceBlockAt(worldObj, new BlockPos((int) posX + x, (int) posY, (int) posZ + z))) {
-                        worldObj.setBlockState(new BlockPos((int) posX + x, (int) posY, (int) posZ + z), CCBlocks.chewingGumPuddle.getDefaultState());
+                    if (rand.nextBoolean() && CCBlocks.chewingGumPuddle.canPlaceBlockAt(world, new BlockPos((int) posX + x, (int) posY, (int) posZ + z))) {
+                        world.setBlockState(new BlockPos((int) posX + x, (int) posY, (int) posZ + z), CCBlocks.chewingGumPuddle.getDefaultState());
                     }
                 }
             }
             explosionCount--;
         }
-        if (!worldObj.isRemote && getPower() < maxPower()) {
+        if (!world.isRemote && getPower() < maxPower()) {
             setPower(getPower() + 1);
         }
         if (!inWater && isJumping && controller != null) {
@@ -93,7 +100,7 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
             motionX /= 1.5;
             motionZ /= 1.5;
         }
-        if (!worldObj.isRemote && controller != null && controller instanceof EntityLivingBase) {
+        if (!world.isRemote && controller != null && controller instanceof EntityLivingBase) {
             rotationYaw = ((EntityLivingBase) controller).rotationYawHead;
             prevRotationYaw = ((EntityLivingBase) controller).rotationYawHead;
             EntityLivingBase entitylivingbase = (EntityLivingBase) controller;
@@ -108,38 +115,24 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
                 motionZ = 0;
                 moveForward = 0;
                 moveStrafing = 0;
-                getNavigator().clearPathEntity();
+                getNavigator().clearPath();
             }
         }
     }
 
     @Override
     public int getPower() {
-        return dataWatcher.getWatchableObjectInt(16);
+        return dataManager.get(POWER);
     }
 
     @Override
     public void setPower(int i) {
-        dataWatcher.updateObject(16, i);
-    }
-
-    @Override
-    public boolean canRiderInteract() {
-        return false;
+        dataManager.set(POWER, i);
     }
 
     @Override
     public double getMountedYOffset() {
         return height - 0.05D;
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        return false;
-    }
-
-    @Override
-    public void fall(float distance, float damageMultiplier) {
     }
 
     @Override
@@ -151,17 +144,11 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (!worldObj.isRemote && par1DamageSource.isExplosion()) {
+        if (!world.isRemote && par1DamageSource.isExplosion()) {
             return false;
         }
-        Entity entity = par1DamageSource.getEntity();
-        return getControllingPassenger() != null && getControllingPassenger().equals(entity) ? false : super.attackEntityFrom(par1DamageSource, par2);
-    }
-
-    @Override
-    protected void entityInit() {
-        super.entityInit();
-        dataWatcher.addObject(16, Integer.valueOf(0));
+        Entity entity = par1DamageSource.getTrueSource();
+        return (getControllingPassenger() == null || !getControllingPassenger().equals(entity)) && super.attackEntityFrom(par1DamageSource, par2);
     }
 
     @Override
@@ -174,20 +161,5 @@ public class EntityKingBeetle extends EntityGolem implements IEntityPowerMount {
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         setPower((par1NBTTagCompound.getInteger("Power")));
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return null;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound() {
-        return null;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return null;
     }
 }

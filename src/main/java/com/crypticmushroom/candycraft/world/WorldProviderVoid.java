@@ -1,6 +1,7 @@
 package com.crypticmushroom.candycraft.world;
 
 import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.CandyCraftConfig;
 import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
@@ -9,12 +10,10 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderVoid extends WorldProvider {
-    public static final DimensionType DUNGEON_WORLD = EnumHelper.addEnum(DimensionType.class, "CANDY_DUNGEON_WORLD_MOD", new Class[]{Integer.class, String.class, String.class, Class.class}, CandyCraft.getCandyDimensionID(), "Candy Dungeon", "candydungeons", WorldProviderVoid.class);
 
     @Override
     protected void init() {
@@ -29,6 +28,7 @@ public class WorldProviderVoid extends WorldProvider {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(float par1, float par2) {
         float f2 = MathHelper.cos(par1 * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
 
@@ -76,12 +76,12 @@ public class WorldProviderVoid extends WorldProvider {
 
     @Override
     public int getRespawnDimension(EntityPlayerMP player) {
-        return CandyCraft.getCandyDimensionID();
+        return CandyCraftConfig.candyDimID;
     }
 
     @Override
     public DimensionType getDimensionType() {
-        return DUNGEON_WORLD;
+        return CandyCraft.dungeonDim;
     }
 
 }

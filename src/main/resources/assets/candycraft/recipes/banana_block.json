@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:banana_seaweed"
+    }
+  },
+  "result": {
+    "item": "candycraft:banana_block"
+  }
+}

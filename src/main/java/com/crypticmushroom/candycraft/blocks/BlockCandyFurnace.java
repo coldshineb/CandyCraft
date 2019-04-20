@@ -1,8 +1,10 @@
 package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.CandyCraft;
-import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFurnace;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityLicoriceFurnace;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -18,11 +20,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockCandyFurnace extends BlockFurnace {
+public class BlockCandyFurnace extends BlockFurnace implements ModelRegisterCallback {
     private static boolean keepInventory;
 
     public BlockCandyFurnace(boolean isBurning) {
         super(isBurning);
+        setSoundType(SoundType.METAL);
+
+        if (!isBurning)
+            setCreativeTab(CandyCraft.getCandyTab());
     }
 
     public static void setState(boolean isOn, World worldIn, BlockPos pos) {
@@ -31,11 +37,11 @@ public class BlockCandyFurnace extends BlockFurnace {
         keepInventory = true;
 
         if (isOn) {
-            worldIn.setBlockState(pos, CCBlocks.sugarFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, CCBlocks.sugarFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, CCBlocks.licoriceFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, CCBlocks.licoriceFurnaceOn.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
         } else {
-            worldIn.setBlockState(pos, CCBlocks.sugarFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, CCBlocks.sugarFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, CCBlocks.licoriceFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+            worldIn.setBlockState(pos, CCBlocks.licoriceFurnace.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
         }
 
         keepInventory = false;
@@ -48,15 +54,15 @@ public class BlockCandyFurnace extends BlockFurnace {
 
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune) {
-        return Item.getItemFromBlock(CCBlocks.sugarFurnace);
+        return Item.getItemFromBlock(CCBlocks.licoriceFurnace);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         } else {
-            TileEntitySugarFurnace tileentityfurnace = (TileEntitySugarFurnace) world.getTileEntity(pos);
+            TileEntityLicoriceFurnace tileentityfurnace = (TileEntityLicoriceFurnace) world.getTileEntity(pos);
             if (tileentityfurnace != null) {
                 player.openGui(CandyCraft.getInstance(), 1, world, pos.getX(), pos.getY(), pos.getZ());
             }
@@ -69,8 +75,8 @@ public class BlockCandyFurnace extends BlockFurnace {
         if (!keepInventory && !worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntitySugarFurnace) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntitySugarFurnace) tileentity);
+            if (tileentity instanceof TileEntityLicoriceFurnace) {
+                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityLicoriceFurnace) tileentity);
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
         }
@@ -80,12 +86,12 @@ public class BlockCandyFurnace extends BlockFurnace {
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntitySugarFurnace();
+        return new TileEntityLicoriceFurnace();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        return new ItemStack(CCBlocks.sugarFurnace);
+        return new ItemStack(CCBlocks.licoriceFurnace);
     }
 }

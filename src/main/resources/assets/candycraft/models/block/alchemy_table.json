@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "candycraftmod:blocks/alchemy_table_particle"
+    "all": "candycraft:blocks/alchemy_table_particle"
   }
 }

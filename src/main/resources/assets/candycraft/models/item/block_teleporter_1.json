@@ -1,5 +1,5 @@
 {
-  "parent": "candycraftmod:block/block_teleporter_1",
+  "parent": "candycraft:block/block_teleporter_1",
   "display": {
     "thirdperson": {
       "rotation": [

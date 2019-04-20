@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:chewing_gum"
+    }
+  },
+  "result": {
+    "item": "candycraft:chewing_gum_puddle"
+  }
+}

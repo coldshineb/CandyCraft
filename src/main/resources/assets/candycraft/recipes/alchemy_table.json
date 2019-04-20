@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#%#",
+    "%$%",
+    "#%#"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:pez"
+    },
+    "%": {
+      "item": "#MARSHMALLOWPLANKS"
+    },
+    "$": {
+      "item": "candycraft:sugar_factory"
+    }
+  },
+  "result": {
+    "item": "candycraft:alchemy_table"
+  }
+}

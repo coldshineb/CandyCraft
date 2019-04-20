@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "candycraft:pez"
+    }
+  ],
+  "result": {
+    "item": "candycraft:pez_dust",
+    "count": 9
+  }
+}

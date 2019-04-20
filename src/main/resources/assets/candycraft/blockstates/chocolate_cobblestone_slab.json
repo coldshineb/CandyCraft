@@ -1,10 +1,16 @@
 {
-  "variants": {
-    "half=bottom,variant=default": {
-      "model": "candycraftmod:half_slab_chocolate_cobblestone"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "half_slab",
+    "textures": {
+      "bottom": "candycraft:blocks/chocolate_cobblestone",
+      "top": "candycraft:blocks/chocolate_cobblestone",
+      "side": "candycraft:blocks/chocolate_cobblestone"
     },
-    "half=top,variant=default": {
-      "model": "candycraftmod:upper_slab_chocolate_cobblestone"
-    }
+    "uvlock": true
+  },
+  "variants": {
+    "inventory": [{}],
+    "half": { "bottom": {}, "top": { "x": 180 } }
   }
 }

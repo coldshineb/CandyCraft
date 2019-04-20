@@ -13,10 +13,10 @@ import java.util.Random;
 public class MapGenCandyRavine extends MapGenBase {
     private final float[] field_75046_d = new float[1024];
 
-    protected void func_180707_a(long p_180707_1_, int p_180707_3_, int p_180707_4_, ChunkPrimer p_180707_5_, double p_180707_6_, double p_180707_8_, double p_180707_10_, float p_180707_12_, float p_180707_13_, float p_180707_14_, int p_180707_15_, int p_180707_16_, double p_180707_17_) {
-        Random random = new Random(p_180707_1_);
-        double d4 = p_180707_3_ * 16 + 8;
-        double d5 = p_180707_4_ * 16 + 8;
+    protected void addTunnel(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double x, double p_180707_8_, double p_180707_10_, float p_180707_12_, float p_180707_13_, float p_180707_14_, int p_180707_15_, int p_180707_16_) {
+        Random random = new Random(seed);
+        double d4 = chunkX * 16 + 8;
+        double d5 = chunkZ * 16 + 8;
         float f3 = 0.0F;
         float f4 = 0.0F;
 
@@ -44,12 +44,12 @@ public class MapGenCandyRavine extends MapGenBase {
 
         for (; p_180707_15_ < p_180707_16_; ++p_180707_15_) {
             double d13 = 1.5D + MathHelper.sin(p_180707_15_ * (float) Math.PI / p_180707_16_) * p_180707_12_ * 1.0F;
-            double d6 = d13 * p_180707_17_;
+            double d6 = d13 * 3.0D;
             d13 *= random.nextFloat() * 0.25D + 0.75D;
             d6 *= random.nextFloat() * 0.25D + 0.75D;
             float f6 = MathHelper.cos(p_180707_14_);
             float f7 = MathHelper.sin(p_180707_14_);
-            p_180707_6_ += MathHelper.cos(p_180707_13_) * f6;
+            x += MathHelper.cos(p_180707_13_) * f6;
             p_180707_8_ += f7;
             p_180707_10_ += MathHelper.sin(p_180707_13_) * f6;
             p_180707_14_ *= 0.7F;
@@ -61,7 +61,7 @@ public class MapGenCandyRavine extends MapGenBase {
             f3 += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4.0F;
 
             if (flag1 || random.nextInt(4) != 0) {
-                double d7 = p_180707_6_ - d4;
+                double d7 = x - d4;
                 double d8 = p_180707_10_ - d5;
                 double d9 = p_180707_16_ - p_180707_15_;
                 double d10 = p_180707_12_ + 2.0F + 16.0F;
@@ -70,13 +70,13 @@ public class MapGenCandyRavine extends MapGenBase {
                     return;
                 }
 
-                if (p_180707_6_ >= d4 - 16.0D - d13 * 2.0D && p_180707_10_ >= d5 - 16.0D - d13 * 2.0D && p_180707_6_ <= d4 + 16.0D + d13 * 2.0D && p_180707_10_ <= d5 + 16.0D + d13 * 2.0D) {
-                    int k3 = MathHelper.floor_double(p_180707_6_ - d13) - p_180707_3_ * 16 - 1;
-                    int l1 = MathHelper.floor_double(p_180707_6_ + d13) - p_180707_3_ * 16 + 1;
-                    int l3 = MathHelper.floor_double(p_180707_8_ - d6) - 1;
-                    int i2 = MathHelper.floor_double(p_180707_8_ + d6) + 1;
-                    int i4 = MathHelper.floor_double(p_180707_10_ - d13) - p_180707_4_ * 16 - 1;
-                    int j2 = MathHelper.floor_double(p_180707_10_ + d13) - p_180707_4_ * 16 + 1;
+                if (x >= d4 - 16.0D - d13 * 2.0D && p_180707_10_ >= d5 - 16.0D - d13 * 2.0D && x <= d4 + 16.0D + d13 * 2.0D && p_180707_10_ <= d5 + 16.0D + d13 * 2.0D) {
+                    int k3 = MathHelper.floor(x - d13) - chunkX * 16 - 1;
+                    int l1 = MathHelper.floor(x + d13) - chunkX * 16 + 1;
+                    int l3 = MathHelper.floor(p_180707_8_ - d6) - 1;
+                    int i2 = MathHelper.floor(p_180707_8_ + d6) + 1;
+                    int i4 = MathHelper.floor(p_180707_10_ - d13) - chunkZ * 16 - 1;
+                    int j2 = MathHelper.floor(p_180707_10_ + d13) - chunkZ * 16 + 1;
 
                     if (k3 < 0) {
                         k3 = 0;
@@ -109,9 +109,9 @@ public class MapGenCandyRavine extends MapGenBase {
                         for (int l2 = i4; !flag2 && l2 < j2; ++l2) {
                             for (int i3 = i2 + 1; !flag2 && i3 >= l3 - 1; --i3) {
                                 if (i3 >= 0 && i3 < 256) {
-                                    IBlockState iblockstate = p_180707_5_.getBlockState(k2, i3, l2);
+                                    IBlockState iblockstate = primer.getBlockState(k2, i3, l2);
 
-                                    if (isOceanBlock(p_180707_5_, k2, i2, l2, p_180707_3_, p_180707_4_)) {
+                                    if (isOceanBlock(primer, k2, i2, l2, chunkX, chunkZ)) {
                                         flag2 = true;
                                     }
 
@@ -125,10 +125,10 @@ public class MapGenCandyRavine extends MapGenBase {
 
                     if (!flag2) {
                         for (k2 = k3; k2 < l1; ++k2) {
-                            double d14 = (k2 + p_180707_3_ * 16 + 0.5D - p_180707_6_) / d13;
+                            double d14 = (k2 + chunkX * 16 + 0.5D - x) / d13;
 
                             for (int j4 = i4; j4 < j2; ++j4) {
-                                double d11 = (j4 + p_180707_4_ * 16 + 0.5D - p_180707_10_) / d13;
+                                double d11 = (j4 + chunkZ * 16 + 0.5D - p_180707_10_) / d13;
                                 boolean flag = false;
 
                                 if (d14 * d14 + d11 * d11 < 1.0D) {
@@ -136,13 +136,13 @@ public class MapGenCandyRavine extends MapGenBase {
                                         double d12 = (j3 - 1 + 0.5D - p_180707_8_) / d6;
 
                                         if ((d14 * d14 + d11 * d11) * field_75046_d[j3 - 1] + d12 * d12 / 6.0D < 1.0D) {
-                                            IBlockState iblockstate1 = p_180707_5_.getBlockState(k2, j3, j4);
+                                            IBlockState iblockstate1 = primer.getBlockState(k2, j3, j4);
 
-                                            if (isTopBlock(p_180707_5_, k2, j3, j4, p_180707_3_, p_180707_4_)) {
+                                            if (isTopBlock(primer, k2, j3, j4, chunkX, chunkZ)) {
                                                 flag = true;
                                             }
 
-                                            digBlock(p_180707_5_, k2, j3, j4, p_180707_3_, p_180707_4_, flag);
+                                            digBlock(primer, k2, j3, j4, chunkX, chunkZ, flag);
                                         }
                                     }
                                 }
@@ -159,18 +159,18 @@ public class MapGenCandyRavine extends MapGenBase {
     }
 
     @Override
-    protected void recursiveGenerate(World worldIn, int p_180701_2_, int p_180701_3_, int p_180701_4_, int p_180701_5_, ChunkPrimer p_180701_6_) {
+    protected void recursiveGenerate(World worldIn, int x, int z, int chunkX, int chunkZ, ChunkPrimer primer) {
         if (rand.nextInt(50) == 0) {
-            double d0 = p_180701_2_ * 16 + rand.nextInt(16);
+            double d0 = x * 16 + rand.nextInt(16);
             double d1 = rand.nextInt(rand.nextInt(40) + 8) + 20;
-            double d2 = p_180701_3_ * 16 + rand.nextInt(16);
+            double d2 = z * 16 + rand.nextInt(16);
             byte b0 = 1;
 
             for (int i1 = 0; i1 < b0; ++i1) {
                 float f = rand.nextFloat() * (float) Math.PI * 2.0F;
                 float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
                 float f2 = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
-                func_180707_a(rand.nextLong(), p_180701_4_, p_180701_5_, p_180701_6_, d0, d1, d2, f2, f, f1, 0, 0, 3.0D);
+                addTunnel(rand.nextLong(), chunkX, chunkZ, primer, d0, d1, d2, f2, f, f1, 0, 0);
             }
         }
     }
@@ -190,7 +190,7 @@ public class MapGenCandyRavine extends MapGenBase {
     // Vanilla bugs to make sure that we generate the map the same way vanilla
     // does.
     private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
-        net.minecraft.world.biome.Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+        net.minecraft.world.biome.Biome biome = world.getBiomeForCoordsBody(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
         IBlockState state = data.getBlockState(x, y, z);
         return (isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock);
     }
@@ -212,7 +212,7 @@ public class MapGenCandyRavine extends MapGenBase {
      *                 we've broken the surface.
      */
     protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
-        net.minecraft.world.biome.Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+        net.minecraft.world.biome.Biome biome = world.getBiomeForCoordsBody(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
         IBlockState state = data.getBlockState(x, y, z);
         IBlockState top = isExceptionBiome(biome) ? Blocks.GRASS.getDefaultState() : biome.topBlock;
         IBlockState filler = isExceptionBiome(biome) ? Blocks.DIRT.getDefaultState() : biome.fillerBlock;

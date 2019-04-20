@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
+//TODO: *FINGERSNAP*
 public class ItemCandyBlock extends ItemBlock {
     private final static String[] metaNames = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
 
@@ -24,8 +25,8 @@ public class ItemCandyBlock extends ItemBlock {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName() + "." + metaNames[stack.getItemDamage()];
+    public String getTranslationKey(ItemStack stack) {
+        return super.getTranslationKey() + "." + metaNames[stack.getItemDamage()];
     }
 
     @Override

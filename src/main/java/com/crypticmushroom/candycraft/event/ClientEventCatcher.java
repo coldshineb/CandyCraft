@@ -8,24 +8,26 @@ import com.crypticmushroom.candycraft.entity.EntityGummyBall;
 import com.crypticmushroom.candycraft.entity.ICandyBoss;
 import com.crypticmushroom.candycraft.entity.IEntityLockable;
 import com.crypticmushroom.candycraft.entity.IEntityPowerMount;
+import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
+@Mod.EventBusSubscriber(modid = CandyCraft.MODID, value = Side.CLIENT)
 public class ClientEventCatcher {
     // Game interaction
 
@@ -84,13 +86,6 @@ public class ClientEventCatcher {
     }
 
     @SubscribeEvent
-    public void onPlayerTick(PlayerTickEvent event) {
-        if (event.phase == Phase.END) {
-            CandyCraft.getClientTicker().onPlayerTick(event.player);
-        }
-    }
-
-    @SubscribeEvent
     public void onFogColor(FogColors event) {
         if (event.getState() != null && event.getState().getBlock() == CCBlocks.grenadine) {
             event.setRed(1.0F);
@@ -104,5 +99,12 @@ public class ClientEventCatcher {
         if (event.getTarget() != null && event.getTarget().typeOfHit == RayTraceResult.Type.BLOCK && event.getPlayer().world.getBlockState(event.getTarget().getBlockPos()).getBlock() == Blocks.BARRIER && event.getPlayer().posZ > 7000 && event.getPlayer().posZ < 13000) {
             event.setCanceled(true);
         }
+    }
+
+    @SubscribeEvent
+    public static void onModelRegistryReady(ModelRegistryEvent event) {
+        for (ModelRegisterCallback b : CCBlocks.getBlockModels()) b.registerModel();
+
+        for (ModelRegisterCallback i : CCItems.ItemRegistryHelper.getItemModels()) i.registerModel();
     }
 }

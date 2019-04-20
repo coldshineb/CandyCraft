@@ -24,8 +24,8 @@ import java.util.Map;
 public class TileEntitySugarFactory extends TileEntity implements ISidedInventory, ITickable {
     public static Map recipeList = new HashMap();
     public static Map advancedRecipeList = new HashMap();
-    public static Map recipes = new HashMap();
 
+    //TODO: Get this shit out of where. What is this?
     static {
         recipeList.put(new ItemStack(Items.STICK), new ItemStack(CCItems.marshmallowStick));
         recipeList.put(new ItemStack(CCBlocks.fraiseTagadaFlower), new ItemStack(CCItems.honeyShard));
@@ -42,10 +42,7 @@ public class TileEntitySugarFactory extends TileEntity implements ISidedInventor
     private String invName;
 
     public static boolean isItemValid(ItemStack i) {
-        if (i != null && i.getItem() instanceof ItemBlock && CandyCraft.getItemList().contains(i.getItem())) {
-            return true;
-        }
-        return i != null && (CandyCraft.getItemList().contains(i.getItem()));
+        return i != null && i.getItem() instanceof ItemBlock && CandyCraft.getItemList().contains(i.getItem()) || i != null && (CandyCraft.getItemList().contains(i.getItem()));
     }
 
     @Override
@@ -152,20 +149,14 @@ public class TileEntitySugarFactory extends TileEntity implements ISidedInventor
     public void setInventorySlotContents(int i, ItemStack itemstack) {
         FactoryItemStacks[i] = itemstack;
 
-        if (itemstack != null && itemstack.getCount() > getInventoryStackLimit()) {
+        if (itemstack.getCount() > getInventoryStackLimit()) {
             itemstack.setCount(getInventoryStackLimit());
         }
     }
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
-        if (player != null && FactoryItemStacks[1] != null && FactoryItemStacks[1].getItem() == CCItems.honeycomb) {
-            //TODO par1EntityPlayer.addStat(CCAchievements.craftHoneyComb);
-        }
-        if (player != null && FactoryItemStacks[1] != null && FactoryItemStacks[1].getItem() == CCItems.chocolateCoin) {
-            //TODO par1EntityPlayer.addStat(CCAchievements.craftCoins);
-        }
-        return world.getTileEntity(pos) == this && player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+        return this.world.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -198,14 +189,14 @@ public class TileEntitySugarFactory extends TileEntity implements ISidedInventor
                 result = new ItemStack(Items.GOLD_NUGGET);
             }
 
-            if (FactoryItemStacks[0].getItem() == CCItems.grenadineBucket) {
+            if (FactoryItemStacks[0] == CCItems.grenadineBucket) {
                 base = new ItemStack(Items.BUCKET, 1);
             }
-            if (FactoryItemStacks[0].getItem() == CCItems.caramelBucket) {
+            if (FactoryItemStacks[0] == CCItems.caramelBucket) {
                 base = new ItemStack(Items.BUCKET, 1);
             }
 
-            if (FactoryItemStacks[0] != null && TileEntitySugarFactory.isItemValid(FactoryItemStacks[0]) && (FactoryItemStacks[1] == null || (FactoryItemStacks[1] != null && FactoryItemStacks[1].getCount() < 64 && FactoryItemStacks[1].getItem() == result.getItem()))) {
+            if (FactoryItemStacks[0] != null && TileEntitySugarFactory.isItemValid(FactoryItemStacks[0]) && (FactoryItemStacks[1] == null || FactoryItemStacks[1].getCount() < 64 && FactoryItemStacks[1].getItem() == result.getItem())) {
                 currentTime += advancedMode ? 2 : 1;
             } else {
                 currentTime = 0;
@@ -239,7 +230,7 @@ public class TileEntitySugarFactory extends TileEntity implements ISidedInventor
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return i == 1 ? false : true;
+        return i != 1;
     }
 
     @Override
@@ -297,6 +288,6 @@ public class TileEntitySugarFactory extends TileEntity implements ISidedInventor
 
     @Override
     public ITextComponent getDisplayName() {
-        return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName(), new Object[0]);
+        return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
     }
 }

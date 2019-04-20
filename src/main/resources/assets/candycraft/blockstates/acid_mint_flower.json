@@ -1,7 +1,11 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cross",
+    "transform": "forge:default-item"
+  },
   "variants": {
-    "normal": {
-      "model": "candycraftmod:acid_mint_flower"
-    }
+    "normal": [{ "model": "cross", "textures": { "cross": "candycraft:blocks/acid_mint_flower" }}],
+    "inventory": [{ "model": "builtin/generated", "textures": { "layer0": "candycraft:blocks/acid_mint_flower" }}]
   }
 }

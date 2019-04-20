@@ -13,6 +13,7 @@ public class WorldGenEnchantedTree extends WorldGenMegaJungle {
         super(notify, baseHeightIn, extraRandomHeightIn, woodMetadataIn, leavesMetadataIn);
     }
 
+    //TODO: Loops that cannot loop. Seriously???
     @Override
     public boolean generate(World worldIn, Random rand, BlockPos position) {
         int i = getHeight(rand);
@@ -76,11 +77,9 @@ public class WorldGenEnchantedTree extends WorldGenMegaJungle {
         }
     }
 
-    private void createCrown(World worldIn, BlockPos p_175930_2_, int p_175930_3_) {
-        int i = 2;
-
+    private void createCrown(World worldIn, BlockPos pos, int width) {
         for (int j = -2; j <= 0; ++j) {
-            growLeavesLayerStrict(worldIn, p_175930_2_.up(j), p_175930_3_ + 1 - j);
+            growLeavesLayerStrict(worldIn, pos.up(j), width + 1 - j);
         }
     }
 

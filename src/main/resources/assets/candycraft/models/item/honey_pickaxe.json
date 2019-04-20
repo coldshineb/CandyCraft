@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/honey_pickaxe"
+    "layer0": "candycraft:items/honey_pickaxe"
   },
   "display": {
     "thirdperson": {

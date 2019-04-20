@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:bone"
+    },
+    "title": {
+      "translate": "advancements.candycraft.tame_candy_wolf.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.tame_candy_wolf.desc"
+    }
+  },
+  "parent": "candycraft:candy_cane",
+  "criteria": {
+    "tamed_animal": {
+      "trigger": "candycraft:tame_candy_wolf"
+    }
+  }
+}

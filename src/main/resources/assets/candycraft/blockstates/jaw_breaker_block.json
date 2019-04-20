@@ -1,7 +1,13 @@
 {
-  "variants": {
-    "normal": {
-      "model": "candycraftmod:jaw_breaker_block"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "candycraft:blocks/jaw_breaker_block"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

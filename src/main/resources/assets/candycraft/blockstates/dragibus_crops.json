@@ -1,28 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "crop"
+  },
   "variants": {
-    "age=0": {
-      "model": "candycraftmod:dragibus_stage0"
-    },
-    "age=1": {
-      "model": "candycraftmod:dragibus_stage0"
-    },
-    "age=2": {
-      "model": "candycraftmod:dragibus_stage1"
-    },
-    "age=3": {
-      "model": "candycraftmod:dragibus_stage1"
-    },
-    "age=4": {
-      "model": "candycraftmod:dragibus_stage2"
-    },
-    "age=5": {
-      "model": "candycraftmod:dragibus_stage2"
-    },
-    "age=6": {
-      "model": "candycraftmod:dragibus_stage2"
-    },
-    "age=7": {
-      "model": "candycraftmod:dragibus_stage3"
-    }
+    "age=0": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.0" } }],
+    "age=1": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.0" } }],
+    "age=2": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.1" } }],
+    "age=3": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.1" } }],
+    "age=4": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.2" } }],
+    "age=5": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.2" } }],
+    "age=6": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.2" } }],
+    "age=7": [{ "textures": { "crop": "candycraft:blocks/dragibus_crops.3" } }]
   }
 }

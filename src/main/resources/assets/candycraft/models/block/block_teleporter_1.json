@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "candycraftmod:blocks/block_teleporter_1",
-    "all": "candycraftmod:blocks/block_teleporter_1"
+    "particle": "candycraft:blocks/block_teleporter_1",
+    "all": "candycraft:blocks/block_teleporter_1"
   },
   "elements": [
     {

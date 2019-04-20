@@ -1,6 +1,7 @@
 package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.items.CCItems;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -9,12 +10,7 @@ import java.util.Random;
 
 public class BlockNougatOre extends BlockCandyBase {
     public BlockNougatOre(Material material) {
-        super(material);
-    }
-
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return CCItems.nougatPowder;
+        super(material, SoundType.STONE, () -> CCItems.nougatPowder);
     }
 
     @Override

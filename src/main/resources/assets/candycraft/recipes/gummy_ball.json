@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "candycraft:gummy"
+    }
+  ],
+  "result": {
+    "item": "candycraft:gummy_ball"
+  }
+}

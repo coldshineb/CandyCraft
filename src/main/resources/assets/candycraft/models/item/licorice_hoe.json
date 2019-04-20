@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/licorice_hoe"
+    "layer0": "candycraft:items/licorice_hoe"
   },
   "display": {
     "thirdperson": {

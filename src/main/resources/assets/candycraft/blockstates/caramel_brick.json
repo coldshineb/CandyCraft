@@ -1,7 +1,11 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": { "all": "candycraft:blocks/caramel_brick" }
+  },
   "variants": {
-    "normal": {
-      "model": "candycraftmod:caramel_brick"
-    }
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

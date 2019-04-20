@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.client.entity.renders;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.client.entity.layers.LayerSuguardHeldItem;
 import com.crypticmushroom.candycraft.client.entity.models.ModelSuguard;
 import com.crypticmushroom.candycraft.items.CCItems;
@@ -13,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderSuguard extends RenderLiving {
-    private static final ResourceLocation suguard = new ResourceLocation("candycraftmod:textures/entity/SuGarde.png");
-    private static final ResourceLocation orangeSuguard = new ResourceLocation("candycraftmod:textures/entity/SuguardeSoldier.png");
+    private static final ResourceLocation suguard = new ResourceLocation(CandyCraft.MODID, "textures/entity/SuGarde.png");
+    private static final ResourceLocation orangesuguard = new ResourceLocation(CandyCraft.MODID, "textures/entity/suguardeSoldier.png");
 
     public RenderSuguard(RenderManager rm) {
         super(rm, new ModelSuguard(), 0.5F);
@@ -25,6 +26,6 @@ public class RenderSuguard extends RenderLiving {
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         EntityLivingBase b = (EntityLivingBase) entity;
-        return b.getEquipmentInSlot(0) != null && b.getEquipmentInSlot(0).getItem() == CCItems.dynamite ? RenderSuguard.orangeSuguard : RenderSuguard.suguard;
+        return b.getHeldItemMainhand().getItem() == CCItems.dynamite ? RenderSuguard.orangesuguard : RenderSuguard.suguard;
     }
 }

@@ -22,7 +22,6 @@ public class EntityCandyPortalFX extends Particle {
         portalPosX = posX = par2;
         portalPosY = posY = par4;
         portalPosZ = posZ = par6;
-        float f = rand.nextFloat() * 0.6F + 0.4F;
         portalParticleScale = particleScale = rand.nextFloat() * 0.2F + 0.5F;
         particleRed = 1.0F;
         particleGreen = 0.3F;

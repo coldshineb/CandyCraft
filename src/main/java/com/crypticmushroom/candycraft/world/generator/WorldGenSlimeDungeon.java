@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.world.generator;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
 import com.crypticmushroom.candycraft.entity.EntityTornadoJelly;
@@ -7,6 +8,7 @@ import com.crypticmushroom.candycraft.entity.boss.EntityKingSlime;
 import com.crypticmushroom.candycraft.entity.boss.EntityPEZJelly;
 import com.crypticmushroom.candycraft.items.CCItems;
 import com.crypticmushroom.candycraft.misc.CCEnchantments;
+import com.crypticmushroom.candycraft.misc.CCLootTables;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -14,6 +16,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -22,11 +25,9 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.Random;
 
 public class WorldGenSlimeDungeon extends WorldGenerator {
-    int incrementer = -2;
-    int posX = 0;
-    int posY = 0;
-
-    int xb, yb, zb, dim = 0;
+    private int incrementer = -2;
+    private int posX = 0;
+    private int xb, yb, zb, dim;
     World world;
 
     public WorldGenSlimeDungeon(int oX, int oY, int oZ, int dime) {
@@ -36,7 +37,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         dim = dime;
     }
 
-    public boolean spawnRoom(World world, Random rand, int x, int y, int z) {
+    public void spawnRoom(World world, Random rand, int x, int y, int z) {
         this.world = world;
         for (int i = 0; i < 10; i++) {
             for (int k = 0; k < 2; k++) {
@@ -157,7 +158,6 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
             this.setBlock(x + 6, y + 2 + i, z + 1, CCBlocks.jawBreakerBlock);
         }
         posX += 5;
-        return true;
     }
 
     public void genRedstone(World world, int i, int j, int k) {
@@ -165,7 +165,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         this.setBlock(i, j + 1, k, Blocks.REDSTONE_WIRE);
     }
 
-    public boolean genCoridor(World world, Random rand, int x, int y, int z) {
+    public void genCorridor(World world, Random rand, int x, int y, int z) {
         for (int i = 0; i < 4; i++) {
             for (int k = 0; k < 2; k++) {
                 for (int j = 0; j < 10; j++) {
@@ -241,14 +241,13 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         this.setBlock(x + 9, y + 3, z - 4, CCBlocks.licoriceBrickStairs, 0, 2);
         this.setBlock(x + 8, y + 4, z - 4, CCBlocks.licoriceBrickStairs, 5, 2);
         this.setBlock(x + 9, y + 4, z - 4, CCBlocks.licoriceBrickStairs, 4, 2);
-        this.setBlock(x + 8, y + 2, z - 4, CCBlocks.licoriceHalfStep);
-        this.setBlock(x + 9, y + 2, z - 4, CCBlocks.licoriceHalfStep);
+        this.setBlock(x + 8, y + 2, z - 4, CCBlocks.licoriceSlab);
+        this.setBlock(x + 9, y + 2, z - 4, CCBlocks.licoriceSlab);
 
         posX += 10;
-        return true;
     }
 
-    public boolean genJumpCraft(World world, Random random, int x, int y, int z) {
+    public void genJumpCraft(World world, Random random, int x, int y, int z) {
         incrementer = -2;
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 2; k++) {
@@ -307,15 +306,15 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
             }
         }
         this.setBlock(x + 1 + random.nextInt(5), y + 5, z - 2, CCBlocks.purpleJellyJump);
-        genStep(world, random, x, y, z);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
-        genStep(world, random, x, y, z + incrementer);
+        genStep(random, x, y, z);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
+        genStep(random, x, y, z + incrementer);
 
         world.setBlockToAir(new BlockPos(x + 3, y + 5, z - 41));
         world.setBlockToAir(new BlockPos(x + 2, y + 5, z - 41));
@@ -363,14 +362,13 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
             this.setBlock(x + i, y + 3, z - 42, Blocks.STICKY_PISTON, 3, 2);
             genRedstone(world, x + i, y + 3, z - 43);
         }
-        this.setBlock(x + 2, y + 5, z - 43, CCBlocks.licoriceHalfStep);
-        this.setBlock(x + 3, y + 5, z - 43, CCBlocks.licoriceHalfStep);
+        this.setBlock(x + 2, y + 5, z - 43, CCBlocks.licoriceSlab);
+        this.setBlock(x + 3, y + 5, z - 43, CCBlocks.licoriceSlab);
 
         posX += 44;
-        return true;
     }
 
-    public void genStep(World world, Random rand, int x, int y, int z) {
+    public void genStep(Random rand, int x, int y, int z) {
         if (rand.nextBoolean()) {
             z -= 4;
             incrementer -= 4;
@@ -404,7 +402,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
                         Entity slime;
                         slime = new EntityTornadoJelly(world);
                         slime.setLocationAndAngles((double) x + i - 12 + 0.5, (double) y + j + 0.5, (double) z - k - 1 + 0.5, MathHelper.wrapDegrees(random.nextFloat() * 360.0F), 0.0F);
-                        world.spawnEntityInWorld(slime);
+                        world.spawnEntity(slime);
                     }
                 }
                 water = !water;
@@ -412,7 +410,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         }
         for (int i = 1; i < 23; i++) {
             for (int k = 1; k < 23; k++) {
-                this.setBlock(x + i - 12, y + 2, z - k - 1, random.nextBoolean() ? CCBlocks.licoriceHalfStep : random.nextBoolean() ? CCBlocks.jawBreakerBlock : random.nextBoolean() ? CCBlocks.licoriceBlock : CCBlocks.jawBreakerLight, 0, 0);
+                this.setBlock(x + i - 12, y + 2, z - k - 1, random.nextBoolean() ? CCBlocks.licoriceSlab : random.nextBoolean() ? CCBlocks.jawBreakerBlock : random.nextBoolean() ? CCBlocks.licoriceBlock : CCBlocks.jawBreakerLight, 0, 0);
             }
         }
         world.setBlockToAir(new BlockPos(x, y + 2, z - 1));
@@ -529,7 +527,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         TileEntityMobSpawner spawner = (TileEntityMobSpawner) world.getTileEntity(new BlockPos(x, y, z));
         int mob = random.nextInt(3);
         if (spawner != null) {
-            spawner.getSpawnerBaseLogic().setEntityName(mob == 0 ? "candycraftmod.SprinterSlime" : mob == 1 ? "candycraftmod.KamikazeSlime" : "candycraftmod.TornadoSlime");
+            spawner.getSpawnerBaseLogic().setEntityId(mob == 0 ? new ResourceLocation(CandyCraft.MODID, "lemon_jelly") : mob == 1 ? new ResourceLocation(CandyCraft.MODID, "strawberry_jelly") : new ResourceLocation(CandyCraft.MODID, "mint_jelly"));
         }
         this.setBlock(x, y + 1, z, CCBlocks.licoriceBlock);
         this.setBlock(x, y + 5, z, CCBlocks.licoriceBlock);
@@ -542,16 +540,16 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         this.setBlock(x + (side ? 2 : -2), y + 1, z, CCBlocks.licoriceBrick);
         this.setBlock(x + (side ? 1 : -1), y + 1, z, CCBlocks.licoriceBrick);
 
-        this.setBlock(x + (side ? -1 : 1), y + 1, z + 1, CCBlocks.licoriceHalfStep);
-        this.setBlock(x + (side ? -1 : 1), y + 1, z - 1, CCBlocks.licoriceHalfStep);
-        this.setBlock(x + (side ? -1 : 1), y + 5, z + 1, CCBlocks.licoriceHalfStep, 8, 2);
-        this.setBlock(x + (side ? -1 : 1), y + 5, z - 1, CCBlocks.licoriceHalfStep, 8, 2);
+        this.setBlock(x + (side ? -1 : 1), y + 1, z + 1, CCBlocks.licoriceSlab);
+        this.setBlock(x + (side ? -1 : 1), y + 1, z - 1, CCBlocks.licoriceSlab);
+        this.setBlock(x + (side ? -1 : 1), y + 5, z + 1, CCBlocks.licoriceSlab, 8, 2);
+        this.setBlock(x + (side ? -1 : 1), y + 5, z - 1, CCBlocks.licoriceSlab, 8, 2);
 
-        this.setBlock(x + (side ? 2 : -2), y + 4, z, CCBlocks.licoriceHalfStep, 8, 2);
-        this.setBlock(x + (side ? 1 : -1), y + 4, z, CCBlocks.licoriceHalfStep, 8, 2);
+        this.setBlock(x + (side ? 2 : -2), y + 4, z, CCBlocks.licoriceSlab, 8, 2);
+        this.setBlock(x + (side ? 1 : -1), y + 4, z, CCBlocks.licoriceSlab, 8, 2);
 
-        this.setBlock(x + (side ? 2 : -2), y + 2, z, CCBlocks.licoriceHalfStep);
-        this.setBlock(x + (side ? 1 : -1), y + 2, z, CCBlocks.licoriceHalfStep);
+        this.setBlock(x + (side ? 2 : -2), y + 2, z, CCBlocks.licoriceSlab);
+        this.setBlock(x + (side ? 1 : -1), y + 2, z, CCBlocks.licoriceSlab);
 
         this.setBlock(x + (side ? 1 : -1), y + 1, z + 1, CCBlocks.licoriceBrickStairs, 3, 2);
         this.setBlock(x + (side ? 2 : -2), y + 1, z + 1, CCBlocks.licoriceBrickStairs, 3, 2);
@@ -567,8 +565,8 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         this.setBlock(x + (side ? 2 : -2), y + 5, z - 1, CCBlocks.licoriceBrickStairs, 6, 2);
         this.setBlock(x, y + 5, z - 1, CCBlocks.licoriceBrickStairs, 6, 2);
 
-        this.setBlock(x, y + 2, z - 1, CCBlocks.licoriceHalfStep);
-        this.setBlock(x, y + 2, z + 1, CCBlocks.licoriceHalfStep);
+        this.setBlock(x, y + 2, z - 1, CCBlocks.licoriceSlab);
+        this.setBlock(x, y + 2, z + 1, CCBlocks.licoriceSlab);
 
         this.setBlock(x + (side ? -1 : 1), y + 1, z, Blocks.LEVER, (side ? 2 : 1), 2);
         this.setBlock(x + (side ? 1 : -1), y + 1, z, Blocks.REDSTONE_TORCH, (side ? 1 : 2), 2);
@@ -612,8 +610,8 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         world.setBlockToAir(new BlockPos(x, y + 5, z - 1));
         EntityPEZJelly slime = new EntityPEZJelly(world);
         slime.setPosition(x + 1, y + 2, z - 12);
-        slime.setJellySize(10);
-        world.spawnEntityInWorld(slime);
+        slime.setSlimeSize(10, true);
+        world.spawnEntity(slime);
         posX += 24;
     }
 
@@ -630,14 +628,14 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         for (int i = 0; i < 50; i += 2) {
             for (int k = 0; k < 49; k++) {
                 if (i != 0 && i != 49 && k != 0 && k != 48) {
-                    this.setBlock(x + i - 24, y, z - k - 1, CCBlocks.candyCaneHalfStep);
+                    this.setBlock(x + i - 24, y, z - k - 1, CCBlocks.candyCaneSlab);
                 }
             }
         }
         for (int i = 0; i < 50; i++) {
             for (int k = 0; k < 49; k += 2) {
                 if (i != 0 && i != 49 && k != 0 && k != 48) {
-                    this.setBlock(x + i - 24, y, z - k - 1, CCBlocks.candyCaneHalfStep);
+                    this.setBlock(x + i - 24, y, z - k - 1, CCBlocks.candyCaneSlab);
                 }
             }
         }
@@ -657,7 +655,7 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         slime.sY = y + 2;
         slime.sZ = z - 25;
         slime.setPosition(x + 1, y + 2, z - 25);
-        world.spawnEntityInWorld(slime);
+        world.spawnEntity(slime);
         posX += 49;
     }
 
@@ -685,7 +683,8 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         world.setBlockToAir(new BlockPos(x, y + 2, z - 1));
         world.setBlockToAir(new BlockPos(x + 1, y + 3, z - 1));
         world.setBlockToAir(new BlockPos(x, y + 3, z - 1));
-        world.setBlockState(new BlockPos(x, y + 2, z - 15), CCBlocks.marshmallowChest.getDefaultState(), 3);
+        //world.setBlockState(new BlockPos(x, y + 2, z - 15), CCBlocks.marshmallowChest.getDefaultState(), 3);
+        CCLootTables.slime_dungeon.generateChest(world, new BlockPos(x, y + 2, z - 15));
         TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y + 2, z - 15));
         if (chest != null) {
             ItemStack fork = new ItemStack(CCItems.fork, 1);
@@ -693,9 +692,10 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
             fork.addEnchantment(Enchantments.EFFICIENCY, 5);
             ItemStack bow = new ItemStack(CCItems.caramelBow, 1);
             bow.addEnchantment(Enchantments.POWER, 4);
-            bow.addEnchantment(CCEnchantments.honeyGlue, 2);
+            bow.addEnchantment(CCEnchantments.honey_glue, 2);
+            //TODO: Loot Table...
             for (int i = 0; i < chest.getSizeInventory(); i++) {
-                ItemStack[] rewards = {new ItemStack(CCItems.sugarCrystal, random.nextInt(8) + 4), new ItemStack(CCItems.licorice, random.nextInt(14) + 8), new ItemStack(CCItems.candyCane, random.nextInt(8) + 3), new ItemStack(CCItems.chocolateCoin, random.nextInt(40) + 16), new ItemStack(CCItems.jumpWand, 1), new ItemStack(CCItems.jellyWand, 1), new ItemStack(CCBlocks.sugarBlock, random.nextInt(7) + 3), new ItemStack(CCItems.PEZ, random.nextInt(12) + 4), new ItemStack(CCItems.gummy, random.nextInt(12) + 6), fork, bow, new ItemStack(CCBlocks.sugarFactory, random.nextInt(2) + 1), new ItemStack(CCItems.lollipopSeeds, random.nextInt(12) + 6), new ItemStack(CCItems.cottonCandy, random.nextInt(3) + 6), new ItemStack(CCItems.cranberryFishCooked, random.nextInt(3) + 6), new ItemStack(CCItems.cranberryScale, random.nextInt(3) + 6), new ItemStack(CCBlocks.dragonEggBlock, 1)};
+                ItemStack[] rewards = {new ItemStack(CCItems.sugarCrystal, random.nextInt(8) + 4), new ItemStack(CCItems.licorice, random.nextInt(14) + 8), new ItemStack(CCItems.candyCane, random.nextInt(8) + 3), new ItemStack(CCItems.chocolateCoin, random.nextInt(40) + 16), new ItemStack(CCItems.jumpWand, 1), new ItemStack(CCItems.jellyWand, 1), new ItemStack(CCBlocks.sugarBlock, random.nextInt(7) + 3), new ItemStack(CCItems.pez, random.nextInt(12) + 4), new ItemStack(CCItems.gummy, random.nextInt(12) + 6), fork, bow, new ItemStack(CCBlocks.sugarFactory, random.nextInt(2) + 1), new ItemStack(CCItems.lollipopSeeds, random.nextInt(12) + 6), new ItemStack(CCItems.cottonCandy, random.nextInt(3) + 6), new ItemStack(CCItems.cranberryFishCooked, random.nextInt(3) + 6), new ItemStack(CCItems.cranberryScale, random.nextInt(3) + 6), new ItemStack(CCBlocks.dragonEggBlock, 1)};
 
                 if (random.nextInt(3) >= 1) {
                     chest.setInventorySlotContents(i, rewards[random.nextInt(rewards.length)]);
@@ -730,53 +730,53 @@ public class WorldGenSlimeDungeon extends WorldGenerator {
         spawnRoom(world, random, i - 1, j - 1, k - 1);
         int r = random.nextInt(4);
         if (r == 0) {
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genJumpCraft(world, random, i + 5, j - 3, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genWaterRoom(world, random, i + 7, j, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genMob(world, random, i + 7, j, k - posX);
         }
         if (r == 1) {
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genMob(world, random, i + 7, j, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genWaterRoom(world, random, i + 7, j, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genJumpCraft(world, random, i + 5, j - 3, k - posX);
         }
         if (r == 2) {
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genJumpCraft(world, random, i + 5, j - 3, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genMob(world, random, i + 7, j, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genWaterRoom(world, random, i + 7, j, k - posX);
         }
         if (r == 3) {
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genWaterRoom(world, random, i + 7, j, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genMob(world, random, i + 7, j, k - posX);
-            genCoridor(world, random, i + 7, j, k - posX);
+            genCorridor(world, random, i + 7, j, k - posX);
             genJumpCraft(world, random, i + 5, j - 3, k - posX);
         }
-        genCoridor(world, random, i + 7, j, k - posX);
+        genCorridor(world, random, i + 7, j, k - posX);
         genMiniBossRoom(world, random, i + 7, j, k - posX);
-        genCoridor(world, random, i + 7, j - 2, k - posX);
+        genCorridor(world, random, i + 7, j - 2, k - posX);
         boolean b = random.nextBoolean();
         if (b) {
             genJumpCraft(world, random, i + 5, j - 5, k - posX);
-            genCoridor(world, random, i + 7, j - 2, k - posX);
+            genCorridor(world, random, i + 7, j - 2, k - posX);
             genMob(world, random, i + 7, j - 2, k - posX);
         } else {
             genMob(world, random, i + 7, j - 2, k - posX);
-            genCoridor(world, random, i + 7, j - 2, k - posX);
+            genCorridor(world, random, i + 7, j - 2, k - posX);
             genJumpCraft(world, random, i + 5, j - 5, k - posX);
         }
-        genCoridor(world, random, i + 7, j - 2, k - posX);
+        genCorridor(world, random, i + 7, j - 2, k - posX);
         genBossRoom(world, random, i + 7, j - 2, k - posX);
-        genCoridor(world, random, i + 7, j - 3, k - posX);
+        genCorridor(world, random, i + 7, j - 3, k - posX);
         genReward(world, random, i + 7, j - 3, k - posX);
         return true;
     }

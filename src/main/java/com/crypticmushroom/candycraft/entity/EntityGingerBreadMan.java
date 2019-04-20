@@ -8,12 +8,13 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -23,8 +24,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class EntityGingerBreadMan extends EntityVillager implements IMerchant, INpc {
+    private static final DataParameter<Integer> PROFESSION = EntityDataManager.createKey(EntityVillager.class, DataSerializers.VARINT);
     public final String[] jobs = {"Blacksmith", "Farmer", "Citizen", "Elder"};
-    EntityAIAvoidPlayerGinger ai = new EntityAIAvoidPlayerGinger(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D);
+    EntityAIAvoidPlayerGinger ai = new EntityAIAvoidPlayerGinger<>(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D);
     private MerchantRecipeList buyingList = new MerchantRecipeList();
 
     public EntityGingerBreadMan(World par1World) {
@@ -65,8 +67,8 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
     }
 
     @Override
-    public void updateAITick() {
-        super.updateAITick();
+    public void updateAITasks() {
+        super.updateAITasks();
         if (getProfession() != 3) {
             if (getMoveHelper().isUpdating()) {
                 double d0 = getMoveHelper().getSpeed();
@@ -89,16 +91,17 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
     }
 
     @Override
-    public void setProfession(int p_70938_1_) {
-        if (p_70938_1_ == 3) {
+    //TODO: Null at PROFESSION
+    public void setProfession(int professionId) {
+        if (professionId == 3) {
             tasks.removeTask(ai);
             getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.83000000298023224D);
             buyingList.clear();
-            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 5), new ItemStack(CCItems.whiteKey)));
-            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 10), new ItemStack(CCItems.skyEmblem)));
-            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.PEZ, 20), new ItemStack(CCItems.CD3)));
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.pez, 5), new ItemStack(CCItems.whiteKey)));
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.pez, 10), new ItemStack(CCItems.skyEmblem)));
+            buyingList.add(new MerchantRecipe(new ItemStack(CCItems.pez, 20), new ItemStack(CCItems.CD3)));
         }
-        dataWatcher.updateObject(16, Integer.valueOf(p_70938_1_));
+        dataManager.set(PROFESSION, professionId);
     }
 
     @Override
@@ -136,7 +139,7 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
                 buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 15), new ItemStack(CCItems.honeycomb, 1)));
             }
             if (rand.nextInt(3) < 1) {
-                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 35), new ItemStack(CCItems.PEZ, 1)));
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(20) + 35), new ItemStack(CCItems.pez, 1)));
             }
             if (buyingList.size() == 0) {
                 buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCItems.honeyArrow, rand.nextInt(4) + 1)));
@@ -150,10 +153,10 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
             }
             buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 2), new ItemStack(CCItems.dragibus, rand.nextInt(2) + 1)));
             if (rand.nextInt(3) < 1) {
-                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCBlocks.pinkSeeweed, rand.nextInt(4) + 1)));
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(10) + 4), new ItemStack(CCBlocks.pinkSeaweed, rand.nextInt(4) + 1)));
             }
             if (rand.nextInt(5) < 2) {
-                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.greenSeeweed, rand.nextInt(6) + 1)));
+                buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.greenSeaweed, rand.nextInt(6) + 1)));
             }
             if (rand.nextInt(5) < 2) {
                 buyingList.add(new MerchantRecipe(new ItemStack(CCItems.chocolateCoin, rand.nextInt(12) + 4), new ItemStack(CCBlocks.bananaSeaweed, rand.nextInt(6) + 1)));
@@ -224,29 +227,14 @@ public class EntityGingerBreadMan extends EntityVillager implements IMerchant, I
 
     @Override
     public EntityVillager createChild(EntityAgeable par1EntityAgeable) {
-        EntityGingerBreadMan entityvillager = new EntityGingerBreadMan(worldObj);
-        entityvillager.onInitialSpawn(worldObj.getDifficultyForLocation(new BlockPos(this)), (IEntityLivingData) null);
+        EntityGingerBreadMan entityvillager = new EntityGingerBreadMan(world);
+        entityvillager.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(this)), null);
         return entityvillager;
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return isTrading() ? SoundEvents.ENTITY_VILLAGER_TRADING : SoundEvents.ENTITY_VILLAGER_AMBIENT;
     }
 
     @Override
     protected float getSoundPitch() {
         return isChild() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 0.2F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 0.2F;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound() {
-        return SoundEvents.ENTITY_VILLAGER_HURT;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_VILLAGER_DEATH;
     }
 
     @Override

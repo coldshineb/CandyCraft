@@ -1,28 +1,11 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cross",
+    "transform": "forge:default-item"
+  },
   "variants": {
-    "metadata=0,stage=0": {
-      "model": "candycraftmod:candy_sapling.0"
-    },
-    "metadata=1,stage=0": {
-      "model": "candycraftmod:candy_sapling.1"
-    },
-    "metadata=2,stage=0": {
-      "model": "candycraftmod:candy_sapling.2"
-    },
-    "metadata=3,stage=0": {
-      "model": "candycraftmod:candy_sapling.3"
-    },
-    "metadata=0,stage=1": {
-      "model": "candycraftmod:candy_sapling.0"
-    },
-    "metadata=1,stage=1": {
-      "model": "candycraftmod:candy_sapling.1"
-    },
-    "metadata=2,stage=1": {
-      "model": "candycraftmod:candy_sapling.2"
-    },
-    "metadata=3,stage=1": {
-      "model": "candycraftmod:candy_sapling.3"
-    }
+    "normal":    [{ "model": "cross",             "textures": { "cross":  "candycraft:blocks/candy_sapling.0" }}],
+    "inventory": [{ "model": "builtin/generated", "textures": { "layer0": "candycraft:blocks/candy_sapling.0" }}]
   }
 }

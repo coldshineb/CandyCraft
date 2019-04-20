@@ -10,20 +10,25 @@ import com.crypticmushroom.candycraft.entity.ICandyBoss;
 import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleBreaking;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IMob, ICandyBoss {
+public class EntityKingSlime extends EntityJelly implements IMob, ICandyBoss {
+    private static final DataParameter<Integer> STATS = EntityDataManager.createKey(EntityKingSlime.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> IS_AWAKE = EntityDataManager.createKey(EntityKingSlime.class, DataSerializers.BOOLEAN);
+    private int slimeJumpDelay;
     public boolean isAwake = false;
-
     public double sX = 0.0D;
     public double sY = 0.0D;
     public double sZ = 0.0D;
@@ -32,14 +37,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
     public EntityKingSlime(World par1World) {
         super(par1World);
         isImmuneToFire = true;
-        slimeJumpDelay = rand.nextInt(20) + 10;
         experienceValue = 800;
-        this.setJellySize(13, true);
-    }
-
-    @Override
-    protected int getJumpDelay() {
-        return slimeJumpDelay;
     }
 
     @Override
@@ -47,24 +45,24 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
         if (isAwake) {
             super.jump();
 
-            EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 48.0D);
-            if (entityplayer != null && !worldObj.isRemote) {
+            EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 48.0D);
+            if (entityplayer != null && !world.isRemote) {
                 if (rand.nextInt(10) == 0) {
                     entityplayer.attackEntityFrom(DamageSource.causeMobDamage(this), 0);
                     entityplayer.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5 * 20, 2));
                     for (int i = 0; i < 20; i++) {
-                        if (worldObj.isRemote) {
+                        if (world.isRemote) {
                             drawParticle(entityplayer);
                         }
                     }
                 }
                 if (rand.nextInt(5) == 0) {
-                    worldObj.createExplosion(this, posX, posY, posZ, 3, false);
+                    world.createExplosion(this, posX, posY, posZ, 3, false);
                 }
                 if (rand.nextInt(3) == 0) {
-                    EntityYellowJelly slime = new EntityYellowJelly(worldObj);
+                    EntityYellowJelly slime = new EntityYellowJelly(world);
                     slime.setPosition(posX, posY, posZ);
-                    worldObj.spawnEntityInWorld(slime);
+                    world.spawnEntity(slime);
                 }
             }
         }
@@ -75,34 +73,20 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
         return isAwake;
     }
 
-    protected void setJellySize(int par1, boolean health) {
-        dataWatcher.updateObject(16, new Byte((byte) par1));
-        setSize(0.6F * par1, 0.6F * par1);
-        if (health) {
-            getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((800));
-            setHealth(getMaxHealth());
-        }
-        setPosition(posX, posY, posZ);
-    }
-
-    public byte getAwake() {
-        return dataWatcher.getWatchableObjectByte(21);
+    public boolean getAwake() {
+        return dataManager.get(IS_AWAKE);
     }
 
     public void setAwake() {
-        dataWatcher.updateObject(21, isAwake ? (byte) 1 : (byte) 0);
+        dataManager.set(IS_AWAKE, isAwake);
     }
 
     public int getStats() {
-        return dataWatcher.getWatchableObjectInt(19);
+        return dataManager.get(STATS);
     }
 
     public void setStats(int par1) {
-        dataWatcher.updateObject(19, par1);
-    }
-
-    public int getSlimeSize() {
-        return dataWatcher.getWatchableObjectByte(16);
+        dataManager.set(STATS, par1);
     }
 
     @Override
@@ -134,17 +118,17 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataWatcher.addObject(19, new Integer(0));
-        dataWatcher.addObject(20, new Integer(800));
-        dataWatcher.addObject(21, new Byte((byte) 0));
+        dataManager.register(STATS, 0);
+        //dataManager.register(20, 800); TODO: Unused?
+        dataManager.register(IS_AWAKE, false);
     }
 
     @Override
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
         int i = getSlimeSize();
 
-        if (canEntityBeSeen(par1EntityPlayer) && getDistanceSqToEntity(par1EntityPlayer) < 0.6D * i * 0.6D * i && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), getSlimeSize() * 2.5F)) {
-            playSound("mob.attack", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+        if (canEntityBeSeen(par1EntityPlayer) && getDistanceSq(par1EntityPlayer) < 0.6D * i * 0.6D * i && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), getSlimeSize() * 2.5F)) {
+            playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
         }
     }
 
@@ -163,27 +147,27 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         double percent = (double) (getHealth() / getMaxHealth()) * 12;
-        if (!worldObj.isRemote && getSlimeSize() > (int) percent + 1) {
-            this.setJellySize((int) percent + 1, false);
+        if (!world.isRemote && getSlimeSize() > (int) percent + 1) {
+            this.setSlimeSize((int) percent + 1, false);
         }
 
         if (par1DamageSource.isProjectile()) {
             return false;
         }
-        if (!isAwake && !worldObj.isRemote && par1DamageSource.getEntity() != null) {
+        if (!isAwake && !world.isRemote && par1DamageSource.getTrueSource() != null) {
             motionY = 2;
             isAwake = true;
             setAwake();
 
         }
-        if (par1DamageSource.getEntity() != null && par1DamageSource.getEntity() instanceof EntityPlayer && par2 > 1 && !((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode) {
-            double d0 = par1DamageSource.getEntity().posX - posX;
+        if (par1DamageSource.getTrueSource() != null && par1DamageSource.getTrueSource() instanceof EntityPlayer && par2 > 1 && !((EntityPlayer) par1DamageSource.getTrueSource()).capabilities.isCreativeMode) {
+            double d0 = par1DamageSource.getTrueSource().posX - posX;
             double d1;
 
-            for (d1 = par1DamageSource.getEntity().posZ - posZ; d0 * d0 + d1 * d1 < 1.0E-4D; d1 = (Math.random() - Math.random()) * 0.01D) {
+            for (d1 = par1DamageSource.getTrueSource().posZ - posZ; d0 * d0 + d1 * d1 < 1.0E-4D; d1 = (Math.random() - Math.random()) * 0.01D) {
                 d0 = (Math.random() - Math.random()) * 0.01D;
             }
-            ((EntityPlayer) par1DamageSource.getEntity()).knockBack(this, 2.0F, -d0, -d1);
+            ((EntityPlayer) par1DamageSource.getTrueSource()).knockBack(this, 2.0F, -d0, -d1);
         }
         return super.attackEntityFrom(par1DamageSource, par2);
     }
@@ -194,7 +178,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
             motionX = 0;
             motionZ = 0;
         }
-        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(worldObj, this, 48.0D);
+        EntityPlayer entityplayer = EntityUtil.getClosestVulnerablePlayerToEntity(world, this, 48.0D);
 
         if (entityplayer != null && isAwake) {
             faceEntity(entityplayer, 10.0F, 20.0F);
@@ -202,9 +186,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
             if ((onGround) && slimeJumpDelay-- <= 0) {
                 slimeJumpDelay = getJumpDelay();
 
-                if (entityplayer != null) {
-                    slimeJumpDelay /= 3;
-                }
+                slimeJumpDelay /= 3;
 
                 isJumping = true;
 
@@ -213,7 +195,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
                 }
 
                 moveStrafing = 1.0F - rand.nextFloat() * 2.0F;
-                moveForward = 1 * getSlimeSize();
+                moveForward = getSlimeSize();
             } else {
                 isJumping = false;
 
@@ -221,7 +203,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
                     moveStrafing = moveForward = 0.0F;
                 }
             }
-        } else if (!worldObj.isRemote && entityplayer == null && (worldObj.getClosestPlayerToEntity(this, 48.0D) == null || (worldObj.getClosestPlayerToEntity(this, 48.0D) != null && worldObj.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
+        } else if (!world.isRemote && entityplayer == null && (world.getClosestPlayerToEntity(this, 48.0D) == null || (world.getClosestPlayerToEntity(this, 48.0D) != null && world.getClosestPlayerToEntity(this, 48.0D) == getAttackTarget()))) {
             motionX = 0;
             motionZ = 0;
             isAwake = false;
@@ -231,7 +213,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
 
     @SideOnly(Side.CLIENT)
     public void drawParticle(EntityPlayer entityplayer) {
-        ParticleBreaking fx = new EntityBreakingParticleFX(worldObj, entityplayer.posX + rand.nextFloat() - 0.5F, entityplayer.posY + entityplayer.getEyeHeight(), entityplayer.posZ + rand.nextFloat() - 0.5F, CCItems.gummyBall);
+        ParticleBreaking fx = new EntityBreakingParticleFX(world, entityplayer.posX + rand.nextFloat() - 0.5F, entityplayer.posY + entityplayer.getEyeHeight(), entityplayer.posZ + rand.nextFloat() - 0.5F, CCItems.gummy_ball);
         Minecraft.getMinecraft().effectRenderer.addEffect(fx);
     }
 
@@ -259,8 +241,7 @@ public class EntityKingSlime extends EntityJelly implements IBossDisplayData, IM
 
     @Override
     @SideOnly(Side.CLIENT)
-    public float lastDamage(float par1) {
+    public void lastDamage(float par1) {
         ((GuiBoss) CandyCraft.getClientTicker().bossHealth).lastLife += par1;
-        return par1;
     }
 }

@@ -1,6 +1,6 @@
 package com.crypticmushroom.candycraft.event;
 
-import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.CandyCraftConfig;
 import com.crypticmushroom.candycraft.entity.DynamiteCallBack;
 import com.crypticmushroom.candycraft.items.CCItems;
 import com.crypticmushroom.candycraft.world.WorldProviderCandy;
@@ -12,29 +12,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ServerTick {
-    public static ArrayList<DynamiteCallBack> dynamiteCallBack = new ArrayList();
-    public static ArrayList<WorldGenFloatingIsland> floatingIsland = new ArrayList();
+    public static ArrayList<DynamiteCallBack> dynamiteCallBack = new ArrayList<>();
+    public static ArrayList<WorldGenFloatingIsland> floatingIsland = new ArrayList<>();
 
     public void onWorldTick(World world) {
         if (world instanceof WorldServer) {
-            WorldServer worldS = (WorldServer) world;
 
-            if (worldS.areAllPlayersAsleep()) {
-                if (worldS.getGameRules().getBoolean("doDaylightCycle")) {
-                    long i = world.getWorldInfo().getWorldTime() + 24000L;
-                    setTime(world, (i - i % 24000L));
-                }
-
-                wakeAllPlayers(worldS);
-            }
-
-            if (world.provider.getDimension() == CandyCraft.getCandyDimensionID()) {
+            //TODO: This structure gen stuff should be moved out of here. This is bad practice, like, REALLY bad
+            if (world.provider.getDimension() == CandyCraftConfig.candyDimID) {
                 if (WorldProviderCandy.canGenVillage > 0) {
                     WorldProviderCandy.canGenVillage--;
                 }
@@ -61,7 +50,7 @@ public class ServerTick {
                     WorldGenFloatingIsland is = floatingIsland.get(i);
                     if (is.finished && world == is.world) {
                         floatingIsland.remove(i);
-                        is.finishGeneration(is.world, is.x, is.y, is.z);
+                        is.finishGeneration(is.world);
                     }
                 }
             }
@@ -73,29 +62,8 @@ public class ServerTick {
         }
     }
 
-    public void setTime(World world, long par2) {
-        for (WorldServer worldServer : DimensionManager.getWorlds()) {
-            worldServer.setWorldTime(par2);
-        }
-    }
-
-    protected void wakeAllPlayers(WorldServer world) {
-        // world.allPlayersSleeping = false;
-        Iterator iterator = world.playerEntities.iterator();
-
-        while (iterator.hasNext()) {
-            EntityPlayer entityplayer = (EntityPlayer) iterator.next();
-
-            if (entityplayer.isPlayerSleeping()) {
-                entityplayer.wakeUpPlayer(false, false, true);
-            }
-        }
-
-        world.provider.resetRainAndThunder();
-    }
-
     public void onPlayerTick(EntityPlayer player) {
-        if (player.getItemStackFromSlot(EntityEquipmentSlot.HEAD) != null && player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == CCItems.waterMask) {
+        if (player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == CCItems.waterMask) {
             player.setAir(300);
         }
         if (player.inventory.hasItemStack(new ItemStack(CCItems.waterEmblem)) && player.isInWater() && player.ticksExisted % 600 == 0) {

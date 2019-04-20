@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:licorice_ore"
+    },
+    "title": {
+      "translate": "advancements.candycraft.licorice.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.licorice.desc"
+    }
+  },
+  "parent": "candycraft:candy_world",
+  "criteria": {
+    "licorice": {
+      "trigger": "minecraft:inventory_changed",
+      "items": [
+        {
+          "item": "candycraft:licorice"
+        }
+      ]
+    }
+  }
+}

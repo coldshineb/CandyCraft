@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/jelly_wand"
+    "layer0": "candycraft:items/jelly_wand"
   },
   "display": {
     "thirdperson": {

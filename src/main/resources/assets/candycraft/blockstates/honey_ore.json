@@ -1,7 +1,13 @@
 {
-  "variants": {
-    "normal": {
-      "model": "candycraftmod:honey_ore"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "candycraft:blocks/honey_ore"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

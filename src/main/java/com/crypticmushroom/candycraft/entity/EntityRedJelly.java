@@ -14,18 +14,14 @@ public class EntityRedJelly extends EntityJelly implements IMob {
         isImmuneToFire = true;
     }
 
-    protected boolean canDamagePlayer() {
-        return true;
-    }
-
     protected EntityRedJelly createInstance() {
-        return new EntityRedJelly(worldObj);
+        return new EntityRedJelly(world);
     }
 
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_) {
-        setJellySize(2);
-        return super.onInitialSpawn(p_180482_1_, p_180482_2_);
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingData) {
+        setSlimeSize(2, true);
+        return super.onInitialSpawn(difficulty, livingData);
     }
 
     @Override
@@ -36,18 +32,18 @@ public class EntityRedJelly extends EntityJelly implements IMob {
 
     @Override
     public void setDead() {
-        int i = getJellySize();
+        int i = getSlimeSize();
 
-        if (!worldObj.isRemote && i > 1 && getHealth() <= 0.0F) {
+        if (!world.isRemote && i > 1 && getHealth() <= 0.0F) {
             int j = 2 + rand.nextInt(3);
 
             for (int k = 0; k < j; ++k) {
                 float f = (k % 2 - 0.5F) * i / 4.0F;
                 float f1 = (k / 2 - 0.5F) * i / 4.0F;
                 EntityRedJelly entityslime = createInstance();
-                entityslime.setJellySize(i / 2);
+                entityslime.setSlimeSize(i / 2, true);
                 entityslime.setLocationAndAngles(posX + f, posY + 0.5D, posZ + f1, rand.nextFloat() * 360.0F, 0.0F);
-                worldObj.spawnEntityInWorld(entityslime);
+                world.spawnEntity(entityslime);
             }
         }
 
@@ -56,11 +52,9 @@ public class EntityRedJelly extends EntityJelly implements IMob {
 
     @Override
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-        int i = getJellySize();
-
         if (par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), 6)) {
-            if (!worldObj.isRemote) {
-                worldObj.createExplosion(this, posX, posY, posZ, 3, false);
+            if (!world.isRemote) {
+                world.createExplosion(this, posX, posY, posZ, 3, false);
                 setDead();
             }
         }

@@ -7,8 +7,9 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
+//TODO: Things are unused in there, but I'll spare from the cutting board in the event of usage (then again, Structure NBT)
 interface Pattern {
-    public IBlockState getBlock(BlockPos pos);
+    IBlockState getBlock(BlockPos pos);
 }
 
 public class GeometryGenerator extends WorldGenerator {

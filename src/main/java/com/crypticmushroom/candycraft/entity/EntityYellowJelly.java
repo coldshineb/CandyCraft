@@ -14,9 +14,9 @@ public class EntityYellowJelly extends EntityJelly implements IMob {
     }
 
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance p_180482_1_, IEntityLivingData p_180482_2_) {
-        setJellySize(1);
-        return super.onInitialSpawn(p_180482_1_, p_180482_2_);
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingData) {
+        setSlimeSize(1, true);
+        return super.onInitialSpawn(difficulty, livingData);
     }
 
     @Override
@@ -26,8 +26,6 @@ public class EntityYellowJelly extends EntityJelly implements IMob {
 
     @Override
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-        int i = getJellySize();
-
         if (par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), 6)) {
             playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
         }

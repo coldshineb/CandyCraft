@@ -1,9 +1,9 @@
 package com.crypticmushroom.candycraft.entity;
 
 public interface ICandyBoss {
-    public abstract int bossStatue();
+    int bossStatue();
 
-    public abstract float lastDamage(float par1);
+    void lastDamage(float par1);
 
-    public abstract double[] getBarColor();
+    double[] getBarColor();
 }

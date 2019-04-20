@@ -9,7 +9,6 @@ public abstract class GenLayerCandyBiomes extends GenLayer {
     }
 
     public static GenLayer[] initBiomes(long par0, WorldType par1) {
-        boolean flag = false;
         GenLayerCandyIsland genlayerisland = new GenLayerCandyIsland(1L);
         GenLayerFuzzyZoom genlayerfuzzyzoom = new GenLayerFuzzyZoom(2000L, genlayerisland);
         GenLayerCandyAddIsland genlayeraddisland = new GenLayerCandyAddIsland(1L, genlayerfuzzyzoom);
@@ -33,7 +32,7 @@ public abstract class GenLayerCandyBiomes extends GenLayer {
 
         GenLayer genlayer = GenLayerZoom.magnify(1000L, genlayer3, 0);
         GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, genlayer);
-        Object object = getBiomeLayer(par0, genlayer3, par1);
+        Object object = getBiomeLayer(genlayer3, par1);
 
         GenLayer genlayer1 = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
         GenLayerHills genlayerhills = new GenLayerHills(1000L, (GenLayer) object, genlayer1);
@@ -63,7 +62,7 @@ public abstract class GenLayerCandyBiomes extends GenLayer {
         return new GenLayer[]{genlayerrivermix, genlayervoronoizoom, genlayerrivermix};
     }
 
-    public static GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer, WorldType type) {
+    public static GenLayer getBiomeLayer(GenLayer parentLayer, WorldType type) {
         GenLayer ret = new GenLayerBiomeCandy(200L, parentLayer, type);
         ret = GenLayerZoom.magnify(1000L, ret, 2);
         ret = new GenLayerBiomeEdge(1000L, ret);

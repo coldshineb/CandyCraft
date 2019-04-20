@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "L L"
+  ],
+  "key": {
+    "L": {
+      "item": "candycraft:honeycomb"
+    }
+  },
+  "result": {
+    "item": "candycraft:honey_helmet"
+  }
+}

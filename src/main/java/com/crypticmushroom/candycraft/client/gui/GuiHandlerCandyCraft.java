@@ -1,7 +1,7 @@
 package com.crypticmushroom.candycraft.client.gui;
 
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
-import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFurnace;
+import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityLicoriceFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -14,8 +14,8 @@ public class GuiHandlerCandyCraft implements IGuiHandler {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         if (tileEntity instanceof TileEntitySugarFactory) {
             return new ContainerSugarFactory(player.inventory, (TileEntitySugarFactory) tileEntity);
-        } else if (tileEntity instanceof TileEntitySugarFurnace) {
-            return new ContainerSugarFurnace(player.inventory, (TileEntitySugarFurnace) tileEntity);
+        } else if (tileEntity instanceof TileEntityLicoriceFurnace) {
+            return new ContainerLicoriceFurnace(player.inventory, (TileEntityLicoriceFurnace) tileEntity);
         } else if (ID == 4301) {
             return new ContainerCandyWorkbench(player.inventory, world, new BlockPos(x, y, z));
         } else {
@@ -28,8 +28,8 @@ public class GuiHandlerCandyCraft implements IGuiHandler {
         TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
         if (tileEntity instanceof TileEntitySugarFactory) {
             return new GuiSugarFactory(player.inventory, (TileEntitySugarFactory) tileEntity);
-        } else if (tileEntity instanceof TileEntitySugarFurnace) {
-            return new GuiSugarFurnace(player.inventory, (TileEntitySugarFurnace) tileEntity);
+        } else if (tileEntity instanceof TileEntityLicoriceFurnace) {
+            return new GuiLicoriceFurnace(player.inventory, (TileEntityLicoriceFurnace) tileEntity);
         } else if (ID == 4301) {
             return new GuiCandyWorkbench(player.inventory, world, x, y, z);
         } else {

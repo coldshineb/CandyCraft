@@ -7,7 +7,6 @@ import com.crypticmushroom.candycraft.world.biomes.CCBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,22 +16,14 @@ import java.util.Random;
 
 public class WorldGenCandyTrees extends WorldGenAbstractTree {
     private final int minTreeHeight;
-    private final int metaWood;
+    private final Block metaWood;
     private final boolean metaChange;
     World world;
-    private int metaLeaves;
+    private Block metaLeaves;
 
-    public WorldGenCandyTrees(boolean doBlockNotify, boolean metaChange) {
-        this(doBlockNotify, 4, 0, 0, metaChange);
-    }
-
-    public WorldGenCandyTrees(boolean doBlockNotify, int meta) {
-        this(doBlockNotify, 4, meta, meta, false);
-    }
-
-    public WorldGenCandyTrees(boolean doBlockNotify, int minHeight, int metaWood, int metaLeaves, boolean metaChange) {
+    public WorldGenCandyTrees(boolean doBlockNotify, int minHeight, Block metaWood, Block metaLeaves, boolean metaChange) {
         super(doBlockNotify);
-        minTreeHeight = minHeight;
+        this.minTreeHeight = minHeight;
         this.metaWood = metaWood;
         this.metaLeaves = metaLeaves;
         this.metaChange = metaChange;
@@ -46,10 +37,10 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
     @Override
     public boolean generate(World worldIn, Random random, BlockPos pos) {
         world = worldIn;
-        if (metaLeaves == 3) {
+        if (metaLeaves == CCBlocks.candyLeaveCherry) {
             return generateCherry(worldIn, pos);
         }
-        if (metaLeaves == 0 || metaLeaves == 1 || (metaLeaves == 2 && random.nextInt(10) == 0)) {
+        if (metaLeaves == CCBlocks.candyLeave || metaLeaves == CCBlocks.candyLeaveDark || (metaLeaves == CCBlocks.candyLeaveLight && random.nextInt(10) == 0)) {
             int i = random.nextInt(3) + minTreeHeight;
             boolean flag = true;
 
@@ -57,21 +48,21 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                 if (random.nextInt(2000) == 100) {
                     EntityJellyQueen entity = new EntityJellyQueen(worldIn);
                     entity.setPosition(pos.getX(), 300, pos.getZ());
-                    entity.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData) null);
-                    worldIn.spawnEntityInWorld(entity);
+                    entity.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entity)), null);
+                    worldIn.spawnEntity(entity);
                 }
                 if (random.nextInt(100) == 0) {
                     return generateCherry(worldIn, pos);
                 }
                 int r = random.nextInt(3);
                 if (r == 0) {
-                    metaLeaves = 1;
+                    metaLeaves = CCBlocks.candyLeaveDark;
                 } else {
-                    metaLeaves = 0;
+                    metaLeaves = CCBlocks.candyLeave;
                 }
 
-                if (worldIn.getBiomeGenForCoords(pos) == CCBiomes.candyForest && random.nextInt(30) == 0) {
-                    return new WorldGenBigCandyTree(true, metaLeaves).generate(worldIn, random, pos);
+                if (worldIn.getBiomeForCoordsBody(pos) == CCBiomes.candyForest && random.nextInt(30) == 0) {
+                    return new WorldGenBigCandyTree(true).generate(worldIn, random, pos);
                 }
 
                 if (pos.getY() >= 1 && pos.getY() + i + 1 <= 256) {
@@ -135,7 +126,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                                             IBlockState block = worldIn.getBlockState(blockpos1);
 
                                             if (block.getBlock().isAir(block, worldIn, blockpos1) || block.getBlock().isLeaves(block, worldIn, blockpos1) || block.getMaterial() == Material.VINE) {
-                                                setBlockAndNotifyAdequately(worldIn, blockpos1, CCBlocks.candyLeave.getStateFromMeta(metaLeaves));
+                                                setBlockAndNotifyAdequately(worldIn, blockpos1, metaLeaves.getDefaultState());
                                             }
                                         }
                                     }
@@ -147,7 +138,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                                 IBlockState block2 = worldIn.getBlockState(upN);
 
                                 if (block2.getBlock().isAir(block2, worldIn, upN) || block2.getBlock().isLeaves(block2, worldIn, upN) || block2.getMaterial() == Material.VINE) {
-                                    setBlockAndNotifyAdequately(worldIn, pos.up(l), CCBlocks.marshmallowLog.getStateFromMeta(metaLeaves));
+                                    setBlockAndNotifyAdequately(worldIn, pos.up(l), metaWood.getDefaultState());
                                 }
                             }
                             return true;
@@ -179,22 +170,22 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
         for (i = 0; i < world.rand.nextInt(3) + 5; i++) {
             if (isAirBlock(x, y + i, z) && isAirBlock(x, y + i, z + 1) && isAirBlock(x, y + i, z - 1) && isAirBlock(x - 1, y + i, z) && isAirBlock(x + 1, y + i, z)) {
                 this.setBlock(x, y + i, z, CCBlocks.marshmallowLog);
-                this.setBlock(x, y + i, z + 1, CCBlocks.candyLeave, 3, 2);
-                this.setBlock(x, y + i, z - 1, CCBlocks.candyLeave, 3, 2);
-                this.setBlock(x - 1, y + i, z, CCBlocks.candyLeave, 3, 2);
-                this.setBlock(x + 1, y + i, z, CCBlocks.candyLeave, 3, 2);
+                this.setBlock(x, y + i, z + 1, CCBlocks.candyLeaveCherry, 2);
+                this.setBlock(x, y + i, z - 1, CCBlocks.candyLeaveCherry, 2);
+                this.setBlock(x - 1, y + i, z, CCBlocks.candyLeaveCherry, 2);
+                this.setBlock(x + 1, y + i, z, CCBlocks.candyLeaveCherry, 2);
                 if ((i % 2) != 0 && isAirBlock(x + 1, y + i, z + 1) && isAirBlock(x + 1, y + i, z - 1) && isAirBlock(x - 1, y + i, z + 1) && isAirBlock(x - 1, y + i, z - 1)) {
-                    this.setBlock(x + 1, y + i, z + 1, CCBlocks.candyLeave, 3, 2);
-                    this.setBlock(x + 1, y + i, z - 1, CCBlocks.candyLeave, 3, 2);
-                    this.setBlock(x - 1, y + i, z + 1, CCBlocks.candyLeave, 3, 2);
-                    this.setBlock(x - 1, y + i, z - 1, CCBlocks.candyLeave, 3, 2);
+                    this.setBlock(x + 1, y + i, z + 1, CCBlocks.candyLeaveCherry, 2);
+                    this.setBlock(x + 1, y + i, z - 1, CCBlocks.candyLeaveCherry, 2);
+                    this.setBlock(x - 1, y + i, z + 1, CCBlocks.candyLeaveCherry, 2);
+                    this.setBlock(x - 1, y + i, z - 1, CCBlocks.candyLeaveCherry, 2);
                 }
             } else {
                 break;
             }
         }
         if (isAirBlock(x, y + i, z)) {
-            this.setBlock(x, y + i, z, CCBlocks.candyLeave, 3, 2);
+            this.setBlock(x, y + i, z, CCBlocks.candyLeaveCherry, 2);
         }
         return true;
     }
@@ -203,11 +194,11 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
         if (metaChange) {
             int i = par2Random.nextInt(3);
             if (i == 0) {
-                metaLeaves = 1;
+                metaLeaves = CCBlocks.candyLeaveDark;
             } else if (i == 1) {
-                metaLeaves = 2;
+                metaLeaves = CCBlocks.candyLeaveLight;
             } else {
-                metaLeaves = 0;
+                metaLeaves = CCBlocks.candyLeave;
             }
         }
         int l = par2Random.nextInt(4) + 6;
@@ -221,7 +212,6 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
             int l3;
 
             for (int l1 = par4; l1 <= par4 + 1 + l && flag; ++l1) {
-                boolean flag1 = true;
 
                 if (l1 - par4 < i1) {
                     l3 = 0;
@@ -272,7 +262,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                                 IBlockState state3 = par1World.getBlockState(new BlockPos(l2, k2, j3));
 
                                 if ((Math.abs(i3) != l3 || Math.abs(k3) != l3 || l3 <= 0) && state3.getBlock().canBeReplacedByLeaves(state3, par1World, new BlockPos(l2, k2, j3))) {
-                                    setBlockAndNotifyAdequately(par1World, new BlockPos(l2, k2, j3), CCBlocks.candyLeave.getStateFromMeta(metaLeaves));
+                                    setBlockAndNotifyAdequately(par1World, new BlockPos(l2, k2, j3), metaLeaves.getDefaultState());
                                 }
                             }
                         }
@@ -292,9 +282,9 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
 
                     i4 = par2Random.nextInt(3);
 
-                    if (par1World.getBiomeGenForCoords(new BlockPos(par3, par4, par5)) == CCBiomes.candyHellMountains && par2Random.nextInt(20) == 0) {
-                        this.setBlock(par3 + 1, par4 - 1, par5, CCBlocks.pudding, 0, 2);
-                        this.setBlock(par3 + 1, par4, par5, CCBlocks.sugarEssenceFlower, 0, 2);
+                    if (par1World.getBiomeForCoordsBody(new BlockPos(par3, par4, par5)) == CCBiomes.candyHellMountains && par2Random.nextInt(20) == 0) {
+                        this.setBlock(par3 + 1, par4 - 1, par5, CCBlocks.pudding, 2);
+                        this.setBlock(par3 + 1, par4, par5, CCBlocks.sugarEssenceFlower, 2);
                     }
 
                     for (k2 = 0; k2 < l - i4; ++k2) {
@@ -302,7 +292,7 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
                         Block block2 = state2.getBlock();
 
                         if (block2.isAir(state2, par1World, new BlockPos(par3, par4 + k2, par5)) || block2.isLeaves(state2, par1World, new BlockPos(par3, par4 + k2, par5))) {
-                            setBlockAndNotifyAdequately(par1World, new BlockPos(par3, par4 + k2, par5), CCBlocks.marshmallowLog.getStateFromMeta(metaLeaves));
+                            setBlockAndNotifyAdequately(par1World, new BlockPos(par3, par4 + k2, par5), metaWood.getDefaultState());
                         }
                     }
 
@@ -318,10 +308,6 @@ public class WorldGenCandyTrees extends WorldGenAbstractTree {
 
     public void setBlock(int x, int y, int z, Block bl) {
         world.setBlockState(new BlockPos(x, y, z), bl.getDefaultState());
-    }
-
-    public void setBlock(int x, int y, int z, Block bl, int meta, int flag) {
-        world.setBlockState(new BlockPos(x, y, z), bl.getStateFromMeta(meta), flag);
     }
 
     public void setBlock(int x, int y, int z, Block bl, int flag) {

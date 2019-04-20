@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/caramel_crossbow_0"
+    "layer0": "candycraft:items/caramel_crossbow_0"
   },
   "display": {
     "thirdperson": {

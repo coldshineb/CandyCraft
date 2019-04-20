@@ -1,13 +1,13 @@
 package com.crypticmushroom.candycraft.entity;
 
 public interface IEntityPowerMount {
-    public int maxPower();
+    int maxPower();
 
-    public int powerUsed();
+    int powerUsed();
 
-    public void unleashPower();
+    void unleashPower();
 
-    public int getPower();
+    int getPower();
 
-    public void setPower(int i);
+    void setPower(int i);
 }

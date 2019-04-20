@@ -1,7 +1,13 @@
 {
-  "variants": {
-    "normal": {
-      "model": "candycraftmod:purple_trampojelly"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "candycraft:blocks/purple_trampojelly"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

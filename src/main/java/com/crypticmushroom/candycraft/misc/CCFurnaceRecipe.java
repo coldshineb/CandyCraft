@@ -12,9 +12,6 @@ import java.util.Map;
 public class CCFurnaceRecipe {
     private static final CCFurnaceRecipe smeltingBase = new CCFurnaceRecipe();
 
-    private Map smeltingList = new HashMap();
-    private Map experienceList = new HashMap();
-
     private CCFurnaceRecipe() {
         GameRegistry.addSmelting(CCBlocks.flour, new ItemStack(CCBlocks.pudding), 0.7F);
         GameRegistry.addSmelting(CCBlocks.licoriceOre, new ItemStack(CCItems.licorice), 1.0F);
@@ -26,7 +23,7 @@ public class CCFurnaceRecipe {
         GameRegistry.addSmelting(CCBlocks.chocolateCobbleStone, new ItemStack(CCBlocks.chocolateStone), 0.7F);
         GameRegistry.addSmelting(CCBlocks.honeyBlock, new ItemStack(CCBlocks.honeyLamp), 0.7F);
         GameRegistry.addSmelting(CCItems.gummy, new ItemStack(CCItems.hotGummy), 0.7F);
-        GameRegistry.addSmelting(CCBlocks.PEZOre, new ItemStack(CCItems.PEZ), 1.0F);
+        GameRegistry.addSmelting(CCBlocks.pezOre, new ItemStack(CCItems.pez), 1.0F);
         GameRegistry.addSmelting(CCItems.cranberryFish, new ItemStack(CCItems.cranberryFishCooked), 0.7F);
         GameRegistry.addSmelting(CCBlocks.caramelBlock, new ItemStack(CCBlocks.caramelGlass0), 0.7F);
     }

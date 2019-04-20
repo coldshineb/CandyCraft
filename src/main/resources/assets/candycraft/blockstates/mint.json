@@ -1,52 +1,12 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cross",
+    "transform": "forge:default-item"
+  },
   "variants": {
-    "level=0": {
-      "model": "candycraftmod:mint"
-    },
-    "level=1": {
-      "model": "candycraftmod:mint"
-    },
-    "level=2": {
-      "model": "candycraftmod:mint"
-    },
-    "level=3": {
-      "model": "candycraftmod:mint"
-    },
-    "level=4": {
-      "model": "candycraftmod:mint"
-    },
-    "level=5": {
-      "model": "candycraftmod:mint"
-    },
-    "level=6": {
-      "model": "candycraftmod:mint"
-    },
-    "level=7": {
-      "model": "candycraftmod:mint"
-    },
-    "level=8": {
-      "model": "candycraftmod:mint"
-    },
-    "level=9": {
-      "model": "candycraftmod:mint"
-    },
-    "level=10": {
-      "model": "candycraftmod:mint"
-    },
-    "level=11": {
-      "model": "candycraftmod:mint"
-    },
-    "level=12": {
-      "model": "candycraftmod:mint"
-    },
-    "level=13": {
-      "model": "candycraftmod:mint"
-    },
-    "level=14": {
-      "model": "candycraftmod:mint"
-    },
-    "level=15": {
-      "model": "candycraftmod:mint"
-    }
+    "normal": [{ "model": "cross", "textures": { "cross": "candycraft:blocks/mint" }}],
+    "inventory": [{ "model": "builtin/generated", "textures": { "layer0": "candycraft:blocks/mint" }}]
+
   }
 }

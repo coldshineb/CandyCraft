@@ -1,43 +1,19 @@
 {
-  "variants": {
-    "axis=y,metadata=0": {
-      "model": "candycraftmod:marshmallow_log.0"
-    },
-    "axis=z,metadata=0": {
-      "model": "candycraftmod:marshmallow_log_side.0"
-    },
-    "axis=x,metadata=0": {
-      "model": "candycraftmod:marshmallow_log_side.0",
-      "y": 90
-    },
-    "axis=none,metadata=0": {
-      "model": "candycraftmod:marshmallow_log.0"
-    },
-    "axis=y,metadata=1": {
-      "model": "candycraftmod:marshmallow_log.1"
-    },
-    "axis=z,metadata=1": {
-      "model": "candycraftmod:marshmallow_log_side.1"
-    },
-    "axis=x,metadata=1": {
-      "model": "candycraftmod:marshmallow_log_side.1",
-      "y": 90
-    },
-    "axis=none,metadata=1": {
-      "model": "candycraftmod:marshmallow_log.1"
-    },
-    "axis=y,metadata=2": {
-      "model": "candycraftmod:marshmallow_log.2"
-    },
-    "axis=z,metadata=2": {
-      "model": "candycraftmod:marshmallow_log_side.2"
-    },
-    "axis=x,metadata=2": {
-      "model": "candycraftmod:marshmallow_log_side.2",
-      "y": 90
-    },
-    "axis=none,metadata=2": {
-      "model": "candycraftmod:marshmallow_log.2"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_column",
+    "textures": {
+      "end": "candycraft:blocks/marshmallow_log_top.0",
+      "side": "candycraft:blocks/marshmallow_log_side.0"
     }
+  },
+  "variants": {
+    "axis": {
+      "y": {},
+      "z": { "x": 90 },
+      "x": { "x": 90, "y": 90 },
+      "none": { "model": "cube_all", "textures": { "all": "#side" } }
+    },
+    "inventory": [{}]
   }
 }

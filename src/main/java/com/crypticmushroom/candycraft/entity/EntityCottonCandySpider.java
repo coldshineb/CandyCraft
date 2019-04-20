@@ -29,19 +29,19 @@ public class EntityCottonCandySpider extends EntitySpider {
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity p_70652_1_) {
-        if (super.attackEntityAsMob(p_70652_1_)) {
-            if (p_70652_1_ instanceof EntityLivingBase) {
+    public boolean attackEntityAsMob(Entity entityIn) {
+        if (super.attackEntityAsMob(entityIn)) {
+            if (entityIn instanceof EntityLivingBase) {
                 byte b0 = 0;
 
-                if (worldObj.getDifficulty() == EnumDifficulty.NORMAL) {
+                if (world.getDifficulty() == EnumDifficulty.NORMAL) {
                     b0 = 7;
-                } else if (worldObj.getDifficulty() == EnumDifficulty.HARD) {
+                } else if (world.getDifficulty() == EnumDifficulty.HARD) {
                     b0 = 15;
                 }
 
                 if (b0 > 0) {
-                    ((EntityLivingBase) p_70652_1_).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, b0 * 20, 0));
+                    ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, b0 * 20, 0));
                 }
             }
 

@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:licorice_spear"
+    },
+    "title": {
+      "translate": "advancements.candycraft.kill_suguard.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.kill_suguard.desc"
+    }
+  },
+  "parent": "candycraft:kill_candy_creeper",
+  "criteria": {
+    "kill_suguard": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "candycraft:suguard"
+        }
+      }
+    }
+  }
+}

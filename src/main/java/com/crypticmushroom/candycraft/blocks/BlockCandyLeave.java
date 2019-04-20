@@ -1,64 +1,69 @@
 package com.crypticmushroom.candycraft.blocks;
 
-import com.google.common.base.Predicate;
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
-public class BlockCandyLeave extends BlockCandyLeaveBase implements IShearable {
-    public static final PropertyEnum VARIANT_PROP = PropertyEnum.create("variant", BlockPlanks.EnumType.class, new Predicate() {
-        public boolean func_180202_a(BlockPlanks.EnumType p_180202_1_) {
-            return p_180202_1_.getMetadata() < 4;
-        }
+public class BlockCandyLeave extends BlockLeaves implements IShearable, ModelRegisterCallback {
 
-        @Override
-        public boolean apply(Object p_apply_1_) {
-            return func_180202_a((BlockPlanks.EnumType) p_apply_1_);
-        }
-    });
+    private final Supplier<Item> sapling;
 
-    protected BlockCandyLeave() {
-        setDefaultState(blockState.getBaseState().withProperty(VARIANT_PROP, BlockPlanks.EnumType.OAK).withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+    protected BlockCandyLeave(Supplier<Item> drop) {
+        setCreativeTab(CandyCraft.getCandyTab());
+        setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
+        sapling = drop;
     }
 
     @Override
-    protected ItemStack createStackedBlock(IBlockState state) {
-        return new ItemStack(Item.getItemFromBlock(this), 1, ((BlockPlanks.EnumType) state.getValue(VARIANT_PROP)).getMetadata());
+    @SideOnly(Side.CLIENT)
+    public boolean isOpaqueCube(IBlockState state) {
+        setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
+        return !leavesFancy;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
+        return leavesFancy ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(VARIANT_PROP, getWoodType(meta)).withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+        return getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY, (meta & 8) > 0);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
         int i = 0;
-        i = i | ((BlockPlanks.EnumType) state.getValue(VARIANT_PROP)).getMetadata();
 
-        if (!state.getValue(DECAYABLE).booleanValue()) {
+        if (!state.getValue(DECAYABLE)) {
             i |= 4;
         }
 
-        if (state.getValue(CHECK_DECAY).booleanValue()) {
+        if (state.getValue(CHECK_DECAY)) {
             i |= 8;
         }
 
@@ -66,29 +71,25 @@ public class BlockCandyLeave extends BlockCandyLeaveBase implements IShearable {
     }
 
     @Override
-    public BlockPlanks.EnumType getWoodType(int p_176233_1_) {
-        return BlockPlanks.EnumType.byMetadata((p_176233_1_ & 3) % 4);
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return null;
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{VARIANT_PROP, CHECK_DECAY, DECAYABLE});
+        return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
     }
 
     @Override
-    public int damageDropped(IBlockState state) {
-        return ((BlockPlanks.EnumType) state.getValue(VARIANT_PROP)).getMetadata();
+    protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
     }
 
+    /* TODO: Allow for metadata-free version
     @Override
-    protected void dropApple(World worldIn, BlockPos p_176234_2_, IBlockState p_176234_3_, int p_176234_4_) {
+    protected int getSaplingDropChance(IBlockState state) {
+        return state.getValue(VARIANT_PROP) == BlockPlanks.EnumType.JUNGLE ? 40 : super.getSaplingDropChance(state);
     }
-
-    @Override
-    protected int getSaplingDropChance(IBlockState p_176232_1_) {
-        return p_176232_1_.getValue(VARIANT_PROP) == BlockPlanks.EnumType.JUNGLE ? 40 : super.getSaplingDropChance(p_176232_1_);
-    }
-
+*/
     @Override
     public void dropBlockAsItemWithChance(World thisWorld, BlockPos pos, IBlockState state, float par6, int par7) {
         if (!thisWorld.isRemote && this == CCBlocks.candyLeave) {
@@ -127,25 +128,18 @@ public class BlockCandyLeave extends BlockCandyLeaveBase implements IShearable {
 
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune) {
-        return Item.getItemFromBlock(CCBlocks.candySapling);
+        return sapling.get();
     }
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        List<ItemStack> l = new ArrayList<>();
-        l.add(new ItemStack(world.getBlockState(pos).getBlock(), 1, getMetaFromState(world.getBlockState(pos))));
-        return l;
+        return NonNullList.withSize(1, new ItemStack(this));
     }
 
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-        items.add(new ItemStack(this, 1, 0));
-        items.add(new ItemStack(this, 1, 1));
-        items.add(new ItemStack(this, 1, 2));
-        items.add(new ItemStack(this, 1, 3));
-    }
-
+    @SideOnly(Side.CLIENT)
     @Override
-    public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
-        return SoundType.PLANT;
+    public void registerModel() {
+        ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(CHECK_DECAY, DECAYABLE).build());
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
     }
 }

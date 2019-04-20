@@ -1,5 +1,5 @@
 {
-  "parent": "candycraftmod:block/candy_portal_inventory",
+  "parent": "candycraft:block/candy_portal_inventory",
   "display": {
     "thirdperson": {
       "rotation": [

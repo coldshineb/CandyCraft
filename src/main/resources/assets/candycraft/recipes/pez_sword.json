@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L",
+    "L",
+    "S"
+  ],
+  "key": {
+    "L": {
+      "item": "candycraft:pez"
+    },
+    "S": {
+      "item": "candycraft:marshmallow_stick"
+    }
+  },
+  "result": {
+    "item": "candycraft:pez_sword"
+  }
+}

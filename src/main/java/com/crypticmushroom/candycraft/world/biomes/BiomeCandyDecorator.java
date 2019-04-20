@@ -15,7 +15,7 @@ public class BiomeCandyDecorator {
     public int chunk_X;
     public int chunk_Z;
     public BiomeGenCandy biome;
-    public WorldGenerator clayGen = new WorldGenClay(4);
+    //public WorldGenerator clayGen = new WorldGenClay(4); This is unused. Keeping in the event of reopening
     public WorldGenerator sandGen;
     public WorldGenerator gravelAsSandGen;
     public WorldGenerator dirtGen;
@@ -52,7 +52,7 @@ public class BiomeCandyDecorator {
         gravelAsSandGen = new WorldGenSand(Blocks.GRAVEL, 6);
         dirtGen = new WorldGenMinable(Blocks.DIRT.getDefaultState(), 32);
         cobbleGen = new WorldGenMinable(Blocks.COBBLESTONE.getDefaultState(), 32);
-        IceCreamGen = new WorldGenMinable(CCBlocks.iceCream.getStateFromMeta(3), 24);
+        IceCreamGen = new WorldGenMinable(CCBlocks.iceCream.getDefaultState(), 24);
         gravelGen = new WorldGenMinable(Blocks.GRAVEL.getDefaultState(), 32);
         coalGen = new WorldGenMinable(Blocks.COAL_ORE.getDefaultState(), 16);
         ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), 8);
@@ -101,12 +101,10 @@ public class BiomeCandyDecorator {
 
         int l;
 
-        boolean doGen = true;
-
         for (j = 0; j < i; ++j) {
             k = chunk_X + randomGenerator.nextInt(16) + 8;
             l = chunk_Z + randomGenerator.nextInt(16) + 8;
-            WorldGenerator worldgenerator = biome.genBigTreeChance(randomGenerator);
+            WorldGenerator worldgenerator = biome.getRandomTreeFeature(randomGenerator);
             worldgenerator.setDecorationDefaults();
             BlockPos h = currentWorld.getHeight(new BlockPos(k, 0, l));
             if (currentWorld.provider.getBiomeForCoords(h) instanceof BiomeGenSkyMountains || h.getY() < 120) {
@@ -138,8 +136,9 @@ public class BiomeCandyDecorator {
             k = chunk_X + randomGenerator.nextInt(16) + 8;
             l = chunk_Z + randomGenerator.nextInt(16) + 8;
 
-            for (i1 = randomGenerator.nextInt(128); i1 > 40 && currentWorld.isAirBlock(new BlockPos(k, i1 - 1, l)); --i1) {
-                ;
+            i1 = randomGenerator.nextInt(128);
+            while (i1 > 40 && currentWorld.isAirBlock(new BlockPos(k, i1 - 1, l))) {
+                --i1;
             }
 
             waterlilyGen.generate(currentWorld, randomGenerator, new BlockPos(k, i1, l));

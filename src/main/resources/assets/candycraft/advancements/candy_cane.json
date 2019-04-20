@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:candy_cane"
+    },
+    "title": {
+      "translate": "advancements.candycraft.candy_cane.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.candy_cane.desc"
+    }
+  },
+  "parent": "candycraft:candy_world",
+  "criteria": {
+    "candy_cane": {
+      "trigger": "minecraft:inventory_changed",
+      "items": [
+        {
+          "item": "candycraft:candy_cane"
+        }
+      ]
+    }
+  }
+}

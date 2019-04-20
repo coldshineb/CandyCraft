@@ -1,10 +1,10 @@
 {
   "textures": {
-    "particle": "candycraftmod:blocks/cotton_candy_bed_top_lower",
-    "top": "candycraftmod:blocks/cotton_candy_bed_top_lower",
-    "bottom": "candycraftmod:blocks/marshmallow_planks.0",
-    "end": "candycraftmod:blocks/cotton_candy_bed_back",
-    "side": "candycraftmod:blocks/cotton_candy_bed_side_lower"
+    "particle": "candycraft:blocks/cotton_candy_bed_top_lower",
+    "top": "candycraft:blocks/cotton_candy_bed_top_lower",
+    "bottom": "candycraft:blocks/marshmallow_planks.0",
+    "end": "candycraft:blocks/cotton_candy_bed_back",
+    "side": "candycraft:blocks/cotton_candy_bed_side_lower"
   },
   "elements": [
     {

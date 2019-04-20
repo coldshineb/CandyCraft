@@ -7,32 +7,29 @@ import com.crypticmushroom.candycraft.event.ServerTick;
 import com.crypticmushroom.candycraft.world.WorldProviderCandy;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class WorldGenFloatingIsland extends WorldGenerator {
     public boolean finished;
     public int x, y, z;
     public World world;
-    ArrayList<ArrayBlock> blocks = new ArrayList();
-    HashMap<String, ArrayBlock> prevBlock = new HashMap<String, ArrayBlock>();
-    ArrayList<Entity> entities = new ArrayList();
+    ArrayList<ArrayBlock> blocks = new ArrayList<>();
+    ArrayList<Entity> entities = new ArrayList<>();
 
-    public boolean generate(World par1, Random par2, int par3, int par4, int par5, int mainIsland) {
+    public boolean generate(World par1, Random par2, int par3, int par4, int par5) {
         WorldProviderCandy.canGenIsland = 600;
         int nX = par2.nextInt(8) - 4;
         int nZ = par2.nextInt(8) - 4;
         int[][] lastLayer = new int[32][32];
         lastLayer[16][16] = 2;
         lastLayer[16 + nX][16 + nZ] = 2;
-        int[][] newLayer = new int[32][32];
+        int[][] newLayer;
 
         int maxHeight = par2.nextInt(3) + 7;
         for (int y = 0; y < maxHeight; y++) {
@@ -86,13 +83,12 @@ public class WorldGenFloatingIsland extends WorldGenerator {
         return true;
     }
 
-    public void finishGeneration(World world, int x, int y, int z) {
-        for (int i = 0; i < blocks.size(); i++) {
-            ArrayBlock bl = blocks.get(i);
+    public void finishGeneration(World world) {
+        for (ArrayBlock bl : blocks) {
             world.setBlockState(new BlockPos(bl.x, bl.y, bl.z), bl.block.getStateFromMeta(bl.metadata), 3);
         }
-        for (int i = 0; i < entities.size(); i++) {
-            world.spawnEntity(entities.get(i));
+        for (Entity entity : entities) {
+            world.spawnEntity(entity);
         }
 
     }
@@ -116,7 +112,7 @@ public class WorldGenFloatingIsland extends WorldGenerator {
                             this.setBlock(par3 + x, par4 - 1, par5 + z, CCBlocks.candySoil);
                             this.setBlock(par3 + x, par4, par5 + z, CCBlocks.dragibusCrops, par2.nextInt(3) + 5);
                         } else {
-                            this.setBlock(par3 + x, par4, par5 + z, CCBlocks.tallCandyGrass, par2.nextInt(3));
+                            this.setBlock(par3 + x, par4, par5 + z, getRandomGrassBlock(), par2.nextInt(3));
                         }
                     }
                 }
@@ -130,7 +126,7 @@ public class WorldGenFloatingIsland extends WorldGenerator {
                 for (int z = 0; z < 32; z++) {
                     if (lastLayer[x][z] == 2) {
                         if (par2.nextInt(2) == 0) {
-                            this.setBlock(par3 + x, par4, par5 + z, CCBlocks.tallCandyGrass, par2.nextInt(3));
+                            this.setBlock(par3 + x, par4, par5 + z, getRandomGrassBlock(), par2.nextInt(3));
                         } else {
                             this.setBlock(par3 + x, par4, par5 + z, CCBlocks.chewingGumPuddle, par2.nextInt(3));
                         }
@@ -140,6 +136,20 @@ public class WorldGenFloatingIsland extends WorldGenerator {
             EntityBossBeetle boss = new EntityBossBeetle(par1);
             boss.setPosition(par3 + 16, par4 + 2, par5 + 16);
             entities.add(boss);
+        }
+    }
+
+    private Block getRandomGrassBlock() {
+        Random rand = new Random();
+
+        switch (rand.nextInt(3)) {
+            case 0:
+                return CCBlocks.tallCandyGrassPink;
+            case 1:
+                return CCBlocks.tallCandyGrassPale;
+            case 2:
+            default:
+                return CCBlocks.tallCandyGrassYellow;
         }
     }
 
@@ -251,7 +261,7 @@ public class WorldGenFloatingIsland extends WorldGenerator {
 
         EntityGingerBreadMan man = new EntityGingerBreadMan(world);
         man.setPosition(i + 2, j + 1, k + 2);
-        man.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(man)), (IEntityLivingData) null);
+        man.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(man)), null);
         if (j > 100) {
             man.setProfession(3);
         }
@@ -273,15 +283,15 @@ public class WorldGenFloatingIsland extends WorldGenerator {
 
     @Override
     public boolean generate(World world, Random random, BlockPos pos) {
-        int p_76484_3_ = pos.getX();
-        int p_76484_4_ = pos.getY();
-        int p_76484_5_ = pos.getZ();
-        x = p_76484_3_;
-        y = p_76484_4_;
-        z = p_76484_5_;
+        int posX = pos.getX();
+        int posY = pos.getY();
+        int posZ = pos.getZ();
+        x = posX;
+        y = posY;
+        z = posZ;
         this.world = world;
         ServerTick.floatingIsland.add(this);
-        ThreadFloatingIsland is = new ThreadFloatingIsland(this, world, random, p_76484_3_, p_76484_4_, p_76484_5_);
+        ThreadFloatingIsland is = new ThreadFloatingIsland(this, world, random, posX, posY, posZ);
         is.start();
         return true;
     }

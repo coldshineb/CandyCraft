@@ -1,6 +1,8 @@
 package com.crypticmushroom.candycraft.items;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.client.ClientProxy;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,40 +12,44 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemCandyArmor extends ItemArmor {
+public class ItemCandyArmor extends ItemArmor implements ModelRegisterCallback {
+
+    public static final String TEXTURE_LOC = CandyCraft.MODID + ":textures/models/armor/";
+
     public ItemCandyArmor(ArmorMaterial material, EntityEquipmentSlot slot) {
         super(material, 0, slot);
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getArmorTexture(ItemStack par1Armor, Entity entity, EntityEquipmentSlot slot, String type) {
-        if (par1Armor.getItem() == CCItems.licoriceHelmet || par1Armor.getItem() == CCItems.licoricePlate || par1Armor.getItem() == CCItems.licoriceBoots) {
-            return "candycraftmod:textures/models/armor/Armor_Licorice_2.png";
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+        if (stack.getItem() == CCItems.licoriceHelmet || stack.getItem() == CCItems.licoricePlate || stack.getItem() == CCItems.licoriceBoots) {
+            return TEXTURE_LOC + "Armor_Licorice_2.png";
         }
-        if (par1Armor.getItem() == CCItems.licoriceLeggings) {
-            return "candycraftmod:textures/models/armor/Armor_Licorice_1.png";
+        if (stack.getItem() == CCItems.licoriceLeggings) {
+            return TEXTURE_LOC + "Armor_Licorice_1.png";
         }
-        if (par1Armor.getItem() == CCItems.honeyHelmet || par1Armor.getItem() == CCItems.honeyPlate || par1Armor.getItem() == CCItems.honeyBoots) {
-            return "candycraftmod:textures/models/armor/Armor_Honey_2.png";
+        if (stack.getItem() == CCItems.honeyHelmet || stack.getItem() == CCItems.honeyPlate || stack.getItem() == CCItems.honeyBoots) {
+            return TEXTURE_LOC + "Armor_Honey_2.png";
         }
-        if (par1Armor.getItem() == CCItems.honeyLeggings) {
-            return "candycraftmod:textures/models/armor/Armor_Honey_1.png";
+        if (stack.getItem() == CCItems.honeyLeggings) {
+            return TEXTURE_LOC + "Armor_Honey_1.png";
         }
-        if (par1Armor.getItem() == CCItems.PEZHelmet || par1Armor.getItem() == CCItems.PEZPlate || par1Armor.getItem() == CCItems.PEZBoots) {
-            return "candycraftmod:textures/models/armor/Armor_PEZ_2.png";
+        if (stack.getItem() == CCItems.pezHelmet || stack.getItem() == CCItems.pezPlate || stack.getItem() == CCItems.pezBoots) {
+            return TEXTURE_LOC + "Armor_PEZ_2.png";
         }
-        if (par1Armor.getItem() == CCItems.PEZLeggings) {
-            return "candycraftmod:textures/models/armor/Armor_PEZ_1.png";
+        if (stack.getItem() == CCItems.pezLeggings) {
+            return TEXTURE_LOC + "Armor_PEZ_1.png";
         }
-        if (par1Armor.getItem() == CCItems.jellyCrown) {
-            return "candycraftmod:textures/models/armor/Jelly_Crown.png";
+        if (stack.getItem() == CCItems.jellyCrown) {
+            return TEXTURE_LOC + "Jelly_Crown.png";
         }
-        if (par1Armor.getItem() == CCItems.waterMask) {
-            return "candycraftmod:textures/models/armor/Armor_Mask.png";
+        if (stack.getItem() == CCItems.waterMask) {
+            return TEXTURE_LOC + "Armor_Mask.png";
         }
-        if (par1Armor.getItem() == CCItems.jellyBoots) {
-            return "candycraftmod:textures/models/armor/Armor_Boots.png";
+        if (stack.getItem() == CCItems.jellyBoots) {
+            return TEXTURE_LOC + "Armor_Boots.png";
         }
         return "";
     }

@@ -1,7 +1,7 @@
 package com.crypticmushroom.candycraft.entity;
 
 public interface IEntityLockable {
-    public boolean isLocked();
+    boolean isLocked();
 
-    public void setLocked(boolean i);
+    void setLocked(boolean i);
 }

@@ -1,7 +1,7 @@
 package com.crypticmushroom.candycraft.client.entity.renders;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.entity.EntityCandyWolf;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderWolf;
 import net.minecraft.entity.passive.EntityWolf;
@@ -11,13 +11,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderCandyWolf extends RenderWolf {
-    private static final ResourceLocation wolfTexture = new ResourceLocation("candycraftmod:textures/entity/wolfCandy.png");
-    private static final ResourceLocation tameTexture = new ResourceLocation("candycraftmod:textures/entity/wolf_tameCandy.png");
-    private static final ResourceLocation angryTexture = new ResourceLocation("candycraftmod:textures/entity/wolf_angryCandy.png");
-    private static final ResourceLocation caramelTexture = new ResourceLocation("candycraftmod:textures/entity/wolf_tameCandy2.png");
-    private static final ResourceLocation collarTexture = new ResourceLocation("textures/entity/wolf/wolf_collar.png");
+    private static final ResourceLocation wolfTexture = new ResourceLocation(CandyCraft.MODID, "textures/entity/wolfCandy.png");
+    private static final ResourceLocation tameTexture = new ResourceLocation(CandyCraft.MODID, "textures/entity/wolf_tameCandy.png");
+    private static final ResourceLocation angryTexture = new ResourceLocation(CandyCraft.MODID, "textures/entity/wolf_angryCandy.png");
+    private static final ResourceLocation caramelTexture = new ResourceLocation(CandyCraft.MODID, "textures/entity/wolf_tameCandy2.png");
 
-    public RenderCandyWolf(RenderManager rm, ModelBase par1ModelBase, float par3) {
+    public RenderCandyWolf(RenderManager rm) {
         super(rm);
     }
 

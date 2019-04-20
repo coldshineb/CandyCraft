@@ -1,12 +1,12 @@
 package com.crypticmushroom.candycraft.items;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -15,9 +15,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemCandyBed extends Item {
+public class ItemCandyBed extends ItemCandyBase {
     public ItemCandyBed() {
         super();
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ItemCandyBed extends Item {
             }
 
             int i = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-            EnumFacing enumfacing1 = EnumFacing.getHorizontal(i);
+            EnumFacing enumfacing1 = EnumFacing.byHorizontalIndex(i);
             BlockPos blockpos1 = pos.offset(enumfacing1);
             boolean flag1 = block.isReplaceable(worldIn, blockpos1);
             boolean flag2 = worldIn.isAirBlock(pos) || flag;
@@ -45,7 +46,6 @@ public class ItemCandyBed extends Item {
 
             if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(blockpos1, facing, stack)) {
                 if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos, EnumFacing.UP) && worldIn.getBlockState(blockpos1.down()).isSideSolid(worldIn, blockpos1, EnumFacing.UP)) {
-                    int j = enumfacing1.getHorizontalIndex();
                     IBlockState iblockstate1 = CCBlocks.cottonCandyBedBlock.getDefaultState().withProperty(BlockBed.OCCUPIED, false).withProperty(BlockDirectional.FACING, enumfacing1).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
 
                     if (worldIn.setBlockState(pos, iblockstate1, 3)) {

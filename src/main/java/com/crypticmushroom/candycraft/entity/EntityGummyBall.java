@@ -10,6 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -21,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityGummyBall extends EntityThrowable {
+    private static final DataParameter<Integer> POWER = EntityDataManager.createKey(EntityGummyBall.class, DataSerializers.VARINT);
     public int airState = 0;
     public EntityPlayer target = null;
     public EntityBossBeetle beetle = null;
@@ -53,16 +57,16 @@ public class EntityGummyBall extends EntityThrowable {
         float f = getPowerful() == 3 ? 0.002F : 0.4F;
         motionX = -MathHelper.sin(rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float) Math.PI) * f;
         motionZ = MathHelper.cos(rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float) Math.PI) * f;
-        motionY = -MathHelper.sin((rotationPitch + this.getInaccuracy()) / 180.0F * (float) Math.PI) * f;
-        setThrowableHeading(motionX + r, motionY, motionZ + r2, getVelocity(), 1.0F);
+        motionY = -MathHelper.sin((rotationPitch + 1.0F) / 180.0F * (float) Math.PI) * f;
+        shoot(motionX + r, motionY, motionZ + r2, getVelocity(), 1.0F);
     }
 
     public int getPowerful() {
-        return dataWatcher.getWatchableObjectInt(16);
+        return dataManager.get(POWER);
     }
 
     public void setPowerful(int i) {
-        dataWatcher.updateObject(16, i);
+        dataManager.set(POWER, i);
     }
 
     @Override
@@ -79,7 +83,6 @@ public class EntityGummyBall extends EntityThrowable {
         airState = par1NBTTagCompound.getInteger("airState");
     }
 
-    @Override
     protected float getVelocity() {
         return getPowerful() == 3 || airState == 3 ? 0.8F : 1.5F;
     }
@@ -95,20 +98,18 @@ public class EntityGummyBall extends EntityThrowable {
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
+    public boolean attackEntityFrom(DamageSource source, float amount) {
         if (getPowerful() != 3) {
             return false;
         } else {
-            setBeenAttacked();
+            markVelocityChanged();
 
-            if (p_70097_1_.getEntity() != null) {
-                Vec3d vec3 = p_70097_1_.getEntity().getLookVec();
+            if (source.getTrueSource() != null) {
+                Vec3d vec3 = source.getTrueSource().getLookVec();
 
-                if (vec3 != null) {
-                    motionX = vec3.xCoord;
-                    motionY = vec3.yCoord;
-                    motionZ = vec3.zCoord;
-                }
+                motionX = vec3.x;
+                motionY = vec3.y;
+                motionZ = vec3.z;
 
                 return true;
             } else {
@@ -124,44 +125,44 @@ public class EntityGummyBall extends EntityThrowable {
 
     @Override
     public void entityInit() {
-        dataWatcher.addObject(16, Integer.valueOf(0));
+        dataManager.register(POWER, 0);
     }
 
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (worldObj.isRemote && getPowerful() == 1) {
+        if (world.isRemote && getPowerful() == 1) {
             spawnParticle();
         }
-        if (worldObj.isRemote && getPowerful() == 2) {
+        if (world.isRemote && getPowerful() == 2) {
             spawnParticle2();
         }
-        if (worldObj.isRemote && getPowerful() == 3) {
+        if (world.isRemote && getPowerful() == 3) {
             spawnParticle3();
         }
     }
 
     @Override
-    public void setThrowableHeading(double par1, double par3, double par5, float par7, float par8) {
-        float f2 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
-        par1 /= f2;
-        par3 /= f2;
-        par5 /= f2;
+    public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
+        float f2 = MathHelper.sqrt(x * x + y * y + z * z);
+        x /= f2;
+        y /= f2;
+        z /= f2;
         if (getPowerful() > 0 && getPowerful() != 3) {
-            par1 += rand.nextGaussian() * 0.007499999832361937D * par8;
-            par3 += rand.nextGaussian() * 0.007499999832361937D * par8;
-            par5 += rand.nextGaussian() * 0.007499999832361937D * par8;
+            x += rand.nextGaussian() * 0.007499999832361937D * inaccuracy;
+            y += rand.nextGaussian() * 0.007499999832361937D * inaccuracy;
+            z += rand.nextGaussian() * 0.007499999832361937D * inaccuracy;
         }
-        par1 *= par7;
-        par3 *= par7;
-        par5 *= par7;
+        x *= velocity;
+        y *= velocity;
+        z *= velocity;
 
-        motionX = par1;
-        motionY = par3;
-        motionZ = par5;
-        float f3 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-        prevRotationYaw = rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
-        prevRotationPitch = rotationPitch = (float) (Math.atan2(par3, f3) * 180.0D / Math.PI);
+        motionX = x;
+        motionY = y;
+        motionZ = z;
+        float f3 = MathHelper.sqrt(x * x + z * z);
+        prevRotationYaw = rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
+        prevRotationPitch = rotationPitch = (float) (Math.atan2(y, f3) * 180.0D / Math.PI);
     }
 
     @Override
@@ -172,46 +173,46 @@ public class EntityGummyBall extends EntityThrowable {
             if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase && getPowerful() < 2) {
                 ((EntityLivingBase) par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5 * 20, 2));
             } else if (getPowerful() == 2) {
-                ((EntityLivingBase) par1MovingObjectPosition.entityHit).setFire(7);
+                par1MovingObjectPosition.entityHit.setFire(7);
             } else if (!(par1MovingObjectPosition.entityHit instanceof EntityBossBeetle)) {
-                float f4 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+                float f4 = MathHelper.sqrt(motionX * motionX + motionZ * motionZ);
                 par1MovingObjectPosition.entityHit.addVelocity(motionX * 1 * 0.6000000238418579D / f4, 0.1D, motionZ * 1 * 0.6000000238418579D / f4);
             }
             setDead();
         }
 
         for (int i = 0; i < 8; ++i) {
-            if (worldObj.isRemote && getPowerful() < 2) {
+            if (world.isRemote && getPowerful() < 2) {
                 spawnParticle();
             }
-            if (worldObj.isRemote && getPowerful() == 2) {
+            if (world.isRemote && getPowerful() == 2) {
                 spawnParticle2();
             }
-            if (worldObj.isRemote && getPowerful() == 3) {
+            if (world.isRemote && getPowerful() == 3) {
                 spawnParticle3();
             }
         }
 
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             setDead();
         }
     }
 
     @SideOnly(Side.CLIENT)
     public void spawnParticle() {
-        ParticleBreaking fx = new EntityBreakingParticleFX(worldObj, posX, posY, posZ, CCItems.gummyBall);
+        ParticleBreaking fx = new EntityBreakingParticleFX(world, posX, posY, posZ, CCItems.gummy_ball);
         Minecraft.getMinecraft().effectRenderer.addEffect(fx);
     }
 
     @SideOnly(Side.CLIENT)
     public void spawnParticle2() {
-        worldObj.spawnParticle(EnumParticleTypes.FLAME, posX - 0.5F + rand.nextDouble(), posY - 0.5F + rand.nextDouble(), posZ - 0.5F + rand.nextDouble(), 0.0F, 0.0F, 0.0F);
+        world.spawnParticle(EnumParticleTypes.FLAME, posX - 0.5F + rand.nextDouble(), posY - 0.5F + rand.nextDouble(), posZ - 0.5F + rand.nextDouble(), 0.0F, 0.0F, 0.0F);
     }
 
     @SideOnly(Side.CLIENT)
     public void spawnParticle3() {
-        ParticleBreaking fx = new EntityBreakingParticleFX(worldObj, posX, posY, posZ, CCItems.gummyBall);
-        fx.setParticleTexture(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(CCItems.gummyBall, 2));
+        ParticleBreaking fx = new EntityBreakingParticleFX(world, posX, posY, posZ, CCItems.gummy_ball);
+        fx.setParticleTexture(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(CCItems.gummy_ball, 2));
         Minecraft.getMinecraft().effectRenderer.addEffect(fx);
     }
 }

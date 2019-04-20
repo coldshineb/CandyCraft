@@ -12,12 +12,12 @@ public class CCCreativeTabs extends CreativeTabs {
     }
 
     @Override
-    public String getTranslatedTabLabel() {
-        return "CandyCraft";
+    public String getTabLabel() {
+        return "candycraft";
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(Item.getItemFromBlock(CCBlocks.marshmallowWorkbench));
     }
 }

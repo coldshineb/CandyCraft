@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "S"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:honey_shard"
+    },
+    "S": {
+      "item": "candycraft:marshmallow_stick"
+    }
+  },
+  "result": {
+    "item": "candycraft:honey_torch",
+    "count": 4
+  }
+}

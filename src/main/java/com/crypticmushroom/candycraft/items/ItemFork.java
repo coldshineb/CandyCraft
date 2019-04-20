@@ -1,13 +1,15 @@
 package com.crypticmushroom.candycraft.items;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
+import com.crypticmushroom.candycraft.misc.CCAdvancements;
 import com.crypticmushroom.candycraft.misc.CCEnchantments;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -18,11 +20,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFork extends Item {
+public class ItemFork extends ItemCandyBase {
     public ItemFork() {
         super();
         maxStackSize = 1;
         setMaxDamage(100);
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override
@@ -33,16 +36,13 @@ public class ItemFork extends Item {
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player) {
         Block i = player.world.getBlockState(pos).getBlock();
-        if (i != null) {
-            ItemStack block = new ItemStack(i);
-            if (EnchantmentHelper.getEnchantmentLevel(CCEnchantments.devourer, itemstack) > 0 && TileEntitySugarFactory.isItemValid(block)) {
-                player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, player.world.rand.nextFloat() * 0.1F + 0.9F);
-                player.world.setBlockToAir(pos);
-                itemstack.setItemDamage(itemstack.getItemDamage() - 1);
-                player.getFoodStats().addStats(1, 0.0F);
-                //TODO player.addStat(CCAchievements.eatBlock);
-            }
-            return false;
+        ItemStack block = new ItemStack(i);
+        if (EnchantmentHelper.getEnchantmentLevel(CCEnchantments.devourer, itemstack) > 0 && TileEntitySugarFactory.isItemValid(block)) {
+            player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, player.world.rand.nextFloat() * 0.1F + 0.9F);
+            player.world.setBlockToAir(pos);
+            itemstack.setItemDamage(itemstack.getItemDamage() - 1);
+            player.getFoodStats().addStats(1, 0.0F);
+            CCAdvancements.EAT_BLOCK.trigger((EntityPlayerMP)player);
         }
         return false;
     }

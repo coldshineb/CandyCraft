@@ -31,12 +31,12 @@ public class EntityGlueDynamite extends EntityThrowable {
 
     @Override
     public void onUpdate() {
-        if (worldObj.isRemote && getAir() == 4311 && !glued) {
+        if (world.isRemote && getAir() == 4311 && !glued) {
             glued = true;
         }
-        if (worldObj.isRemote && glued) {
+        if (world.isRemote && glued) {
             for (int i = 0; i < 10; ++i) {
-                worldObj.spawnParticle(EnumParticleTypes.REDSTONE, posX + (rand.nextDouble() * 2 - 1.0D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() * 2 - 1.0D) * width, 1.0F, 0.5F, 0.5F);
+                world.spawnParticle(EnumParticleTypes.REDSTONE, posX + (rand.nextDouble() * 2 - 1.0D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() * 2 - 1.0D) * width, 1.0F, 0.5F, 0.5F);
             }
         }
         if (glued && gluedEntity) {
@@ -44,24 +44,24 @@ public class EntityGlueDynamite extends EntityThrowable {
         }
         super.onUpdate();
         fuse--;
-        if (!worldObj.isRemote && fuse <= 0) {
-            boolean var2 = worldObj.getGameRules().getBoolean("mobGriefing");
-            worldObj.createExplosion(this, posX, posY, posZ, 3, var2);
+        if (!world.isRemote && fuse <= 0) {
+            boolean var2 = world.getGameRules().getBoolean("mobGriefing");
+            world.createExplosion(this, posX, posY, posZ, 3, var2);
             setDead();
         }
         if (glued) {
             posY = prevPosY;
         }
-        if (worldObj.isRemote) {
+        if (world.isRemote) {
             for (int i = 0; i < 2; ++i) {
-                worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
+                world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height, posZ + (rand.nextDouble() - 0.5D) * width, 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
     @Override
     protected void onImpact(RayTraceResult par1MovingObjectPosition) {
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (par1MovingObjectPosition.entityHit != null && !chocked) {
                 par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 0);
             }
@@ -72,9 +72,9 @@ public class EntityGlueDynamite extends EntityThrowable {
                 setAir(4311);
             }
             if (par1MovingObjectPosition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                if (!chocked && worldObj.getBlockState(par1MovingObjectPosition.getBlockPos()).getCollisionBoundingBox(worldObj, par1MovingObjectPosition.getBlockPos()) != null) {
+                if (!chocked && world.getBlockState(par1MovingObjectPosition.getBlockPos()).getCollisionBoundingBox(world, par1MovingObjectPosition.getBlockPos()) != null) {
                     setDead();
-                    EntityGlueDynamite dyna = new EntityGlueDynamite(worldObj);
+                    EntityGlueDynamite dyna = new EntityGlueDynamite(world);
                     dyna.setPosition(posX, posY, posZ);
                     dyna.glued = true;
                     dyna.fuse = fuse;
@@ -83,7 +83,7 @@ public class EntityGlueDynamite extends EntityThrowable {
                     dyna.motionY = 0;
                     dyna.motionZ = 0;
                     dyna.chocked = true;
-                    worldObj.spawnEntityInWorld(dyna);
+                    world.spawnEntity(dyna);
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.items;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -9,12 +10,13 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemEmblem extends Item {
-    String attr = "";
+public class ItemEmblem extends ItemCandyBase {
+    private String attr;
 
     public ItemEmblem(String desc) {
         super();
         setMaxStackSize(1);
+        setCreativeTab(CandyCraft.getCandyTab());
         attr = desc;
     }
 

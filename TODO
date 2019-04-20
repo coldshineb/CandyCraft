@@ -1,13 +1,13 @@
 CHECK INTERACT
 {
-    NESSIE 
+    nessie
     CREEPER
     DOG
 }
 
 CHECK RIDING
 {
-    NESSIE
+    nessie
 }
 
 CHANGE ARMOR TEXTURE IN CCITEMS 

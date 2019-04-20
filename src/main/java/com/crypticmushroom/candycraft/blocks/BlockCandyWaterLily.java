@@ -1,7 +1,10 @@
 package com.crypticmushroom.candycraft.blocks;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.block.BlockLilyPad;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,10 +16,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockCandyWaterLily extends BlockLilyPad {
+public class BlockCandyWaterLily extends BlockLilyPad implements ModelRegisterCallback {
     public BlockCandyWaterLily() {
         super();
         setTickRandomly(this != CCBlocks.marshmallowFlowerBlock);
+        setSoundType(SoundType.PLANT);
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override

@@ -1,0 +1,43 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:fork"
+    },
+    "title": {
+      "translate": "advancements.candycraft.fork.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.fork.desc"
+    }
+  },
+  "parent": "candycraft:candy_world",
+  "criteria": {
+    "candy_cane_fence": {
+      "trigger": "minecraft:inventory_changed",
+      "items": [
+        {
+          "item": "candycraft:fork"
+        }
+      ]
+    },
+    "recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "candycraft:fork"
+      }
+    },
+    "recipe_2": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "candycraft:fork_2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "candy_cane_fence",
+      "recipe",
+      "recipe_2"
+    ]
+  ]
+}

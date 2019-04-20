@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelNessie2 extends ModelBase {
-    ModelRenderer Body;
     ModelRenderer RearEnd;
     ModelRenderer Leg8;
     ModelRenderer Leg2;

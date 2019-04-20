@@ -1,19 +1,11 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "candycraft:marshmallow_ladder",
+    "transform": "forge:default-item"
+  },
   "variants": {
-    "facing=north": {
-      "model": "candycraftmod:marshmallow_ladder"
-    },
-    "facing=east": {
-      "model": "candycraftmod:marshmallow_ladder",
-      "y": 90
-    },
-    "facing=south": {
-      "model": "candycraftmod:marshmallow_ladder",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "candycraftmod:marshmallow_ladder",
-      "y": 270
-    }
+    "normal": [{}],
+    "inventory": [{ "model": "builtin/generated", "textures": { "layer0": "candycraft:blocks/marshmallow_ladder" }}]
   }
 }

@@ -1,12 +1,13 @@
 package com.crypticmushroom.candycraft.items;
 
-import net.minecraft.item.Item;
+import com.crypticmushroom.candycraft.CandyCraft;
 
-public class ItemBossKey extends Item {
+public class ItemBossKey extends ItemCandyBase {
     public final int keyId;
 
     public ItemBossKey(int id) {
         super();
+        setCreativeTab(CandyCraft.getCandyTab());
         keyId = id;
     }
 }

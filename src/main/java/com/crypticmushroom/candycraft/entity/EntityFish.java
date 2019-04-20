@@ -2,9 +2,11 @@ package com.crypticmushroom.candycraft.entity;
 
 import com.crypticmushroom.candycraft.items.CCItems;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -27,12 +29,8 @@ public class EntityFish extends EntityWaterMob {
     }
 
     @Override
-    public void moveEntityWithHeading(float par1, float par2) {
-        if (isInWater()) {
-            motionY -= 0.002D;
-        }
-        super.moveEntityWithHeading(par1, par2);
-
+    public void travel(float par1, float par2, float par3) {
+        move(MoverType.SELF, motionX, motionY, motionZ);
     }
 
     @Override
@@ -46,7 +44,7 @@ public class EntityFish extends EntityWaterMob {
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
         return null;
     }
 
@@ -94,7 +92,7 @@ public class EntityFish extends EntityWaterMob {
         super.updateAITasks();
 
         if (isInWater()) {
-            if (currentFlightTarget != null && (!(worldObj.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
+            if (currentFlightTarget != null && (!(world.getBlockState(new BlockPos(currentFlightTarget.getX(), currentFlightTarget.getY(), currentFlightTarget.getZ())).getMaterial() == Material.WATER) || currentFlightTarget.getY() < 1)) {
                 currentFlightTarget = null;
             }
 

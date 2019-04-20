@@ -1,9 +1,8 @@
 package com.crypticmushroom.candycraft.blocks;
 
-import com.crypticmushroom.candycraft.CandyCraft;
-import com.crypticmushroom.candycraft.CandyCraftPreferences;
+import com.crypticmushroom.candycraft.CandyCraftConfig;
 import com.crypticmushroom.candycraft.items.CCItems;
-import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,9 +17,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockSugar extends Block {
+public class BlockSugar extends BlockCandyBase {
     public BlockSugar(Material par2Material) {
-        super(par2Material);
+        super(par2Material, SoundType.GROUND);
     }
 
     @Override
@@ -41,13 +40,13 @@ public class BlockSugar extends Block {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = playerIn.getHeldItem(hand);
-        if ((heldItem != ItemStack.EMPTY && heldItem.getItem() != null && ((heldItem.getItem() == Items.LAVA_BUCKET && CandyCraftPreferences.canOpenPortalWithLava) || (heldItem.getItem() == CCItems.caramelBucket && CandyCraftPreferences.canOpenPortalWithCaramel)) && (worldIn.provider.getDimension() == 0 || worldIn.provider.getDimension() == CandyCraft.getCandyDimensionID()))) {
+        if (heldItem != ItemStack.EMPTY && (heldItem.getItem() == Items.LAVA_BUCKET && CandyCraftConfig.canOpenPortalWithLava || heldItem == CCItems.caramelBucket && CandyCraftConfig.canOpenPortalWithCaramel) && (worldIn.provider.getDimension() == 0 || worldIn.provider.getDimension() == CandyCraftConfig.candyDimID)) {
             boolean isActivated = false;
             enable:
             for (int x = -1; x < 2; x++) {
                 for (int y = -1; y < 2; y++) {
                     for (int z = -1; z < 2; z++) {
-                        isActivated = CCBlocks.candyPortal.trySpawnPortal(worldIn, new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+                        isActivated = ((BlockCandyPortal)CCBlocks.candyPortal).trySpawnPortal(worldIn, new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
                         if (isActivated) {
                             playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
                             break enable;

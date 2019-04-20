@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/dragibus_stick"
+    "layer0": "candycraft:items/dragibus_stick"
   },
   "display": {
     "thirdperson": {

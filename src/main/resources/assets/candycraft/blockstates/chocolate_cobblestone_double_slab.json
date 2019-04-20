@@ -1,10 +1,13 @@
 {
-  "variants": {
-    "half=bottom,variant=default": {
-      "model": "candycraftmod:chocolate_cobblestone"
-    },
-    "half=top,variant=default": {
-      "model": "candycraftmod:chocolate_cobblestone"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "candycraft:blocks/chocolate_cobblestone"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

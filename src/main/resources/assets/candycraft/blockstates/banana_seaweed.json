@@ -1,52 +1,12 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cross",
+    "transform": "forge:default-item"
+  },
   "variants": {
-    "level=0": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=1": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=2": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=3": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=4": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=5": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=6": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=7": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=8": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=9": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=10": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=11": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=12": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=13": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=14": {
-      "model": "candycraftmod:banana_seaweed"
-    },
-    "level=15": {
-      "model": "candycraftmod:banana_seaweed"
-    }
+    "normal": [{ "model": "cross", "textures": { "cross": "candycraft:blocks/banana_seaweed" }}],
+    "inventory": [{ "model": "builtin/generated", "textures": { "layer0": "candycraft:blocks/banana_seaweed" }}]
+
   }
 }

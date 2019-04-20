@@ -1,11 +1,11 @@
 {
   "textures": {
-    "0": "candycraftmod:blocks/alchemy_side",
-    "1": "candycraftmod:blocks/alchemy_top",
-    "2": "candycraftmod:blocks/alchemy_side_glass",
-    "3": "candycraftmod:blocks/alchemy_top_glass",
-    "4": "candycraftmod:blocks/alchemy_bottom_glass",
-    "5": "candycraftmod:blocks/alchemy_side_glass_intern"
+    "0": "candycraft:blocks/alchemy_side",
+    "1": "candycraft:blocks/alchemy_top",
+    "2": "candycraft:blocks/alchemy_side_glass",
+    "3": "candycraft:blocks/alchemy_top_glass",
+    "4": "candycraft:blocks/alchemy_bottom_glass",
+    "5": "candycraft:blocks/alchemy_side_glass_intern"
   },
   "display": {
     "thirdperson": {

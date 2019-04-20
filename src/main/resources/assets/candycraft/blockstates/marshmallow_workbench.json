@@ -1,7 +1,19 @@
 {
-  "variants": {
-    "normal": {
-      "model": "candycraftmod:marshmallow_workbench"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube",
+    "textures": {
+      "particle": "candycraft:blocks/marshmallow_workbench_side",
+      "down": "candycraft:blocks/marshmallow_planks.0",
+      "up": "candycraft:blocks/marshmallow_workbench_top",
+      "north": "candycraft:blocks/marshmallow_workbench_side",
+      "east": "candycraft:blocks/marshmallow_workbench_side",
+      "south": "candycraft:blocks/marshmallow_workbench_side",
+      "west": "candycraft:blocks/marshmallow_workbench_side"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

@@ -8,7 +8,7 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
 public class TeleporterDungeon extends Teleporter {
-    TileEntityTeleporter teleporter = null;
+    TileEntityTeleporter teleporter;
 
     public TeleporterDungeon(WorldServer worldServer, TileEntityTeleporter tileEntityTeleporter) {
         super(worldServer);

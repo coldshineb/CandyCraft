@@ -17,7 +17,7 @@ public class ContainerSugarFactory extends Container {
     public ContainerSugarFactory(InventoryPlayer par1InventoryPlayer, TileEntitySugarFactory par2TileEntityFurnace) {
         factory = par2TileEntityFurnace;
         addSlotToContainer(new Slot(par2TileEntityFurnace, 0, 8, 33));
-        addSlotToContainer(new SlotSugarFactory(par1InventoryPlayer.player, par2TileEntityFurnace, 1, 152, 33));
+        addSlotToContainer(new SlotSugarFactory(par2TileEntityFurnace, 1, 152, 33));
         int i;
 
         for (i = 0; i < 3; ++i) {
@@ -34,7 +34,7 @@ public class ContainerSugarFactory extends Container {
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
-        listener.sendProgressBarUpdate(this, 0, factory.currentTime);
+        listener.sendWindowProperty(this, 0, factory.currentTime);
         listener.sendAllWindowProperties(this, factory);
     }
 
@@ -42,10 +42,9 @@ public class ContainerSugarFactory extends Container {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < listeners.size(); ++i) {
-            IContainerListener icrafting = listeners.get(i);
+        for (IContainerListener icrafting : listeners) {
             if (lastCookTime != factory.currentTime) {
-                icrafting.sendProgressBarUpdate(this, 0, factory.currentTime);
+                icrafting.sendWindowProperty(this, 0, factory.currentTime);
             }
         }
 
@@ -62,23 +61,21 @@ public class ContainerSugarFactory extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return factory.isUseableByPlayer(par1EntityPlayer);
+        return factory.isUsableByPlayer(par1EntityPlayer);
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-        ItemStack itemstack = null;
         Slot slot = inventorySlots.get(par2);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
 
             if (par2 == 0 || par2 == 1) {
                 if (!mergeItemStack(itemstack1, 2, 38, false)) {
                     return null;
                 }
-                factory.setInventorySlotContents(par2, null);
+                factory.setInventorySlotContents(par2, ItemStack.EMPTY);
 
             } else {
                 if (TileEntitySugarFactory.isItemValid(itemstack1)) {
@@ -86,9 +83,9 @@ public class ContainerSugarFactory extends Container {
                         return null;
                     }
                     if (par2 >= 29) {
-                        slot.inventory.setInventorySlotContents((27 - (par2 - 2)) * -1, null);
+                        slot.inventory.setInventorySlotContents((27 - (par2 - 2)) * -1, ItemStack.EMPTY);
                     } else {
-                        slot.inventory.setInventorySlotContents(par2 + 7, null);
+                        slot.inventory.setInventorySlotContents(par2 + 7, ItemStack.EMPTY);
                     }
                 }
                 return null;

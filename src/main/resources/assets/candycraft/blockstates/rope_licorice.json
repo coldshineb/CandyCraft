@@ -1,52 +1,12 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cross",
+    "transform": "forge:default-item"
+  },
   "variants": {
-    "level=0": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=1": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=2": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=3": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=4": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=5": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=6": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=7": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=8": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=9": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=10": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=11": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=12": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=13": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=14": {
-      "model": "candycraftmod:rope_licorice"
-    },
-    "level=15": {
-      "model": "candycraftmod:rope_licorice"
-    }
+    "normal": [{ "model": "cross", "textures": { "cross": "candycraft:blocks/rope_licorice" }}],
+    "inventory": [{ "model": "builtin/generated", "textures": { "layer0": "candycraft:blocks/rope_licorice" }}]
+
   }
 }

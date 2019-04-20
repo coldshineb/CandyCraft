@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class WorldGenSuguardDungeon extends WorldGenerator {
     private GeometryGenerator generator = new GeometryGenerator();
-    private int xb, yb, zb, dim = 0;
+    private int xb, yb, zb, dim;
     private int xs, ys, zs;
     private boolean doBlockNotify;
 
@@ -25,7 +25,7 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
         dim = dime;
     }
 
-    private void spawnRoom(World world, Random rand, BlockPos pos) {
+    private void spawnRoom(World world, BlockPos pos) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
@@ -34,7 +34,7 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
         generator.cube(world, new BlockPos(x - 4, y, z - 4), new BlockPos(x + 4, y, z + 4), new FastCheckerBoardPattern(CCBlocks.caramelBlock.getDefaultState(), CCBlocks.honeyLamp.getDefaultState()));
 
         setBlockAndNotifyAdequately(world, new BlockPos(x, y, z), CCBlocks.caramelBlock.getDefaultState());
-        setBlockAndNotifyAdequately(world, new BlockPos(x, y + 1, z), CCBlocks.blockTeleporter.getStateFromMeta(1));
+        setBlockAndNotifyAdequately(world, new BlockPos(x, y + 1, z), CCBlocks.blockTeleporter.getDefaultState()/*.getStateFromMeta(1)*/);
         TileEntityTeleporter port = (TileEntityTeleporter) world.getTileEntity(new BlockPos(x, y + 1, z));
         port.x = xb;
         port.y = yb;
@@ -167,12 +167,6 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
     private void generateZDoor(World world, BlockPos pos) {
         generatePillar(world, pos.add(1, 0, 0));
         generatePillar(world, pos.add(-1, 0, 0));
-        generator.cube(world, pos.add(0, 0, 0), pos.add(0, 2, 0), new SimplePattern(Blocks.AIR.getDefaultState()));
-    }
-
-    private void generateXDoor(World world, BlockPos pos) {
-        generatePillar(world, pos.add(0, 0, 1));
-        generatePillar(world, pos.add(0, 0, -1));
         generator.cube(world, pos.add(0, 0, 0), pos.add(0, 2, 0), new SimplePattern(Blocks.AIR.getDefaultState()));
     }
 
@@ -468,7 +462,6 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
 
     private void generateFightRoom(World world, BlockPos pos) {
         int x = pos.getX();
-        int y = pos.getY();
         int z = pos.getZ();
 
         // Walls
@@ -636,6 +629,7 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
     }
 
     @Override
+    //TODO: Get back onto you
     public boolean generate(World world, Random random, BlockPos pos) {
         int x = xs = pos.getX();
         int y = ys = pos.getY();
@@ -643,11 +637,11 @@ public class WorldGenSuguardDungeon extends WorldGenerator {
 
         for (int x1 = -128; x1 < 128; x1 += 16) {
             for (int z1 = -128; z1 < 128; z1 += 16) {
-                world.getChunkProvider().provideChunk(new BlockPos(x + x1, y, z + z1)).enqueueRelightChecks();
+                //world.getChunkProvider().provideChunk(new BlockPos(x + x1, y, z + z1)).enqueueRelightChecks();
             }
         }
         // SPAWN
-        spawnRoom(world, random, pos);
+        spawnRoom(world, pos);
         generateZCorridor(world, new BlockPos(x, y, z - 5));
         generateZCorridor(world, new BlockPos(x, y, z + 13));
         generateXCorridor(world, new BlockPos(x - 5, y, z));

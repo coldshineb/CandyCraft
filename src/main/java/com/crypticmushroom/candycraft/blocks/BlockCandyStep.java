@@ -1,58 +1,54 @@
 package com.crypticmushroom.candycraft.blocks;
 
-import com.crypticmushroom.candycraft.items.ItemCandySlab;
+import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
 import java.util.Random;
 
-public class BlockCandyStep extends BlockSlab {
-    public static final PropertyEnum VARIANTS = PropertyEnum.create("variant", BlockCandyStep.EnumType.class);
+public class BlockCandyStep extends BlockSlab implements ModelRegisterCallback {
+    public static final PropertyEnum<BlockCandyStep.EnumType> VARIANTS = PropertyEnum.create("variant", BlockCandyStep.EnumType.class);
     private final boolean isFullSlab;
-    private int dropped = 0;
 
-    public BlockCandyStep(Material material, boolean isFull, int dropId) {
+    public BlockCandyStep(Material material, boolean isFull, SoundType sound) {
         super(material);
+        setSoundType(sound);
+        setDefaultState(blockState.getBaseState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM).withProperty(VARIANTS, EnumType.DEFAULT));
         isFullSlab = isFull;
         fullBlock = isFull;
-        dropped = dropId;
-        setDefaultState(blockState.getBaseState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM).withProperty(VARIANTS, EnumType.DEFAULT));
         useNeighborBrightness = true;
+
+        if (!isFullSlab)
+            setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override
-    public Item getItemDropped(IBlockState state, Random random, int fortune) {
-        return Item.getItemFromBlock(ItemCandySlab.slabList[dropped]);
-    }
-
-    @Override
-    protected ItemStack createStackedBlock(IBlockState state) {
-        return new ItemStack(ItemCandySlab.slabList[dropped], 2, 0);
-    }
-
-    @Override
-    public String getUnlocalizedName(int meta) {
-        return "CandySlabFull-" + dropped;
+    public String getTranslationKey(int meta) {
+        return super.getTranslationKey();
     }
 
     @Override
     public boolean isDouble() {
         return isFullSlab;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return isFullSlab ? 2 : 1;
     }
 
     @Override
@@ -62,39 +58,44 @@ public class BlockCandyStep extends BlockSlab {
 
     @Override
     public Comparable<?> getTypeForItem(ItemStack stack) {
-        return 0;
+        return EnumType.DEFAULT;
     }
 
     @Override
+    @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return meta == 0 ? getDefaultState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM).withProperty(VARIANTS, EnumType.DEFAULT) : getDefaultState().withProperty(HALF, BlockSlab.EnumBlockHalf.TOP).withProperty(VARIANTS, EnumType.DEFAULT);
+        return this.isDouble() ? this.getDefaultState() : this.getDefaultState().withProperty(HALF, EnumBlockHalf.values()[meta % EnumBlockHalf.values().length]);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return (state.getValue(HALF)) == BlockSlab.EnumBlockHalf.BOTTOM ? 0 : 1;
+        return state.getValue(HALF).ordinal();
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{HALF, VARIANTS});
+        return this.isDouble() ? new BlockStateContainer(this, VARIANTS) : new BlockStateContainer(this, VARIANTS, HALF);
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item par1, CreativeTabs tab, List par3List) {
-        if (!isFullSlab) {
-            par3List.add(new ItemStack(par1, 1, 0));
-        }
-    }
-
+    /* TODO: Determine a better way for this
     @Override
     @SideOnly(Side.CLIENT)
     public ItemStack getPickBlock(IBlockState state, RayTraceResult result, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(Item.getItemFromBlock(ItemCandySlab.slabList[dropped]));
+    }*/
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerModel() {
+        if (this.isDouble())
+            ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(VARIANTS).ignore(HALF).build());
+        else {
+            ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(VARIANTS).build());
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation((this).getRegistryName(), "inventory"));
+        }
     }
 
-    public static enum EnumType implements IStringSerializable {
+    public enum EnumType implements IStringSerializable {
         DEFAULT;
 
         @Override

@@ -1,10 +1,10 @@
 {
   "variants": {
     "metadata=0": {
-      "model": "candycraftmod:block_teleporter_0"
+      "model": "candycraft:block_teleporter_0"
     },
     "metadata=1": {
-      "model": "candycraftmod:block_teleporter_1"
+      "model": "candycraft:block_teleporter_1"
     }
   }
 }

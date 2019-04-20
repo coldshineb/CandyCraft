@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockChewingGumPlate extends BlockChewingGum {
     protected static final AxisAlignedBB GUM_PLATE_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.15625F, 1.0F);
 
-    public BlockChewingGumPlate(Material p_i45394_1_) {
-        super(p_i45394_1_);
+    public BlockChewingGumPlate(Material material) {
+        super(material);
     }
 
     @Override
@@ -34,7 +34,8 @@ public class BlockChewingGumPlate extends BlockChewingGum {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+    @Deprecated
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
         return null;
     }
 
@@ -45,15 +46,15 @@ public class BlockChewingGumPlate extends BlockChewingGum {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World par1World, BlockPos pos, Block par5) {
-        if (!canPlaceBlockAt(par1World, pos)) {
-            par1World.setBlockToAir(pos);
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!canPlaceBlockAt(worldIn, pos)) {
+            worldIn.setBlockToAir(pos);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 }

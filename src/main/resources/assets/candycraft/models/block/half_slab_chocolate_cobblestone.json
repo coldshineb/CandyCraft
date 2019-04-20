@@ -1,8 +1,0 @@
-{
-  "parent": "block/half_slab",
-  "textures": {
-    "bottom": "candycraftmod:blocks/chocolate_cobblestone",
-    "top": "candycraftmod:blocks/chocolate_cobblestone",
-    "side": "candycraftmod:blocks/chocolate_cobblestone"
-  }
-}

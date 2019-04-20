@@ -1,11 +1,11 @@
 {
-  "parent": "builtin/generated",
+  "parent": "item/generated",
   "textures": {
-    "layer0": "candycraftmod:items/sugar_pill_0",
-    "layer1": "candycraftmod:items/sugar_pill_1",
-    "layer2": "candycraftmod:items/sugar_pill_2",
-    "layer3": "candycraftmod:items/sugar_pill_3",
-    "layer4": "candycraftmod:items/sugar_pill_4"
+    "layer0": "candycraft:items/sugar_pill_0",
+    "layer1": "candycraft:items/sugar_pill_1",
+    "layer2": "candycraft:items/sugar_pill_2",
+    "layer3": "candycraft:items/sugar_pill_3",
+    "layer4": "candycraft:items/sugar_pill_4"
   },
   "display": {
     "thirdperson": {

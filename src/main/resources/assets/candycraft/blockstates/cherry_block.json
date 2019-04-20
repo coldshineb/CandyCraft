@@ -1,7 +1,10 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "candycraft:cherry_block"
+  },
   "variants": {
-    "normal": {
-      "model": "candycraftmod:cherry_block"
-    }
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

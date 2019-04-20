@@ -2,7 +2,10 @@ package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntitySugarFactory;
-import net.minecraft.block.BlockContainer;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
+import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -11,19 +14,17 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockSugarFactory extends BlockContainer {
+public class BlockSugarFactory extends BlockCandyBase implements ITileEntityProvider {
     public BlockSugarFactory(Material par2Material, boolean advanced) {
-        super(par2Material);
+        super(par2Material, SoundType.METAL);
+        setCreativeTab(CandyCraft.getCandyTab());
     }
 
     @Override
@@ -90,11 +91,5 @@ public class BlockSugarFactory extends BlockContainer {
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
         return new TileEntitySugarFactory();
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
     }
 }

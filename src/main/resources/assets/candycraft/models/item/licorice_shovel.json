@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/licorice_shovel"
+    "layer0": "candycraft:items/licorice_shovel"
   },
   "display": {
     "thirdperson": {

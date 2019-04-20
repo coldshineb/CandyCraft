@@ -6,18 +6,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelSuguard extends ModelBase {
-    ModelRenderer leg1;
-    ModelRenderer leg2;
-    ModelRenderer Shape3;
-    ModelRenderer Shape4;
-    ModelRenderer Shape5;
-    ModelRenderer Shape6;
-    ModelRenderer Shape7;
-    ModelRenderer Shape8;
-    ModelRenderer leftArm;
-    ModelRenderer rightArm;
-    ModelRenderer shield;
-    ModelRenderer Shape12;
+    public ModelRenderer leg1;
+    public ModelRenderer leg2;
+    public ModelRenderer Shape3;
+    public ModelRenderer Shape4;
+    public ModelRenderer Shape5;
+    public ModelRenderer Shape6;
+    public ModelRenderer Shape7;
+    public ModelRenderer Shape8;
+    public ModelRenderer leftArm;
+    public ModelRenderer rightArm;
+    public ModelRenderer shield;
+    public ModelRenderer Shape12;
 
     public ModelSuguard() {
         textureWidth = 64;

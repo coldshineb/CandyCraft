@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.client;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -17,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.Random;
 
 public class RenderWeather extends IRenderHandler {
-    private static final ResourceLocation locationRainPng = new ResourceLocation("candycraftmod:textures/environment/rain.png");
+    private static final ResourceLocation locationRainPng = new ResourceLocation(CandyCraft.MODID, "textures/environment/rain.png");
 
     private float[] rainX = new float[1024];
     private float[] rainY = new float[1024];

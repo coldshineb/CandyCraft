@@ -15,10 +15,10 @@ import java.util.Random;
 public class WorldGenCaramelTree extends WorldGenAbstractTree {
     private final int minTreeHeight;
     World world;
-    private boolean metaChange = false;
+    private boolean metaChange;
 
     public WorldGenCaramelTree(boolean par1, int par2) {
-        this(par1, 1, 0, par2);
+        this(par1, 1, par2);
         metaChange = false;
     }
 
@@ -27,7 +27,7 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
         metaChange = par2;
     }
 
-    public WorldGenCaramelTree(boolean par1, int par2, int par3, int par4) {
+    public WorldGenCaramelTree(boolean par1, int par2, int par4) {
         super(par1);
         metaChange = false;
         minTreeHeight = par2;
@@ -40,12 +40,7 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
         }
         int l = par2Random.nextInt(5) + minTreeHeight;
         boolean flag = true;
-        if (metaChange) {
-            int i = par2Random.nextInt(3);
-            if (i == 0) {
-            } else {
-            }
-        }
+
         if (par4 >= 1 && par4 + l + 1 <= 256) {
             byte b0;
             int k1;
@@ -65,7 +60,6 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
                 for (int j1 = par3 - b0; j1 <= par3 + b0 && flag; ++j1) {
                     for (k1 = par5 - b0; k1 <= par5 + b0 && flag; ++k1) {
                         if (i1 >= 0 && i1 < 256) {
-                            block = getBlock(j1, i1, k1);
 
                             if (!this.isReplaceable(par1World, j1, i1, k1)) {
                                 flag = false;
@@ -107,7 +101,7 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
                                     IBlockState block1 = getBlockState(i2, k1, k2);
 
                                     if (block1.getBlock().isAir(block1, par1World, new BlockPos(i2, k1, k2)) || block1.getBlock().isLeaves(block1, par1World, new BlockPos(i2, k1, k2))) {
-                                        this.setBlock(i2, k1, k2, CCBlocks.candyLeave, 1);
+                                        this.setBlock(i2, k1, k2, CCBlocks.candyLeaveDark);
                                     }
                                 }
                             }
@@ -119,7 +113,7 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
                         block = state.getBlock();
 
                         if (block.isAir(state, par1World, new BlockPos(par3, par4 + k1, par5)) || block.isLeaves(state, par1World, new BlockPos(par3, par4 + k1, par5))) {
-                            this.setBlock(par3, par4 + k1, par5, CCBlocks.marshmallowLog, 1);
+                            this.setBlock(par3, par4 + k1, par5, CCBlocks.marshmallowLogDark);
                         }
                     }
                     return true;
@@ -154,7 +148,6 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
             int l3;
 
             for (int l1 = par4; l1 <= par4 + 1 + l && flag; ++l1) {
-                boolean flag1 = true;
 
                 if (l1 - par4 < i1) {
                     l3 = 0;
@@ -203,7 +196,7 @@ public class WorldGenCaramelTree extends WorldGenAbstractTree {
                                 IBlockState state = getBlockState(l2, k2, j3);
 
                                 if ((Math.sin(i3) != l3 || Math.sin(k3) != l3 || l3 <= 0) && state.getBlock().canBeReplacedByLeaves(state, par1World, new BlockPos(l2, k2, j3))) {
-                                    this.setBlock(l2, k2, j3, CCBlocks.candyLeave, 1);
+                                    this.setBlock(l2, k2, j3, CCBlocks.candyLeaveDark);
                                 }
                             }
                         }

@@ -1,21 +1,17 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "grass",
+    "textures": {
+      "particle": "candycraft:blocks/flour",
+      "bottom": "candycraft:blocks/flour",
+      "top": "candycraft:blocks/pudding_overlay_top",
+      "side": "candycraft:blocks/pudding_side",
+      "overlay": "candycraft:blocks/pudding_overlay_side"
+    }
+  },
   "variants": {
-    "normal": [
-      {
-        "model": "candycraftmod:pudding_normal"
-      },
-      {
-        "model": "candycraftmod:pudding_normal",
-        "y": 90
-      },
-      {
-        "model": "candycraftmod:pudding_normal",
-        "y": 180
-      },
-      {
-        "model": "candycraftmod:pudding_normal",
-        "y": 270
-      }
-    ]
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

@@ -1,11 +1,13 @@
 package com.crypticmushroom.candycraft.world.generator;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -15,8 +17,8 @@ import java.util.Random;
 public class WorldGenWebLakes extends WorldGenerator {
     private final Block blockToPlace;
 
-    public WorldGenWebLakes(Block p_i45455_1_) {
-        blockToPlace = p_i45455_1_;
+    public WorldGenWebLakes(Block block) {
+        blockToPlace = block;
     }
 
     @Override
@@ -27,8 +29,9 @@ public class WorldGenWebLakes extends WorldGenerator {
 
         pX -= 8;
 
-        for (pZ -= 8; pY > 5 && world.isAirBlock(new BlockPos(pX, pY, pZ)); --pY) {
-            ;
+        pZ -= 8;
+        while (pY > 5 && world.isAirBlock(new BlockPos(pX, pY, pZ))) {
+            --pY;
         }
 
         if (pY <= 4) {
@@ -100,7 +103,7 @@ public class WorldGenWebLakes extends WorldGenerator {
             if (blockToPlace == CCBlocks.cottonCandyWeb) {
                 world.setBlockState(new BlockPos(pX + 8, pY + 2, pZ + 8), Blocks.MOB_SPAWNER.getDefaultState(), 2);
                 TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner) world.getTileEntity(new BlockPos(pX + 8, pY + 2, pZ + 8));
-                tileentitymobspawner.getSpawnerBaseLogic().setEntityName("candycraftmod.CottonCandySpider");
+                tileentitymobspawner.getSpawnerBaseLogic().setEntityId(new ResourceLocation(CandyCraft.MODID, "cotton_candy_spider"));
             }
 
             return true;

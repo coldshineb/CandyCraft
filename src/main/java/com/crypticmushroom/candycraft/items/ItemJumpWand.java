@@ -19,13 +19,12 @@ public class ItemJumpWand extends ItemWand {
         }
         par1Entity.isAirBorne = true;
         float f1 = MathHelper.sqrt(par3 * par3 + par5 * par5);
-        float f2 = par2;
         par1Entity.motionX /= 2.0D;
         par1Entity.motionY /= 2.0D;
         par1Entity.motionZ /= 2.0D;
-        par1Entity.motionX -= par3 / f1 * f2;
+        par1Entity.motionX -= par3 / f1 * par2;
         par1Entity.motionY += par6;
-        par1Entity.motionZ -= par5 / f1 * f2;
+        par1Entity.motionZ -= par5 / f1 * par2;
     }
 
     @Override

@@ -9,7 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelWaffleSheep extends ModelQuadruped {
-    private static final String __OBFID = "CL_00000852";
     public float woolSize = 1.75F;
     private float field_78152_i;
 

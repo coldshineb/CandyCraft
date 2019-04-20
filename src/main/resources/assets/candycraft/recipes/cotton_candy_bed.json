@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "$$$"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:cotton_candy"
+    },
+    "$": {
+      "item": "#MARSHMALLOWPLANKS"
+    }
+  },
+  "result": {
+    "item": "candycraft:cotton_candy_bed"
+  }
+}

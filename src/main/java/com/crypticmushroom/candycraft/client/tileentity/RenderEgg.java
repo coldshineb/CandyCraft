@@ -7,17 +7,16 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.tileentity.TileEntity;
 
 import java.util.Random;
 
-public class RenderEgg extends TileEntitySpecialRenderer {
+public class RenderEgg extends TileEntitySpecialRenderer<TileEntityEgg> {
 
     @Override
-    public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+    public void render(TileEntityEgg te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x + 0.5D, y + 0.8D, z + 0.5D);
-        renderLight((TileEntityEgg) te, destroyStage);
+        renderLight(te, destroyStage);
         GlStateManager.popMatrix();
     }
 

@@ -1,16 +1,16 @@
 {
   "variants": {
     "facing=west": {
-      "model": "candycraftmod:marshmallow_chest"
+      "model": "candycraft:marshmallow_chest"
     },
     "facing=east": {
-      "model": "candycraftmod:marshmallow_chest"
+      "model": "candycraft:marshmallow_chest"
     },
     "facing=south": {
-      "model": "candycraftmod:marshmallow_chest"
+      "model": "candycraft:marshmallow_chest"
     },
     "facing=north": {
-      "model": "candycraftmod:marshmallow_chest"
+      "model": "candycraft:marshmallow_chest"
     }
   }
 }

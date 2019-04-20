@@ -9,7 +9,7 @@ public class ModelMermaid extends ModelBase {
     ModelRenderer Shape1;
     ModelRenderer Shape3;
     ModelRenderer Shape4;
-    ModelRenderer Shape41;
+    public ModelRenderer Shape41;
     ModelRenderer Shape6;
     ModelRenderer Shape7;
     ModelRenderer Shape8;

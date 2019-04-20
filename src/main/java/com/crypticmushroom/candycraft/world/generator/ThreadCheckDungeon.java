@@ -1,6 +1,6 @@
 package com.crypticmushroom.candycraft.world.generator;
 
-import com.crypticmushroom.candycraft.CandyCraft;
+import com.crypticmushroom.candycraft.CandyCraftConfig;
 import com.crypticmushroom.candycraft.blocks.tileentity.TileEntityTeleporter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +18,7 @@ public class ThreadCheckDungeon extends Thread {
 
     @Override
     public void run() {
-        World world = player.worldObj.getMinecraftServer().worldServerForDimension(CandyCraft.getDungeonDimensionID());
+        World world = player.world.getMinecraftServer().getWorld(CandyCraftConfig.dungeonDimID);
 
         int x = 0;
         int id = 0;

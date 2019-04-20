@@ -15,11 +15,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockChewingGum extends Block {
+import static com.crypticmushroom.candycraft.misc.CCSoundTypes.SOUND_JELLY_FOOTSTEP;
+
+public class BlockChewingGum extends BlockCandyBase {
     protected static final AxisAlignedBB GUM_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
 
     public BlockChewingGum(Material material) {
-        super(material);
+        super(material, SOUND_JELLY_FOOTSTEP);
     }
 
     @Override
@@ -28,7 +30,7 @@ public class BlockChewingGum extends Block {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
         if (!(entity instanceof EntityBeetle) && !(entity instanceof EntityBossBeetle) && !(entity instanceof EntityKingBeetle)) {
             if (entity instanceof EntityPlayer && ((EntityPlayer) entity).inventory.hasItemStack(new ItemStack(CCItems.chewingGumEmblem))) {
                 return;

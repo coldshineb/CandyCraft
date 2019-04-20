@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "candycraft:trampojelly"
+    },
+    "title": {
+      "translate": "advancements.candycraft.trampojelly.title"
+    },
+    "description": {
+      "translate": "advancements.candycraft.trampojelly.desc"
+    }
+  },
+  "parent": "candycraft:craft_licorice_furnace",
+  "criteria": {
+    "trampojelly": {
+      "trigger": "minecraft:inventory_changed",
+      "items": [
+        {
+          "item": "candycraft:trampojelly"
+        }
+      ]
+    }
+  }
+}

@@ -18,19 +18,21 @@ public class EntityCandyPig extends EntityPig {
     public EntityCandyPig(World par1World) {
         super(par1World);
         setSize(0.9F, 0.9F);
-        float var2 = 0.25F;
-        tasks.taskEntries.clear();
-        tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        tasks.addTask(3, new EntityAIMate(this, 1.0D));
-        tasks.addTask(4, new EntityAITempt(this, 1.2D, CCItems.dragibusStick, false));
-        tasks.addTask(4, new EntityAITempt(this, 1.2D, CCItems.dragibus, false));
-        tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
-        tasks.addTask(6, new EntityAIWander(this, 1.0D));
-        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        tasks.addTask(8, new EntityAILookIdle(this));
-        tasks.addTask(4, new EntityAIAvoidPlayerGinger(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
         setPathPriority(PathNodeType.WATER, -1.0F);
+    }
+
+    @Override
+    protected void initEntityAI() {
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
+        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, CCItems.dragibusStick, false));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, CCItems.dragibus, false));
+        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.tasks.addTask(4, new EntityAIAvoidPlayerGinger<>(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
     }
 
     @Override
@@ -43,11 +45,11 @@ public class EntityCandyPig extends EntityPig {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             ItemStack itemstack = entityplayer.getHeldItemMainhand();
 
-            if (itemstack != null && itemstack.getItem() == CCItems.dragibusStick) {
+            if (itemstack.getItem() == CCItems.dragibusStick) {
                 return true;
             } else {
                 itemstack = entityplayer.getHeldItemOffhand();
-                return itemstack != null && itemstack.getItem() == CCItems.dragibusStick;
+                return itemstack.getItem() == CCItems.dragibusStick;
             }
         }
     }
@@ -99,6 +101,6 @@ public class EntityCandyPig extends EntityPig {
 
     @Override
     public EntityPig createChild(EntityAgeable par1EntityAgeable) {
-        return new EntityCandyPig(worldObj);
+        return new EntityCandyPig(world);
     }
 }

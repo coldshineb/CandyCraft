@@ -1,7 +1,7 @@
 package com.crypticmushroom.candycraft.blocks;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -13,16 +13,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockCandyCane extends BlockCandyBase {
-    public static final PropertyEnum AXIS_PROP = PropertyEnum.create("axis", BlockCandyCane.EnumAxis.class);
+    public static final PropertyEnum<EnumAxis> AXIS_PROP = PropertyEnum.create("axis", BlockCandyCane.EnumAxis.class);
 
-    public BlockCandyCane(Material par2Material) {
-        super(par2Material);
+    public BlockCandyCane(Material par2Material, SoundType sound) {
+        super(par2Material, sound);
         setDefaultState(blockState.getBaseState().withProperty(AXIS_PROP, BlockCandyCane.EnumAxis.X));
     }
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(AXIS_PROP, BlockCandyCane.EnumAxis.func_176870_a(facing.getAxis()));
+        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(AXIS_PROP, BlockCandyCane.EnumAxis.fromFacingAxis(facing.getAxis()));
     }
 
     @Override
@@ -32,24 +32,22 @@ public class BlockCandyCane extends BlockCandyBase {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return ((BlockCandyCane.EnumAxis) state.getValue(AXIS_PROP)).axisID;
+        return state.getValue(AXIS_PROP).axisID;
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{AXIS_PROP});
+        return new BlockStateContainer(this, AXIS_PROP);
     }
 
-    public static enum EnumAxis implements IStringSerializable {
+    public enum EnumAxis implements IStringSerializable {
         X("x", 0), Y("y", 1), Z("z", 2);
         private static final BlockCandyCane.EnumAxis[] enumList = new BlockCandyCane.EnumAxis[values().length];
 
         static {
             BlockCandyCane.EnumAxis[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2) {
-                BlockCandyCane.EnumAxis var3 = var0[var2];
+            for (EnumAxis var3 : var0) {
                 enumList[var3.axisID] = var3;
             }
         }
@@ -57,13 +55,13 @@ public class BlockCandyCane extends BlockCandyBase {
         private final String rotationName;
         private final int axisID;
 
-        private EnumAxis(String name, int id) {
+        EnumAxis(String name, int id) {
             rotationName = name;
             axisID = id;
         }
 
-        public static BlockCandyCane.EnumAxis func_176870_a(EnumFacing.Axis p_176870_0_) {
-            switch (BlockCandyCane.SwitchAxis.name[p_176870_0_.ordinal()]) {
+        public static BlockCandyCane.EnumAxis fromFacingAxis(EnumFacing.Axis axis) {
+            switch (BlockCandyCane.SwitchAxis.name[axis.ordinal()]) {
                 case 1:
                     return X;
                 case 2:
@@ -73,10 +71,6 @@ public class BlockCandyCane extends BlockCandyBase {
                 default:
                     return X;
             }
-        }
-
-        public int getID() {
-            return axisID;
         }
 
         @Override
@@ -96,21 +90,15 @@ public class BlockCandyCane extends BlockCandyBase {
         static {
             try {
                 name[EnumFacing.Axis.X.ordinal()] = 1;
-            } catch (NoSuchFieldError var3) {
-                ;
-            }
+            } catch (NoSuchFieldError ignored) { }
 
             try {
                 name[EnumFacing.Axis.Y.ordinal()] = 2;
-            } catch (NoSuchFieldError var2) {
-                ;
-            }
+            } catch (NoSuchFieldError ignored) { }
 
             try {
                 name[EnumFacing.Axis.Z.ordinal()] = 3;
-            } catch (NoSuchFieldError var1) {
-                ;
-            }
+            } catch (NoSuchFieldError ignored) { }
         }
     }
 }

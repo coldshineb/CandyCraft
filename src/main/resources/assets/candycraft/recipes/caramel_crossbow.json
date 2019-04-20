@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    " $ ",
+    "  $"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:caramel_bow"
+    },
+    "$": {
+      "item": "candycraft:caramel_block"
+    }
+  },
+  "result": {
+    "item": "candycraft:caramel_crossbow"
+  }
+}

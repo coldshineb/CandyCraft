@@ -2,6 +2,7 @@ package com.crypticmushroom.candycraft.entity;
 
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.items.CCItems;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,11 +11,17 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class EntityPingouin extends EntityAnimal {
+    private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityPingouin.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> IS_SUPER = EntityDataManager.createKey(EntityPingouin.class, DataSerializers.BOOLEAN);
+
     public EntityPingouin(World par1World) {
         super(par1World);
         setSize(0.6F, 1.0F);
@@ -32,19 +39,19 @@ public class EntityPingouin extends EntityAnimal {
     }
 
     public int getColor() {
-        return dataWatcher.getWatchableObjectInt(16) & 3;
+        return dataManager.get(COLOR) & 3;
     }
 
     public void setColor(int i) {
-        dataWatcher.updateObject(16, i);
+        dataManager.set(COLOR, i);
     }
 
     public boolean isSuper() {
-        return dataWatcher.getWatchableObjectInt(17) == 1;
+        return dataManager.get(IS_SUPER);
     }
 
     public void setSuper(boolean i) {
-        dataWatcher.updateObject(17, i ? 1 : 0);
+        dataManager.set(IS_SUPER, i);
     }
 
     @Override
@@ -57,12 +64,33 @@ public class EntityPingouin extends EntityAnimal {
     }
 
     @Override
-    public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand, ItemStack stackInHand) {
-        if (!worldObj.isRemote && stackInHand != null && stackInHand.getItem() == CCItems.marshmallowFlower) {
-            entityDropItem(new ItemStack(CCBlocks.iceCream, rand.nextInt(6) + 5, getColor()), 0.5F);
-            stackInHand.stackSize--;
+    public boolean processInteract(EntityPlayer par1EntityPlayer, EnumHand hand) {
+        if (!world.isRemote && par1EntityPlayer.getHeldItemMainhand().getItem() == CCItems.marshmallowFlower) {
+            entityDropItem(getDrop(getColor()), 0.5F);
+            par1EntityPlayer.getHeldItemMainhand().shrink(1);
         }
-        return super.processInteract(par1EntityPlayer, hand, stackInHand);
+        return super.processInteract(par1EntityPlayer, hand);
+    }
+
+    private ItemStack getDrop(int color) {
+        Block block;
+
+        switch (color) {
+            case 0:
+                block = CCBlocks.strawberryIceCream;
+                break;
+            case 1:
+                block = CCBlocks.mintIceCream;
+                break;
+            case 2:
+                block = CCBlocks.blueberryIceCream;
+                break;
+            case 3:
+            default:
+                block = CCBlocks.iceCream;
+        }
+
+        return new ItemStack(block, rand.nextInt(6) + 5);
     }
 
     @Override
@@ -84,8 +112,8 @@ public class EntityPingouin extends EntityAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataWatcher.addObject(16, Integer.valueOf(0));
-        dataWatcher.addObject(17, Integer.valueOf(0));
+        dataManager.register(COLOR, 0);
+        dataManager.register(IS_SUPER, false);
     }
 
     @Override
@@ -114,6 +142,6 @@ public class EntityPingouin extends EntityAnimal {
 
     @Override
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
-        return new EntityPingouin(worldObj);
+        return new EntityPingouin(world);
     }
 }

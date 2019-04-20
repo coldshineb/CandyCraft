@@ -1,7 +1,14 @@
 {
-  "variants": {
-    "normal": {
-      "model": "candycraftmod:dragon_egg_block"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "candycraft:candy_egg",
+    "textures": {
+      "particle": "candycraft:blocks/dragon_egg",
+      "all": "candycraft:blocks/dragon_egg"
     }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

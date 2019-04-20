@@ -25,16 +25,16 @@ public class EntityAICandyArrow extends EntityAIBase {
      */
     private int rangedAttackTime;
     private double entityMoveSpeed;
-    private int field_75318_f;
-    private int field_96561_g;
+    private int seeTime;
+    private int attackIntervalMin;
 
     /**
      * The maximum time the AI has to wait before peforming another ranged
      * attack.
      */
     private int maxRangedAttackTime;
-    private float field_96562_i;
-    private float field_82642_h;
+    private float attackRadius;
+    private float maxAttackDistance;
 
     public EntityAICandyArrow(IRangedAttackMob par1IRangedAttackMob, double par2, int par4, float par5) {
         this(par1IRangedAttackMob, par2, par4, par4, par5);
@@ -49,10 +49,10 @@ public class EntityAICandyArrow extends EntityAIBase {
             rangedAttackEntityHost = par1IRangedAttackMob;
             entityHost = (EntityLiving) par1IRangedAttackMob;
             entityMoveSpeed = par2;
-            field_96561_g = par4;
+            attackIntervalMin = par4;
             maxRangedAttackTime = par5;
-            field_96562_i = par6;
-            field_82642_h = par6 * par6;
+            attackRadius = par6;
+            maxAttackDistance = par6 * par6;
             setMutexBits(3);
         }
     }
@@ -78,7 +78,7 @@ public class EntityAICandyArrow extends EntityAIBase {
      * Returns whether an in-progress EntityAIBase should continue executing
      */
     @Override
-    public boolean continueExecuting() {
+    public boolean shouldContinueExecuting() {
         return shouldExecute() || !entityHost.getNavigator().noPath();
     }
 
@@ -88,7 +88,7 @@ public class EntityAICandyArrow extends EntityAIBase {
     @Override
     public void resetTask() {
         attackTarget = null;
-        field_75318_f = 0;
+        seeTime = 0;
         rangedAttackTime = -1;
     }
 
@@ -101,13 +101,13 @@ public class EntityAICandyArrow extends EntityAIBase {
         boolean flag = entityHost.getEntitySenses().canSee(attackTarget);
 
         if (flag) {
-            ++field_75318_f;
+            ++seeTime;
         } else {
-            field_75318_f = 0;
+            seeTime = 0;
         }
 
-        if (d0 <= (double) field_82642_h + 20 && field_75318_f >= 20) {
-            entityHost.getNavigator().clearPathEntity();
+        if (d0 <= (double) maxAttackDistance + 20 && seeTime >= 20) {
+            entityHost.getNavigator().clearPath();
         } else {
             entityHost.getNavigator().tryMoveToEntityLiving(attackTarget, entityMoveSpeed);
         }
@@ -116,11 +116,11 @@ public class EntityAICandyArrow extends EntityAIBase {
         float f;
 
         if (--rangedAttackTime == 0) {
-            if (d0 > (double) field_82642_h + 20 || !flag) {
+            if (d0 > (double) maxAttackDistance + 20 || !flag) {
                 return;
             }
 
-            f = MathHelper.sqrt_double(d0) / field_96562_i;
+            f = MathHelper.sqrt(d0) / attackRadius;
             float f1 = f;
 
             if (f < 0.1F) {
@@ -132,10 +132,10 @@ public class EntityAICandyArrow extends EntityAIBase {
             }
 
             rangedAttackEntityHost.attackEntityWithRangedAttack(attackTarget, f1);
-            rangedAttackTime = MathHelper.floor_float(f * (maxRangedAttackTime - field_96561_g) + field_96561_g);
+            rangedAttackTime = MathHelper.floor(f * (maxRangedAttackTime - attackIntervalMin) + attackIntervalMin);
         } else if (rangedAttackTime < 0) {
-            f = MathHelper.sqrt_double(d0) / field_96562_i;
-            rangedAttackTime = MathHelper.floor_float(f * (maxRangedAttackTime - field_96561_g) + field_96561_g);
+            f = MathHelper.sqrt(d0) / attackRadius;
+            rangedAttackTime = MathHelper.floor(f * (maxRangedAttackTime - attackIntervalMin) + attackIntervalMin);
         }
     }
 }

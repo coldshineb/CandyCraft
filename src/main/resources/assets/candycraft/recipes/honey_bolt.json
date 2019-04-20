@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  $",
+    " $ ",
+    "#  "
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:candy_cane"
+    },
+    "$": {
+      "item": "candycraft:honey_shard"
+    }
+  },
+  "result": {
+    "item": "candycraft:fork"
+  }
+}

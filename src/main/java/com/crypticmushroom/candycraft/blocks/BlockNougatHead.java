@@ -1,9 +1,8 @@
 package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.entity.EntityNougatGolem;
-import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -13,11 +12,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockNougatHead extends Block {
+public class BlockNougatHead extends BlockCandyBase {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public BlockNougatHead() {
-        super(Material.IRON);
+        super(Material.IRON, SoundType.METAL);
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
@@ -67,7 +66,7 @@ public class BlockNougatHead extends Block {
             golem.setPosition(pos.getX() + 0.5D, pos.getY() - lenght, pos.getZ() + 0.5D);
 
             if (j == 0) {
-                golem.setLenght(0.8F);
+                golem.setLength(0.8F);
             }
             golemList[j] = golem;
 
@@ -79,8 +78,9 @@ public class BlockNougatHead extends Block {
     }
 
     @Override
+    @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+        EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
         if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
             enumfacing = EnumFacing.NORTH;
@@ -96,6 +96,6 @@ public class BlockNougatHead extends Block {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING});
+        return new BlockStateContainer(this, FACING);
     }
 }

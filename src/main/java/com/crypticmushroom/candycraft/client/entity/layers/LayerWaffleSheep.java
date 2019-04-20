@@ -1,14 +1,14 @@
 package com.crypticmushroom.candycraft.client.entity.layers;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.client.entity.models.ModelWaffleSheep;
 import com.crypticmushroom.candycraft.client.entity.renders.RenderWaffleSheep;
 import com.crypticmushroom.candycraft.entity.EntityWaffleSheep;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class LayerWaffleSheep implements LayerRenderer {
-    private static final ResourceLocation sheepTextures = new ResourceLocation("candycraftmod:textures/entity/sheepCandy.png");
+public class LayerWaffleSheep implements LayerRenderer<EntityWaffleSheep> {
+    private static final ResourceLocation sheepTextures = new ResourceLocation(CandyCraft.MODID, "textures/entity/sheepCandy.png");
     private static final ModelWaffleSheep furModel = new ModelWaffleSheep();
 
     private RenderWaffleSheep sheepRenderer;
@@ -18,9 +18,9 @@ public class LayerWaffleSheep implements LayerRenderer {
     }
 
     @Override
-    public void doRenderLayer(EntityLivingBase entity, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_) {
+    public void doRenderLayer(EntityWaffleSheep entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         sheepRenderer.bindTexture(sheepTextures);
-        furModel.woolSize = -0.15F - ((EntityWaffleSheep) entity).getFurSize() * 0.02F;
+        furModel.woolSize = -0.15F - entity.getFurSize() * 0.02F;
         if (!entity.isChild()) {
             ModelWaffleSheep waffle = LayerWaffleSheep.furModel;
             waffle.leg1.offsetY = -waffle.woolSize;
@@ -39,7 +39,7 @@ public class LayerWaffleSheep implements LayerRenderer {
             waffle.head.offsetY = -waffle.woolSize / 2;
         }
         LayerWaffleSheep.furModel.setModelAttributes(sheepRenderer.getMainModel());
-        LayerWaffleSheep.furModel.render(entity, p_177141_2_, p_177141_3_, p_177141_5_, p_177141_6_, p_177141_7_, p_177141_8_);
+        LayerWaffleSheep.furModel.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.client.entity.renders;
 
+import com.crypticmushroom.candycraft.CandyCraft;
 import com.crypticmushroom.candycraft.entity.EntityCandyArrow;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,8 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderCandyArrow extends RenderArrow {
-    private static final ResourceLocation arrowTextures = new ResourceLocation("candycraftmod:textures/entity/candyArrow.png");
-    private static final ResourceLocation boltTextures = new ResourceLocation("candycraftmod:textures/entity/candyBolt.png");
+    private static final ResourceLocation arrowTextures = new ResourceLocation(CandyCraft.MODID, "textures/entity/candy_arrow.png");
+    private static final ResourceLocation boltTextures = new ResourceLocation(CandyCraft.MODID, "textures/entity/candyBolt.png");
 
     public RenderCandyArrow(RenderManager renderManager) {
         super(renderManager);

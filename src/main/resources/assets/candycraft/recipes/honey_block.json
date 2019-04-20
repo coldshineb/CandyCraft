@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:honey_shard"
+    }
+  },
+  "result": {
+    "item": "candycraft:honeycomb_block"
+  }
+}

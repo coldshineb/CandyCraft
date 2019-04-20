@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "candycraftmod:blocks/candy_cane_top",
-    "side": "candycraftmod:blocks/candy_cane_side"
-  }
-}

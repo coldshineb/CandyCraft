@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "half_slab",
+    "textures": {
+      "bottom": "candycraft:blocks/ice_cream.2",
+      "top": "candycraft:blocks/ice_cream.2",
+      "side": "candycraft:blocks/ice_cream.2"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "inventory": [{}],
+    "half": { "bottom": {}, "top": { "x": 180 } }
+  }
+}

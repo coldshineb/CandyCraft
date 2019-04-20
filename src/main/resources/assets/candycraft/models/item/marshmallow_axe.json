@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "candycraftmod:items/marshmallow_axe"
+    "layer0": "candycraft:items/marshmallow_axe"
   },
   "display": {
     "thirdperson": {

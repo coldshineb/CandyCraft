@@ -1,36 +1,36 @@
 {
-  "records.CD-1": {
+  "records.cd-1": {
     "category": "record",
     "sounds": [
       {
-        "name": "records/CD-1",
+        "name": "candycraft:records/cd-1",
         "stream": true
       }
     ]
   },
-  "records.CD-2": {
+  "records.cd-2": {
     "category": "record",
     "sounds": [
       {
-        "name": "records/CD-2",
+        "name": "candycraft:records/cd-2",
         "stream": true
       }
     ]
   },
-  "records.CD-3": {
+  "records.cd-3": {
     "category": "record",
     "sounds": [
       {
-        "name": "records/CD-3",
+        "name": "candycraft:records/cd-3",
         "stream": true
       }
     ]
   },
-  "records.CD-4": {
+  "records.cd-4": {
     "category": "record",
     "sounds": [
       {
-        "name": "records/CD-4",
+        "name": "candycraft:records/cd-4",
         "stream": true
       }
     ]
@@ -39,11 +39,11 @@
     "category": "block",
     "sounds": [
       {
-        "name": "dig/jelly1",
+        "name": "candycraft:dig/jelly1",
         "stream": false
       },
       {
-        "name": "dig/jelly2",
+        "name": "candycraft:dig/jelly2",
         "stream": false
       }
     ]
@@ -52,13 +52,13 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "mob/nessie1"
+        "name": "candycraft:mob/nessie1"
       },
       {
-        "name": "mob/nessie2"
+        "name": "candycraft:mob/nessie2"
       },
       {
-        "name": "mob/nessie3"
+        "name": "candycraft:mob/nessie3"
       }
     ]
   },
@@ -66,7 +66,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "mob/nessiehurt"
+        "name": "candycraft:mob/nessiehurt"
       }
     ]
   },
@@ -74,19 +74,19 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "step/jelly1",
+        "name": "candycraft:step/jelly1",
         "stream": false
       },
       {
-        "name": "step/jelly2",
+        "name": "candycraft:step/jelly2",
         "stream": false
       },
       {
-        "name": "step/jelly3",
+        "name": "candycraft:step/jelly3",
         "stream": false
       },
       {
-        "name": "step/jelly4",
+        "name": "candycraft:step/jelly4",
         "stream": false
       }
     ]

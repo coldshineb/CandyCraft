@@ -1,19 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "orientable",
+    "textures": {
+      "top": "candycraft:blocks/licorice_block",
+      "front": "candycraft:blocks/licorice_furnace_front_on",
+      "side": "candycraft:blocks/licorice_furnace_side"
+    }
+  },
   "variants": {
-    "facing=north": {
-      "model": "candycraftmod:licorice_furnace_on"
-    },
-    "facing=south": {
-      "model": "candycraftmod:licorice_furnace_on",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "candycraftmod:licorice_furnace_on",
-      "y": 270
-    },
-    "facing=east": {
-      "model": "candycraftmod:licorice_furnace_on",
-      "y": 90
+    "facing": {
+      "north": { },
+      "east": { "y": 90 },
+      "south": { "y": 180 },
+      "west": { "y": 270 }
     }
   }
 }

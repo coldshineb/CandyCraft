@@ -15,18 +15,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class EntityBunny extends EntityAnimal {
-    private static final DataParameter<Integer> RED = EntityDataManager.<Integer>createKey(EntityBunny.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> GREEN = EntityDataManager.<Integer>createKey(EntityBunny.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> BLUE = EntityDataManager.<Integer>createKey(EntityBunny.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> RED = EntityDataManager.createKey(EntityBunny.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> GREEN = EntityDataManager.createKey(EntityBunny.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> BLUE = EntityDataManager.createKey(EntityBunny.class, DataSerializers.VARINT);
     public float lastRotationYaw;
     public int jumpDelay = 0;
-    boolean isJp = false;
+    private boolean isJp = false;
 
     public EntityBunny(World par1World) {
         super(par1World);
@@ -43,15 +44,15 @@ public class EntityBunny extends EntityAnimal {
     }
 
     public int getRed() {
-        return dataManager.get(RED).intValue();
+        return dataManager.get(RED);
     }
 
     public int getGreen() {
-        return dataManager.get(GREEN).intValue();
+        return dataManager.get(GREEN);
     }
 
     public int getBlue() {
-        return dataManager.get(BLUE).intValue();
+        return dataManager.get(BLUE);
     }
 
     public void setColor(int i, int j, int k) {
@@ -60,8 +61,8 @@ public class EntityBunny extends EntityAnimal {
         dataManager.set(BLUE, k);
     }
 
-    public EntityBunny spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
-        EntityBunny bunny = new EntityBunny(worldObj);
+    public EntityBunny spawnBabyAnimal() {
+        EntityBunny bunny = new EntityBunny(world);
         bunny.setColor(rand.nextInt(230) + 20, rand.nextInt(230) + 20, rand.nextInt(230) + 20);
         return bunny;
     }
@@ -83,17 +84,12 @@ public class EntityBunny extends EntityAnimal {
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {
-        return null;
-    }
-
-    @Override
     protected Item getDropItem() {
         return CCItems.gummy;
     }
 
     @Override
-    protected SoundEvent getHurtSound() {
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
         return null;
     }
 
@@ -123,7 +119,7 @@ public class EntityBunny extends EntityAnimal {
 
     @Override
     public boolean isBreedingItem(ItemStack par1ItemStack) {
-        return par1ItemStack == null ? false : par1ItemStack.getItem() == CCItems.licorice;
+        return par1ItemStack != null && par1ItemStack.getItem() == CCItems.licorice;
     }
 
     @Override
@@ -137,12 +133,12 @@ public class EntityBunny extends EntityAnimal {
 
     @Override
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
-        return spawnBabyAnimal(par1EntityAgeable);
+        return spawnBabyAnimal();
     }
 
     @Override
     public void onLivingUpdate() {
-        if (!worldObj.isRemote && !inWater) {
+        if (!world.isRemote && !inWater) {
             if (jumpDelay > 0 && onGround) {
                 jumpDelay--;
                 getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);

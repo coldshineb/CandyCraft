@@ -1,8 +1,10 @@
 package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.items.CCItems;
+import com.crypticmushroom.candycraft.misc.ModelRegisterCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +14,13 @@ import net.minecraft.world.IBlockAccess;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockDragibus extends BlockCrops {
+public class BlockDragibus extends BlockCrops implements ModelRegisterCallback {
+
+    public BlockDragibus() {
+        super();
+        setSoundType(SoundType.PLANT);
+    }
+
     @Override
     public Item getItemDropped(IBlockState state, Random random, int fortune) {
         return getCrop();

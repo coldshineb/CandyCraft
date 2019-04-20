@@ -1,5 +1,6 @@
 package com.crypticmushroom.candycraft.world.biomes;
 
+import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.entity.EntityCandyWolf;
 import com.crypticmushroom.candycraft.entity.EntitySuguard;
 import com.crypticmushroom.candycraft.entity.EntityWaffleSheep;
@@ -25,8 +26,8 @@ public class BiomeGenColdForest extends BiomeGenCandy {
     }
 
     @Override
-    public WorldGenAbstractTree genBigTreeChance(Random par1Random) {
-        return new WorldGenCandyTrees(false, 4, 2, 2, false);
+    public WorldGenAbstractTree getRandomTreeFeature(Random par1Random) {
+        return new WorldGenCandyTrees(false, 4, CCBlocks.marshmallowLogLight, CCBlocks.candyLeaveLight, false);
     }
 
     @Override

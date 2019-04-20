@@ -1,8 +1,0 @@
-{
-  "parent": "block/farmland",
-  "textures": {
-    "particle": "candycraftmod:blocks/flour",
-    "dirt": "candycraftmod:blocks/flour",
-    "top": "candycraftmod:blocks/soil_top1"
-  }
-}

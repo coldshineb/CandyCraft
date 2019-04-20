@@ -1,6 +1,6 @@
 package com.crypticmushroom.candycraft.blocks.tileentity;
 
-import com.crypticmushroom.candycraft.CandyCraftPreferences;
+import com.crypticmushroom.candycraft.CandyCraftConfig;
 import com.crypticmushroom.candycraft.blocks.CCBlocks;
 import com.crypticmushroom.candycraft.entity.EntityDragon;
 import com.crypticmushroom.candycraft.entity.EntityKingBeetle;
@@ -16,9 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import java.util.Random;
 
 public class TileEntityEgg extends TileEntity implements ITickable {
-    public int timeLeft = 300;
+    public int timeLeft;
     public int hatchDelay = 50;
-    Random rand = new Random();
+    private Random rand = new Random();
 
     public TileEntityEgg() {
         timeLeft = rand.nextInt(24000) + 48000;
@@ -41,11 +41,11 @@ public class TileEntityEgg extends TileEntity implements ITickable {
 
             if (!world.isRemote) {
                 if (timeLeft == hatchDelay) {
-                    if (world.getBlockState(pos).getBlock() == CCBlocks.dragonEggBlock && CandyCraftPreferences.allowDragons) {
+                    if (world.getBlockState(pos).getBlock() == CCBlocks.dragonEggBlock && CandyCraftConfig.allowDragons) {
                         EntityDragon dragon = new EntityDragon(world);
                         dragon.setPosition(pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ());
                         world.spawnEntity(dragon);
-                    } else if (CandyCraftPreferences.allowBeetleKings) {
+                    } else if (CandyCraftConfig.allowBeetleKings) {
                         EntityKingBeetle beetle = new EntityKingBeetle(world);
                         beetle.setPosition(pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ());
                         world.spawnEntity(beetle);

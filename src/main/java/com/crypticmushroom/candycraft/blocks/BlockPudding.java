@@ -1,11 +1,10 @@
 package com.crypticmushroom.candycraft.blocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
@@ -13,12 +12,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockPudding extends Block implements IGrowable {
+public class BlockPudding extends BlockCandyBase implements IGrowable {
     public BlockPudding() {
-        super(Material.GROUND);
+        super(Material.GROUND, SoundType.CLOTH);
         setTickRandomly(true);
     }
 
@@ -89,9 +87,9 @@ public class BlockPudding extends Block implements IGrowable {
                     if (random.nextInt(8) == 0) {
                         worldIn.setBlockState(blockpos2, CCBlocks.fraiseTagadaFlower.getDefaultState(), 3);
                     } else {
-                        IBlockState iblockstate2 = CCBlocks.tallCandyGrass.getStateFromMeta(random.nextInt(4));
+                        IBlockState iblockstate2 = getRandomGrassState();
 
-                        if (CCBlocks.tallCandyGrass.canBlockStay(worldIn, blockpos2, iblockstate2)) {
+                        if (((BlockBush)CCBlocks.tallCandyGrassPink).canBlockStay(worldIn, blockpos2, iblockstate2)) {
                             worldIn.setBlockState(blockpos2, iblockstate2, 3);
                         }
                     }
@@ -103,14 +101,25 @@ public class BlockPudding extends Block implements IGrowable {
         }
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+    private IBlockState getRandomGrassState() {
+        Random rand = new Random();
+
+        switch (rand.nextInt(4)) {
+            case 0:
+                return CCBlocks.tallCandyGrassPink.getDefaultState();
+            case 1:
+                return CCBlocks.tallCandyGrassPale.getDefaultState();
+            case 2:
+                return CCBlocks.tallCandyGrassYellow.getDefaultState();
+            case 3:
+            default:
+                return CCBlocks.tallCandyGrassRed.getDefaultState();
+        }
     }
 
     @Override
-    public SoundType getSoundType(IBlockState state, World world, BlockPos pos, @Nullable Entity entity) {
-        return SoundType.CLOTH;
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 }

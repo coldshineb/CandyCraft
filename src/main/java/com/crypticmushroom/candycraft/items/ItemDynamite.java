@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class ItemDynamite extends Item {
+public class ItemDynamite extends ItemCandyBase {
     public Random rand = new Random();
 
     public void renderItemUse(ItemStack par1ItemStack, EntityLivingBase player) {
@@ -21,7 +21,7 @@ public class ItemDynamite extends Item {
             for (int i = 0; i < 2; ++i) {
                 Vec3d vec31 = new Vec3d((Item.itemRand.nextFloat() - 0.5D) * 0.3D, (-Item.itemRand.nextFloat()) * 0.6D - 0.3D, 0.6D);
                 vec31 = vec31.rotateYaw(-(player.rotationYaw + 25) * (float) Math.PI / 180.0F);
-                vec31 = vec31.addVector(player.posX, player.posY + player.getEyeHeight() + 0.5, player.posZ);
+                vec31 = vec31.add(player.posX, player.posY + player.getEyeHeight() + 0.5, player.posZ);
                 player.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, vec31.x, vec31.y, vec31.z, 0.0F, 0.1F, 0.0F);
             }
         }
@@ -51,7 +51,7 @@ public class ItemDynamite extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         playerIn.setActiveHand(handIn);
         renderItemUse(playerIn.getHeldItem(handIn), playerIn);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
     @Override
@@ -65,9 +65,9 @@ public class ItemDynamite extends Item {
                     itemstack.shrink(1);
                 }
 
-                world.playSound((EntityPlayer) null, player.posX + 0.5F, player.posY + 0.5F, player.posZ + 0.5F, SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                world.playSound(null, player.posX + 0.5F, player.posY + 0.5F, player.posZ + 0.5F, SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-                if (!world.isRemote && var6 != 80) {
+                if (!world.isRemote) {
                     if (this == CCItems.dynamite) {
                         EntityDynamite dynamite = new EntityDynamite(world, player);
                         dynamite.fuse = 80 - var6;
@@ -106,4 +106,22 @@ public class ItemDynamite extends Item {
      *
      * return null; }
      */// TODO CHECK
+
+    /*
+    THIS IS WHERE THE ITEM RENDERS WILL BE KEPT. THE GOAL IS TO FIND OUT HOW TO USE THESE
+
+        ri.getItemModelMesher().register(CCItems.dynamite, 0, new ModelResourceLocation("candycraftmod:dynamite", "inventory"));
+        ri.getItemModelMesher().register(CCItems.dynamite, 1, new ModelResourceLocation("candycraftmod:dynamite_1", "inventory"));
+        ri.getItemModelMesher().register(CCItems.dynamite, 2, new ModelResourceLocation("candycraftmod:dynamite_2", "inventory"));
+        ModelBakery.registerItemVariants(CCItems.dynamite, new ResourceLocation("candycraftmod:dynamite"), new ResourceLocation("candycraftmod:dynamite_1"), new ResourceLocation("candycraftmod:dynamite_2"));
+
+        ri.getItemModelMesher().register(CCItems.glueDynamite, 0, new ModelResourceLocation("candycraftmod:glue_dynamite", "inventory"));
+        ri.getItemModelMesher().register(CCItems.glueDynamite, 1, new ModelResourceLocation("candycraftmod:glue_dynamite_1", "inventory"));
+        ri.getItemModelMesher().register(CCItems.glueDynamite, 2, new ModelResourceLocation("candycraftmod:dynamite_2", "inventory"));
+        ModelBakery.registerItemVariants(CCItems.glueDynamite, new ResourceLocation("candycraftmod:glue_dynamite"), new ResourceLocation("candycraftmod:glue_dynamite_1"), new ResourceLocation("candycraftmod:dynamite_2"));
+
+        public static ModelResourceLocation dynAn1 = new ModelResourceLocation("candycraftmod:dynamite_1", "inventory");
+        public static ModelResourceLocation dynAn1_1 = new ModelResourceLocation("candycraftmod:glue_dynamite_1", "inventory");
+        public static ModelResourceLocation dynAn2 = new ModelResourceLocation("candycraftmod:dynamite_2", "inventory");
+     */
 }

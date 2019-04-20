@@ -6,7 +6,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomeCandy extends GenLayer {
-    private static final String __OBFID = "CL_00000555";
     private Biome[] field_151623_c;
     private Biome[] field_151621_d;
     private Biome[] field_151622_e;

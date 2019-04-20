@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "candycraft:sugar_crystal"
+    }
+  },
+  "result": {
+    "item": "candycraft:sugar_spikes",
+    "count": 8
+  }
+}
