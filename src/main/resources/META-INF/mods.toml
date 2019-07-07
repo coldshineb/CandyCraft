@@ -11,6 +11,7 @@ logoFile="candycraft.png"
 #credits=""
 authors="Cryptic Mushroom"
 description='''
+
 '''
 [[dependencies.candycraft]]
     modId="forge"
