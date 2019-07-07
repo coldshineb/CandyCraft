@@ -16,5 +16,11 @@ public class CCBlocks {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	
 	public static Block sweetstone = new BlockBase("sweetstone", Block.Properties.create(Material.ROCK, MaterialColor.PINK).hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE), 0, ToolType.PICKAXE);
-
+	public static Block plain_ice_cream = new BlockBase("plain_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
+	public static Block chocolate_ice_cream = new BlockBase("chocolate_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
+	public static Block vanilla_ice_cream = new BlockBase("vanilla_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
+	public static Block strawberry_ice_cream = new BlockBase("strawberry_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
+	public static Block mint_ice_cream = new BlockBase("mint_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
+	public static Block blueberry_ice_cream = new BlockBase("blueberry_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
+	
 }

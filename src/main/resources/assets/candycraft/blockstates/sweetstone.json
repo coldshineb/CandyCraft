@@ -1,10 +1,10 @@
 {
     "variants": {
         "": [
-            { "model": "candycraft:block/sweestone" },
-            { "model": "candycraft:block/sweestonemirrored" },
-            { "model": "candycraft:block/sweestone", "y": 180 },
-            { "model": "candycraft:block/sweestone_mirrored", "y": 180 }
+            { "model": "candycraft:block/sweetstone" },
+            { "model": "candycraft:block/sweetstone_mirrored" },
+            { "model": "candycraft:block/sweetstone", "y": 180 },
+            { "model": "candycraft:block/sweetstone_mirrored", "y": 180 }
         ]
     }
 }
