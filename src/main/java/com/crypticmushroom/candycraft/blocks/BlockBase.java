@@ -1,35 +1,41 @@
 package com.crypticmushroom.candycraft.blocks;
 
 import com.crypticmushroom.candycraft.CandyCraft;
-import com.crypticmushroom.candycraft.misc.IModelProvider;
+import com.crypticmushroom.candycraft.init.CCBlocks;
+import com.crypticmushroom.candycraft.init.CCItems;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraftforge.common.ToolType;
 
-import static com.crypticmushroom.candycraft.CandyCraft.MODID;
+public class BlockBase extends Block {
+	
+	public int level;
+	public ToolType tool;
 
-public class BlockBase extends Block implements IModelProvider {
+	public BlockBase(String name, Properties properties, int harvestLevel, ToolType harvestTool) {
+		super(properties);
+		
+		setRegistryName(CandyCraft.MOD_ID, name);
+		
+		level = harvestLevel;
+		tool = harvestTool;
+		
+		CCBlocks.BLOCKS.add(this);
+		CCItems.ITEMS.add(new BlockItem(this, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName(CandyCraft.MOD_ID, name));
+	}
+	
+	@Override
+	public int getHarvestLevel(BlockState state) {
+		return level;
+	}
+	
+	@Override
+	public ToolType getHarvestTool(BlockState state) {
+		return tool;
+	}
 
-    public BlockBase(Material materialIn, String name, SoundType soundType, float resistance, float hardness) {
-        this(materialIn, name, soundType);
-        setResistance(resistance);
-        setHardness(hardness);
-    }
-
-    public BlockBase(Material materialIn, String name, float resistance, float hardness) {
-        this(materialIn, name);
-        setResistance(resistance);
-        setHardness(hardness);
-    }
-
-    public BlockBase(Material materialIn, String name, SoundType soundType) {
-        this(materialIn, name);
-        setSoundType(soundType);
-    }
-    public BlockBase(Material materialIn, String name) {
-        super(materialIn);
-        setRegistryName(name);
-        setTranslationKey(MODID + "." + name);
-        setCreativeTab(CandyCraft.ccTab);
-    }
 }
