@@ -22,5 +22,4 @@ public class CCBlocks {
 	public static Block strawberry_ice_cream = new BlockBase("strawberry_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
 	public static Block mint_ice_cream = new BlockBase("mint_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
 	public static Block blueberry_ice_cream = new BlockBase("blueberry_ice_cream", Block.Properties.create(Material.SNOW, MaterialColor.SNOW).hardnessAndResistance(0.4F, 2.0F).sound(SoundType.SNOW), 0, ToolType.SHOVEL);
-	
 }
