@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "candycraft:block/pudding_flour_block"
+      },
+      {
+        "model": "candycraft:block/pudding_flour_block",
+        "y": 90
+      },
+      {
+        "model": "candycraft:block/pudding_flour_block",
+        "y": 180
+      },
+      {
+        "model": "candycraft:block/pudding_flour_block",
+        "y": 270
+      }
+    ]
+  }
+}
