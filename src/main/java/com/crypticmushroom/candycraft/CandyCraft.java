@@ -1,16 +1,15 @@
 package com.crypticmushroom.candycraft;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.crypticmushroom.candycraft.init.CCBlocks;
 import com.crypticmushroom.candycraft.init.CCItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(CandyCraft.MOD_ID)
 public class CandyCraft
@@ -18,7 +17,12 @@ public class CandyCraft
     public static final String MOD_ID = "candycraft";
     
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-	
+
+    public CandyCraft() {
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
 	@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents
 	{
