@@ -1,6 +1,9 @@
 package com.crypticmushroom.candycraft.world;
 
+import javax.annotation.Nullable;
+
 import com.crypticmushroom.candycraft.init.CCBiomes;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
@@ -20,8 +23,6 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
-
 public class CandylandsDimension extends Dimension {
     public CandylandsDimension(final World worldIn, final DimensionType typeIn) {
         super(worldIn, typeIn);
@@ -30,9 +31,9 @@ public class CandylandsDimension extends Dimension {
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
 
-        BiomeProvider biomeProvider = new SingleBiomeProvider(new SingleBiomeProviderSettings().setBiome(CCBiomes.SUGAR_FIELDS));
+        BiomeProvider biomeProvider = new SingleBiomeProvider(new SingleBiomeProviderSettings().setBiome(CCBiomes.CARAMEL_WOODS));
 
-        return new CandyWorldChunkGenerator(this.world, biomeProvider, CandyWorldChunkGenerator.Config.createDefault());
+        return new CandylandsChunkGenerator(this.world, biomeProvider, CandylandsChunkGenerator.CandylandsGenerationSettings.createDefault());
 
     }
 

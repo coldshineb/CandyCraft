@@ -1,13 +1,11 @@
 package com.crypticmushroom.candycraft.world;
 
-import java.util.Random;
-
 import com.crypticmushroom.candycraft.init.CCBlocks;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -15,12 +13,15 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
+import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.server.ServerWorld;
 
-public class CandyWorldChunkGenerator extends NoiseChunkGenerator<CandyWorldChunkGenerator.Config> {
+public class CandylandsChunkGenerator extends NoiseChunkGenerator<CandylandsChunkGenerator.CandylandsGenerationSettings> {
     private static final float[] field_222576_h = Util.make(new float[25], (p_222575_0_) -> {
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
@@ -32,12 +33,15 @@ public class CandyWorldChunkGenerator extends NoiseChunkGenerator<CandyWorldChun
     });
     public static final int SURFACE_LEVEL = 64;
     private final OctavesNoiseGenerator depthNoise;
+    private final INoiseGenerator surfaceDepthNoise;
     private final World world;
 
-    public CandyWorldChunkGenerator(World world, BiomeProvider biomeProvider, Config config) {
+    public CandylandsChunkGenerator(World world, BiomeProvider biomeProvider, CandylandsGenerationSettings config) {
         super(world, biomeProvider, 4, 8, 256, config, true);
         this.world = world;
         this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 16);
+        this.surfaceDepthNoise = (INoiseGenerator)(new PerlinNoiseGenerator(this.randomSeed, 4));
+        this.getSettings().setDefaultFluid(Blocks.RED_WOOL.getDefaultState());
     }
 
     @Override
@@ -47,35 +51,29 @@ public class CandyWorldChunkGenerator extends NoiseChunkGenerator<CandyWorldChun
 
     @Override
     public void generateSurface(IChunk chunkIn) {
-        super.generateSurface(chunkIn);
-    }
+    	ChunkPos chunkpos = chunkIn.getPos();
+        int i = chunkpos.x;
+        int j = chunkpos.z;
+        SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
+        sharedseedrandom.setBaseChunkSeed(i, j);
+        ChunkPos chunkpos1 = chunkIn.getPos();
+        int k = chunkpos1.getXStart();
+        int l = chunkpos1.getZStart();
+        double d0 = 0.0625D;
+        Biome[] abiome = chunkIn.getBiomes();
 
-    protected void makeBedrock(IChunk chunkIn, Random rand) {
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        int i = chunkIn.getPos().getXStart();
-        int j = chunkIn.getPos().getZStart();
-        CandyWorldChunkGenerator.Config t = this.getSettings();
-        int k = t.getBedrockFloorHeight();
-        int l = t.getBedrockRoofHeight();
-
-        //TODO Change to CandyWorld's Bedrock
-        for (BlockPos blockpos : BlockPos.getAllInBoxMutable(i, 0, j, i + 15, 0, j + 15)) {
-            if (l > 0) {
-                for (int i1 = l; i1 >= l - 4; --i1) {
-                    if (i1 >= l - rand.nextInt(5)) {
-                        chunkIn.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
-                    }
-                }
-            }
-
-            if (k < 256) {
-                for (int j1 = k + 4; j1 >= k; --j1) {
-                    if (j1 <= k + rand.nextInt(5)) {
-                        chunkIn.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
-                    }
-                }
-            }
+        for(int i1 = 0; i1 < 16; ++i1) {
+           for(int j1 = 0; j1 < 16; ++j1) {
+              int k1 = k + i1;
+              int l1 = l + j1;
+              int i2 = chunkIn.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
+              int scale = 4; //Noise for the candylands is scaled down. Revert by removing the scale from the noise generator. Apart from that there is no need for this override.
+              double noise = this.surfaceDepthNoise.func_215460_a((double)(scale * k1) * 0.0625D, (double)(scale * l1) * 0.0625D, 0.0625D, (double)(scale * i1) * 0.0625D);
+              abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, chunkIn, k1, l1, i2, noise, this.getSettings().getDefaultBlock(), this.getSettings().getDefaultFluid(), this.getSeaLevel(), this.world.getSeed());
+           }
         }
+
+        this.makeBedrock(chunkIn, sharedseedrandom);
     }
 
     @Override
@@ -183,13 +181,13 @@ public class CandyWorldChunkGenerator extends NoiseChunkGenerator<CandyWorldChun
     }
 
 
-    public static class Config extends GenerationSettings {
-        public static Config createDefault() {
-            Config config = new Config();
+    public static class CandylandsGenerationSettings extends GenerationSettings {
+        public static CandylandsGenerationSettings createDefault() {
+            CandylandsGenerationSettings settings = new CandylandsGenerationSettings();
+            settings.setDefaultBlock(CCBlocks.SWEETSTONE.getDefaultState());
+            settings.setDefaultFluid(Blocks.RED_WOOL.getDefaultState());
 
-            config.setDefaultBlock(CCBlocks.sweetstone.getDefaultState());
-
-            return config;
+            return settings;
         }
 
         public int getBedrockFloorHeight() {

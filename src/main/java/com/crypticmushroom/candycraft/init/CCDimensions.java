@@ -21,6 +21,7 @@ public class CCDimensions {
         public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
             return CandylandsDimension::new;
         }
+        
     }.setRegistryName(new ResourceLocation(CandyCraft.MOD_ID, "candylands"));
 
 
