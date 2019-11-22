@@ -1,7 +1,7 @@
 package com.crypticmushroom.candycraft.init;
 
 import com.crypticmushroom.candycraft.CandyCraft;
-import com.crypticmushroom.candycraft.world.CandyWorldDimension;
+import com.crypticmushroom.candycraft.world.CandylandsDimension;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
@@ -19,14 +19,14 @@ public class CCDimensions {
     public static ModDimension CANDYLAND = new ModDimension() {
         @Override
         public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-            return CandyWorldDimension::new;
+            return CandylandsDimension::new;
         }
-    }.setRegistryName(new ResourceLocation(CandyCraft.MOD_ID, "candy_land"));
+    }.setRegistryName(new ResourceLocation(CandyCraft.MOD_ID, "candylands"));
 
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<ModDimension> registry) {
         registry.getRegistry().register(CANDYLAND);
-        DimensionManager.registerDimension(new ResourceLocation(CandyCraft.MOD_ID, "candy_land"), CANDYLAND, null, true);
+        DimensionManager.registerDimension(new ResourceLocation(CandyCraft.MOD_ID, "candylands"), CANDYLAND, null, true);
     }
 }

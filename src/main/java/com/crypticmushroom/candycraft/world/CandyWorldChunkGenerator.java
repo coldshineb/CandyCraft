@@ -1,6 +1,9 @@
 package com.crypticmushroom.candycraft.world;
 
+import java.util.Random;
+
 import com.crypticmushroom.candycraft.init.CCBlocks;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.Util;
@@ -16,8 +19,6 @@ import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.server.ServerWorld;
-
-import java.util.Random;
 
 public class CandyWorldChunkGenerator extends NoiseChunkGenerator<CandyWorldChunkGenerator.Config> {
     private static final float[] field_222576_h = Util.make(new float[25], (p_222575_0_) -> {

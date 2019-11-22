@@ -22,15 +22,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class CandyWorldDimension extends Dimension {
-    public CandyWorldDimension(final World worldIn, final DimensionType typeIn) {
+public class CandylandsDimension extends Dimension {
+    public CandylandsDimension(final World worldIn, final DimensionType typeIn) {
         super(worldIn, typeIn);
     }
 
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
 
-        BiomeProvider biomeProvider = new SingleBiomeProvider(new SingleBiomeProviderSettings().setBiome(CCBiomes.CANDY_PLAIN));
+        BiomeProvider biomeProvider = new SingleBiomeProvider(new SingleBiomeProviderSettings().setBiome(CCBiomes.SUGAR_FIELDS));
 
         return new CandyWorldChunkGenerator(this.world, biomeProvider, CandyWorldChunkGenerator.Config.createDefault());
 
