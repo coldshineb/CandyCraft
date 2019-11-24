@@ -1,4 +1,4 @@
-package com.crypticmushroom.candycraft.world.surfacebuilder;
+package com.crypticmushroom.candycraft.world.surfacebuilders;
 
 import java.util.Random;
 import java.util.function.Function;

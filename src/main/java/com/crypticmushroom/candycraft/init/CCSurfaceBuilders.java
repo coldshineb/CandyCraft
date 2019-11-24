@@ -1,6 +1,6 @@
 package com.crypticmushroom.candycraft.init;
 
-import com.crypticmushroom.candycraft.world.surfacebuilder.CaramelSurfaceBuilder;
+import com.crypticmushroom.candycraft.world.surfacebuilders.CaramelSurfaceBuilder;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

@@ -1,16 +1,9 @@
 package com.crypticmushroom.candycraft.world.biome;
 
-import com.crypticmushroom.candycraft.init.CCBlocks;
+import com.crypticmushroom.candycraft.init.CCBiomeFeatures;
 import com.crypticmushroom.candycraft.init.CCSurfaceBuilders;
-import com.google.common.collect.Lists;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.SphereReplaceConfig;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
 
 public class CaramelWoodsBiome extends Biome {
 	
@@ -26,7 +19,8 @@ public class CaramelWoodsBiome extends Biome {
         		.waterFogColor(0xa7c2ff)
         		.parent(null));
         
-        this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.DISK, new SphereReplaceConfig(CCBlocks.FLOUR_BLOCK.getDefaultState(), 4, 1, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.CLAY.getDefaultState())), Placement.COUNT_TOP_SOLID, new FrequencyConfig(1)));
+        CCBiomeFeatures.addStoneVariants(this);
+        CCBiomeFeatures.addSedimentDisks(this);
     }
 
 }

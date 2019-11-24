@@ -52,7 +52,7 @@ public class CandylandsChunkGenerator extends NoiseChunkGenerator<CandylandsChun
     @Override
     public void generateSurface(IChunk chunkIn) {
     	ChunkPos chunkpos = chunkIn.getPos();
-        int i = chunkpos.x;
+    	int i = chunkpos.x;
         int j = chunkpos.z;
         SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
         sharedseedrandom.setBaseChunkSeed(i, j);
@@ -63,14 +63,14 @@ public class CandylandsChunkGenerator extends NoiseChunkGenerator<CandylandsChun
         Biome[] abiome = chunkIn.getBiomes();
 
         for(int i1 = 0; i1 < 16; ++i1) {
-           for(int j1 = 0; j1 < 16; ++j1) {
-              int k1 = k + i1;
-              int l1 = l + j1;
-              int i2 = chunkIn.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
-              int scale = 4; //Noise for the candylands is scaled down. Revert by removing the scale from the noise generator. Apart from that there is no need for this override.
-              double noise = this.surfaceDepthNoise.func_215460_a((double)(scale * k1) * 0.0625D, (double)(scale * l1) * 0.0625D, 0.0625D, (double)(scale * i1) * 0.0625D);
-              abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, chunkIn, k1, l1, i2, noise, this.getSettings().getDefaultBlock(), this.getSettings().getDefaultFluid(), this.getSeaLevel(), this.world.getSeed());
-           }
+        	for(int j1 = 0; j1 < 16; ++j1) {
+        		int k1 = k + i1;
+        		int l1 = l + j1;
+        		int i2 = chunkIn.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
+        		int scale = 4; //Noise for the candylands is scaled down. Revert by removing the scale from the noise generator. Apart from that there is no need for this override.
+        		double noise = this.surfaceDepthNoise.func_215460_a((double)(scale * k1) * 0.0625D, (double)(scale * l1) * 0.0625D, 0.0625D, (double)(scale * i1) * 0.0625D);
+        		abiome[j1 * 16 + i1].buildSurface(sharedseedrandom, chunkIn, k1, l1, i2, noise, this.getSettings().getDefaultBlock(), this.getSettings().getDefaultFluid(), this.getSeaLevel(), this.world.getSeed());
+        	}	
         }
 
         this.makeBedrock(chunkIn, sharedseedrandom);
