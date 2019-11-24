@@ -16,7 +16,8 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 public class SugarFieldsBiome extends Biome {
     public SugarFieldsBiome() {
-        super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, CCSurfaceBuilders.PUDDING_CONFIG)
+        super((new Biome.Builder())
+        		.surfaceBuilder(SurfaceBuilder.DEFAULT, CCSurfaceBuilders.PUDDING_CONFIG)
         		.precipitation(RainType.RAIN)
         		.category(Category.PLAINS)
         		.depth(0.125F)

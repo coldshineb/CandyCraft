@@ -140,7 +140,7 @@ public class CandylandsDimension extends Dimension {
 
     @Override
     public boolean canRespawnHere() {
-        return true;
+        return false;
     }
 
     @Override

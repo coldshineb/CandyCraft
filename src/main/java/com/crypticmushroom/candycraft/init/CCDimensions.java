@@ -16,6 +16,7 @@ import java.util.function.BiFunction;
 
 @Mod.EventBusSubscriber(modid = CandyCraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CCDimensions {
+	
     public static ModDimension CANDYLAND = new ModDimension() {
         @Override
         public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
@@ -23,7 +24,6 @@ public class CCDimensions {
         }
         
     }.setRegistryName(new ResourceLocation(CandyCraft.MOD_ID, "candylands"));
-
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<ModDimension> registry) {
