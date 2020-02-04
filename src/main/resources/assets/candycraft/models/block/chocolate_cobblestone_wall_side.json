@@ -1,6 +1,0 @@
-{
-  "parent": "block/wall_side",
-  "textures": {
-    "wall": "candycraft:blocks/chocolate_cobblestone"
-  }
-}

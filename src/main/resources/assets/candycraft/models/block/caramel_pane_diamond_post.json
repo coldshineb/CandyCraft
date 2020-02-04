@@ -1,7 +1,0 @@
-{
-  "parent": "block/pane_post",
-  "textures": {
-    "edge": "candycraft:blocks/caramel_glass_top",
-    "pane": "candycraft:blocks/caramel_glass_2"
-  }
-}
