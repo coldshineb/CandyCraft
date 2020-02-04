@@ -10,6 +10,6 @@ public final class Globals {
     }
 
     public final static class Dimensions {
-        public static final String CANDY = "candy";
+        public static final String CANDYLANDS = "candylands";
     }
 }
