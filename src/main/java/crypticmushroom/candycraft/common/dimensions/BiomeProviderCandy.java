@@ -41,7 +41,7 @@ public class BiomeProviderCandy extends BiomeProvider {
     }
 
     @Override
-    public Biome func_225526_b_(int p_225526_1_, int p_225526_2_, int p_225526_3_) {
+    public Biome getNoiseBiome(int i, int i1, int i2) {
         return biome;
     }
 }
