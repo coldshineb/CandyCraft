@@ -1,4 +1,4 @@
-package crypticmushroom.candycraft.common;
+package com.crypticmushroom.candycraft;
 
 public final class Globals {
     public final static class Mod {
@@ -6,7 +6,7 @@ public final class Globals {
     }
 
     public final static class Blocks {
-        public static final String SUGAR = "sugar";
+        public static final String SUGAR_BLOCK = "sugar_block";
     }
 
     public final static class Dimensions {

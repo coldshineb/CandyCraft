@@ -1,4 +1,4 @@
-package crypticmushroom.candycraft.common;
+package com.crypticmushroom.candycraft;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;

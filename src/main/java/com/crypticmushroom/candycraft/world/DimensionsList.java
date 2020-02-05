@@ -1,6 +1,7 @@
-package crypticmushroom.candycraft.common.dimensions;
+package com.crypticmushroom.candycraft.world;
 
-import crypticmushroom.candycraft.common.Globals;
+import com.crypticmushroom.candycraft.Globals;
+
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
@@ -20,7 +21,7 @@ public class DimensionsList {
     @SubscribeEvent
     public static void onRegisterModDimensionEvent(final RegistryEvent.Register<ModDimension> event) {
         IForgeRegistry<ModDimension> registry = event.getRegistry();
-        registry.register(new ModDimensionCandy().setRegistryName(Globals.Mod.ID, Globals.Dimensions.CANDYLANDS));
+        registry.register(new CandylandsModDimension().setRegistryName(Globals.Mod.ID, Globals.Dimensions.CANDYLANDS));
     }
 }
 

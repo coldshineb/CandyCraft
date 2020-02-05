@@ -1,8 +1,9 @@
-package crypticmushroom.candycraft.common;
+package com.crypticmushroom.candycraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import crypticmushroom.candycraft.common.dimensions.DimensionsList;
+import com.crypticmushroom.candycraft.world.DimensionsList;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod.EventBusSubscriber(modid=Globals.Mod.ID, bus= Mod.EventBusSubscriber.Bus.FORGE)
 public class CandyCraft {
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(Globals.Mod.ID);
 
     public CandyCraft() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);

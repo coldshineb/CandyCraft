@@ -1,4 +1,4 @@
-package crypticmushroom.candycraft.common.dimensions;
+package com.crypticmushroom.candycraft.world;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -10,15 +10,15 @@ import net.minecraft.world.gen.ChunkGenerator;
 
 import javax.annotation.Nullable;
 
-public class DimensionCandy extends Dimension {
+public class CandylandsDimension extends Dimension {
 
-    public DimensionCandy(World world, DimensionType dimensionType) {
+    public CandylandsDimension(World world, DimensionType dimensionType) {
         super(world, dimensionType, 0);
     }
 
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new ChunkGeneratorCandy(world, new BiomeProviderCandy());
+        return new CandylandsChunkGenerator(world, new CandylandsBiomeProvider());
     }
 
     @Nullable

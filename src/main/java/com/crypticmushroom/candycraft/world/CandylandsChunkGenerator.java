@@ -1,6 +1,7 @@
-package crypticmushroom.candycraft.common.dimensions;
+package com.crypticmushroom.candycraft.world;
 
-import crypticmushroom.candycraft.common.blocks.BlocksList;
+import com.crypticmushroom.candycraft.registry.CCBlocks;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -13,16 +14,16 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.WorldGenRegion;
 
-public class ChunkGeneratorCandy extends ChunkGenerator<ChunkGeneratorCandy.Config> {
+public class CandylandsChunkGenerator extends ChunkGenerator<CandylandsChunkGenerator.Config> {
 
-    public ChunkGeneratorCandy(IWorld worldIn, BiomeProvider biomeProviderIn) {
+    public CandylandsChunkGenerator(IWorld worldIn, BiomeProvider biomeProviderIn) {
         super(worldIn, biomeProviderIn, Config.createDefault());
     }
 
     @Override
     public void func_225551_a_(WorldGenRegion worldGenRegion, IChunk chunk) {
         BlockState bedrock = Blocks.BEDROCK.getDefaultState();
-        BlockState sugar = BlocksList.SUGAR.getDefaultState();
+        BlockState sugar = CCBlocks.SUGAR_BLOCK.getDefaultState();
         ChunkPos chunkpos = chunk.getPos();
 
         BlockPos.Mutable pos = new BlockPos.Mutable();
@@ -67,7 +68,7 @@ public class ChunkGeneratorCandy extends ChunkGenerator<ChunkGeneratorCandy.Conf
     public static class Config extends GenerationSettings {
         public static Config createDefault() {
             Config config = new Config();
-            config.setDefaultBlock(BlocksList.SUGAR.getDefaultState());
+            config.setDefaultBlock(CCBlocks.SUGAR_BLOCK.getDefaultState());
             return config;
         }
     }

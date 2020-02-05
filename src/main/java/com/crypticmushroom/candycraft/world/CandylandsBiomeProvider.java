@@ -1,4 +1,4 @@
-package crypticmushroom.candycraft.common.dimensions;
+package com.crypticmushroom.candycraft.world;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,12 +11,12 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.feature.structure.Structure;
 
-public class BiomeProviderCandy extends BiomeProvider {
+public class CandylandsBiomeProvider extends BiomeProvider {
 
     private final Biome biome;
     private static final List<Biome> SPAWN = Collections.singletonList(Biomes.PLAINS);
 
-    public BiomeProviderCandy() {
+    public CandylandsBiomeProvider() {
         super(new HashSet<>(SPAWN));
         biome = Biomes.PLAINS;
     }
@@ -36,7 +36,6 @@ public class BiomeProviderCandy extends BiomeProvider {
         if (topBlocksCache.isEmpty()) {
             topBlocksCache.add(biome.getSurfaceBuilderConfig().getTop());
         }
-
         return topBlocksCache;
     }
 
