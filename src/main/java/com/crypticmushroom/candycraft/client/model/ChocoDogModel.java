@@ -108,6 +108,7 @@ public class ChocoDogModel<T extends ChocoDogEntity> extends TintedAgeableModel<
             this.LeftFrontLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         }
 
+
         this.Head.rotateAngleZ = entityIn.getInterestedAngle(partialTick) + entityIn.getShakeAngle(partialTick, 0.0F);
         this.Body.rotateAngleZ = entityIn.getShakeAngle(partialTick, -0.16F);
     }
@@ -118,6 +119,18 @@ public class ChocoDogModel<T extends ChocoDogEntity> extends TintedAgeableModel<
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float HeadPitch) {
         this.Head.rotateAngleX = HeadPitch * ((float) Math.PI / 180F);
         this.Head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
-        this.Tail.rotateAngleX = ageInTicks;
+        this.Tail.rotateAngleX = entityIn.getTailRotation();
+
+        float f = ageInTicks - (float) entityIn.ticksExisted;
+        float eatingAmount = entityIn.getEatingAnimationScale(f);
+
+        eatingAmount = eatingAmount * eatingAmount;
+
+
+        if (eatingAmount > 0) {
+            this.Mouth.rotateAngleX = (0.2F + MathHelper.cos(ageInTicks * 0.6F)) * 0.2F * eatingAmount;
+        } else {
+            this.Mouth.rotateAngleX = 0.0F;
+        }
     }
 }

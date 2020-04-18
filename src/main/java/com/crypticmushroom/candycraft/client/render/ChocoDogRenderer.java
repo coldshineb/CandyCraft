@@ -23,10 +23,6 @@ public class ChocoDogRenderer extends MobRenderer<ChocoDogEntity, ChocoDogModel<
         this.addLayer(new ChocoDogCollarLayer(this));
     }
 
-    protected float handleRotationFloat(ChocoDogEntity livingBase, float partialTicks) {
-        return livingBase.getTailRotation();
-    }
-
     public void render(ChocoDogEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         if (entityIn.isWolfWet()) {
             float f = entityIn.getBrightness() * entityIn.getShadingWhileWet(partialTicks);

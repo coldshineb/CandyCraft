@@ -1,0 +1,42 @@
+{
+  "parent": "builtin/generated",
+  "textures": {
+    "layer0": "candycraft:items/caramel_crossbow"
+  },
+  "display": {
+    "thirdperson": {
+      "rotation": [
+        0,
+        0,
+        -45
+      ],
+      "translation": [
+        0,
+        2,
+        -1.5
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
+    },
+    "firstperson": {
+      "rotation": [
+        100,
+        -165,
+        12
+      ],
+      "translation": [
+        0,
+        -1.5,
+        -8
+      ],
+      "scale": [
+        1.7,
+        1.7,
+        1.7
+      ]
+    }
+  }
+}

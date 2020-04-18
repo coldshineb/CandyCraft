@@ -2,7 +2,6 @@ package com.crypticmushroom.candycraft.registry;
 
 import com.crypticmushroom.candycraft.Globals;
 import com.crypticmushroom.candycraft.blocks.BlockBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,6 +22,10 @@ public class CCBlocks {
 
     @ObjectHolder(Globals.Blocks.SUGAR_BLOCK)
     public static final Block SUGAR_BLOCK = null;
+    @ObjectHolder(Globals.Blocks.CHOCOLATE_STONE)
+    public static final Block CHOCOLATE_STONE = null;
+    @ObjectHolder(Globals.Blocks.CHOCOLATE_COBBLESTONE)
+    public static final Block CHOCOLATE_COBBLESTONE = null;
 
     @SubscribeEvent
     public static void onRegisterBlocks(final RegistryEvent.Register<Block> event) {
@@ -30,6 +33,9 @@ public class CCBlocks {
     	IForgeRegistry<Block> reg = event.getRegistry();		
     	
     	reg.register(new BlockBase("sugar_block", Block.Properties.create(Material.SAND, MaterialColor.SNOW).hardnessAndResistance(0.5F).sound(SoundType.SAND), 0, ToolType.SHOVEL));
+        reg.register(new BlockBase("chocolate_stone", Block.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE), 0, ToolType.PICKAXE));
+        reg.register(new BlockBase("chocolate_cobblestone", Block.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(2.0F, 6.0F).sound(SoundType.STONE), 0, ToolType.PICKAXE));
+
     }
     
     @SubscribeEvent
