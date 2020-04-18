@@ -1,6 +1,8 @@
 package com.crypticmushroom.candycraft.entitys;
 
+import com.crypticmushroom.candycraft.items.ColoredGummyItem;
 import com.crypticmushroom.candycraft.registry.CCEntitys;
+import com.crypticmushroom.candycraft.registry.CCItems;
 import com.crypticmushroom.candycraft.utils.CandyCraftUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
@@ -260,6 +262,10 @@ public class GummyBunnyEntity extends AnimalEntity {
         return SoundEvents.ENTITY_RABBIT_DEATH;
     }
 
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        return this.isInvulnerableTo(source) ? false : super.attackEntityFrom(source, amount);
+    }
+
     private boolean isRabbitBreedingItem(Item itemIn) {
         return itemIn == Items.CARROT || itemIn == Items.GOLDEN_CARROT || itemIn == Blocks.DANDELION.asItem();
     }
@@ -291,6 +297,17 @@ public class GummyBunnyEntity extends AnimalEntity {
 
         this.setColor(i);
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    protected void dropSpecialItems(DamageSource source, int looting, boolean recentlyHitIn) {
+        super.dropSpecialItems(source, looting, recentlyHitIn);
+        Entity entity = source.getTrueSource();
+        if (entity != this && !this.isChild() && world.getRandom().nextFloat() < 0.175F + looting * 0.01F) {
+            ItemStack stack = new ItemStack(CCItems.COLORED_GUMMY, 1 + world.getRandom().nextInt(1 + looting));
+            ColoredGummyItem gummyItem = (ColoredGummyItem) stack.getItem();
+            gummyItem.setColor(stack, getColor());
+            this.entityDropItem(stack);
+        }
     }
 
     private int getRandomGummyBunnyType(IWorld world) {

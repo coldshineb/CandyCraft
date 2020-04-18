@@ -44,7 +44,9 @@ public class CCBlocks {
 		IForgeRegistry<Item> reg = event.getRegistry();
 		
 		reg.register(new BlockItem(SUGAR_BLOCK, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName(Globals.Mod.ID, Globals.Blocks.SUGAR_BLOCK));
-		
-	}
+        reg.register(new BlockItem(CHOCOLATE_STONE, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName(Globals.Mod.ID, "chocolate_stone"));
+        reg.register(new BlockItem(CHOCOLATE_COBBLESTONE, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName(Globals.Mod.ID, "chocolate_cobblestone"));
+
+    }
 
 }

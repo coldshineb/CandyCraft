@@ -1,6 +1,7 @@
 package com.crypticmushroom.candycraft.registry;
 
 import com.crypticmushroom.candycraft.Globals;
+import com.crypticmushroom.candycraft.items.ColoredGummyItem;
 import com.crypticmushroom.candycraft.items.GummyItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -17,6 +18,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class CCItems {
     public static final Item GUMMYBUNNY_SPAWNEGG = Items.AIR;
     public static final Item GUMMY = Items.AIR;
+    public static final Item COLORED_GUMMY = Items.AIR;
     public static final Item HOT_GUMMY = Items.AIR;
 	
 	
@@ -27,6 +29,7 @@ public class CCItems {
 
         event.getRegistry().register(new SpawnEggItem(CCEntitys.GUMMY_BUNNY, 0xb2ffff, 0xe5dbf3, new Item.Properties().group(ItemGroup.MISC)).setRegistryName("gummy_bunny_spawnegg"));
         event.getRegistry().register(new GummyItem(new Item.Properties().group(ItemGroup.FOOD).food(CCFoods.GUMMY)).setRegistryName("gummy"));
+        event.getRegistry().register(new ColoredGummyItem(new Item.Properties().group(ItemGroup.FOOD).food(CCFoods.GUMMY)).setRegistryName("colored_gummy"));
         event.getRegistry().register(new GummyItem(new Item.Properties().group(ItemGroup.FOOD).food(CCFoods.HOT_GUMMY)).setRegistryName("hot_gummy"));
     }
 
