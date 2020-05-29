@@ -1,5 +1,7 @@
 package com.crypticmushroom.candycraft.world;
 
+import com.crypticmushroom.candycraft.registry.CCBlocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -7,6 +9,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.ChunkGeneratorType;
+import net.minecraft.world.gen.NetherGenSettings;
+import net.minecraft.world.gen.OverworldGenSettings;
 
 import javax.annotation.Nullable;
 
@@ -18,7 +23,10 @@ public class CandylandsDimension extends Dimension {
 
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new CandylandsChunkGenerator(world, new CandylandsBiomeProvider());
+        CandylandsChunkGeneratorConfig candylandsSettings = DimensionsList.CANDYLANDS_CHUNK_GENERATOR.createSettings();
+        candylandsSettings.setDefaultBlock(CCBlocks.SUGAR_BLOCK.getDefaultState());
+        candylandsSettings.setDefaultFluid(Blocks.WATER.getDefaultState());
+        return DimensionsList.CANDYLANDS_CHUNK_GENERATOR.create(this.world, DimensionsList.CANDYLANDS_BIOME_PROVIDER.create(DimensionsList.CANDYLANDS_BIOME_PROVIDER.func_226840_a_(this.world.getWorldInfo())), candylandsSettings);
     }
 
     @Nullable

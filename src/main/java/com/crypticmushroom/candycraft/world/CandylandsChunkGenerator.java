@@ -14,10 +14,10 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.WorldGenRegion;
 
-public class CandylandsChunkGenerator extends ChunkGenerator<CandylandsChunkGenerator.Config> {
+public class CandylandsChunkGenerator extends ChunkGenerator<CandylandsChunkGeneratorConfig> {
 
-    public CandylandsChunkGenerator(IWorld worldIn, BiomeProvider biomeProviderIn) {
-        super(worldIn, biomeProviderIn, Config.createDefault());
+    public CandylandsChunkGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, CandylandsChunkGeneratorConfig generatorConfig) {
+        super(worldIn, biomeProviderIn, generatorConfig);
     }
 
     @Override
@@ -63,13 +63,5 @@ public class CandylandsChunkGenerator extends ChunkGenerator<CandylandsChunkGene
     @Override
     public int func_222529_a(int p_222529_1_, int p_222529_2_, Heightmap.Type p_222529_3_) {
         return 0;
-    }
-
-    public static class Config extends GenerationSettings {
-        public static Config createDefault() {
-            Config config = new Config();
-            config.setDefaultBlock(CCBlocks.SUGAR_BLOCK.getDefaultState());
-            return config;
-        }
     }
 }

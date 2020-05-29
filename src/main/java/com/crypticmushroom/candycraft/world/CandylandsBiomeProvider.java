@@ -1,29 +1,24 @@
 package com.crypticmushroom.candycraft.world;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.layer.Layer;
+import net.minecraft.world.gen.layer.LayerUtil;
 
 public class CandylandsBiomeProvider extends BiomeProvider {
 
-    private final Biome biome;
-    private static final List<Biome> SPAWN = Collections.singletonList(Biomes.PLAINS);
+    private final Layer biome;
+    private static final Set<Biome> SPAWN = ImmutableSet.of(Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE);
 
-    public CandylandsBiomeProvider() {
-        super(new HashSet<>(SPAWN));
-        biome = Biomes.PLAINS;
-    }
-
-    @Override
-    public List<Biome> getBiomesToSpawnIn() {
-        return SPAWN;
+    public CandylandsBiomeProvider(CandyLandsProviderSettings settingsProvider) {
+        super(SPAWN);
+        this.biome = LayerUtilOverridden.func_227474_a_(settingsProvider.func_226850_a_(), settingsProvider.func_226851_b_(), settingsProvider.getGeneratorSettings());
     }
 
     @Override
@@ -32,15 +27,7 @@ public class CandylandsBiomeProvider extends BiomeProvider {
     }
 
     @Override
-    public Set<BlockState> getSurfaceBlocks() {
-        if (topBlocksCache.isEmpty()) {
-            topBlocksCache.add(biome.getSurfaceBuilderConfig().getTop());
-        }
-        return topBlocksCache;
-    }
-
-    @Override
-    public Biome getNoiseBiome(int i, int i1, int i2) {
-        return biome;
+    public Biome getNoiseBiome(int x, int y, int z) {
+        return this.biome.func_215738_a(x, z);
     }
 }
