@@ -6,12 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraftforge.common.ToolType;
 
-public class BlockBase extends Block {
+public class CCBlock extends Block {
 	
 	public int level;
 	public ToolType tool;
 	
-    public BlockBase(String name, Properties properties, int harvestLevel, ToolType harvestTool) {
+    public CCBlock(String name, Properties properties, int harvestLevel, ToolType harvestTool) {
         super(properties);
         
         setRegistryName(Globals.Mod.ID, name);

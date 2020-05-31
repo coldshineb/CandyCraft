@@ -1,7 +1,8 @@
 package com.crypticmushroom.candycraft.client.model;
 
-import com.crypticmushroom.candycraft.entitys.ChocoDogEntity;
 import com.google.common.collect.ImmutableList;
+
+import entities.ChocoDogEntity;
 import net.minecraft.client.renderer.entity.model.TintedAgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;

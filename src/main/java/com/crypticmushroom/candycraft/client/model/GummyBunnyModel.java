@@ -1,9 +1,10 @@
 package com.crypticmushroom.candycraft.client.model;
 
-import com.crypticmushroom.candycraft.entitys.GummyBunnyEntity;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+
+import entities.GummyBunnyEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;

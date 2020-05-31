@@ -2,9 +2,10 @@ package com.crypticmushroom.candycraft.client.render;
 
 import com.crypticmushroom.candycraft.Globals;
 import com.crypticmushroom.candycraft.client.model.GummyBunnyModel;
-import com.crypticmushroom.candycraft.entitys.GummyBunnyEntity;
 import com.crypticmushroom.candycraft.utils.CandyCraftUtil;
 import com.mojang.blaze3d.matrix.MatrixStack;
+
+import entities.GummyBunnyEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

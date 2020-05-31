@@ -2,8 +2,9 @@ package com.crypticmushroom.candycraft.client.render.layer;
 
 import com.crypticmushroom.candycraft.Globals;
 import com.crypticmushroom.candycraft.client.model.ChocoDogModel;
-import com.crypticmushroom.candycraft.entitys.ChocoDogEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
+
+import entities.ChocoDogEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;

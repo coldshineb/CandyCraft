@@ -1,8 +1,9 @@
 package com.crypticmushroom.candycraft.registry;
 
 import com.crypticmushroom.candycraft.Globals;
-import com.crypticmushroom.candycraft.entitys.ChocoDogEntity;
-import com.crypticmushroom.candycraft.entitys.GummyBunnyEntity;
+
+import entities.ChocoDogEntity;
+import entities.GummyBunnyEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.event.RegistryEvent;

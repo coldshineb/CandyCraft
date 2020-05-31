@@ -22,7 +22,7 @@ public class DimensionsList {
     public static DimensionType CANDYLANDS_TYPE;
 
     public static final ChunkGeneratorType<CandylandsChunkGeneratorConfig, CandylandsChunkGenerator> CANDYLANDS_CHUNK_GENERATOR = new ChunkGeneratorType<>(CandylandsChunkGenerator::new, false, CandylandsChunkGeneratorConfig::new);
-    public static final BiomeProviderType<CandyLandsProviderSettings, CandylandsBiomeProvider> CANDYLANDS_BIOME_PROVIDER = new BiomeProviderType<>(CandylandsBiomeProvider::new, CandyLandsProviderSettings::new);
+    public static final BiomeProviderType<CandylandsProviderSettings, CandylandsBiomeProvider> CANDYLANDS_BIOME_PROVIDER = new BiomeProviderType<>(CandylandsBiomeProvider::new, CandylandsProviderSettings::new);
 
     @SubscribeEvent
     public static void onRegisterModDimensionEvent(final RegistryEvent.Register<ModDimension> event) {

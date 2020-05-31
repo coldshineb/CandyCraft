@@ -1,4 +1,4 @@
-package com.crypticmushroom.candycraft.entitys;
+package entities;
 
 import com.crypticmushroom.candycraft.items.ColoredGummyItem;
 import com.crypticmushroom.candycraft.registry.CCEntitys;

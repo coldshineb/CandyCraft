@@ -16,7 +16,7 @@ public class CandylandsBiomeProvider extends BiomeProvider {
     private final Layer biome;
     private static final Set<Biome> SPAWN = ImmutableSet.of(Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE);
 
-    public CandylandsBiomeProvider(CandyLandsProviderSettings settingsProvider) {
+    public CandylandsBiomeProvider(CandylandsProviderSettings settingsProvider) {
         super(SPAWN);
         this.biome = LayerUtilOverridden.func_227474_a_(settingsProvider.func_226850_a_(), settingsProvider.func_226851_b_(), settingsProvider.getGeneratorSettings());
     }
